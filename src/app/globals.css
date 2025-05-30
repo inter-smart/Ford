@@ -1,26 +1,142 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-fordAntenna: var(--font-fordAntenna);
+
+  --color-base1: #f1d1a8;
+  --color-base2: #cdcdcd;
+  --color-base3: #1d0a44;
+
+  --breakpoint-4xs: 20rem;
+  /* 320px */
+  --breakpoint-3xs: 24rem;
+  /* 384px */
+  --breakpoint-2xs: 28rem;
+  /* 448px */
+  --breakpoint-xs: 36rem;
+  /* 576px */
+  --breakpoint-sm: 40rem;
+  /* 640px */
+  --breakpoint-md: 48rem;
+  /* 768px */
+  --breakpoint-lg: 64rem;
+  /* 1024px */
+  --breakpoint-xl: 80rem;
+  /* 1280px */
+  --breakpoint-2xl: 96rem;
+  /* 1536px */
+  --breakpoint-3xl: 120rem;
+  /* 1920px */
+
+  --breakpoint-gap: 15px;
+  /* * */
+  --breakpoint-gap-lg: 60px;
+  /* 1024px */
+  --breakpoint-gap-xl: 65px;
+  /* 1280px */
+  --breakpoint-gap-2xl: 86px;
+  /* 1536px */
+  --breakpoint-gap-3xl: 100px;
+  /* 1920px */
+
+  --animate-fadeDown: fadeDown 0.6s ease-in-out both;
+
+  @keyframes fadeDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  --animate-right: bounce 1s ease-in-out infinite;
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateX(25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+  
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+ 
+body {
+  font-family: var(--font-fordAntenna), Arial, sans-serif;
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-[var(--breakpoint-gap)] lg:px-[var(--breakpoint-gap-lg)] xl:px-[var(--breakpoint-gap-xl)];
+  }
+ 
+
+  .btn-base1 {
+    @apply bg-base2 hover:bg-base1 hover:border-base1;
+  }
+
+  .typography {
+    &>* {
+      @apply my-[10px] lg:my-[15px]; 
+    }
+
+    p,
+    & {
+      @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] font-normal leading-normal text-[#2d2929];
+    }
+
+    h1 {
+      @apply text-[24px] lg:text-[36px] xl:text-[43px] 2xl:text-[48px] 3xl:text-[65px] font-semibold leading-tight text-black;
+    }
+
+    h2 {
+      @apply text-[20px] lg:text-[26px] xl:text-[32px] 2xl:text-[44px] 3xl:text-[54px] font-semibold leading-tight text-black;
+    }
+
+    h3 {
+      @apply text-[14px] lg:text-[16px] xl:text-[20px] 2xl:text-[26px] 3xl:text-[30px] font-semibold leading-tight text-black;
+    }
+
+    h5 {
+      @apply text-[13px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px] 3xl:text-[25px] font-semibold leading-tight text-black;
+    }
+
+    h6 {
+      @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] font-semibold leading-tight text-black;
+    }
+
+    ul,
+    ol {
+      @apply pl-[20px] lg:pl-[30px];
+    }
+
+    ul>li,
+    ol>li {
+      @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] font-normal leading-normal text-[#2d2929] my-[10px] lg:my-[15px];
+    }
+
+    ul>li {
+      @apply list-disc;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+ 
