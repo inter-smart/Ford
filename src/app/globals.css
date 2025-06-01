@@ -81,11 +81,11 @@
 
   @keyframes carMove {
     0% {
-      transform: translateY(0px)
+      transform: translateX(-100%)
     }
 
     100% {
-      transform: translateY(-10px)
+      transform: translateX(0)
     }
   }
 }
