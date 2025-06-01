@@ -74,11 +74,22 @@
       animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
   }
-  
 
+
+
+  --animate-move: carMove 3s ease-in-out;
+
+  @keyframes carMove {
+    0% {
+      transform: translateY(0px)
+    }
+
+    100% {
+      transform: translateY(-10px)
+    }
+  }
 }
 
- 
 body {
   font-family: var(--font-fordAntenna), Arial, sans-serif;
 }
@@ -87,7 +98,7 @@ body {
   .container {
     @apply mx-auto px-[var(--breakpoint-gap)] lg:px-[var(--breakpoint-gap-lg)] xl:px-[var(--breakpoint-gap-xl)];
   }
- 
+
 
   .btn-base1 {
     @apply bg-base2 hover:bg-base1 hover:border-base1;
@@ -95,7 +106,7 @@ body {
 
   .typography {
     &>* {
-      @apply my-[10px] lg:my-[15px]; 
+      @apply my-[10px] lg:my-[15px];
     }
 
     p,
@@ -138,5 +149,3 @@ body {
     }
   }
 }
-
- 

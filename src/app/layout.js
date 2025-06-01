@@ -7,32 +7,32 @@ import localFont from 'next/font/local';
 const fordAntenna = localFont({
   src: [
     {
-      path: "../../assets/fonts/FordAntenna-Thin.woff2",
+      path: "../../public/fonts/FordAntenna-Thin.woff2",
       weight: "100",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/FordAntenna-ExtraLight.woff2",
+      path: "../../public/fonts/FordAntenna-ExtraLight.woff2",
       weight: "200",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/FordAntenna-Light.woff2",
+      path: "../../public/fonts/FordAntenna-Light.woff2",
       weight: "300",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/FordAntenna-Regular.woff2",
+      path: "../../public/fonts/FordAntenna-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/FordAntenna-Medium.woff2",
+      path: "../../public/fonts/FordAntenna-Medium.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/FordAntenna-Black.woff2",
+      path: "../../public/fonts/FordAntenna-Black.woff2",
       weight: "700",
       style: "normal",
     },

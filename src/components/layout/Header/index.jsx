@@ -30,7 +30,7 @@ const menuLinkClass = "3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white 2x
 export default function Header() {
   return (
     <header>
-      <div className="w-full bg-black">
+      <div className="w-full absolute top-0 left-0 z-10 bg-transparent">
         <div className="container">
           <div className="w-full flex flex-wrap items-center justify-between py-[20px]">
             {/* Main menu */}
