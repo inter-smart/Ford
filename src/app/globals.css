@@ -40,7 +40,7 @@
   /* 1024px */
   --breakpoint-gap-xl: 65px;
   /* 1280px */
-  --breakpoint-gap-2xl: 86px;
+  --breakpoint-gap-2xl: 70px;
   /* 1536px */
   --breakpoint-gap-3xl: 100px;
   /* 1920px */
@@ -99,6 +99,8 @@ body {
     @apply mx-auto px-[var(--breakpoint-gap)] lg:px-[var(--breakpoint-gap-lg)] xl:px-[var(--breakpoint-gap-xl)];
   }
 
+ 
+
 
   .btn-base1 {
     @apply bg-base2 hover:bg-base1 hover:border-base1;
@@ -151,5 +153,6 @@ body {
 }
 
 .outlined-text {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);  
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+
 }

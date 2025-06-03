@@ -7,6 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import Link from 'next/link';
+import { Heading } from "@/components/layout/Heading";
 
 const sliderItems = [
   {
@@ -15,10 +16,9 @@ const sliderItems = [
     colors: [
       { name: 'Arctic White', image: '/images/car1.png', code: '#FFFFFF' },
       { name: 'Command Grey', image: '/images/car2.png', code: '#7A7A7A' },
-      { name: 'Meteor Grey', image: '/images/car3.png', code: '#555555' },
-      { name: 'Blue Lightning', image: '/images/car4.png', code: '#005BBB' },
-      { name: 'Code Orange', image: '/images/car1.png', code: '#F76300' },
-      { name: 'Shadow Black', image: '/images/car2.png', code: '#000000' },
+      { name: 'Blue Lightning', image: '/images/car2.png', code: '#005BBB' },
+      { name: 'Code Orange', image: '/images/car4.png', code: '#F76300' },
+      { name: 'Shadow Black', image: '/images/blackMustag.png', code: '#000000' },
     ],
     engine: '2.0L EcoBoost®',
     body: 'Coupe',
@@ -28,15 +28,15 @@ const sliderItems = [
   },
   {
     label: 'Trucks',
-    carName: '2025 Ranger Raptor',
     colors: [
       { name: ' Grey', image: '/images/car4.png', code: '#7A7A7A' },
-      { name: ' White', image: '/images/car1.png', code: '#FFFFFF' },
-      { name: ' Grey', image: '/images/car3.png', code: '#555555' },
-      { name: 'Blue ', image: '/images/car4.png', code: '#005BBB' },
-      { name: ' Orange', image: '/images/car1.png', code: '#F76300' },
-      { name: ' Black', image: '/images/car2.png', code: '#000000' },
+      { name: 'Arctic White', image: '/images/car3.png', code: '#FFFFFF' },
+      { name: 'Command Grey', image: '/images/car2.png', code: '#7A7A7A' },
+      { name: 'Blue Lightning', image: '/images/car2.png', code: '#005BBB' },
+      { name: 'Code Orange', image: '/images/car4.png', code: '#F76300' },
+      { name: 'Shadow Black', image: '/images/blackMustag.png', code: '#000000' },
     ],
+    carName: '2025 Ranger Raptor',
     engine: '2.0L EcoBoost®',
     body: 'Coupe',
     transmission: '6-speed',
@@ -47,12 +47,12 @@ const sliderItems = [
     label: 'SuvS',
     colors: [
       { name: 'Meteor Grey', image: '/images/car2.png', code: '#555555' },
-      { name: 'Arctic White', image: '/images/car1.png', code: '#FFFFFF' },
       { name: 'Command Grey', image: '/images/car2.png', code: '#7A7A7A' },
-      { name: 'Blue Lightning', image: '/images/car4.png', code: '#005BBB' },
-      { name: 'Code Orange', image: '/images/car1.png', code: '#F76300' },
-      { name: 'Shadow Black', image: '/images/car2.png', code: '#000000' },
+      { name: 'Blue Lightning', image: '/images/car2.png', code: '#005BBB' },
+      { name: 'Code Orange', image: '/images/car4.png', code: '#F76300' },
+      { name: 'Shadow Black', image: '/images/blackMustag.png', code: '#000000' },
     ],
+    carName: 'Benz',
     engine: '2.0L EcoBoost®',
     body: 'Coupe',
     transmission: '6-speed',
@@ -64,11 +64,11 @@ const sliderItems = [
     colors: [
       { name: 'Arctic White', image: '/images/car3.png', code: '#FFFFFF' },
       { name: 'Command Grey', image: '/images/car2.png', code: '#7A7A7A' },
-      { name: 'Meteor Grey', image: '/images/car3.png', code: '#555555' },
-      { name: 'Blue Lightning', image: '/images/car4.png', code: '#005BBB' },
-      { name: 'Code Orange', image: '/images/car1.png', code: '#F76300' },
-      { name: 'Shadow Black', image: '/images/car2.png', code: '#000000' },
+      { name: 'Blue Lightning', image: '/images/car2.png', code: '#005BBB' },
+      { name: 'Code Orange', image: '/images/car4.png', code: '#F76300' },
+      { name: 'Shadow Black', image: '/images/blackMustag.png', code: '#000000' },
     ],
+    carName: 'Audi',
     engine: '2.0L EcoBoost®',
     body: 'Coupe',
     transmission: '6-speed',
@@ -79,11 +79,11 @@ const sliderItems = [
     label: 'CARS',
     colors: [
       { name: 'Command Grey', image: '/images/car2.png', code: '#7A7A7A' },
-      { name: 'Meteor Grey', image: '/images/car3.png', code: '#555555' },
-      { name: 'Arctic White', image: '/images/car1.png', code: '#FFFFFF' },
-      { name: 'Blue Lightning', image: '/images/car4.png', code: '#005BBB' },
-      { name: 'Code Orange', image: '/images/car1.png', code: '#F76300' },
-      { name: 'Shadow Black', image: '/images/car2.png', code: '#000000' },
+      { name: 'Arctic White', image: '/images/car3.png', code: '#FFFFFF' },
+      { name: 'Command Grey', image: '/images/car2.png', code: '#7A7A7A' },
+      { name: 'Blue Lightning', image: '/images/car2.png', code: '#005BBB' },
+      { name: 'Code Orange', image: '/images/car4.png', code: '#F76300' },
+      { name: 'Shadow Black', image: '/images/blackMustag.png', code: '#000000' },
     ],
     engine: '2.0L EcoBoost®',
     body: 'Coupe',
@@ -94,13 +94,12 @@ const sliderItems = [
   {
     label: 'CARS',
     colors: [
-      { name: 'Arctic White', image: '/images/car1.png', code: '#FFFFFF' },
+      { name: 'Shadow Black', image: '/images/blackMustag.png', code: '#FFFFFF' },
       { name: 'Command Grey', image: '/images/car2.png', code: '#7A7A7A' },
-      { name: 'Meteor Grey', image: '/images/car3.png', code: '#555555' },
-      { name: 'Blue Lightning', image: '/images/car4.png', code: '#005BBB' },
-      { name: 'Code Orange', image: '/images/car1.png', code: '#F76300' },
-      { name: 'Shadow Black', image: '/images/car2.png', code: '#000000' },
+      { name: 'Blue Lightning', image: '/images/car2.png', code: '#005BBB' },
+      { name: 'Code Orange', image: '/images/car4.png', code: '#F76300' },
     ],
+    carName: 'MUSTANG GT 5.0',
     engine: '2.0L EcoBoost®',
     body: 'Coupe',
     transmission: '6-speed',
@@ -122,7 +121,8 @@ export default function VehicleShowcase() {
 
   return (
     <div
-      className={`absolute top-0 right-0 flex justify-end h-full w-full text-white 2xl:py-[75px] py-[45px] overflow-hidden transition-colors duration-500 ${activeIndex !== null ? 'bg-[#181818]' : 'bg-transparent'
+      className={`absolute top-0 right-0 flex justify-end h-full w-full text-white
+         2xl:pb-[75px] pb-[45px] overflow-hidden transition-colors duration-500 ${activeIndex !== null ? 'bg-[#181818]' : 'bg-transparent'
         }`}
     >
       {/* Background Video */}
@@ -148,9 +148,13 @@ export default function VehicleShowcase() {
               className={`2xl:w-[calc(100%-135px)] lg:w-[calc(100%-110px)] w-[calc(100%-80px)] sm:max-w-[750px] max-w-[175px] ${activeIndex !== null ? 'hidden' : 'block'
                 }`}
             >
-              <div className="2xl:text-[54px] xl:text-[45px] lg:text-[40px] md:text-[35px] sm:text-[30px] text-[25px] text-white font-medium mb-[30px]" >
+              <Heading
+                size="heading1"
+                as="h2"
+                className=" mb-[30px]"
+              >
                 Discover the <br />New Era of Ford in Oman
-              </div>
+              </Heading>
 
               <div className="flex gap-4">
                 <Link href="/book" className="2xl:text-[14px] xl:text-[12px] text-[10px] font-normal  text-white  min-w-[130px] 2xl:h-[40px] h-[35px] flex items-center justify-center bg-[#1A73E8] px-6 rounded-full hover:bg-[#fff] hover:text-black transition cursor-pointer">
@@ -166,83 +170,123 @@ export default function VehicleShowcase() {
             {/* Car Display Details*/}
 
             {active && (
-              <div className="flex-1 flex flex-col justify-center duration-500 relative ">
-                <div className="w-full max-h-[550px] max-w-[calc(100%-200px)] relative">
-                  <div className="text-[120px] font-medium text-transparent absolute top-[50px] right-0 leading-none z-[0] text-right outlined-text">
-
-                    <div>2025 Ranger</div>
-                    <div> Raptor</div>
-
-
-                  </div>
-                  <div className="realtive">
+              <div className="relative flex flex-col justify-end w-full h-full 3xl:pb-[150px] pb-[110px] duration-500 ">
+                <div className="w-full 3xl:max-h-[550px] max--h-[400px] 3xl:max-w-[calc(100%-200px)] max-w-[calc(100%-80px)] relative z-1">
+                  {/* car name and image  */}
+                  <div className="realtive 2xl:min-h-[550px] min-h-[400px] flex items-end">
+                    <div className="3xl:text-[120px] 2xl:text-[100px] xl:text-[80px] lg:text-[70px] text-[50px] text-right font-medium text-transparent 
+                      line-clamp-2 break-words absolute top-0 right-0 leading-[1.1] z-[-1] 
+                      outlined-text 3xl:max-w-[830px] 2xl:max-w-[750px] xl:max-w-[650px] max-w-[550px] ml-auto">
+                      {active.carName}
+                    </div>
                     <img
                       src={active.colors[selectedColorIndex].image}
                       alt={active.label}
-                      className="w-[850px] object-contain animate-carMove"
+                      className="3xl:max-w-[850px] 2xl:max-w-[750px] xl:max-w-[620px] max-w-[550px] 2xl:min-h-[550px] min-h-[400px] object-contain animate-carMove"
                     />
                   </div>
-                  <button
-                    onClick={() => setShowColorOptions(!showColorOptions)}
-                    className="w-[32px] h-[32px] flex items-center justify-center absolute left-0 bottom-8 bg-[#A7A7A7] text-white p-[0] rounded-[10px] cursor-pointer hover:bg-white/20 transition-all z-10"
-                  >
-                    <svg className='w-full h-full' viewBox="0 0 32 33" >
-                      <circle cx="16" cy="16.9004" r="16" fill="#A7A7A7" />
-                      <path d="M16 7.90039C11.03 7.90039 7 11.9304 7 16.9004C7 21.8704 11.03 25.9004 16 25.9004C16.83 25.9004 17.5 25.2304 17.5 24.4004C17.5 24.0104 17.35 23.6604 17.11 23.3904C16.88 23.1304 16.73 22.7804 16.73 22.4004C16.73 21.5704 17.4 20.9004 18.23 20.9004H20C22.76 20.9004 25 18.6604 25 15.9004C25 11.4804 20.97 7.90039 16 7.90039ZM10.5 16.9004C9.67 16.9004 9 16.2304 9 15.4004C9 14.5704 9.67 13.9004 10.5 13.9004C11.33 13.9004 12 14.5704 12 15.4004C12 16.2304 11.33 16.9004 10.5 16.9004ZM13.5 12.9004C12.67 12.9004 12 12.2304 12 11.4004C12 10.5704 12.67 9.90039 13.5 9.90039C14.33 9.90039 15 10.5704 15 11.4004C15 12.2304 14.33 12.9004 13.5 12.9004ZM18.5 12.9004C17.67 12.9004 17 12.2304 17 11.4004C17 10.5704 17.67 9.90039 18.5 9.90039C19.33 9.90039 20 10.5704 20 11.4004C20 12.2304 19.33 12.9004 18.5 12.9004ZM21.5 16.9004C20.67 16.9004 20 16.2304 20 15.4004C20 14.5704 20.67 13.9004 21.5 13.9004C22.33 13.9004 23 14.5704 23 15.4004C23 16.2304 22.33 16.9004 21.5 16.9004Z" fill="#323232" />
-                    </svg>
-
-                  </button>
-                </div>
-                <div className="grid grid-cols-3 text-sm gap-6 mt-8 z-10 relative pointer-events-none">
-                  <div>
-                    <p className="text-white/50">Engine</p>
-                    <p className="font-semibold">{active.engine}</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50">Bodystyle</p>
-                    <p className="font-semibold">{active.body}</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50">Drive System</p>
-                    <p className="font-semibold">{active.drive}</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50">Automatic Transmission</p>
-                    <p className="font-semibold">{active.transmission}</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50">Horsepower</p>
-                    <p className="font-semibold">{active.hp}</p>
-                  </div>
-                </div>
-
-
-                {showColorOptions && active?.colors && (
-                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#292929] rounded-lg px-[15px] py-[30px] space-y-2 z-10 min-w-[160px]">
+                  {/* color options button  */}
+                  <div className='absolute bottom-0 left-0'>
                     <button
-                      onClick={() => setShowColorOptions(false)}
-                      className="absolute top-2 right-2 text-white text-sm"
+                      onClick={() => setShowColorOptions(!showColorOptions)}
+                      className="w-[32px] h-[32px] flex items-center justify-center absolute left-0 bottom-8 bg-[#A7A7A7] text-white p-[0] rounded-full
+                    cursor-pointer hover:bg-orange/20 transition-all z-10"
                     >
-                      ×
+                      <svg className='w-full h-full' viewBox="0 0 32 33" >
+                        <circle cx="16" cy="16.9004" r="16" fill="#A7A7A7" />
+                        <path d="M16 7.90039C11.03 7.90039 7 11.9304 7 16.9004C7 21.8704 11.03 25.9004 16 25.9004C16.83 25.9004 17.5 25.2304 17.5 24.4004C17.5 24.0104 17.35 23.6604 17.11 23.3904C16.88 23.1304 16.73 22.7804 16.73 22.4004C16.73 21.5704 17.4 20.9004 18.23 20.9004H20C22.76 20.9004 25 18.6604 25 15.9004C25 11.4804 20.97 7.90039 16 7.90039ZM10.5 16.9004C9.67 16.9004 9 16.2304 9 15.4004C9 14.5704 9.67 13.9004 10.5 13.9004C11.33 13.9004 12 14.5704 12 15.4004C12 16.2304 11.33 16.9004 10.5 16.9004ZM13.5 12.9004C12.67 12.9004 12 12.2304 12 11.4004C12 10.5704 12.67 9.90039 13.5 9.90039C14.33 9.90039 15 10.5704 15 11.4004C15 12.2304 14.33 12.9004 13.5 12.9004ZM18.5 12.9004C17.67 12.9004 17 12.2304 17 11.4004C17 10.5704 17.67 9.90039 18.5 9.90039C19.33 9.90039 20 10.5704 20 11.4004C20 12.2304 19.33 12.9004 18.5 12.9004ZM21.5 16.9004C20.67 16.9004 20 16.2304 20 15.4004C20 14.5704 20.67 13.9004 21.5 13.9004C22.33 13.9004 23 14.5704 23 15.4004C23 16.2304 22.33 16.9004 21.5 16.9004Z" fill="#323232" />
+                      </svg>
                     </button>
-                    {active.colors.map((color, i) => (
-                      <div
-                        key={i}
-                        onClick={() => setSelectedColorIndex(i)}
-                        className={`flex items-center gap-2 cursor-pointer text-sm rounded-md px-3 py-1 transition-all ${i === selectedColorIndex
-                          ? 'bg-white/20'
-                          : 'hover:bg-white/10'
-                          }`}
-                      >
-                        <div
-                          className="w-4 h-4 rounded-full border"
-                          style={{ backgroundColor: color.code }}
-                        ></div>
-                        <span className="text-white">{color.name}</span>
+
+                    {showColorOptions && active?.colors && (
+                      <div className="absolute left-0 bottom-[80px]  bg-[#292929] rounded-lg px-[15px] py-[30px_10px] space-y-2 z-10 min-w-[160px]">
+                        <button
+                          onClick={() => setShowColorOptions(false)}
+                          className="absolute top-2 right-2 text-white text-sm cursor-pointer transition-all hover:text-[#2F6BAB]"
+                        >
+                          ×
+                        </button>
+                        {active.colors.map((color, i) => (
+                          <div
+                            key={i}
+                            onClick={() => setSelectedColorIndex(i)}
+                            className={`flex items-center gap-2 cursor-pointer text-sm rounded-md border-transparent transition-all mb-[15px] ${i === selectedColorIndex
+                              ? ' '
+                              : ''
+                              }`}
+                          >
+                            <div
+                              className="w-[22px] h-[22px] flex items-center justify-center rounded-full"
+                              style={{ backgroundColor: color.code }}
+                            >
+                              <svg
+                                className={`w-[10px] h-[10px] transition-all ${i === selectedColorIndex
+                                  ? 'opacity-100'
+                                  : 'opacity-0 group-hover:opacity-100'
+                                  }`}
+                                viewBox="0 0 11 9"
+                                style={{
+                                  fill:
+                                    i === selectedColorIndex && color.code.toLowerCase() === '#ffffff'
+                                      ? 'black'
+                                      : 'white',
+                                }}
+                              >
+                                <path d="M3.34286 6.43241L0.910365 3.99991L0.0820312 4.82241L3.34286 8.08324L10.3429 1.08324L9.52037 0.260742L3.34286 6.43241Z" />
+                              </svg>
+                            </div>
+
+                            <span className="text-[10px] text-white">{color.name}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    )}
                   </div>
-                )}
+
+                </div>
+                {/* car descriptions  */}
+
+                <div className="absolute bottom-0 left-0 w-full 3xl:max-w-[calc(100%-200px)] max-w-[calc(100%-80px)]">
+                  <div className="grid 2xl:grid-cols-[1fr_230px] xl:grid-cols-[1fr_200px] grid-cols-[1fr_165px] gap-0">
+                    {/* Left Empty Space */}
+                    <div className="row-span-2"></div>
+
+                    {/* Automatic Transmission */}
+                    <div className="border border-white/10 3xl:p-[35px] p-[20px] 2xl:w-[230px] xl:w-[200px] w-[165px]">
+                      <p className="2xl:text-[16px] text-[14px] font-medium text-[#707070]">Automatic Transmission</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px] text-[16px] font-medium">{active.transmission}</p>
+                    </div>
+
+                    {/* Horsepower */}
+                    <div className="border-l border border-white/10 3xl:p-[35px] p-[20px] 2xl:w-[230px] xl:w-[200px] w-[165px]">
+                      <p className="2xl:text-[16px] text-[14px] font-medium text-[#707070]">Horsepower</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px] text-[16px] font-medium">{active.hp}</p>
+                    </div>
+                  </div>
+
+                  {/* Bottom Specs Row */}
+                  <div className="grid 2xl:grid-cols-[1fr_1fr_230px] xl:grid-cols-[1fr_1fr_200px] grid-cols-[1fr_1fr_165px] border-t border-white/10">
+                    {/* Engine */}
+                    <div className="3xl:p-[35px] p-[20px] border border-white/10">
+                      <p className="2xl:text-[16px] text-[14px] font-medium text-[#707070]">Engine</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px] text-[16px] font-medium">{active.engine}</p>
+                    </div>
+
+                    {/* Bodystyle */}
+                    <div className="3xl:p-[35px] p-[20px] border border-white/10">
+                      <p className="2xl:text-[16px] text-[14px] font-medium text-[#707070]">Bodystyle</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px] text-[16px] font-medium">{active.body}</p>
+                    </div>
+
+                    {/* Drive System */}
+                    <div className="3xl:p-[35px] p-[20px] border border-white/10 2xl:w-[230px] xl:w-[200px] w-[165px]">
+                      <p className="2xl:text-[16px] text-[14px] font-medium text-[#707070]">Drive System</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px] text-[16px] font-medium">{active.drive}</p>
+                    </div>
+                  </div>
+
+                </div>
+
               </div>
             )}
 
