@@ -99,7 +99,7 @@ body {
     @apply mx-auto px-[var(--breakpoint-gap)] lg:px-[var(--breakpoint-gap-lg)] xl:px-[var(--breakpoint-gap-xl)];
   }
 
- 
+
 
 
   .btn-base1 {
@@ -149,6 +149,14 @@ body {
     ul>li {
       @apply list-disc;
     }
+  }
+
+  .footer-link {
+    @apply  2xl:text-[14px] md:text-[12px] text-[11px] text-white/60 capitalize font-normal hover:text-white transition-all;
+  }
+
+  .footer-heading {
+    @apply text-[11px] uppercase text-white/40 font-medium mb-3;
   }
 }
 

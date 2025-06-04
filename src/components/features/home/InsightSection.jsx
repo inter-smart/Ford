@@ -34,7 +34,7 @@ export default function welcome() {
     return (
         <section className="w-full relative bg-[#F0F0F0] 2xl:py-[20px_100px] xl:py-[20px_80px] py-[10px_50px] z-0 overflow-hidden ">
             <div className="container">
-                <div className="flex flex-wrap justify-between items-center 3xl:mb-[40px] 2xl:mb-[30px] xl:mb-[25px] mb-[15px] gap-2">
+                <div className="flex flex-wrap justify-between items-center 3xl:mb-[40px] 2xl:mb-[30px] xl:mb-[25px] mb-[15px] max-sm:gap-2">
                     <div className="w-full sm:w-[calc(100%-110px)] ">
                         <Heading
                             size="heading1"
@@ -58,10 +58,16 @@ export default function welcome() {
                     </div>
                 </div>
             </div>
-            <div className="p-[20px_25px] xl:p-[35px_45px] 2xl:p-[45px_65px] 3xl:p-[50px_70px] ltr:lg:pl-[calc(((100vw-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))] ltr:xl:pl-[calc(((100vw-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
-             ltr:2xl:pl-[calc(((100vw-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))] ltr:3xl:pl-[calc(((100vw-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl))]
-              rtl:lg:pr-[calc(((100vw-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))] rtl:xl:pr-[calc(((100vw-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
-               rtl:2xl:pr-[calc(((100vw-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))] rtl:3xl:pr-[calc(((100vw-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl))] ">
+           <div
+            className="p-0 ltr:lg:pl-[calc(((100vw-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
+             ltr:xl:pl-[calc(((100vw-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
+             ltr:2xl:pl-[calc(((100vw-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
+             ltr:3xl:pl-[calc(((100vw-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl))]
+             rtl:lg:pr-[calc(((100vw-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
+             rtl:xl:pr-[calc(((100vw-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
+             rtl:2xl:pr-[calc(((100vw-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
+             rtl:3xl:pr-[calc(((100vw-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl))]"
+>
                 <Swiper
                     spaceBetween={10}
                     slidesPerView={1.5}
@@ -86,7 +92,7 @@ export default function welcome() {
                 {newsItems.map((item, id) => (
                     <SwiperSlide key={id} className="w-full h-full">
                         <div className="w-full h-full group">
-                            <div className="overflow-hidden rounded-md aspect-square mb-[15px] relative cursor-pointer">
+                            <div className="overflow-hidden rounded-[15px] aspect-square mb-[15px] relative cursor-pointer">
                                 {/* Default Image */}
                                 <Image
                                     src={item.img}
@@ -111,7 +117,7 @@ export default function welcome() {
                                 <Heading
                                     size="heading6"
                                     as="h3"
-                                    className="text-black mb-[15px] line-clamp-2 sm:max-w-[90%]"
+                                    className="text-black mb-[15px] line-clamp-2 sm:max-w-[90%]"           
                                 >
                                     {item.title}
                                 </Heading>

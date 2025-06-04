@@ -53,6 +53,7 @@ export default function RootLayout({ children }) {
       <body className={`${fordAntenna.variable} `}>
         <Header />
         <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );
