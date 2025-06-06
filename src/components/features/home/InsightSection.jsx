@@ -59,7 +59,8 @@ export default function welcome() {
                 </div>
             </div>
            <div
-            className="p-0 ltr:lg:pl-[calc(((100vw-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
+            className="w-full h-full relative z-0 p-[0px_0_0_25px] lg:pr-0 
+            ltr:lg:pl-[calc(((100vw-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
              ltr:xl:pl-[calc(((100vw-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
              ltr:2xl:pl-[calc(((100vw-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
              ltr:3xl:pl-[calc(((100vw-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl))]
@@ -84,9 +85,7 @@ export default function welcome() {
                             slidesPerView: 2.5,
                             spaceBetween: 30, // corrected syntax
                         },
-                    }}
-                    navigation
-                    modules={[Navigation]}
+                    }} 
                     className="w-full"
                 >
                 {newsItems.map((item, id) => (

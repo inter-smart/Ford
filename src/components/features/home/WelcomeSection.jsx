@@ -1,13 +1,14 @@
 
 import { Heading } from "@/components/layout/Heading";
+import Image from "next/image";
 import { Text } from "@/components/layout/Text";
 import Link from 'next/link';
 export default function welcome() {
   return (
     <section className="w-full relative bg-[#F0F0F0] 2xl:py-[125px_100px] xl:py-[80px] py-[50px] z-0 overflow-hidden ">
       <div className="absolute right-0 lg:top-0 max-md:bottom-0 xl:max-w-[550px] max-w-[350px] h-auto w-full z-[-1]">
-        <img
-          src="images/mountains.png"
+        <Image
+          src="/images/mountains.png" width="650" height="450"
           alt="logo"
           className="w-full h-full object-contain"
         />
@@ -19,9 +20,9 @@ export default function welcome() {
               <div className="3xl:text-[25px] 2xl:text-[20px] xl:text-[18px] text-[15px] font-medium text-black line-clamp-5 flex items-center mb-[15px]">
                 Welcome to
                 <div className="2xl:max-w-[100px] xl:max-w-[80px] max-w-[50px] mx-[10px]">
-                  <img
-                    src="images/logoBlue.png"
-                    alt="logo"
+                  <Image
+                    src="/images/logoBlue.png" 
+                    alt="logo" width="88" height="45"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -49,9 +50,9 @@ export default function welcome() {
           </div>
           <div className="2xl:w-[650px] xl:w-[550px] lg:w-[430px]  flex items-end relative z-0">
 
-            <img
-              src="images/welcome_car.png"
-              alt="logo"
+            <Image
+              src="/images/welcome_car.png"
+              alt="logo" width="600" height="450"
               className="w-full h-full object-contain"
             />
           </div>

@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Mousewheel, Thumbs } from 'swiper/modules';
+import Image from "next/image";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
@@ -116,8 +117,19 @@ export default function VehicleShowcase() {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const thumbSwiperRef = useRef(null);
+  const [swiperDirection, setSwiperDirection] = useState("vertical");
 
   const active = activeIndex !== null ? sliderItems[activeIndex] : null;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSwiperDirection(window.innerWidth < 578 ? "horizontal" : "vertical");
+    };
+
+    handleResize(); // initial call
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div
@@ -142,10 +154,10 @@ export default function VehicleShowcase() {
           <source src="/videos/hero-1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="container w-full h-full">
-          <div className="relative w-full h-full flex items-end justify-between">
+        <div className="container w-full h-full max-xs:flex max-xs:items-end">
+          <div className="relative w-full xs:h-full flex max-sm:flex-wrap items-end justify-between">
             <div
-              className={`2xl:w-[calc(100%-135px)] lg:w-[calc(100%-110px)] w-[calc(100%-80px)] sm:max-w-[750px] max-w-[175px] ${activeIndex !== null ? 'hidden' : 'block'
+              className={`2xl:w-[calc(100%-135px)] lg:w-[calc(100%-110px)] w-[calc(100%-80px)] max-xs:mb-[30px] sm:max-w-[750px] max-w-[175px] ${activeIndex !== null ? 'hidden' : 'block'
                 }`}
             >
               <Heading
@@ -170,19 +182,19 @@ export default function VehicleShowcase() {
             {/* Car Display Details*/}
 
             {active && (
-              <div className="relative flex flex-col justify-end w-full h-full 3xl:pb-[150px] pb-[110px] duration-500 ">
-                <div className="w-full 3xl:max-h-[550px] max-h-[400px] 3xl:max-w-[calc(100%-200px)] lg:max-w-[calc(100%-80px)] sm:max-w-[calc(100%-30px)]  relative z-1">
+              <div className="relative flex flex-col lg:justify-center justify-end w-full h-full  md:pb-[0px] pb-[110px] duration-500 ">
+                <div className="w-full 3xl:max-h-[550px] max-h-[400px] 3xl:max-w-[calc(100%-200px)] lg:max-w-[calc(100%-80px)] xs:max-w-[calc(100%-30px)] relative z-1">
                   {/* car name and image  */}
                   <div className="realtive 2xl:min-h-[550px] min-h-[400px] flex items-end">
-                    <div className="3xl:text-[120px] 2xl:text-[100px] xl:text-[80px] lg:text-[70px] text-[50px] lg:text-right font-medium text-transparent 
+                    <div className="3xl:text-[120px] 2xl:text-[100px] xl:text-[80px] lg:text-[70px] md:text-[50px] text-[40px] lg:text-right font-medium text-transparent 
                       line-clamp-2 break-words absolute top-0 lg:right-0 left-o leading-[1.1] z-[-1] 
-                      outlined-text 3xl:max-w-[830px] 2xl:max-w-[750px] xl:max-w-[650px] max-w-[550px] lg:ml-auto">
+                      outlined-text 3xl:max-w-[830px] 2xl:max-w-[750px] xl:max-w-[650px] lg:max-w-[550px] max-w-[400px] lg:ml-auto">
                       {active.carName}
                     </div>
                     <div className="3xl:max-w-[850px] 2xl:max-w-[750px] xl:max-w-[620px] lg:max-w-[550px] max-w-[450px] 2xl:min-h-[550px] min-h-[400px] flex items-center lg:justify-center justify-start  animate-carMove">
-                      <img
-                        src={active.colors[selectedColorIndex].image}
-                        alt={active.label}
+                      <Image
+                        src={active.colors[selectedColorIndex].image} 
+                        alt={active.label} width="850" height="450"
                         className="w-full h-full object-contain animate-carMove"
                       />
                     </div>
@@ -248,42 +260,42 @@ export default function VehicleShowcase() {
                 </div>
                 {/* car descriptions  */}
 
-                <div className="absolute bottom-0 left-0 w-full 3xl:max-w-[calc(100%-200px)] lg:max-w-[calc(100%-80px)] sm:max-w-[calc(100%-30px)]">
-                  <div className="grid 2xl:grid-cols-[1fr_230px] xl:grid-cols-[1fr_200px] grid-cols-[1fr_165px] gap-0">
+                <div className="absolute bottom-0 left-0 w-full 3xl:max-w-[calc(100%-200px)] lg:max-w-[calc(100%-80px)] xs:max-w-[calc(100%-30px)] max-xs:mb-[20px]">
+                  <div className="grid 2xl:grid-cols-[1fr_230px] xl:grid-cols-[1fr_200px] 3xs:grid-cols-[1fr_165px] grid-cols-[1fr_120px] gap-0">
                     {/* Left Empty Space */}
                     <div className="row-span-2"></div>
 
                     {/* Automatic Transmission */}
-                    <div className="border border-white/10 3xl:p-[35px] md:p-[20px] p-[12px] 2xl:w-[230px] xl:w-[200px] w-[165px]">
+                    <div className="border border-white/10 3xl:p-[35px] md:p-[20px] 3xs:p-[12px] p-[10px] 2xl:w-[230px] xl:w-[200px] 3xs:w-[165px] w-[120px]">
                       <p className="2xl:text-[16px] md:text-[14px] text-[10px] font-medium text-[#707070]">Automatic Transmission</p>
-                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px] md:text-[16px] text-[12px] font-medium">{active.transmission}</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px] md:text-[16px] 3xs:text-[12px] text-[10px] font-medium">{active.transmission}</p>
                     </div>
 
                     {/* Horsepower */}
-                    <div className="border-l border border-white/10 3xl:p-[35px] md:p-[20px] p-[12px] 2xl:w-[230px] xl:w-[200px] w-[165px]">
+                    <div className="border-l border border-white/10 3xl:p-[35px] md:p-[20px] 3xs:p-[12px] p-[10px] 2xl:w-[230px] xl:w-[200px] 3xs:w-[165px] w-[120px]">
                       <p className="2xl:text-[16px] md:text-[14px] text-[10px] font-medium text-[#707070]">Horsepower</p>
-                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px] md:text-[16px] text-[12px] font-medium">{active.hp}</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px] md:text-[16px] 3xs:text-[12px] text-[10px]  font-medium">{active.hp}</p>
                     </div>
                   </div>
 
                   {/* Bottom Specs Row */}
-                  <div className="grid 2xl:grid-cols-[1fr_1fr_230px] xl:grid-cols-[1fr_1fr_200px] grid-cols-[1fr_1fr_165px] border-t border-white/10">
+                  <div className="grid 2xl:grid-cols-[1fr_1fr_230px] xl:grid-cols-[1fr_1fr_200px] 3xs:grid-cols-[1fr_1fr_165px] grid-cols-[1fr_1fr_120px]  border-t border-white/10">
                     {/* Engine */}
-                    <div className="3xl:p-[35px] md:p-[20px] p-[12px] border border-white/10">
+                    <div className="3xl:p-[35px] md:p-[20px] 3xs:p-[12px] p-[10px] border border-white/10">
                       <p className="2xl:text-[16px] md:text-[14px] text-[10px] font-medium text-[#707070]">Engine</p>
-                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px]  md:text-[16px] text-[12px] font-medium">{active.engine}</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px]  md:text-[16px] 3xs:text-[12px] text-[10px]  font-medium">{active.engine}</p>
                     </div>
 
                     {/* Bodystyle */}
-                    <div className="3xl:p-[35px] md:p-[20px] p-[12px] border border-white/10">
+                    <div className="3xl:p-[35px] md:p-[20px] 3xs:p-[12px] p-[10px] border border-white/10">
                       <p className="2xl:text-[16px] md:text-[14px] text-[10px] font-medium text-[#707070]">Bodystyle</p>
-                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px]  md:text-[16px] text-[12px] font-medium">{active.body}</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px]  md:text-[16px] 3xs:text-[12px] text-[10px]  font-medium">{active.body}</p>
                     </div>
 
                     {/* Drive System */}
-                    <div className="3xl:p-[35px] md:p-[20px] p-[12px] border border-white/10 2xl:w-[230px] xl:w-[200px] w-[165px]">
+                    <div className="3xl:p-[35px] md:p-[20px] 3xs:p-[12px] p-[10px] border border-white/10 2xl:w-[230px] xl:w-[200px] 3xs:w-[165px] w-[120px]">
                       <p className="2xl:text-[16px] md:text-[14px] text-[10px] font-medium text-[#707070]">Drive System</p>
-                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px]  md:text-[16px] text-[12px] font-medium">{active.drive}</p>
+                      <p className="2xl:text-[25px] xl:text-[22px] lg:text-[18px]  md:text-[16px] 3xs:text-[12px] text-[10px]  font-medium">{active.drive}</p>
                     </div>
                   </div>
 
@@ -294,9 +306,10 @@ export default function VehicleShowcase() {
 
             {/*car Thumbnail Swiper */}
 
-            <div className="2xl:w-[135px] lg:w-[110px] w-[100px] 2xl:h-[570px] xl:h-[450px] sm:h-[400px] h-[350px] flex flex-col items-center duration-500 rounded-[5px] overflow-hidden">
+            <div className="2xl:w-[135px] lg:w-[110px] xs:w-[100px] w-full 2xl:h-[570px] xl:h-[450px] xs:h-[400px] h-[120px] 
+            flex flex-col items-center duration-500 rounded-[5px] overflow-hidden">
               <Swiper
-                direction="vertical"
+                direction={swiperDirection}
                 slidesPerView={4}
                 spaceBetween={0}
                 navigation={false}
@@ -313,7 +326,7 @@ export default function VehicleShowcase() {
                   setIsEnd(swiper.isEnd);
                 }}
                 modules={[Navigation, Mousewheel]}
-                className="2xl:h-[calc(100%  - 50px)] xl: w-full bg-[rgba(187,187,187,0.3)] backdrop-blur-[20px] p-[15px] rounded-[5px]"
+                className="2xl:h-[calc(100%  - 50px)] xl: w-full bg-[rgba(187,187,187,0.3)] backdrop-blur-[20px] sm:p-[15px] p-[10px] rounded-[5px]"
               >
                 {sliderItems.map((item, index) => (
                   <SwiperSlide key={index}>
@@ -326,7 +339,8 @@ export default function VehicleShowcase() {
                       className={`w-full h-full cursor-pointer px-[15px] py-[10px] rounded-[5px] transition-all duration-300 flex flex-col items-center justify-center border-b border-[rgba(187,187,187,0.3)] ${index === activeIndex ? 'bg-white/20' : 'hover:bg-white/10'
                         }`}
                     >
-                      <img
+                      <Image
+                      width="100" height="100"
                         src={item.colors[0].image}
                         alt={item.label}
                         className="w-full h-[60px] object-contain mb-[10px]"
