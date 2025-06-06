@@ -290,7 +290,7 @@ export default function LegendarySection() {
                         height={500}
                         className="w-full max-w-5xl mx-auto object-contain z-1"
                       />
-                      <div className="absolute sm:top-[-10%] top-[-25%] left-0 right-0 opacity-[0.1] m-auto  w-full lg:max-w-[350px] max-w-[250px] z-[-1]">
+                      <div className="absolute sm:top-[-30%] top-[-25%] left-0 right-0 opacity-[0.1] m-auto  w-full lg:max-w-[350px] max-w-[250px] z-[-1]">
                         <Image
                           src={car.logoImage}
                           alt={car.name}

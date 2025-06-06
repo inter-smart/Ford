@@ -2,6 +2,7 @@
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ScrollToTopButton from "@/components/common/scrollTop";
 import localFont from 'next/font/local';
 
 const fordAntenna = localFont({
@@ -51,6 +52,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${fordAntenna.variable} `}>
+        <ScrollToTopButton />
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
