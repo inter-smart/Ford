@@ -40,7 +40,7 @@ export default function ServiceSection() {
     ];
     return (
         <section className="w-full relative bg-[#00095B]  z-0 overflow-hidden before:content-['']
-         before:absolute before:top-[-2px] before:left-0 before:w-full before:bg-white before:xl:h-[30%] before:h-[25%] before:z-[-1]">
+         before:absolute before:top-0 before:left-0 before:w-full before:bg-white before:xl:h-[30%] before:h-[25%] before:z-[-1]">
             <div className="container">
                 <Swiper
                     slidesPerView={1}
@@ -56,7 +56,7 @@ export default function ServiceSection() {
                 >
                     {features.map((item, index) => (
                         <SwiperSlide key={index} className="!h-auto">
-                            <Link href="/book" className="w-full h-full flex flex-col justify-start rounded-[10px_10px_0_0] overflow-hidden p-[10px] pb-[25px] max-sm:bg-[#0A1572]   group hover:bg-[#0A1572] cursor-pointer">
+                            <Link href="/book" className="w-full h-full flex flex-col justify-start rounded-[10px_10px_0_0] overflow-hidden p-[10px] sm:pb-[25px] pb-[45px] max-sm:bg-[#0A1572]   group hover:bg-[#0A1572] cursor-pointer">
                                 <div className="w-full rounded-[10px] 2xl:pt-[150px] sm:pt-[110px] pt-[130px] overflow-hidden mb-[15px] relative">
                                     {/* Image (shown on hover) */}
                                     <div className="w-full aspect-ratio-[280/170]">
@@ -80,7 +80,7 @@ export default function ServiceSection() {
                                         />
                                     </div>
                                 </div>
-                                <div>
+                                <div className="max-sm:text-center">
                                     <Heading
                                         size="heading2"
                                         as="h4"
@@ -98,7 +98,8 @@ export default function ServiceSection() {
                                     <div
                                         className="2xl:text-[14px] xl:text-[12px] text-[10px] font-normal text-white max-w-[135px] 2xl:h-[40px] h-[35px] flex 
                                         items-center justify-center bg-transparent border
-                                        border-white px-2 rounded-full sm:opacity-0 sm:group-hover:opacity-100 hover:bg-white hover:text-[#1A73E8] transition cursor-pointer"
+                                        border-white px-2 rounded-full sm:opacity-0 sm:group-hover:opacity-100 hover:bg-white
+                                         hover:text-[#1A73E8] transition cursor-pointer max-sm:m-auto"
                                     >
                                         More Details
                                     </div>

@@ -156,4 +156,24 @@ body {
 
 .outlined-text {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+<<<<<<< HEAD
 }
+=======
+
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease forwards;
+}
+>>>>>>> 0cd9b501f56c13b3de2d9b46ee784816599cb0b4
