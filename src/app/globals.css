@@ -62,7 +62,6 @@
   --animate-right: bounce 1s ease-in-out infinite;
 
   @keyframes bounce {
-
     0%,
     100% {
       transform: translateX(25%);
@@ -75,17 +74,15 @@
     }
   }
 
-
-
   --animate-move: carMove 3s ease-in-out;
 
   @keyframes carMove {
     0% {
-      transform: translateX(-100%)
+      transform: translateX(-100%);
     }
 
     100% {
-      transform: translateX(0)
+      transform: translateX(0);
     }
   }
 }
@@ -99,15 +96,12 @@ body {
     @apply mx-auto px-[var(--breakpoint-gap)] lg:px-[var(--breakpoint-gap-lg)] xl:px-[var(--breakpoint-gap-xl)];
   }
 
-
-
-
   .btn-base1 {
     @apply bg-base2 hover:bg-base1 hover:border-base1;
   }
 
   .typography {
-    &>* {
+    & > * {
       @apply my-[10px] lg:my-[15px];
     }
 
@@ -141,18 +135,18 @@ body {
       @apply pl-[20px] lg:pl-[30px];
     }
 
-    ul>li,
-    ol>li {
+    ul > li,
+    ol > li {
       @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] font-normal leading-normal text-[#2d2929] my-[10px] lg:my-[15px];
     }
 
-    ul>li {
+    ul > li {
       @apply list-disc;
     }
   }
 
   .footer-link {
-    @apply  2xl:text-[14px] xl:text-[12px] md:text-[11px] text-[10px] text-white/60 capitalize font-normal hover:text-white transition-all;
+    @apply 2xl:text-[14px] xl:text-[12px] md:text-[11px] text-[10px] text-white/60 capitalize font-normal hover:text-white transition-all;
   }
 
   .footer-heading {
@@ -162,5 +156,4 @@ body {
 
 .outlined-text {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-
 }
