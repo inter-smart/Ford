@@ -40,7 +40,7 @@ export default function ServiceSection() {
     ];
     return (
         <section className="w-full relative bg-[#00095B]  z-0 overflow-hidden before:content-['']
-         before:absolute before:top-0 before:left-0 before:w-full before:bg-white before:xl:h-[30%] before:h-[25%] before:z-[-1]">
+         before:absolute before:top-[-2px] before:left-0 before:w-full before:bg-white before:xl:h-[30%] before:h-[25%] before:z-[-1]">
             <div className="container">
                 <Swiper
                     slidesPerView={1}
@@ -57,7 +57,7 @@ export default function ServiceSection() {
                     {features.map((item, index) => (
                         <SwiperSlide key={index} className="!h-auto">
                             <Link href="/book" className="w-full h-full flex flex-col justify-start rounded-[10px_10px_0_0] overflow-hidden p-[10px] pb-[25px] max-sm:bg-[#0A1572]   group hover:bg-[#0A1572] cursor-pointer">
-                                <div className="w-full rounded-[10px] 2xl:pt-[150px] md:pt-[90px] sm:pt-[110px] pt-[130px] overflow-hidden mb-[15px] relative">
+                                <div className="w-full rounded-[10px] 2xl:pt-[150px] sm:pt-[110px] pt-[130px] overflow-hidden mb-[15px] relative">
                                     {/* Image (shown on hover) */}
                                     <div className="w-full aspect-ratio-[280/170]">
                                         <Image
