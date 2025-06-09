@@ -1,0 +1,15 @@
+{
+  "header": {
+    "models": "Models",
+    "about": "About Us",
+    "services": "Services",
+    "contact": "Contact",
+    "owners": "Owners",
+    "offers": "Offers",
+    "news": "Latest News & Events",
+    "u8": "U8",
+    "u8_description": "Premium electric vehicle with advanced technology.",
+    "u9": "U9",
+    "u9_description": "High-performance electric supercar."
+  }
+}
