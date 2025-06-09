@@ -37,6 +37,8 @@ const menuLinkClass =
   "3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white 2xl:px-[20px] xl:px-[15px] px-[8px] hover:text-[#036EEE]";
 
 export default function Header({ locale }) {
+  console.log("header language", locale);
+  
   return (
     <header>
       <div className="w-full absolute top-0 left-0 z-10 bg-transparent">
@@ -88,7 +90,7 @@ export default function Header({ locale }) {
 
                 {/* Language */}
                 <NavigationMenuItem>
-                  {/* <button
+                  <button
                     onClick={() => handleLocaleChange("en")}
                     className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium mx-[85px_10px] flex items-center gap-2 cursor-pointer"
                   >
@@ -102,30 +104,7 @@ export default function Header({ locale }) {
                     <span className="relative h-full px-[10px] after:absolute after:content-[''] after:left-0 after:top-0 after:bottom-0 after:w-[6px] after:h-[6px] after:rounded-full after:m-auto after:bg-white">
                       ENG
                     </span>
-                  </button> */}
-                  <Select
-                    onValueChange={handleLocaleChange}
-                    value={locale}
-                    defaultValue={locale}
-                  >
-                    <SelectTrigger className="3xl:text-[15px] 2xl:text-[14px] xl:text-[10px] lg:text-[10px] text-[10px] font-normal uppercase leading-none text-white [&_svg]:stroke-white p-0 focus-visible:ring-0 shadow-none border-none gap-[2px] [&>svg]:size-3 2xl:[&>svg]:mt-[1px] 3xl:[&>svg]:mt-[2px]">
-                      <SelectValue placeholder={locale.toUpperCase()} />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white max-w-[40px] border-base1/10">
-                      <SelectItem
-                        className={`${triggerNavStyle} uppercase text-black`}
-                        value="en"
-                      >
-                        En
-                      </SelectItem>
-                      <SelectItem
-                        className={`${triggerNavStyle} uppercase text-black`}
-                        value="ar"
-                      >
-                        Ar
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
+                  </button>
                 </NavigationMenuItem>
 
                 {/* Search */}
