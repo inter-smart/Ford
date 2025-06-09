@@ -18,6 +18,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   { label: "Home", href: "/" },
@@ -36,7 +37,23 @@ const extraMenuItems = [
 const menuLinkClass =
   "3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white 2xl:px-[20px] xl:px-[15px] px-[8px] hover:text-[#036EEE]";
 
-export default function Header() {
+export default function Header({ locale }) {
+  const pathname = usePathname();
+
+  React.useEffect(() => {
+    console.log(
+      `[2025-05-29T14:24:00.000Z] Header locale: ${locale}, pathname: ${pathname}`
+    );
+  }, [locale, pathname]);
+  const handleLocaleChange = (newLocale) => {
+    const cleanPath = pathname.replace(/^\/(en|ar)/, "") || "/";
+    console.log(
+      `[2025-05-29T14:24:00.000Z] Switching locale to ${newLocale}, path: ${cleanPath}`
+    );
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    router.replace(cleanPath, { locale: newLocale });
+  };
+
   return (
     <header>
       <div className="w-full absolute top-0 left-0 z-10 bg-transparent">
@@ -74,7 +91,10 @@ export default function Header() {
             <NavigationMenu>
               <NavigationMenuList className="flex items-center gap-0">
                 {extraMenuItems.map((item) => (
-                  <NavigationMenuItem key={item.label} className="max-lg:hidden">
+                  <NavigationMenuItem
+                    key={item.label}
+                    className="max-lg:hidden"
+                  >
                     <Link href={item.href} passHref>
                       <NavigationMenuLink asChild>
                         <span className={menuLinkClass}>{item.label}</span>
@@ -85,7 +105,10 @@ export default function Header() {
 
                 {/* Language */}
                 <NavigationMenuItem>
-                  <button className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium mx-[85px_10px] flex items-center gap-2 cursor-pointer">
+                  {/* <button
+                    onClick={() => handleLocaleChange("en")}
+                    className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium mx-[85px_10px] flex items-center gap-2 cursor-pointer"
+                  >
                     <Image
                       src="/images/ar.png"
                       alt="UAE Flag"
@@ -96,7 +119,30 @@ export default function Header() {
                     <span className="relative h-full px-[10px] after:absolute after:content-[''] after:left-0 after:top-0 after:bottom-0 after:w-[6px] after:h-[6px] after:rounded-full after:m-auto after:bg-white">
                       ENG
                     </span>
-                  </button>
+                  </button> */}
+                  <Select
+                    onValueChange={handleLocaleChange}
+                    value={locale}
+                    defaultValue={locale}
+                  >
+                    <SelectTrigger className="3xl:text-[15px] 2xl:text-[14px] xl:text-[10px] lg:text-[10px] text-[10px] font-normal uppercase leading-none text-white [&_svg]:stroke-white p-0 focus-visible:ring-0 shadow-none border-none gap-[2px] [&>svg]:size-3 2xl:[&>svg]:mt-[1px] 3xl:[&>svg]:mt-[2px]">
+                      <SelectValue placeholder={locale.toUpperCase()} />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white max-w-[40px] border-base1/10">
+                      <SelectItem
+                        className={`${triggerNavStyle} uppercase text-black`}
+                        value="en"
+                      >
+                        En
+                      </SelectItem>
+                      <SelectItem
+                        className={`${triggerNavStyle} uppercase text-black`}
+                        value="ar"
+                      >
+                        Ar
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </NavigationMenuItem>
 
                 {/* Search */}
@@ -115,17 +161,29 @@ export default function Header() {
                 <NavigationMenuItem className="lg:hidden">
                   <Sheet>
                     <SheetTrigger className="text-white font-medium flex items-center cursor-pointer">
-                      <svg height="25" width="25" viewBox="0 0 512 512" className="fill-white">
-                        <path d="M128 102.4c0-14.138 11.462-25.6 25.6-25.6h332.8c14.138 0 25.6 11.462 25.6 25.6s-11.462 25.6-25.6 25.6h-332.8c-14.138 
+                      <svg
+                        height="25"
+                        width="25"
+                        viewBox="0 0 512 512"
+                        className="fill-white"
+                      >
+                        <path
+                          d="M128 102.4c0-14.138 11.462-25.6 25.6-25.6h332.8c14.138 0 25.6 11.462 25.6 25.6s-11.462 25.6-25.6 25.6h-332.8c-14.138 
                         0-25.6-11.463-25.6-25.6zm358.4 128h-460.8c-14.138 0-25.6 11.463-25.6 25.6 0 14.138 11.462 25.6 25.6 25.6h460.8c14.138 0 25.6-11.462 25.6-25.6 
                         0-14.137-11.462-25.6-25.6-25.6zm0 153.6h-230.4c-14.137 0-25.6 11.462-25.6 25.6 0 14.137 11.463 25.6 25.6 25.6h230.4c14.138 0 
-                        25.6-11.463 25.6-25.6 0-14.138-11.462-25.6-25.6-25.6z" />
+                        25.6-11.463 25.6-25.6 0-14.138-11.462-25.6-25.6-25.6z"
+                        />
                       </svg>
                     </SheetTrigger>
-                    <SheetContent side="left" className="w-full max-w-[340px] backdrop-blur-[20px] bg-black/70 p-6 text-white border-none">
+                    <SheetContent
+                      side="left"
+                      className="w-full max-w-[340px] backdrop-blur-[20px] bg-black/70 p-6 text-white border-none"
+                    >
                       <SheetHeader>
                         <div className="flex justify-between items-center mb-6">
-                          <SheetTitle className="text-2xl font-semibold tracking-wide">Menu</SheetTitle>
+                          <SheetTitle className="text-2xl font-semibold tracking-wide">
+                            Menu
+                          </SheetTitle>
                         </div>
                         <ul className="space-y-4 mt-4">
                           {[...menuItems, ...extraMenuItems].map((item, i) => (
@@ -148,8 +206,6 @@ export default function Header() {
                     </SheetContent>
                   </Sheet>
                 </NavigationMenuItem>
-
-
               </NavigationMenuList>
             </NavigationMenu>
           </div>
