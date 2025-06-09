@@ -188,7 +188,7 @@ export default function VehicleShowcase() {
                   <div className="realtive 2xl:min-h-[550px] min-h-[400px] flex items-end">
                     <div className="3xl:text-[120px] 2xl:text-[100px] xl:text-[80px] lg:text-[70px] md:text-[50px] text-[40px] lg:text-right font-medium text-transparent 
                       line-clamp-2 break-words absolute top-0 lg:right-0 left-o leading-[1.1] z-[-1] 
-                      outlined-text 3xl:max-w-[830px] 2xl:max-w-[750px] xl:max-w-[650px] lg:max-w-[550px] max-w-[400px] lg:ml-auto">
+                      outlined-text 3xl:max-w-[830px] 2xl:max-w-[750px] xl:max-w-[650px] lg:max-w-[550px] max-w-[400px] lg:ml-auto before:absolute before:content:'' before:left-0 before:w-full before:top-0 before:h-full " >
                       {active.carName}
                     </div>
                     <div className="3xl:max-w-[850px] 2xl:max-w-[750px] xl:max-w-[620px] lg:max-w-[550px] max-w-[450px] 2xl:min-h-[550px] min-h-[400px] flex items-center lg:justify-center justify-start  animate-carMove">
