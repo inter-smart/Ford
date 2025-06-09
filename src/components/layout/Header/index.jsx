@@ -18,7 +18,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { usePathname } from "next/navigation";
 
 const menuItems = [
   { label: "Home", href: "/" },
@@ -38,22 +37,6 @@ const menuLinkClass =
   "3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white 2xl:px-[20px] xl:px-[15px] px-[8px] hover:text-[#036EEE]";
 
 export default function Header({ locale }) {
-  const pathname = usePathname();
-
-  React.useEffect(() => {
-    console.log(
-      `[2025-05-29T14:24:00.000Z] Header locale: ${locale}, pathname: ${pathname}`
-    );
-  }, [locale, pathname]);
-  const handleLocaleChange = (newLocale) => {
-    const cleanPath = pathname.replace(/^\/(en|ar)/, "") || "/";
-    console.log(
-      `[2025-05-29T14:24:00.000Z] Switching locale to ${newLocale}, path: ${cleanPath}`
-    );
-    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
-    router.replace(cleanPath, { locale: newLocale });
-  };
-
   return (
     <header>
       <div className="w-full absolute top-0 left-0 z-10 bg-transparent">

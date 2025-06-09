@@ -52,20 +52,15 @@ async function getMessages(locale) {
   try {
     return (await import(`../../../messages/${locale}.json`)).default;
   } catch (error) {
-    console.error(
-      `[2025-05-29T12:10:00.000Z] Failed to load messages for ${locale}:`,
-      error.message
-    );
+    console.error(`[2025-05-29T12:10:00.000Z] Failed to load messages for ${locale}:`, error.message);
     notFound();
   }
 }
 
 export default async function RootLayout({ children, params }) {
   const { locale } = await params;
+
   const messages = await getMessages(locale);
-
-  console.log("lang", locale);
-
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={`${fordAntenna.variable} `}>
@@ -73,7 +68,7 @@ export default async function RootLayout({ children, params }) {
           <ScrollToTopButton />
           <Header locale={locale} />
           <main className="flex-grow">{children}</main>
-          <Footer />
+          <Footer locale={locale} />
         </NextIntlClientProvider>
       </body>
     </html>

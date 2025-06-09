@@ -189,17 +189,16 @@ export default function LegendarySection() {
                             {car.name} Models:
                           </span>
                           <Select value={selectedModel} onValueChange={setSelectedModel}>
-                            <SelectTrigger className="!text-[11px] md:!text-[14px] max-w-full min-h-[35px] lg:min-h-[40px] 2xl:min-h-[50px] px-6 border border-[#CCCCCC]
+                            <SelectTrigger
+                              className="!text-[11px] md:!text-[12px] 2xl:!text-[14px] max-w-full min-h-[35px] lg:min-h-[40px] 2xl:min-h-[50px] px-6 border border-[#CCCCCC]
                               text-[#000000] w-[150px] lg:w-[200px] bg-[#F8F9FD] rounded-full 
-                              font-medium outline-none shadow-none transition-all cursor-pointer 
-                              flex items-center justify-between relative
+                              font-medium outline-none shadow-none focus:outline-none focus:ring-0 focus:border-[#CCCCCC] focus:shadow-none
                               data-[state=open]:border-[#00095b] 
-                              data-[state=open]:shadow-lg 
-                              data-[state=open]:shadow-[#1577F0]/0"
-                            >
+                              data-[state=open]:shadow-none"
+                                                      >
                               <SelectValue placeholder="Select model" />
                             </SelectTrigger>
-                            <SelectContent className="bg-white border border-[#CCCCCC] rounded-md shadow-md text-[18px] font-medium text-[#1D0A44]">
+                            <SelectContent className="3xl:text-[18px] 2xl:text-[16px] md:text-[12px] text-[10px] bg-white border border-[#CCCCCC] rounded-md shadow-md font-medium text-[#1D0A44]">
                               {car.models.map((model) => (
                                 <SelectItem
                                   key={model}
