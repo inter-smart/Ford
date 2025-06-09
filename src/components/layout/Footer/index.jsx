@@ -64,12 +64,13 @@ export default function welcome() {
         <section className="w-full relative bg-[#00095B] 2xl:py-[65px] xl:py-[50px] sm:py-[40px] py-[30px] z-0 overflow-hidden ">
             <div className="container">
                 <div className="max-w-full mx-auto bg-[#010D7E] rounded-[16px] 3xl:py-[50px] md:py-[35px] md:px-[30px] px-[30px] 
-                py-[25px] 3xl:pr-[95px] 2xl:pr-[75px] xl:pr-[45px] lg:mb-[50px] mb-[30px] 
+                    py-[25px] ltr:3xl:pr-[95px] ltr:2xl:pr-[75px] ltr:xl:pr-[45px] rtl:3xl:pl-[95px] rtl:2xl:pl-[75px] rtl:xl:pl-[45px] lg:mb-[50px] mb-[30px] 
                     flex flex-col md:flex-row justify-between items-center
                     relative overflow-hidden 
-                    after:absolute after:content-[''] after:right-0 after:top-0 after:bottom-0 
-                    3xl:after:w-[480px] 2xl:after:w-[380px] xl:after:w-[300px] lg:after:w-[250px] after:w-[220px] 3xl:after:h-[480px] 2xl:after:h-[380px] xl:after:h-[300px] 
-                    lg:after:h-[250px] after:h-[220px] after:rounded-l-full after:bg-[#15229F] after:m-auto max-md:after:hidden">
+                    after:absolute after:content-['']  ltr:after:right-0 rtl:after:left-0 after:top-0 after:bottom-0 
+                    3xl:after:w-[480px] 2xl:after:w-[380px] xl:after:w-[300px] lg:after:w-[250px] after:w-[220px] 3xl:after:h-[480px] 2xl:after:h-[380px] 
+                    xl:after:h-[300px] 
+                    lg:after:h-[250px] after:h-[220px] ltr:after:rounded-l-full rtl:after:rounded-r-full after:bg-[#15229F] after:m-auto max-md:after:hidden">
 
                     {/* Left Content */}
                     <div className="text-white 3xl:max-w-[580px] md:max-w-[450px] mb-5 md:mb-0 max-md:text-center">
@@ -162,10 +163,10 @@ export default function welcome() {
                         <Link href="tel:+1 981 981-23-19" className="w-[115px]">
                             <Image src="/images/logo.svg" alt="Ford Logo" width={80} height={30} className="w-full sm:max-w-[115px] max-w-[85px] object-fill xl:mb-[50px] sm:mb-[30px] mb-[20px] lg:ml-auto " />
                         </Link>
-                        <div className="h-px w-10 bg-white opacity-20 lg:ml-auto xl:mb-[25px] mb-[15px]" />
+                        <div className="h-px w-10 bg-white opacity-20 ltr:lg:ml-auto xl:mb-[25px] mb-[15px]" />
                         <ul className="space-y-2">
-                            <li><Link href="tel:+1 981 981-23-19" className="footer-link">+1 981 981-23-19</Link></li>
-                            <li><Link href="mailto:hello@logoipsum.com" className="footer-link">hello@logoipsum.com</Link></li>
+                            <li><Link href="tel:+1 981 981-23-19" className="footer-link flex lg:justify-end ">+1 981 981-23-19</Link></li>
+                            <li><Link href="mailto:hello@logoipsum.com" className="footer-link flex lg:justify-end ">hello@logoipsum.com</Link></li>
                         </ul>
                     </div>
                     {/* download section */}
@@ -189,7 +190,7 @@ export default function welcome() {
                             </div>
 
                             {/* Social Media Section */}
-                            <div className="flex flex-wrap items-center sm:gap-4 gap-3 max-sm:justify-center lg:pt-[30px] lg:px-[40px]">
+                            <div className="flex flex-wrap items-center sm:gap-4 gap-3 max-sm:justify-center lg:pt-[30px] lg:px-[40px] px-[20px]">
                                 <p className="text-[11px] uppercase text-white/40 font-medium">Follow Us:</p>
                                 <div className="flex justify-center gap-4 ">
                                     {socialIcons.map(({ svg, name, link }, idx) => (
@@ -217,8 +218,8 @@ export default function welcome() {
 
                 {/* copyrights */}
 
-                <div className="xs:w-[calc(100%-60px)] relative z-0 flex flex-wrap items-center justify-between xl:mt-[50px] md:mt-[30px] mt-[15px] after:absolute after:content-['']
-                 after:left-0 after:right-0 after:h-[1px] after:w-full after:bg-[#051EFF] after:m-auto after:z-[-1] max-sm:after:hidden max-xs:text-center max-xs:justify-center">
+                <div className="xs:w-[calc(100%-30px)] lg:w-[calc(100%-60px)] relative z-0 flex flex-wrap items-center justify-between xl:mt-[50px] md:mt-[30px] mt-[15px] after:absolute after:content-['']
+                 after:left-0 after:right-0 after:h-[1px] after:w-full after:bg-[#051EFF] after:m-auto after:z-[-1] max-sm:after:hidden max-xs:text-center max-xs:px-[20px] max-xs:justify-center">
                     <div className="bg-[#00095B] p-[5px]">
                         <Text size="text2" as="p"
                             className="text-white">

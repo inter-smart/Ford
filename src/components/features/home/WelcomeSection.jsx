@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 export default function Welcome() {
   return (
     <section className="w-full relative bg-[#F0F0F0] 2xl:py-[125px_100px] xl:py-[80px] py-[50px] z-0 overflow-hidden">
-      <div className="absolute right-0 lg:top-0 max-md:bottom-0 xl:max-w-[550px] max-w-[350px] h-auto w-full z-[-1]">
+      <div className="absolute ltr:right-0 rtl:left-0 lg:top-0 max-md:bottom-0 xl:max-w-[550px] max-w-[350px] h-auto w-full z-[-1]">
         <Image
           src="/images/mountains.png"
           width="650"
@@ -72,7 +72,7 @@ export default function Welcome() {
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
             className="2xl:w-[650px] xl:w-[550px] lg:w-[430px] flex items-end relative z-0"
           >
             <Image
