@@ -2,8 +2,8 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToTopButton from "@/components/common/scrollTop";
-import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
+import localFont from 'next/font/local'
 
 const fordAntenna = localFont({
   src: [
