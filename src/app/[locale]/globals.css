@@ -145,13 +145,7 @@ body {
     }
   }
 
-  .footer-link {
-    @apply 2xl:text-[14px] xl:text-[12px] md:text-[11px] text-[10px] text-white/60 capitalize font-normal hover:text-white transition-all;
-  }
-
-  .footer-heading {
-    @apply lg:text-[11px] text-[10px] uppercase text-white/40 font-medium lg:mb-3 mb-1;
-  }
+ 
 }
 
 .outlined-text {

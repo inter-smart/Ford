@@ -213,7 +213,7 @@ export default function HeroSection() {
                           before:content:'' before:left-0 before:w-full before:top-0 before:h-full " >
                           {active.carName}
                         </div>
-                              <AnimatePresence mode="wait">
+                           
                         <motion.div
                           key={active.colors[selectedColorIndex].image}
                           initial={{ opacity: 0, scale: 0.95 }}
@@ -228,8 +228,7 @@ export default function HeroSection() {
                               className="w-full h-full object-contain animate-carMove"
                             />
                           </div>
-                        </motion.div>
-                        </AnimatePresence>
+                        </motion.div> 
                       </div>
                       {/* color options button  */}
                       <div className='absolute lg:bottom-0 md:bottom-[80px] bottom-0 ltr:left-0 rtl:right-0'>
