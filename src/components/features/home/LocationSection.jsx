@@ -25,7 +25,7 @@ export default function LocationSection() {
                         className="w-full h-full object-cover duration-300 absolute top-0 left-0 "
                     />
                     <div className="w-full flex flex-wrap justify-between relative z-1 gap-3">
-                        <div className="relative w-full z-0 2xl:max-w-[450px] lg:max-w-[380px] md:max-w-[300px] max:md:mb-[50px]">
+                        <div className="relative w-full z-0 2xl:max-w-[450px] lg:max-w-[380px] md:max-w-[300px] md:mb-0 mb-[30px]">
                             <Heading size="heading1" as="h2"
                                 className="text-white mb-[10px]">
                                 Locate a <br className="max-md:hidden" />
