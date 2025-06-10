@@ -136,14 +136,14 @@ export default function LegendarySection() {
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 w-full 2xl:w-[calc(100%-200px)] lg:w-[calc(100%-160px)] 2xl:pl-[50px] xl:pl-[40px]">
+          <div className="flex-1 w-full 2xl:w-[calc(100%-200px)] lg:w-[calc(100%-160px)] ltr:pr-0 rtl:pl-0 ltr:2xl:pl-[50px] rtl:2xl:pr-[50px] ltr:xl:pl-[40px] rtl:xl:pr-[40px]">
             {filteredCars.length === 0 ? (
               <div className="text-gray-400 text-center text-[18px] font-medium py-10">
                 No items to display for <span className="font-semibold">{selectedCategory}</span>.
               </div>
             ) : (
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                <TabsList className="bg-transparent gap-6 2xl:mb-[45px] mb-[30px] h-auto p-0">
+                <TabsList className="bg-transparent gap-6 2xl:mb-[45px] mb-[30px] h-auto p-0 rtl:ml-auto">
                   {filteredCars.map((car) => (
                     <TabsTrigger
                       key={car.key}
@@ -169,14 +169,14 @@ export default function LegendarySection() {
 
                 {filteredCars.map((car) => (
                   <TabsContent key={car.key} value={car.key} className="mt-0 relative">
-                    <div className="flex flex-col sm:flex-row justify-between gap-6 sm:absolute top-0 left-0 w-full">
+                    <div className="flex flex-col ltr:sm:flex-row rtl:flex-row-reverse justify-between gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
                       <div className="sm:w-1/3">
-                        <Heading size="heading1" as="h2" className="text-black font-medium lg:mb-[35px] sm:mb-[25px] mb-[15px] max-w-[360px]">
+                        <Heading size="heading1" as="h2" className="text-black font-medium lg:mb-[35px] sm:mb-[25px] mb-[15px] max-w-[360px] rtl:ml-auto">
                           {car.tagline}
                         </Heading>
                         <Link
                           href="#"
-                          className="2xl:text-[14px] text-[12px] text-[#1577F0] font-medium inline-block border border-[#1577F0] 2xl:px-6 px-5 2xl:py-3 py-2
+                          className="2xl:text-[14px] text-[12px] text-[#1577F0] font-medium inline-block border rtl:ml-auto border-[#1577F0] 2xl:px-6 px-5 2xl:py-3 py-2
                           rounded-full hover:bg-[#0052FF] hover:text-white transition sm:mb-10"
                         >
                           Download Brochure
@@ -213,7 +213,7 @@ export default function LegendarySection() {
                         </div>
 
                         {isVisible && currentCar && (
-                          <div className="absolute 2xl:top-[130px] top-[40%] sm:top-[100px] right-0 sm:right-[100px] w-full 2xl:max-w-[230px] 
+                          <div className="absolute 2xl:top-[130px] top-[40%] sm:top-[100px] ltr:right-0 rtl:left-0 ltr:sm:right-[100px] rtl:sm:left-[100px] w-full 2xl:max-w-[230px] 
                           lg:max-w-[200px] max-w-[150px] shadow-md">
                             <div className="relative">
                               <div className="rounded-md border border-gray-200 w-full h-full overflow-hidden relative">
@@ -254,8 +254,8 @@ export default function LegendarySection() {
                         )}
 
                         <div className="2xl:mt-[50px] sm:mt-[30px]">
-                          <p className="text-[16px] font-medium sm:text-right mb-5">Colors</p>
-                          <div className="flex sm:flex-col items-end gap-2 flex-wrap">
+                          <p className="text-[16px] font-medium ltr:sm:text-right rtl:sm:text-left  mb-5">Colors</p>
+                          <div className="flex sm:flex-col ltr:items-end rtl:items-start gap-2 flex-wrap">
                             {car.colors.map((color, i) => {
                               const isSelected = selectedColorImage === color.image;
                               return (

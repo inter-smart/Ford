@@ -59,8 +59,8 @@ export default function welcome() {
                 </div>
             </div>
            <div
-            className="w-full h-full relative z-0 p-[0px_0_0_25px] lg:pr-0 
-            ltr:lg:pl-[calc(((100vw-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
+            className="w-full h-full relative z-0 ltr:p-[0px_0px_0px_25px] rtl:p-[0px_25px_0px_0px] ltr:lg:pr-0 rtl:lg:pl-0 
+             ltr:lg:pl-[calc(((100vw-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
              ltr:xl:pl-[calc(((100vw-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
              ltr:2xl:pl-[calc(((100vw-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
              ltr:3xl:pl-[calc(((100vw-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl))]

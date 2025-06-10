@@ -38,7 +38,7 @@ const menuLinkClass =
 
 export default function Header({ locale }) {
   console.log("header language", locale);
-  
+
   return (
     <header>
       <div className="w-full absolute top-0 left-0 z-10 bg-transparent">
@@ -46,7 +46,7 @@ export default function Header({ locale }) {
           <div className="w-full flex flex-wrap items-center justify-between py-[20px]">
             {/* Main menu */}
             <NavigationMenu className="max-lg:hidden">
-              <NavigationMenuList className="flex gap-0 items-center">
+              <NavigationMenuList className="flex gap-0 items-center rtl:flex-row-reverse">
                 {menuItems.map((item) => (
                   <NavigationMenuItem key={item.label}>
                     <Link href={item.href} passHref>
@@ -74,7 +74,7 @@ export default function Header({ locale }) {
 
             {/* Right Menu */}
             <NavigationMenu>
-              <NavigationMenuList className="flex items-center gap-0">
+              <NavigationMenuList className="flex items-center gap-0 rtl:flex-row-reverse">
                 {extraMenuItems.map((item) => (
                   <NavigationMenuItem
                     key={item.label}
@@ -90,10 +90,7 @@ export default function Header({ locale }) {
 
                 {/* Language */}
                 <NavigationMenuItem>
-                  <button
-                    onClick={() => handleLocaleChange("en")}
-                    className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium mx-[85px_10px] flex items-center gap-2 cursor-pointer"
-                  >
+                  <button className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium ltr:mx-[85px_10px] rtl:mx-[10px_85px] flex items-center gap-2 cursor-pointer">
                     <Image
                       src="/images/ar.png"
                       alt="UAE Flag"
