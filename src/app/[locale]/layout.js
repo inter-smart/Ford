@@ -13,7 +13,7 @@ export const metadata = {
 export const fordAntenna = localFont({
   src: [
     {
-      path: "../../public/fonts/StretchProRegular.woff2",
+      path: "../../../public/fonts/StretchProRegular.woff2",
       weight: "100",
       style: "normal",
     },
