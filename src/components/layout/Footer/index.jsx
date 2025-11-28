@@ -59,6 +59,10 @@ const socialIcons = [
     },
 ];
 
+
+const footerLink = "2xl:text-[14px] xl:text-[12px] md:text-[11px] text-[10px] text-white/60 capitalize font-normal hover:text-white transition-all"
+const footerHeading = "lg:text-[11px] text-[10px] uppercase text-white/40 font-medium lg:mb-3 mb-1"
+
 export default function welcome() {
     return (
         <section className="w-full relative bg-[#00095B] 2xl:py-[65px] xl:py-[50px] sm:py-[40px] py-[30px] z-0 overflow-hidden ">
@@ -111,50 +115,50 @@ export default function welcome() {
 
                     {/* Column 1: SUVs & Cars */}
                     <div className="min-w-0 w-full">
-                        <h4 className="footer-heading">SUVs & Cars</h4>
+                        <h4 className={footerHeading}>SUVs & Cars</h4>
                         <ul className="space-y-2">
-                            <li><Link href="#" className="footer-link">Ford Expedition</Link></li>
-                            <li><Link href="#" className="footer-link">Ford Mustang</Link></li>
-                            <li><Link href="#" className="footer-link">Ford Territory</Link></li>
-                            <li><Link href="#" className="footer-link">Ford Mustang Shelby</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford Expedition</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford Mustang</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford Territory</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford Mustang Shelby</Link></li>
                         </ul>
                     </div>
 
                     {/* Column 2: Trucks & Vans */}
                     <div className="min-w-0 w-full">
-                        <h4 className="footer-heading">Trucks & Vans</h4>
+                        <h4 className={footerHeading}>Trucks & Vans</h4>
                         <ul className="space-y-2">
-                            <li><Link href="#" className="footer-link">Ford F-150 Raptor</Link></li>
-                            <li><Link href="#" className="footer-link">Ford F-150</Link></li>
-                            <li><Link href="#" className="footer-link">Ford Super Duty</Link></li>
-                            <li><Link href="#" className="footer-link">Ford Transit Custom</Link></li>
-                            <li><Link href="#" className="footer-link">Ford Transit Van</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford F-150 Raptor</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford F-150</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford Super Duty</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford Transit Custom</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford Transit Van</Link></li>
                         </ul>
                     </div>
 
                     {/* Column 3: Useful Links */}
                     <div className="min-w-0 w-full">
-                        <h4 className="footer-heading">Useful Links</h4>
+                        <h4 className={footerHeading}>Useful Links</h4>
                         <ul className="space-y-2">
-                            <li><Link href="#" className="footer-link">News and Events</Link></li>
-                            <li><Link href="#" className="footer-link">Book a Service</Link></li>
-                            <li><Link href="#" className="footer-link">Book a Test Drive</Link></li>
-                            <li><Link href="#" className="footer-link">Terms and Conditions</Link></li>
-                            <li><Link href="#" className="footer-link">Privacy Policy</Link></li>
-                            <li><Link href="#" className="footer-link">Careers</Link></li>
+                            <li><Link href="#" className={footerLink}>News and Events</Link></li>
+                            <li><Link href="#" className={footerLink}>Book a Service</Link></li>
+                            <li><Link href="#" className={footerLink}>Book a Test Drive</Link></li>
+                            <li><Link href="#" className={footerLink}>Terms and Conditions</Link></li>
+                            <li><Link href="#" className={footerLink}>Privacy Policy</Link></li>
+                            <li><Link href="#" className={footerLink}>Careers</Link></li>
                         </ul>
                     </div>
 
                     {/* Column 4: Customer Service */}
                     <div className="min-w-0 w-full">
-                        <h4 className="footer-heading">Customer Service</h4>
+                        <h4 className={footerHeading}>Customer Service</h4>
                         <ul className="space-y-2">
-                            <li><Link href="#" className="footer-link">Contact Us</Link></li>
-                            <li><Link href="#" className="footer-link">Seeb</Link></li>
-                            <li><Link href="#" className="footer-link">Barka</Link></li>
-                            <li><Link href="#" className="footer-link">Salalah</Link></li>
-                            <li><Link href="#" className="footer-link">Sohar</Link></li>
-                            <li><Link href="#" className="footer-link">Ford Approved – Wattayah</Link></li>
+                            <li><Link href="#" className={footerLink}>Contact Us</Link></li>
+                            <li><Link href="#" className={footerLink}>Seeb</Link></li>
+                            <li><Link href="#" className={footerLink}>Barka</Link></li>
+                            <li><Link href="#" className={footerLink}>Salalah</Link></li>
+                            <li><Link href="#" className={footerLink}>Sohar</Link></li>
+                            <li><Link href="#" className={footerLink}>Ford Approved – Wattayah</Link></li>
                         </ul>
                     </div>
 
@@ -165,8 +169,17 @@ export default function welcome() {
                         </Link>
                         <div className="h-px w-10 bg-white opacity-20 ltr:lg:ml-auto xl:mb-[25px] mb-[15px]" />
                         <ul className="space-y-2">
-                            <li><Link href="tel:+1 981 981-23-19" className="footer-link flex lg:justify-end ">+1 981 981-23-19</Link></li>
-                            <li><Link href="mailto:hello@logoipsum.com" className="footer-link flex lg:justify-end ">hello@logoipsum.com</Link></li>
+                            <li>
+                                <Link href="tel:+19819812319" className={`${footerLink} flex lg:justify-end`}>
+                                    +1 981 981-23-19
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="mailto:hello@logoipsum.com" className={`${footerLink} flex lg:justify-end`}>
+                                    hello@logoipsum.com
+                                </Link>
+                            </li>
+
                         </ul>
                     </div>
                     {/* download section */}
@@ -174,7 +187,7 @@ export default function welcome() {
                         <div className="flex flex-col md:flex-row md:items-center gap-6">
                             {/* App Download Section */}
                             <div>
-                                <p className="footer-heading 2xl:mb-[25px] mb-[10px]">Download the App</p>
+                                <p className={`${footerHeading} 2xl:mb-[25px] mb-[10px]`} >Download the App</p>
                                 <div className="flex gap-3 lg:max-w-[380px] sm:max-w-[300px] w-full">
                                     <div className="w-1/2">
                                         <Link href="#" className="w-full 2xl:h-[55px] h-[45px] border border-white 2xl:rounded-[10px] rounded-[5px]  flex items-center px-[15px] justify-center group hover:bg-[#010D7E]">

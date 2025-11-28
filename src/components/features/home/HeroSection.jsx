@@ -188,7 +188,7 @@ export default function HeroSection() {
 
                 {active && (
                   <div className="relative flex flex-col lg:justify-center justify-end w-full h-full  md:pb-[0px] pb-[110px] duration-500 ">
-                    <button className="lg:w-[30px] w-[20px] lg:h-[30px] h-[20px] bg-transparent cursor-pointer absolute top-[0] xs:top-[15%]
+                    <button className="lg:w-[30px] w-[20px] lg:h-[30px] h-[20px] bg-transparent cursor-pointer absolute top-[0] z-2 xs:top-[15%] 
                  rtl:3xl:left-[-6%] rtl:2xl:left-[-7%] rtl:lg:left-[-7%] rtl:md:left-[-9%] rtl:sm:left-[-10%] rtl:left-0
                  ltr:3xl:right-[-6%] ltr:2xl:right-[-7%] ltr:lg:right-[-7%] ltr:md:right-[-9%] ltr:sm:right-[-10%] ltr:right-0 group" onClick={() => setActiveIndex(null)}>
                       <svg viewBox="0 0 64 64" className="w-full h-full">
@@ -213,7 +213,7 @@ export default function HeroSection() {
                           before:content:'' before:left-0 before:w-full before:top-0 before:h-full " >
                           {active.carName}
                         </div>
-                              <AnimatePresence mode="wait">
+                           
                         <motion.div
                           key={active.colors[selectedColorIndex].image}
                           initial={{ opacity: 0, scale: 0.95 }}
@@ -228,8 +228,7 @@ export default function HeroSection() {
                               className="w-full h-full object-contain animate-carMove"
                             />
                           </div>
-                        </motion.div>
-                        </AnimatePresence>
+                        </motion.div> 
                       </div>
                       {/* color options button  */}
                       <div className='absolute lg:bottom-0 md:bottom-[80px] bottom-0 ltr:left-0 rtl:right-0'>

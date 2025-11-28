@@ -18,6 +18,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { useRouter, usePathname } from "next/navigation";
 
 const menuItems = [
   { label: "Home", href: "/" },
@@ -33,11 +34,22 @@ const extraMenuItems = [
   { label: "Contact Us", href: "/contact-us" },
 ];
 
+
+
 const menuLinkClass =
   "3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white 2xl:px-[20px] xl:px-[15px] px-[8px] hover:text-[#036EEE]";
 
 export default function Header({ locale }) {
-  console.log("header language", locale);
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleLocaleChange = (newLocale) => {
+    const cleanPath = pathname.replace(/^\/(en|ar)/, "") || "/";
+    console.log(`[2025-05-29T14:24:00.000Z] Switching locale to ${newLocale}, path: ${cleanPath}`);
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    router.replace(`/${newLocale}${cleanPath}`);
+  };
 
   return (
     <header>
@@ -90,16 +102,18 @@ export default function Header({ locale }) {
 
                 {/* Language */}
                 <NavigationMenuItem>
-                  <button className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium ltr:mx-[85px_10px] rtl:mx-[10px_85px] flex items-center gap-2 cursor-pointer">
+                  <button className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium ltr:mx-[85px_10px] rtl:mx-[10px_85px] 
+                  flex items-center gap-2 cursor-pointer group" onClick={() => handleLocaleChange(locale === "en" ? "ar" : "en")}>
                     <Image
-                      src="/images/ar.png"
-                      alt="UAE Flag"
+                      src={locale === "en" ? "/images/ar.png" : "/images/uk.png"}
+                      alt={locale === "en" ? "Arabic" : "English"}
                       width={20}
                       height={15}
                       className="w-[20px] h-[18px] object-contain"
                     />
-                    <span className="relative h-full px-[10px] after:absolute after:content-[''] after:left-0 after:top-0 after:bottom-0 after:w-[6px] after:h-[6px] after:rounded-full after:m-auto after:bg-white">
-                      ENG
+                    <span className="relative h-full px-[10px] after:absolute after:content-[''] after:left-0 after:top-0 after:bottom-0 after:w-[6px] 
+                    after:h-[6px] after:rounded-full after:m-auto after:bg-white group-hover:text-[#036EEE]">
+                      {locale === "en" ? "AR" : "ENG"}
                     </span>
                   </button>
                 </NavigationMenuItem>

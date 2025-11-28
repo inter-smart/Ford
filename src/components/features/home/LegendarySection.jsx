@@ -143,7 +143,7 @@ export default function LegendarySection() {
               </div>
             ) : (
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                <TabsList className="bg-transparent gap-6 2xl:mb-[45px] mb-[30px] h-auto p-0 rtl:ml-auto">
+                <TabsList className="bg-transparent gap-6 2xl:mb-[45px] sm:mb-[30px] mb-[15px] h-auto p-0 rtl:ml-auto">
                   {filteredCars.map((car) => (
                     <TabsTrigger
                       key={car.key}
@@ -169,7 +169,7 @@ export default function LegendarySection() {
 
                 {filteredCars.map((car) => (
                   <TabsContent key={car.key} value={car.key} className="mt-0 relative">
-                    <div className="flex flex-col ltr:sm:flex-row rtl:flex-row-reverse justify-between gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
+                    <div className="flex flex-col ltr:sm:flex-row rtl:sm:flex-row-reverse justify-between gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
                       <div className="sm:w-1/3">
                         <Heading size="heading1" as="h2" className="text-black font-medium lg:mb-[35px] sm:mb-[25px] mb-[15px] max-w-[360px] rtl:ml-auto">
                           {car.tagline}
@@ -183,9 +183,9 @@ export default function LegendarySection() {
                         </Link>
                       </div>
 
-                      <div className="flex flex-col gap-4 md:relative sm:absolute top-0 right-0 lg:top-[-120px] min-w-[200px]">
-                        <div className="flex items-center gap-4">
-                          <span className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-black font-medium uppercase">
+                      <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-0 right-0 lg:top-[-120px] min-w-[200px] sm:mb-0 mb-[30px]">
+                        <div className="flex items-center rtl:max-sm:justify-end  gap-4">
+                          <span className="text-[11px] 2xl:text-[14px] 3xl:text-[16px] text-black font-medium uppercase">
                             {car.name} Models:
                           </span>
                           <Select value={selectedModel} onValueChange={setSelectedModel}>
@@ -213,7 +213,7 @@ export default function LegendarySection() {
                         </div>
 
                         {isVisible && currentCar && (
-                          <div className="absolute 2xl:top-[130px] top-[40%] sm:top-[100px] ltr:right-0 rtl:left-0 ltr:sm:right-[100px] rtl:sm:left-[100px] w-full 2xl:max-w-[230px] 
+                          <div className="absolute 2xl:top-[130px] top-[40%] sm:top-[100px] ltr:right-0 rtl:left-0 ltr:sm:right-[100px] rtl:xs:left-[50px] rtl:sm:left-[100px] w-full 2xl:max-w-[230px] 
                           lg:max-w-[200px] max-w-[150px] shadow-md">
                             <div className="relative">
                               <div className="rounded-md border border-gray-200 w-full h-full overflow-hidden relative">
@@ -254,8 +254,8 @@ export default function LegendarySection() {
                         )}
 
                         <div className="2xl:mt-[50px] sm:mt-[30px]">
-                          <p className="text-[16px] font-medium ltr:sm:text-right rtl:sm:text-left  mb-5">Colors</p>
-                          <div className="flex sm:flex-col ltr:items-end rtl:items-start gap-2 flex-wrap">
+                          <p className="text-[12px] md:text-[16px] font-medium ltr:sm:text-right rtl:sm:text-left  mb-5">Colors</p>
+                          <div className="flex sm:flex-col ltr:items-end rtl:items-start rtl:max-sm:justify-end  gap-2 flex-wrap">
                             {car.colors.map((color, i) => {
                               const isSelected = selectedColorImage === color.image;
                               return (
