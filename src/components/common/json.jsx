@@ -20,6 +20,7 @@ const product_page = {
       id: 1,
       badge: string,
       modelName: "taurus",
+      slug: string,
       modelCategory: (sedan, suv, truck, performance, commercial_vehicle),
       media: {
         type: (image, video),
