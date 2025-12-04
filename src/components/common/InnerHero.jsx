@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Text } from "../layout/Text";
 import { Heading } from "../layout/Heading";
+import { EnquireModal } from "./EnquireModal";
 
 export default function InnerHero({ data }) {
   return (
@@ -35,12 +36,14 @@ export default function InnerHero({ data }) {
             </Text>
           )}
           {data?.button && (
-            <Link
-              href="/"
-              className="text-[12px] xl:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1] font-bold text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-[#fff] hover:text-black transition cursor-pointer"
-            >
-              {data?.button}
-            </Link>
+            // <Link
+            //   href="/"
+            //   className="text-[12px] xl:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1] font-bold text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-[#fff] hover:text-black transition cursor-pointer"
+            // >
+            //   {data?.button}
+            // </Link>
+            <EnquireModal />
+            
           )}
         </div>
       </div>
