@@ -5,7 +5,7 @@ import { Heading } from "../layout/Heading";
 
 export default function InnerHero({ data }) {
   return (
-    <section className="w-full h-auto min-h-[320px] sm:min-h-[400px] xl:min-h-[500px] 2xl:min-h-[560px] flex items-end relative z-0  before:content-[''] before:w-full before:h-[30%] before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-40 before:absolute before:z-[-1] before:inset-auto_0_0_0">
+    <section className="w-full h-auto min-h-[350px] sm:min-h-[450px] xl:min-h-[540px] 2xl:min-h-[580px] flex items-end relative z-0  before:content-[''] before:w-full before:h-[30%] before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-40 before:absolute before:z-[-1] before:inset-auto_0_0_0">
       <picture className="absolute -z-2 inset-0">
         <source media="(max-width: 640px)" srcSet={data?.mobile_image?.url} />
         <Image
@@ -42,6 +42,7 @@ export default function InnerHero({ data }) {
             >
               {data?.button_text}
             </Link>
+            
           )}
         </div>
       </div>
