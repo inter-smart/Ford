@@ -5,16 +5,33 @@ import React, { useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 export default function ProductListSection({ data }) {
-  const { items, categories } = data;
+  const productRaw = data?.product ?? [];
+
+  const categories = [
+    { value: "all", label: "All" },
+    ...Array.from(
+      new Set(productRaw.flatMap((p) => p.modelCategory || []))
+    ).map((cat) => ({
+      value: cat.toLowerCase(),
+      label: cat,
+    })),
+  ];
 
   const [activeCategory, setActiveCategory] = useState("all");
-
+  const [searchQuery, setSearchQuery] = useState("");
   const [tabsEmblaRef] = useEmblaCarousel({ dragFree: true });
 
-  const productList =
-    activeCategory === "all"
-      ? items
-      : items.filter((item) => item.modelCategory === activeCategory);
+  const productList = productRaw.filter((item) => {
+    const categoriesLower = (item.modelCategory || []).map((c) =>
+      c.toLowerCase()
+    );
+    const matchCategory =
+      activeCategory === "all" || categoriesLower.includes(activeCategory);
+    const matchSearch = item.modelName
+      ?.toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    return matchCategory && matchSearch;
+  });
 
   return (
     <section className="w-full h-auto py-[40px] sm:py-[50px_40px] lg:py-[70px_50px] 2xl:py-[85px_65px] block">
@@ -57,16 +74,16 @@ export default function ProductListSection({ data }) {
                     focus:border-black transition-all
                   "
               />
-              <button className="w-[10px] lg:w-[15px] 2xl:w-[20px] h-auto aspect-[20/20] p-[0_15px_0_20px] lg:p-[0_35px_0_20px] absolute z-1 right-0 top-1/2 -translate-y-1/2 cursor-pointer">
+              <button className="w-[10px] lg:w-[15px] 2xl:w-[20px] h-auto aspect-[20/20] p-[0_35px_0_20px] lg:p-[0_35px_0_20px] absolute z-1 right-0 top-1/2 -translate-y-1/2 cursor-pointer">
                 <Search className="text-black" size={20} />
               </button>
             </div>
           </div>
         </div>
         <div className="w-full h-full sm:mx-[-5px] lg:mx-[-7px] flex flex-wrap">
-          {productList.map((item) => (
+          {productList.map((item, index) => (
             <div
-              key={item.id}
+              key={index}
               className="w-full sm:w-1/2 lg:w-1/3 h-auto p-[10px_0px] sm:p-[15px_5px] lg:p-[20px_7px] 2xl:p-[30px_7px]"
             >
               <ProductCard item={item} />
