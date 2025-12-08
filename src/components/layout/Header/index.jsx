@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,36 +19,37 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useRouter, usePathname } from "next/navigation";
 
-const menuItems = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Offer", href: "/offer" },
-  { label: "Product", href: "/product" },
-  { label: "Parts & Service", href: "/parts-service" },
-];
+// const menuItems = [
+//   { label: "Home", href: "/" },
+//   { label: "About", href: "/about" },
+//   { label: "Offer", href: "/offer" },
+//   { label: "Product", href: "/product" },
+//   { label: "Parts & Service", href: "/parts-service" },
+// ];
 
-const extraMenuItems = [
-  { label: "Fleet", href: "/fleet" },
-  { label: "Clients", href: "/clients" },
-  { label: "Contact Us", href: "/contact-us" },
-];
-
-
+// const extraMenuItems = [
+//   { label: "Fleet", href: "/fleet" },
+//   { label: "Clients", href: "/clients" },
+//   { label: "Contact Us", href: "/contact-us" },
+// ];
 
 const menuLinkClass =
   "3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white 2xl:px-[20px] xl:px-[15px] px-[8px] hover:text-[#036EEE]";
 
-export default function Header({ locale }) {
-
+export default function Header({ locale, data: header_acf }) {
   const router = useRouter();
   const pathname = usePathname();
 
   const handleLocaleChange = (newLocale) => {
     const cleanPath = pathname.replace(/^\/(en|ar)/, "") || "/";
-    console.log(`[2025-05-29T14:24:00.000Z] Switching locale to ${newLocale}, path: ${cleanPath}`);
+    console.log(
+      `[2025-05-29T14:24:00.000Z] Switching locale to ${newLocale}, path: ${cleanPath}`
+    );
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
     router.replace(`/${newLocale}${cleanPath}`);
   };
+
+  if (!header_acf) return null;
 
   return (
     <header>
@@ -59,11 +59,13 @@ export default function Header({ locale }) {
             {/* Main menu */}
             <NavigationMenu className="max-lg:hidden">
               <NavigationMenuList className="flex gap-0 items-center rtl:flex-row-reverse">
-                {menuItems.map((item) => (
-                  <NavigationMenuItem key={item.label}>
-                    <Link href={item.href} passHref>
+                {header_acf?.left_menu_items.map((item, index) => (
+                  <NavigationMenuItem key={index}>
+                    <Link href={item?.menu_url?.url} passHref>
                       <NavigationMenuLink asChild>
-                        <span className={menuLinkClass}>{item.label}</span>
+                        <span className={menuLinkClass}>
+                          {item?.menu_title}
+                        </span>
                       </NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>
@@ -75,8 +77,8 @@ export default function Header({ locale }) {
             <div className="lg:w-[140px] w-[75px] flex items-center justify-center">
               <Link href="/" className="w-full h-full max-w-[80px]">
                 <Image
-                  src="/images/logo.png"
-                  alt="Ford"
+                  src={header_acf?.logo_image?.url || "/images/logo.png"}
+                  alt={header_acf?.logo_image?.alt || "Logo"}
                   width={70}
                   height={30}
                   className="w-full h-full object-contain block hover:scale-105 transition-transform duration-300"
@@ -87,14 +89,13 @@ export default function Header({ locale }) {
             {/* Right Menu */}
             <NavigationMenu>
               <NavigationMenuList className="flex items-center gap-0 rtl:flex-row-reverse">
-                {extraMenuItems.map((item) => (
-                  <NavigationMenuItem
-                    key={item.label}
-                    className="max-lg:hidden"
-                  >
-                    <Link href={item.href} passHref>
+                {header_acf?.right_menu_items.map((item, index) => (
+                  <NavigationMenuItem key={index} className="max-lg:hidden">
+                    <Link href={item?.menu_url?.url} passHref>
                       <NavigationMenuLink asChild>
-                        <span className={menuLinkClass}>{item.label}</span>
+                        <span className={menuLinkClass}>
+                          {item?.menu_title}
+                        </span>
                       </NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>
@@ -102,17 +103,26 @@ export default function Header({ locale }) {
 
                 {/* Language */}
                 <NavigationMenuItem>
-                  <button className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium ltr:mx-[85px_10px] rtl:mx-[10px_85px] 
-                  flex items-center gap-2 cursor-pointer group" onClick={() => handleLocaleChange(locale === "en" ? "ar" : "en")}>
+                  <button
+                    className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium ltr:mx-[85px_10px] rtl:mx-[10px_85px] 
+                  flex items-center gap-2 cursor-pointer group"
+                    onClick={() =>
+                      handleLocaleChange(locale === "en" ? "ar" : "en")
+                    }
+                  >
                     <Image
-                      src={locale === "en" ? "/images/ar.png" : "/images/uk.png"}
+                      src={
+                        locale === "en" ? "/images/ar.png" : "/images/uk.png"
+                      }
                       alt={locale === "en" ? "Arabic" : "English"}
                       width={20}
                       height={15}
                       className="w-[20px] h-[18px] object-contain"
                     />
-                    <span className="relative h-full px-[10px] after:absolute after:content-[''] after:left-0 after:top-0 after:bottom-0 after:w-[6px] 
-                    after:h-[6px] after:rounded-full after:m-auto after:bg-white group-hover:text-[#036EEE]">
+                    <span
+                      className="relative h-full px-[10px] after:absolute after:content-[''] after:left-0 after:top-0 after:bottom-0 after:w-[6px] 
+                    after:h-[6px] after:rounded-full after:m-auto after:bg-white group-hover:text-[#036EEE]"
+                    >
                       {locale === "en" ? "AR" : "ENG"}
                     </span>
                   </button>
@@ -159,17 +169,20 @@ export default function Header({ locale }) {
                           </SheetTitle>
                         </div>
                         <ul className="space-y-4 mt-4">
-                          {[...menuItems, ...extraMenuItems].map((item, i) => (
+                          {[
+                            ...(header_acf?.left_menu_items || []),
+                            ...(header_acf?.right_menu_items || []),
+                          ].map((item, index) => (
                             <li
-                              key={item.label}
+                              key={index}
                               className="opacity-0 animate-fade-in-up animation-delay-[var(--delay)]"
-                              style={{ animationDelay: `${i * 80}ms` }}
+                              style={{ animationDelay: `${index * 80}ms` }}
                             >
                               <Link
-                                href={item.href}
+                                href={item?.menu_url?.url}
                                 className="relative block text-[16px] font-medium  py-1 transition-all duration-300 group"
                               >
-                                {item.label}
+                                {item?.menu_title}
                                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#1577F0] transition-all duration-300 group-hover:w-full"></span>
                               </Link>
                             </li>

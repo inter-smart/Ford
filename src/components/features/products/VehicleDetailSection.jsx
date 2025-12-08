@@ -45,7 +45,7 @@ export default function VehicleDetailSection({ data }) {
               <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
                 {data?.interior?.interior_highlights?.map((item, index) => (
                   <div key={index} className="flex items-center">
-                    <div className="w-[25px] sm:w-[35px] lg:w-[40px] 2xl:w-[50px] 3xl:w-[55px] h-auto aspect-square overflow-hidden flex items-center justify-center">
+                    {/* <div className="w-[25px] sm:w-[35px] lg:w-[40px] 2xl:w-[50px] 3xl:w-[55px] h-auto aspect-square overflow-hidden flex items-center justify-center">
                       <Image
                         src={item?.icon_interior?.url || "/images/placeholder.png"}
                         alt={item?.icon_interior?.alt || "Interior"}
@@ -53,12 +53,12 @@ export default function VehicleDetailSection({ data }) {
                         height={680}
                         className="w-full h-full object-contain"
                       />
-                    </div>
-                    <div className="w-[calc(100%-25px)] sm:w-[calc(100%-35px)] lg:w-[calc(100%-40px)] 2xl:w-[calc(100%-50px)] 3xl:w-[calc(100%-55px)] pl-[15px] 2xl:pl-[20px]">
-                      <div className="text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%]">
+                    </div> */}
+                    {/* <div className="w-[calc(100%-25px)] sm:w-[calc(100%-35px)] lg:w-[calc(100%-40px)] 2xl:w-[calc(100%-50px)] 3xl:w-[calc(100%-55px)] pl-[15px] 2xl:pl-[20px]"> */}
+                      <div className="text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] pl-[15px] lg:pl-[20px] relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:left-0 before:top-[9px] before:sm:top-[10px] before:lg:top-[11px] 2xl:before:top-[12px]">
                         {item?.text_interior}
                       </div>
-                    </div>
+                    {/* </div> */}
                   </div>
                 ))}
               </div>
@@ -79,7 +79,7 @@ export default function VehicleDetailSection({ data }) {
               <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
                 {data?.exterior?.exterior_highlights?.map((item, index) => (
                   <div key={index} className="flex items-center">
-                    <div className="w-[25px] sm:w-[35px] lg:w-[40px] 2xl:w-[50px] 3xl:w-[55px] h-auto aspect-square overflow-hidden flex items-center justify-center">
+                    {/* <div className="w-[25px] sm:w-[35px] lg:w-[40px] 2xl:w-[50px] 3xl:w-[55px] h-auto aspect-square overflow-hidden flex items-center justify-center">
                       <Image
                         src={item?.icon_exterior?.url || "/images/placeholder.png"}
                         alt={item?.icon_exterior?.alt || "Exterior"}
@@ -87,12 +87,12 @@ export default function VehicleDetailSection({ data }) {
                         height={680}
                         className="w-full h-full object-contain"
                       />
-                    </div>
-                    <div className="w-[calc(100%-25px)] sm:w-[calc(100%-35px)] lg:w-[calc(100%-40px)] 2xl:w-[calc(100%-50px)] 3xl:w-[calc(100%-55px)] pl-[15px] 2xl:pl-[20px]">
-                      <div className="text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%]">
+                    </div> */}
+                    {/* <div className="w-[calc(100%-25px)] sm:w-[calc(100%-35px)] lg:w-[calc(100%-40px)] 2xl:w-[calc(100%-50px)] 3xl:w-[calc(100%-55px)] pl-[15px] 2xl:pl-[20px]"> */}
+                      <div className="text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] pl-[15px] lg:pl-[20px] relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:left-0 before:top-[9px] before:sm:top-[10px] before:lg:top-[11px] 2xl:before:top-[12px]">
                         {item?.text_exterior}
                       </div>
-                    </div>
+                    {/* </div> */}
                   </div>
                 ))}
               </div>

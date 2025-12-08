@@ -42,7 +42,6 @@ export default function InnerHero({ data }) {
             >
               {data?.button_text}
             </Link>
-            
           )}
         </div>
       </div>
