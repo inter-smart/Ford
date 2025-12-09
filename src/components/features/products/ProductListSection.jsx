@@ -20,16 +20,30 @@ export default function ProductListSection({ data }) {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [tabsEmblaRef] = useEmblaCarousel({ dragFree: true });
-
   const productList = productRaw.filter((item) => {
+    const searchLower = searchQuery.toLowerCase().trim();
+
+    const modelName = String(item.modelName || "").toLowerCase();
+
+    const modelBrandRaw = item.modelBrand || "";
+    const modelBrand = Array.isArray(modelBrandRaw)
+      ? modelBrandRaw.map((b) => String(b).toLowerCase()).join(" ")
+      : String(modelBrandRaw).toLowerCase();
+
     const categoriesLower = (item.modelCategory || []).map((c) =>
-      c.toLowerCase()
+      String(c).toLowerCase()
     );
+
     const matchCategory =
-      activeCategory === "all" || categoriesLower.includes(activeCategory);
-    const matchSearch = item.modelName
-      ?.toLowerCase()
-      .includes(searchQuery.toLowerCase());
+      activeCategory === "all" ||
+      categoriesLower.includes(activeCategory.toLowerCase().replace(/-/g, " "));
+
+    const matchSearch =
+      searchLower === "" ||
+      modelName.includes(searchLower) ||
+      modelBrand.includes(searchLower) ||
+      categoriesLower.some((cat) => cat.includes(searchLower));
+
     return matchCategory && matchSearch;
   });
 
@@ -40,10 +54,10 @@ export default function ProductListSection({ data }) {
           <div className="w-full sm:w-[65%] max-sm:mb-[20px] overflow-hidden relative">
             <div className="embla__viewport" ref={tabsEmblaRef}>
               <div className="embla__container flex">
-                {categories.map((item) => (
+                {categories.map((item, index) => (
                   <div
                     className="embla__slide w-auto mr-[10px] lg:mr-[30px] 2xl:mr-[40px]"
-                    key={item.value}
+                    key={index}
                   >
                     <button
                       onClick={() => setActiveCategory(item.value)}
@@ -67,10 +81,12 @@ export default function ProductListSection({ data }) {
               <input
                 type="text"
                 placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="
-                    text-[14px] lg:text-[16px] w-full h-[40px] 2xl:h-[45px] pl-4 pr-12 
+                    text-[14px] lg:text-[16px] w-full h-[40px] 2xl:h-[45px] pl-4 pr-12
                     border-[#D8D8D8] border-1 rounded-[5px]
-                    text-base outline-none 
+                    text-base outline-none
                     focus:border-black transition-all
                   "
               />
@@ -81,14 +97,20 @@ export default function ProductListSection({ data }) {
           </div>
         </div>
         <div className="w-full h-full sm:mx-[-5px] lg:mx-[-7px] flex flex-wrap">
-          {productList.map((item, index) => (
-            <div
-              key={index}
-              className="w-full sm:w-1/2 lg:w-1/3 h-auto p-[10px_0px] sm:p-[15px_5px] lg:p-[20px_7px] 2xl:p-[30px_7px]"
-            >
-              <ProductCard item={item} />
+          {productList.length > 0 ? (
+            productList.map((item, index) => (
+              <div
+                key={index}
+                className="w-full sm:w-1/2 lg:w-1/3 h-auto p-[10px_0px] sm:p-[15px_5px] lg:p-[20px_7px] 2xl:p-[30px_7px]"
+              >
+                <ProductCard item={item} />
+              </div>
+            ))
+          ) : (
+            <div className="w-full text-center py-10 text-gray-500">
+              No products found matching your search.
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
