@@ -748,8 +748,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 
 export default function LegendarySection({ data = {} }) {
   const carsList = Array.isArray(data?.cars_list) ? data.cars_list : [];
@@ -757,11 +755,17 @@ export default function LegendarySection({ data = {} }) {
   const normalizedCars = useMemo(() => {
     return carsList.map((car, index) => {
       const key = car?.slug || car?.modelName || `car-${index}`;
+      const carLogo = car?.detail_page?.car_logo || {};
+      const modelLogoUrl = carLogo?.url || "/images/placeholder.png";
+      const modelLogoAlt =
+        carLogo?.alt || `${car?.modelName || "Vehicle"} emblem`;
       return {
         key,
         name: car?.modelName || "Unknown Model",
         brandName: car?.modelBrand?.[0]?.name || "Unknown",
         brandLogo: car?.modelBrand?.[0]?.featured_image?.url || "",
+        modelLogo: modelLogoUrl,
+        modelLogoAlt,
         tagline:
           car?.detail_page?.about_vehicle?.[0]?.title_about_vehicle ||
           car?.detail_page?.Banner?.[0]?.description ||
@@ -840,14 +844,12 @@ export default function LegendarySection({ data = {} }) {
     return normalizedCars.find((car) => car.key === selectedModelKey);
   }, [normalizedCars, selectedModelKey]);
 
-  // Auto-select first category
   useEffect(() => {
     if (categories.length > 0 && !selectedCategory) {
       setSelectedCategory(categories[0].name);
     }
   }, [categories]);
 
-  // Reset brand & model when category changes
   useEffect(() => {
     if (brandsInCategory.length > 0) {
       setSelectedBrand(brandsInCategory[0].name);
@@ -858,7 +860,6 @@ export default function LegendarySection({ data = {} }) {
     setIsVisible(true);
   }, [selectedCategory, brandsInCategory]);
 
-  // Auto-select first model when brand changes
   useEffect(() => {
     if (modelsInSelectedBrand.length > 0) {
       const first = modelsInSelectedBrand[0];
@@ -869,7 +870,6 @@ export default function LegendarySection({ data = {} }) {
     setIsVisible(true);
   }, [selectedBrand, modelsInSelectedBrand]);
 
-  // Update image & color when model changes
   useEffect(() => {
     if (currentCar) {
       const defaultColor = currentCar.colors[0];
@@ -1062,17 +1062,15 @@ export default function LegendarySection({ data = {} }) {
                           height={500}
                           className="w-full max-w-5xl mx-auto object-contain z-1"
                         />
-                        {currentCar.brandLogo && (
-                          <div className="absolute sm:top-[-30%] top-[-25%] left-0 right-0 opacity-[0.1] m-auto w-full lg:max-w-[350px] max-w-[250px] z-[-1]">
+                        {currentCar.modelLogo && (
+                          <div className="absolute sm:top-[-30%] top-[-25%] left-0 right-0 m-auto  w-full lg:max-w-[350px] max-w-[250px] z-[-1]">
                             <Image
-                              src={
-                                currentCar.brandLogo ||
-                                "/images/placeholder.png"
-                              }
-                              alt={currentCar.name}
-                              width={400}
-                              height={500}
-                              className="w-full mx-auto object-contain"
+                              src={currentCar.modelLogo}
+                              alt={currentCar.modelLogoAlt}
+                              width={420}
+                              height={420}
+                              className="w-full max-w-[320px] lg:max-w-[420px] object-contain opacity-10"
+                              aria-hidden="true"
                             />
                           </div>
                         )}

@@ -52,8 +52,14 @@ export default function Welcome({ data }) {
                 >
                   {data?.title_about_ford}
                 </Heading>
-                <Text size="text2" as="p" className="text-[#434343] mb-[15px]">
-                  {data?.description_about_ford}
+                <Text
+                  size="text2"
+                  as="div"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.description_about_ford || "",
+                  }}
+                  className="text-[#434343] mb-[15px]"
+                >
                 </Text>
                 <Link
                   href={data?.button_about_ford?.button_link_about_ford?.url}
