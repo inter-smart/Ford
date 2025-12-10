@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ToasterWrapper from "@/components/common/ToasterWrapper";
 import { Barlow } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -85,7 +86,9 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${barlow.className} ${fordAntenna.variable}`}>
         <Header data={headerData} />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow">{children}
+          <ToasterWrapper />
+        </main>
         <Footer data={footerData} />
       </body>
     </html>
