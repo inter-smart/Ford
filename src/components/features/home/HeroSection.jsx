@@ -14,12 +14,13 @@ export default function HeroSection({ data }) {
   const swiperRef = useRef(null);
 
   return (
-    <section className="w-full max-xs:h-[480px] xs:h-dvh xs:min-h-[570px] 2xl:min-h-[800px] relative z-0">
+    <section className="w-full max-xs:h-[480px] xs:h-dvh xs:min-h-[570px] 2xl:min-h-[500px] relative z-0">
       <Swiper
         modules={[EffectFade, Pagination, Autoplay]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
         loop={true}
+        allowTouchMove={true}
         autoplay={{ delay: 2500 }}
         speed={500}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}

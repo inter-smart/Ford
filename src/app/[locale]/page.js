@@ -64,6 +64,7 @@ export async function generateMetadata() {
 export default async function Home() {
   const data = await getPageData();
   const home_data = data?.home_acf;
+
   return (
     <>
       {home_data?.banner_home?.enable__disable_banner_home && (
@@ -78,9 +79,9 @@ export default async function Home() {
       {home_data?.services?.enable__disable_services && (
         <ServiceSection data={home_data?.services} />
       )}
-      <LocationSection />
+      {/* <LocationSection /> */}
       {/* <InsightSection /> */}
-      <InstagramFeedSection />
+      {/* <InstagramFeedSection /> */}
     </>
   );
 }

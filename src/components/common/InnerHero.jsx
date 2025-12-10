@@ -9,8 +9,8 @@ export default function InnerHero({ data }) {
       <picture className="absolute -z-2 inset-0">
         <source media="(max-width: 640px)" srcSet={data?.mobile_image?.url} />
         <Image
-          src={data?.desktop_image?.url}
-          alt={data?.desktop_image?.alt}
+          src={data?.desktop_image?.url || "/images/placeholder.png"}
+          alt={data?.desktop_image?.alt || "Banner"}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw"
           className="-z-2 object-cover pointer-events-none"

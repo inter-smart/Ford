@@ -9,9 +9,11 @@ export default function AboutVehicleSection({ data, badge }) {
         <div className="w-full h-auto flex items-center flex-wrap">
           <div className="w-full md:w-1/2 md:pr-[20px]">
             <div className="w-full">
-              <div className="text-[10px] sm:text-[12px] leading-[1] font-normal text-white w-fit h-auto p-[5px_10px] bg-[#1577F0] rounded-[5px] mb-[10px]">
-                {badge}
-              </div>
+              {badge && (
+                <div className="text-[10px] sm:text-[12px] leading-[1] font-normal text-white w-fit h-auto p-[5px_10px] bg-[#1577F0] rounded-[5px] mb-[10px]">
+                  {badge}
+                </div>
+              )}
               <Heading
                 as="h1"
                 className="text-[22px] sm:text-[24px] md:text-[28px] xl:text-[32px] 2xl:text-[38px] 3xl:text-[45px] leading-[1] font-semibold text-black mb-[15px] lg:mb-[20px] 3xl:mb-[25px]"
@@ -33,8 +35,10 @@ export default function AboutVehicleSection({ data, badge }) {
           <div className="w-full md:w-1/2">
             <div className="w-[280px] sm:w-[380px] lg:w-[480px] xl:w-[550px] 2xl:w-[640px] 3xl:w-[740px] h-auto aspect-[640/480] overflow-hidden max-md:mx-auto flex items-center justify-center">
               <Image
-                src={data?.image_about_vehicle?.url}
-                alt={data?.image_about_vehicle?.alt}
+                src={
+                  data?.image_about_vehicle?.url || "/images/placeholder.png"
+                }
+                alt={data?.image_about_vehicle?.alt || "About Vehicle"}
                 width={640}
                 height={480}
                 className="w-full h-full object-contain"

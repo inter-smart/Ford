@@ -18,20 +18,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { useRouter, usePathname } from "next/navigation";
-
-// const menuItems = [
-//   { label: "Home", href: "/" },
-//   { label: "About", href: "/about" },
-//   { label: "Offer", href: "/offer" },
-//   { label: "Product", href: "/product" },
-//   { label: "Parts & Service", href: "/parts-service" },
-// ];
-
-// const extraMenuItems = [
-//   { label: "Fleet", href: "/fleet" },
-//   { label: "Clients", href: "/clients" },
-//   { label: "Contact Us", href: "/contact-us" },
-// ];
+import { Search, X } from "lucide-react";
 
 const menuLinkClass =
   "3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white 2xl:px-[20px] xl:px-[15px] px-[8px] hover:text-[#036EEE]";
@@ -48,6 +35,71 @@ export default function Header({ locale, data: header_acf }) {
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
     router.replace(`/${newLocale}${cleanPath}`);
   };
+
+  const [searchOpen, setSearchOpen] = React.useState(false);
+  const [query, setQuery] = React.useState("");
+  const [allCars, setAllCars] = React.useState([]);
+  const [filtered, setFiltered] = React.useState([]);
+  const searchRef = React.useRef();
+
+  React.useEffect(() => {
+    async function fetchCars() {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/wp-json/custom/v1/product`
+        );
+        const data = await res.json();
+        setAllCars(data?.product || []);
+      } catch (err) {
+        console.error("Search fetch error:", err);
+      }
+    }
+    fetchCars();
+  }, []);
+
+  React.useEffect(() => {
+    if (!query) return setFiltered([]);
+    const q = query.toLowerCase();
+    const results = allCars.filter((item) => {
+      const brand = (item?.modelBrand ?? "").toString().toLowerCase();
+      const name = (item?.modelName ?? "").toString().toLowerCase();
+      const category = (item?.modelCategory ?? "").toString().toLowerCase();
+      return brand.includes(q) || name.includes(q) || category.includes(q);
+    });
+    setFiltered(results);
+  }, [query, allCars]);
+
+  const searchButtonRef = React.useRef();
+  const searchPanelRef = React.useRef();
+
+  React.useEffect(() => {
+    function handleClose() {
+      if (searchOpen) {
+        setSearchOpen(false);
+        setQuery("");
+        setFiltered([]);
+      }
+    }
+
+    function handleClickOutside(e) {
+      if (
+        searchOpen &&
+        !searchPanelRef.current?.contains(e.target) &&
+        !searchButtonRef.current?.contains(e.target)
+      ) {
+        handleClose();
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    window.addEventListener("scroll", handleClose, { passive: true });
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      window.removeEventListener("scroll", handleClose);
+    };
+  }, [searchOpen]);
 
   if (!header_acf) return null;
 
@@ -104,7 +156,7 @@ export default function Header({ locale, data: header_acf }) {
                 {/* Language */}
                 <NavigationMenuItem>
                   <button
-                    className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium ltr:mx-[85px_10px] rtl:mx-[10px_85px] 
+                    className="3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white font-medium ltr:mx-[85px_10px] rtl:mx-[10px_85px]
                   flex items-center gap-2 cursor-pointer group"
                     onClick={() =>
                       handleLocaleChange(locale === "en" ? "ar" : "en")
@@ -120,8 +172,8 @@ export default function Header({ locale, data: header_acf }) {
                       className="w-[20px] h-[18px] object-contain"
                     />
                     <span
-                      className="relative h-full px-[10px] after:absolute after:content-[''] after:left-0 after:top-0 after:bottom-0 after:w-[6px] 
-                    after:h-[6px] after:rounded-full after:m-auto after:bg-white group-hover:text-[#036EEE]"
+                      className="relative h-full px-[10px] after:absolute after:content-[''] after:left-0 after:top-0 after:bottom-0 after:w-[6px]
+                    after:h-[6px] after:rounded-full after:m-auto after:bg-white"
                     >
                       {locale === "en" ? "AR" : "ENG"}
                     </span>
@@ -129,15 +181,60 @@ export default function Header({ locale, data: header_acf }) {
                 </NavigationMenuItem>
 
                 {/* Search */}
-                <NavigationMenuItem>
-                  <button className="text-white w-[16px] h-[16px] flex cursor-pointer hover:opacity-80 mx-[10px] hover:text-[#036EEE]">
-                    <svg
-                      viewBox="0 0 18 18"
-                      className="fill-white w-full h-full transition-all hover:fill-[#036EEE]"
-                    >
-                      <path d="M7.86654 0.668888C3.73427 0.668888 0.368164 4.03743 0.368164 8.1727C0.368164 12.3079 3.73427 15.6831 7.86654 15.6831C9.63155 15.6831 11.2548 15.0641 12.5378 14.0363L15.6611 17.1603C15.8188 17.3115 16.0293 17.3949 16.2476 17.3927C16.4659 17.3905 16.6747 17.3028 16.8292 17.1484C16.9837 16.994 17.0716 16.7852 17.0742 16.5667C17.0767 16.3483 16.9936 16.1375 16.8428 15.9795L13.7194 12.8539C14.7472 11.568 15.3665 9.94104 15.3665 8.1727C15.3665 4.03743 11.9988 0.668888 7.86654 0.668888ZM7.86654 2.33679C11.0981 2.33679 13.6982 4.93883 13.6982 8.1727C13.6982 11.4066 11.0981 14.0152 7.86654 14.0152C4.635 14.0152 2.03483 11.4066 2.03483 8.1727C2.03483 4.93883 4.635 2.33679 7.86654 2.33679Z" />
-                    </svg>
+                <NavigationMenuItem className="static">
+                  <button
+                    ref={searchButtonRef}
+                    onClick={() => setSearchOpen(!searchOpen)}
+                    className="text-white w-[24px] h-[24px] flex items-center justify-center cursor-pointer hover:text-[#036EEE]"
+                  >
+                    {searchOpen ? <X size={20} /> : <Search size={20} />}
                   </button>
+
+                  {/* Search Panel */}
+                  <div
+                    ref={searchPanelRef}
+                    className={`absolute right-0 top-10 bg-white rounded-md sm:rounded-lg w-80 overflow-hidden ${
+                      searchOpen ? "max-h-[400px] p-2 sm:p-4" : "max-h-0 p-0"
+                    }`}
+                  >
+                    <input
+                      type="text"
+                      className="w-full border p-[10px] sm:px-3 sm:py-2 rounded-sm sm:rounded-md text-sm focus:outline-none"
+                      placeholder="Search cars..."
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+
+                    {filtered.length > 0 && (
+                      <ul className="mt-3 max-h-64 overflow-y-auto">
+                        {filtered.map((item, index) => (
+                          <li key={index}>
+                            <Link
+                              href={`/products/${item.slug}`}
+                              className="block px-2 py-2 hover:bg-gray-100 rounded-md"
+                              onClick={() => {
+                                setSearchOpen(false);
+                                setQuery("");
+                              }}
+                            >
+                              <div className="text-[14px] sm:text-[15px] 3xl:text-[18px] font-semibold">
+                                {item.modelBrand} {item.modelName}
+                              </div>
+                              <div className="text-[12px] 3xl:text-[14px]  text-gray-500">
+                                {item.modelCategory}
+                              </div>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {query.length > 1 && filtered.length === 0 && (
+                      <div className="text-sm text-gray-500 mt-3">
+                        No results found
+                      </div>
+                    )}
+                  </div>
                 </NavigationMenuItem>
 
                 {/* Mobile Hamburger & Sheet Menu */}
@@ -151,9 +248,9 @@ export default function Header({ locale, data: header_acf }) {
                         className="fill-white"
                       >
                         <path
-                          d="M128 102.4c0-14.138 11.462-25.6 25.6-25.6h332.8c14.138 0 25.6 11.462 25.6 25.6s-11.462 25.6-25.6 25.6h-332.8c-14.138 
-                        0-25.6-11.463-25.6-25.6zm358.4 128h-460.8c-14.138 0-25.6 11.463-25.6 25.6 0 14.138 11.462 25.6 25.6 25.6h460.8c14.138 0 25.6-11.462 25.6-25.6 
-                        0-14.137-11.462-25.6-25.6-25.6zm0 153.6h-230.4c-14.137 0-25.6 11.462-25.6 25.6 0 14.137 11.463 25.6 25.6 25.6h230.4c14.138 0 
+                          d="M128 102.4c0-14.138 11.462-25.6 25.6-25.6h332.8c14.138 0 25.6 11.462 25.6 25.6s-11.462 25.6-25.6 25.6h-332.8c-14.138
+                        0-25.6-11.463-25.6-25.6zm358.4 128h-460.8c-14.138 0-25.6 11.463-25.6 25.6 0 14.138 11.462 25.6 25.6 25.6h460.8c14.138 0 25.6-11.462 25.6-25.6
+                        0-14.137-11.462-25.6-25.6-25.6zm0 153.6h-230.4c-14.137 0-25.6 11.462-25.6 25.6 0 14.137 11.463 25.6 25.6 25.6h230.4c14.138 0
                         25.6-11.463 25.6-25.6 0-14.138-11.462-25.6-25.6-25.6z"
                         />
                       </svg>
