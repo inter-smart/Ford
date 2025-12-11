@@ -560,7 +560,7 @@ export default function LegendarySection({ data = {} }) {
                             as="h2"
                             className="text-black font-medium lg:mb-[35px] sm:mb-[25px] mb-[15px] max-w-[360px] rtl:ml-auto"
                           >
-                            {currentCar.tagline}
+                            {currentCar.name}
                           </Heading>
                           {currentCar.brochure && (
                             <Link
