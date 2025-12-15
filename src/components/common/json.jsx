@@ -247,11 +247,97 @@ const product_detil_page = {
         },
       ],
     },
-    colorOption: [
+    color_switch: {
+      car_name: string,
+      colorOption: [
+        {
+          id: 1,
+          name: "Shadow Black",
+          hexCode: "#1a1a1a",
+          media: {
+            type: (image, video),
+            path: string,
+            alt: string,
+          },
+        },
+        {
+          id: 2,
+          name: "Oxford White",
+          hexCode: "#f5f5f5",
+          media: {
+            type: (image, video),
+            path: string,
+            alt: string,
+          },
+        },
+        {
+          id: 3,
+          name: "Race Red",
+          hexCode: "#cc0000",
+          media: {
+            type: (image, video),
+            path: string,
+            alt: string,
+          },
+        },
+        {
+          id: 4,
+          name: "Grabber Blue",
+          hexCode: "#4a90e2",
+          media: {
+            type: (image, video),
+            path: string,
+            alt: string,
+          },
+        },
+        {
+          id: 5,
+          name: "Dark Matter Gray",
+          hexCode: "#4a4a4a",
+          media: {
+            type: (image, video),
+            path: string,
+            alt: string,
+          },
+        },
+        {
+          id: 6,
+          name: "Deep Impact Blue",
+          hexCode: "#1e3a8a",
+          media: {
+            type: (image, video),
+            path: string,
+            alt: string,
+          },
+        },
+        {
+          id: 7,
+          name: "Velocity Blue",
+          hexCode: "#0066cc",
+          media: {
+            type: (image, video),
+            path: string,
+            alt: string,
+          },
+        },
+        {
+          id: 8,
+          name: "Orange Fury",
+          hexCode: "#ff6600",
+          media: {
+            type: (image, video),
+            path: string,
+            alt: string,
+          },
+        },
+      ],
+    },
+  },
+  gallery_section: {
+    title: string,
+    interior: [
       {
         id: 1,
-        name: "Shadow Black",
-        hexCode: "#1a1a1a",
         media: {
           type: (image, video),
           path: string,
@@ -260,8 +346,6 @@ const product_detil_page = {
       },
       {
         id: 2,
-        name: "Oxford White",
-        hexCode: "#f5f5f5",
         media: {
           type: (image, video),
           path: string,
@@ -270,8 +354,16 @@ const product_detil_page = {
       },
       {
         id: 3,
-        name: "Race Red",
-        hexCode: "#cc0000",
+        media: {
+          type: (image, video),
+          path: string,
+          alt: string,
+        },
+      },
+    ],
+    exterior: [
+      {
+        id: 1,
         media: {
           type: (image, video),
           path: string,
@@ -279,9 +371,7 @@ const product_detil_page = {
         },
       },
       {
-        id: 4,
-        name: "Grabber Blue",
-        hexCode: "#4a90e2",
+        id: 2,
         media: {
           type: (image, video),
           path: string,
@@ -289,39 +379,7 @@ const product_detil_page = {
         },
       },
       {
-        id: 5,
-        name: "Dark Matter Gray",
-        hexCode: "#4a4a4a",
-        media: {
-          type: (image, video),
-          path: string,
-          alt: string,
-        },
-      },
-      {
-        id: 6,
-        name: "Deep Impact Blue",
-        hexCode: "#1e3a8a",
-        media: {
-          type: (image, video),
-          path: string,
-          alt: string,
-        },
-      },
-      {
-        id: 7,
-        name: "Velocity Blue",
-        hexCode: "#0066cc",
-        media: {
-          type: (image, video),
-          path: string,
-          alt: string,
-        },
-      },
-      {
-        id: 8,
-        name: "Orange Fury",
-        hexCode: "#ff6600",
+        id: 3,
         media: {
           type: (image, video),
           path: string,
@@ -345,4 +403,97 @@ const product_detil_page = {
       link: "/",
     },
   },
+};
+
+const contact_page = {
+  offices: {
+    headOffice: {
+      title: "Head Office",
+      address: [
+        "Office 1002, A-block, Centurion Star Tower, behind Day To Day,",
+        "Port Saeed 3A St. Deira,",
+        "Dubai, United Arab Emirates.",
+        "PO Box: 22637",
+      ],
+      phone: "97143200021",
+      email: "info@shayan.ae",
+    },
+    corporateOffice: {
+      title: "Corporate Office",
+      address: [
+        "SAIF Office Q1-08-125/A,",
+        "P.O.Box 22637,",
+        "Sharjah - U.A.E",
+      ],
+      phone: "+971 4 272 8150",
+      email: "auto@shayan.ae",
+    },
+  },
+  media: {
+    type: (image, video),
+    path: string,
+    alt: string,
+  },
+  branches: [
+    {
+      title: "Seeb",
+      address: "Seeb Al Mawaleh, Near Carrefour, Seeb",
+      phone: "26887635",
+      time: "10 am to 6 pm",
+      button: {
+        type: "link",
+        isExternal: false,
+        label: "Explore After Sales Service",
+        link: "/",
+      },
+    },
+    {
+      title: "Seeb",
+      address: "Seeb Al Mawaleh, Near Carrefour, Seeb",
+      phone: "26887635",
+      time: "10 am to 6 pm",
+      button: {
+        type: "link",
+        isExternal: false,
+        label: "Explore After Sales Service",
+        link: "/",
+      },
+    },
+    {
+      title: "Seeb",
+      address: "Seeb Al Mawaleh, Near Carrefour, Seeb",
+      phone: "26887635",
+      time: "10 am to 6 pm",
+      button: {
+        type: "link",
+        isExternal: false,
+        label: "Explore After Sales Service",
+        link: "/",
+      },
+    },
+    {
+      title: "Seeb",
+      address: "Seeb Al Mawaleh, Near Carrefour, Seeb",
+      phone: "26887635",
+      time: "10 am to 6 pm",
+      button: {
+        type: "link",
+        isExternal: false,
+        label: "Explore After Sales Service",
+        link: "/",
+      },
+    },
+    {
+      title: "Seeb",
+      address: "Seeb Al Mawaleh, Near Carrefour, Seeb",
+      phone: "26887635",
+      time: "10 am to 6 pm",
+      button: {
+        type: "link",
+        isExternal: false,
+        label: "Explore After Sales Service",
+        link: "/",
+      },
+    },
+  ],
 };
