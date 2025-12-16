@@ -72,48 +72,70 @@ const FormSchema = z.object({
     if ((trimmed.match(/@/g) || []).length !== 1) return false; // multiple @
     return true;
   }, "Invalid email address"),
-phone: z
-  .string()
-  .refine((value) => {
-    if (!value) return false;
+  phone: z
+    .string()
+    .trim()
+    .min(1, { message: "Phone number is required" })
+    .superRefine((value, ctx) => {
 
-    const trimmed = value.trim();
+      // 1️⃣ Length check
+      if (value.length < 10 || value.length > 20) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Phone number must be between 10 and 20 characters",
+        });
+        return;
+      }
 
-    // -------------------------
-    // 1️⃣ Must be 10–20 chars
-    // -------------------------
-    if (trimmed.length < 10 || trimmed.length > 20) return false;
+      // 2️⃣ Allowed pattern
+      const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
+      if (!validPattern.test(value)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Phone number format is invalid",
+        });
+        return;
+      }
 
-    // -------------------------
-    // 2️⃣ Must match allowed pattern
-    // -------------------------
-    const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
-    if (!validPattern.test(trimmed)) return false;
+      // 3️⃣ Only one "+"
+      if ((value.match(/\+/g) || []).length > 1) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Phone number can contain only one '+' symbol",
+        });
+        return;
+      }
 
-    // -------------------------
-    // 3️⃣ Only 1 "+"
-    // -------------------------
-    if ((trimmed.match(/\+/g) || []).length > 1) return false;
+      // 4️⃣ Extract digits
+      const digitsOnly = value.replace(/\D/g, "");
 
-    // -------------------------
-    // 4️⃣ No all-zero numbers
-    // -------------------------
-    const digitsOnly = trimmed.replace(/\D/g, "");
-    if (/^0+$/.test(digitsOnly)) return false;
+      // 5️⃣ All zeros
+      if (/^0+$/.test(digitsOnly)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Phone number cannot be all zeros",
+        });
+        return;
+      }
 
-    // -------------------------
-    // 5️⃣ Max 15 digits total
-    // -------------------------
-    if (digitsOnly.length > 15) return false;
+      // 6️⃣ Max 15 digits (E.164)
+      if (digitsOnly.length > 15) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Phone number cannot exceed 15 digits",
+        });
+        return;
+      }
 
-    // -------------------------
-    // 6️⃣ No letters / no XSS
-    // -------------------------
-    if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(trimmed)) return false;
-
-    return true;
-  }, "Invalid phone number"),
-
+      // 7️⃣ No letters / XSS
+      if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(value)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Phone number contains invalid characters",
+        });
+        return;
+      }
+    }),
   message: z
   .string()
   .optional()
@@ -308,10 +330,10 @@ const onSubmit = async (formData) => {
                   <Textarea
                     {...field}
                     onChange={(e) => field.onChange(e.target.value)} // allow typing freely
-                    onBlur={(e) => {
-            field.onBlur(); 
-            field.onChange(e.target.value.trim());
-          }}
+                      onBlur={(e) => {
+                        field.onBlur();
+                        field.onChange(normalizeText(e.target.value));
+                      }}
                     placeholder=" "
                     rows={3}
                     className="peer text-[12px] 2xl:text-[14px] 3xl:text-[16px] font-normal text-[#000000] w-full pb-[25px] 3xl:pb-[30px] pt-[20px] border-none border-b border-[#D9D6CE] rounded-none min-h-[50px] px-0 focus-visible:ring-0 focus:border-black resize-none"
@@ -326,13 +348,14 @@ const onSubmit = async (formData) => {
           />
 
           {/* Submit Button */}
-          <Button
-            type="submit"
-            disabled={!form.formState.isValid}
-            className="text-[14px] font-bold text-white bg-[#1577F0] hover:bg-[#0f5eda] px-10 h-[40px] 2xl:h-[45px] 3xl:h-[50px] mt-[20px] rounded-full cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            Send
-          </Button>
+<Button
+  type="submit"
+  disabled={!form.formState.isValid || form.formState.isSubmitting}
+  className="text-[14px] font-bold text-white bg-[#1577F0] hover:bg-[#0f5eda] px-10 h-[40px] 2xl:h-[45px] 3xl:h-[50px] mt-[20px] rounded-full cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+>
+  {form.formState.isSubmitting ? "Submitting..." : "Send"}
+</Button>
+
         </form>
       </Form>
     </div>
