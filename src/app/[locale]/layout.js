@@ -59,7 +59,6 @@ async function getFooterData() {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/footer`,
       {
-        // This ensures fresh data every render (no cache)
         cache: "no-store",
       }
     );
