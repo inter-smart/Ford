@@ -1,23 +1,19 @@
-const createNextIntlPlugin = require("next-intl/plugin");
-
-const withNextIntl = createNextIntlPlugin();
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "yangwang.dev20.intersmarthosting.in",
-        pathname: "/**", // Allow all image paths
-      },
-      {
-        protocol: "https",
-        hostname: "www.yangwang.dev20.intersmarthosting.in",
-        pathname: "/**", // Allow all image paths
-      },
-    ],
+    domains: [
+      "dev18.intersmarthosting.in",
+    ], 
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        canvas: false,
+      };
+    }
+    return config;
   },
 };
-
-module.exports = withNextIntl(nextConfig);
+export default nextConfig;

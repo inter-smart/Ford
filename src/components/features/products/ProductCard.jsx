@@ -6,8 +6,8 @@ export default function ProductCard({ item }) {
     <div className="w-full h-full block group">
       <div className="w-full h-auto aspect-[420/260] mb-[10px] sm:mb-[15px] 2xl:mb-[20px] rounded-[5px] lg:rounded-[8px] 2xl:rounded-[10px] overflow-hidden block relative z-0">
         <Image
-          src={item?.media?.path}
-          alt={item?.media?.alt}
+          src={item?.car_image?.path || "/images/placeholder.png"}
+          alt={item?.car_image?.alt || "Car"}
           width={420}
           height={260}
           className="w-full h-full object-cover group-hover:scale-110 transition duration-500 ease-in-out"
@@ -25,11 +25,11 @@ export default function ProductCard({ item }) {
           {item?.modelName}
         </div>
         <Link
-          href={item?.slug}
+          href={`/products/${item?.slug}`}
           className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1] font-bold text-[#1577F0] gap-[5px] flex items-center justify-end group/arrow"
         >
           Learn More
-          <span className="w-[9px] 2xl:w-[10px] 3xl:w-[13px] h-auto aspect-[10/10] flex items-center justify-center relative z-0 bottom-[-1px] group-hover/arrow:translate-x-[3px]  transition duration-500 ease-in-out">
+          <span className="w-[9px] 2xl:w-[10px] 3xl:w-[13px] h-auto aspect-[10/10] flex items-center justify-center relative z-0 bottom-[-1px] group-hover/arrow:translate-x-[3px] transition duration-500 ease-in-out">
             <Image
               src="/images/product_learmore_arrow.svg"
               alt="arrow-right"

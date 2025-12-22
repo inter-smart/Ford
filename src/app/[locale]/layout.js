@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ToasterWrapper from "@/components/common/ToasterWrapper";
 import { Barlow } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -23,7 +24,7 @@ export const fordAntenna = localFont({
     },
     {
       path: "../../../public/fonts/FordAntenna-Light.woff2",
-      weight: "200",
+      weight: "300",
       style: "normal",
     },
     {
@@ -53,7 +54,59 @@ export const fordAntenna = localFont({
 //   display: "swap",
 // });
 
-export default function RootLayout({ children }) {
+async function getHeaderData() {
+  try {
+    console.log("Fetching header data (server-side)");
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/header`,
+      {
+        cache: "no-store", // No caching, always fetch fresh
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch header data");
+    }
+
+    const data = await res.json();
+    return data?.header_acf || null;
+  } catch (error) {
+    console.error("Header fetch failed:", error);
+    return null;
+  }
+}
+
+async function getFooterData() {
+  try {
+    console.log("Fetching footer data (server-side)");
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/footer`,
+      {
+        // This ensures fresh data every render (no cache)
+        cache: "no-store",
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch footer data");
+    }
+
+    const data = await res.json();
+    return data?.footer_acf || null;
+  } catch (err) {
+    console.error("Footer fetch failed", err);
+    return null;
+  }
+}
+
+export default async function RootLayout({ children }) {
+  const [headerData, footerData] = await Promise.all([
+    getHeaderData(),
+    getFooterData(),
+  ]);
+
   return (
     <html lang="en">
       <body className={` ${fordAntenna.variable}`}>
