@@ -1,8 +1,7 @@
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import ToasterWrapper from "@/components/common/ToasterWrapper";
-import { Barlow } from "next/font/google";
+import ToasterWrapper from "@/components/common/ToasterWrapper"; 
 import localFont from "next/font/local";
 
 export const metadata = {
@@ -12,33 +11,19 @@ export const metadata = {
 
 export const fordAntenna = localFont({
   src: [
+   
     {
-      path: "../../../public/fonts/FordAntenna-Thin.woff2",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../../../public/fonts/FordAntenna-ExtraLight.woff2",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "../../../public/fonts/FordAntenna-Light.woff2",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../../../public/fonts/FordAntenna-Regular.woff2",
+      path: "../../../public/fonts/FordF-1-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../../public/fonts/FordAntenna-Medium.woff2",
+      path: "../../../public/fonts/FordF-1-Semibold.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../../../public/fonts/FordAntenna-Black.woff2",
+      path: "../../../public/fonts/FordF-1-Bold.woff2",
       weight: "700",
       style: "normal",
     },
