@@ -12,8 +12,33 @@ export const metadata = {
 export const fordAntenna = localFont({
   src: [
     {
-      path: "../../../public/fonts/StretchProRegular.woff2",
+      path: "../../../public/fonts/FordAntenna-Thin.woff2",
       weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/FordAntenna-ExtraLight.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/FordAntenna-Light.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/FordAntenna-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/FordAntenna-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/FordAntenna-Black.woff2",
+      weight: "700",
       style: "normal",
     },
   ],
@@ -22,16 +47,16 @@ export const fordAntenna = localFont({
   display: "swap",
 });
 
-const barlow = Barlow({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "600", "700", "800", "900"],
-  display: "swap",
-});
+// const barlow = Barlow({
+//   subsets: ["latin"],
+//   weight: ["100", "200", "300", "400", "600", "700", "800", "900"],
+//   display: "swap",
+// });
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${barlow.className} ${fordAntenna.variable}`}>
+      <body className={` ${fordAntenna.variable}`}>
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
