@@ -54,7 +54,7 @@ export default function ColorSwitchSection({ data }) {
                   )}
                 </button>
                 {isActive(item) && (
-                  <div className="text-[13px] 2xl:text-[14px] leading-[1] font-semibold text-black whitespace-nowrap mx-auto absolute z-1 left-0 right-0 bottom-[-25px] sm:bottom-[-30px] flex justify-center">
+                  <div className="text-[13px] 2xl:text-[14px] leading-[1] font-normal text-black whitespace-nowrap mx-auto absolute z-1 left-0 right-0 bottom-[-25px] sm:bottom-[-30px] flex justify-center">
                     {item?.title}
                   </div>
                 )}

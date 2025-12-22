@@ -63,7 +63,7 @@ export default function HeroSection({ data }) {
                   <Heading
                     size="heading1"
                     as="h2"
-                    className="text-white mb-[20px] sm:mb-[30px]"
+                    className="font-semibold text-white mb-[20px] sm:mb-[30px]"
                     dangerouslySetInnerHTML={{
                       __html: item?.title_home_banner || "",
                     }}
@@ -77,7 +77,7 @@ export default function HeroSection({ data }) {
                         item?.button_home_banner?.button_link_home_banner
                           ?.target
                       }
-                      className="2xl:text-[14px] xl:text-[12px] text-[10px] font-normal  text-white  min-w-[130px] 2xl:h-[40px] h-[35px] flex items-center justify-center bg-[#1A73E8] px-6 rounded-full hover:bg-[#fff] hover:text-black transition cursor-pointer"
+                      className="2xl:text-[14px] xl:text-[12px] text-[10px] font-bold  text-white  min-w-[130px] 2xl:h-[40px] h-[35px] flex items-center justify-center bg-[#1A73E8] px-6 rounded-full hover:bg-[#fff] hover:text-black transition cursor-pointer"
                     >
                       {item?.button_home_banner?.button_text_home_banner}
                     </Link>

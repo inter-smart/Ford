@@ -1,7 +1,7 @@
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import ToasterWrapper from "@/components/common/ToasterWrapper"; 
+import ToasterWrapper from "@/components/common/ToasterWrapper";
 import localFont from "next/font/local";
 
 export const metadata = {
@@ -11,7 +11,6 @@ export const metadata = {
 
 export const fordf1 = localFont({
   src: [
-   
     {
       path: "../../../public/fonts/FordF-1-Regular.woff2",
       weight: "400",
@@ -29,6 +28,29 @@ export const fordf1 = localFont({
     },
   ],
   variable: "--font-fordf1",
+  preload: true,
+  display: "swap",
+});
+
+export const fordAntenna = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/FordAntenna-Light.woff2",
+      weight: "300",
+      style: "light",
+    },
+    {
+      path: "../../../public/fonts/FordAntenna-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/FordAntenna-Medium.woff2",
+      weight: "500",
+      style: "medium",
+    },
+  ],
+  variable: "--font-antenna",
   preload: true,
   display: "swap",
 });
@@ -93,10 +115,13 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={` ${fordf1.variable}`}>
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+      <body className={`${fordf1.variable} ${fordAntenna.variable}`}>
+        <Header data={headerData} />
+        <main className="flex-grow">
+          {children}
+          <ToasterWrapper />
+        </main>
+        <Footer data={footerData} />
       </body>
     </html>
   );

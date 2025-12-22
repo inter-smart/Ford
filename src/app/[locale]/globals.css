@@ -8,6 +8,7 @@
   --color-foreground: var(--foreground);
 
   --font-fordf1: var(--font-fordf1);
+  --font-antenna: var(--font-antenna);
 
   --color-base1: #f1d1a8;
   --color-base2: #cdcdcd;
@@ -144,8 +145,6 @@ body {
       @apply list-disc;
     }
   }
-
- 
 }
 
 .outlined-text {
@@ -167,12 +166,11 @@ body {
   animation: fade-in-up 0.4s ease forwards;
 }
 
-
-.leaflet-marker-icon{
+.leaflet-marker-icon {
   width: 30px !important;
   height: 30px !important;
   object-fit: contain;
 }
-.leaflet-control-attribution{
+.leaflet-control-attribution {
   display: none;
 }
