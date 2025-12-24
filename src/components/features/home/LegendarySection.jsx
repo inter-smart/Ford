@@ -594,7 +594,6 @@ export default function LegendarySection({ data = {} }) {
                               </SelectContent>
                             </Select>
                           </div>
-
                           {/* Mini video/image preview */}
                           {isVisible && currentCar.video && (
                             <div className="absolute 2xl:top-[130px] top-[40%] sm:top-[100px] ltr:right-0 rtl:left-0 ltr:sm:right-[100px] rtl:xs:left-[50px] rtl:sm:left-[100px] w-full 2xl:max-w-[230px] lg:max-w-[200px] max-w-[150px] shadow-md">
@@ -629,7 +628,6 @@ export default function LegendarySection({ data = {} }) {
                           )}
                         </div>
                       </div>
-
                       {/* Big car image */}
                       <div className="relative mt-10 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[80px]">
                         <Image
@@ -667,7 +665,6 @@ export default function LegendarySection({ data = {} }) {
 
                               const isSelected =
                                 selectedColorTitle === color.title;
-
                               return (
                                 <button
                                   key={i}
