@@ -573,7 +573,7 @@ export default function LegendarySection({ data = {} }) {
                           )}
                         </div>
 
-                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-0 right-0 lg:top-[-120px] min-w-[200px] sm:mb-0 mb-[30px]">
+                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-[-120px] right-0 min-w-[200px] sm:mb-0 mb-[30px]">
                           <div className="flex items-center rtl:max-sm:justify-end gap-4">
                             <span className="text-[11px] 2xl:text-[14px] 3xl:text-[16px] text-black font-semibold uppercase">
                               {currentCar.name} Models:
