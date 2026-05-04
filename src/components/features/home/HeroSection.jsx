@@ -51,7 +51,7 @@ export default function HeroSection({ data }) {
                   </video>
                 ) : item?.image_home_banner?.url ? (
                   <Image
-                    quality={100}
+                    quality={75}
                     src={item?.image_home_banner?.url}
                     alt={item?.image_home_banner?.alt || "Banner Image"}
                     fill
