@@ -20,7 +20,7 @@ export default function AboutVehicleSection({ data, badge }) {
               >
                 {data?.title_about_vehicle}
               </Heading>
-              <div className="text-[13px] sm:text-[14px] lg:text-[15px] 2xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-black lg:max-w-[500px] 2xl:max-w-[570px] mb-[20px]">
+              <div className="text-[13px] sm:text-[14px] lg:text-[15px] xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-black lg:max-w-[500px] 2xl:max-w-[570px] mb-[20px]">
                 {data?.description_about_vehicle}
               </div>
               <Link
