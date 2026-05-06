@@ -1,16 +1,15 @@
 import InnerHero from "@/components/common/InnerHero";
-import ProductListSection from "@/components/features/products/ProductListSection";
-
+import OfferListSection from "@/components/features/offers/OfferListSection";
 
 async function getPageData() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/wp-json/custom/v1/product`,
+    `${process.env.NEXT_PUBLIC_API_URL}/wp-json/custom/v1/offer`,
     { next: { revalidate: 60 } } 
   );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+  // if (!res.ok) {
+  //   throw new Error("Failed to fetch data");
+  // }
 
   return res.json();
 }
@@ -48,8 +47,8 @@ export default async function page() {
 
   return (
     <>
-      {banner.enable__disable_banner && <InnerHero data={banner} />}
-      <ProductListSection data={data} />
+      <InnerHero data={banner} />
+      <OfferListSection data={data} />
     </>
   );
 }
