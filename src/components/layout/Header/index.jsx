@@ -125,7 +125,7 @@ export default function Header({ locale, data: header_acf }) {
             {/* Main menu */}
             <NavigationMenu className="max-lg:hidden">
               <NavigationMenuList className="flex gap-0 items-center rtl:flex-row-reverse">
-                {header_acf?.left_menu_items.map((item, index) => (
+                {header_acf?.left_menu_items?.map((item, index) => (
                   <NavigationMenuItem key={index}>
                     <Link href={item?.menu_url?.url} passHref>
                       <NavigationMenuLink asChild>
@@ -160,7 +160,7 @@ export default function Header({ locale, data: header_acf }) {
             {/* Right Menu */}
             <NavigationMenu>
               <NavigationMenuList className="flex items-center gap-0 rtl:flex-row-reverse">
-                {header_acf?.right_menu_items.map((item, index) => (
+                {header_acf?.right_menu_items?.map((item, index) => (
                   <NavigationMenuItem key={index} className="max-lg:hidden">
                     <Link href={item?.menu_url?.url} passHref>
                       <NavigationMenuLink asChild>

@@ -54,6 +54,8 @@ const footerHeading =
   "lg:text-[11px] text-[10px] uppercase text-white/40 font-medium lg:mb-3 mb-1";
 
 export default function welcome({ data }) {
+  if (!data) return null;
+
   const {
     test_drive_section,
     first_menu_section,
