@@ -1,9 +1,9 @@
-
 "use client";
 
 import parse from "html-react-parser";
 import { Heading } from "@/components/layout/Heading";
 import Image from "next/image";
+import Link from "next/link";
 
 const newsData = {
   title: "Latest News",
@@ -35,33 +35,36 @@ const newsData = {
   ],
 };
 
-export default function NewsCard({news}) {
+export default function NewsCard({ news = newsData, page="" }) {
   return (
-    <div className="w-full h-auto">
-      <div className="w-full aspect-[67/51] h-[163px] lg:h-[218px] xl:h-[272px] 2xl:h-[326px] shrink-0 relative mb-[10px] md:mb-[15px] xl:mb-[18px] 2xl:mb-[21px]">
+    <Link href={`/news/${news?.slug}`} className="w-full h-auto">
+      <div 
+      className="w-full aspect-[403/306] h-[200px] lg:h-[218px] xl:h-[272px] 2xl:h-[326px] shrink-0 relative mb-[10px] md:mb-[15px] xl:mb-[18px] 2xl:mb-[21px]">
         <Image
-          src="/images/latestNews1.png"
+          src={news?.img}
           alt="latestNews1"
           fill
           className="object-cover rounded-[10px]"
         />
       </div>
 
-      <div className="flex flex-col justify-between">
-      <Heading
-        as={"h3"}
-        size={"heading4"}
-        className=" text-black leading-[1.2] font-normal text-[10px] lg:text-[13px] xl:text-[16px] 2xl:text-[20px] "
-      >
-        {news?.title}
-      </Heading>
-      <p className="text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[18px] text-gray-400">
-        {news?.date}
-      </p>
-      <div className="text-[9px] lg:text-[12px] xl:text-[14px] 2xl:text-[17px] text-gray-600 leading-[1.4]  line-clamp-2">
-        {parse(news?.description)}
+      <div className="">
+        <Heading
+          as={"h3"}
+          size={"heading3"}
+          className="text-[10px] lg:text-[13px] xl:text-[16px] 2xl:text-[19px] 3xl:text-[22px] leading-[1.5] font-semibold text-[#00142E]"
+        >
+          {news?.title}
+        </Heading>
+        <p className="text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[18px] text-[#838383] my-1 md:my-2 font-semibold">
+          {news?.date}
+        </p>
+        {page !== "news_detail" &&
+        <div className="text-[#838383] text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[15px] mt-[5px]">
+          {parse(news?.description)}
+        </div>
+        }
       </div>
-      </div>
-    </div>
+    </Link>
   );
 }

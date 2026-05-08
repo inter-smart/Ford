@@ -26,32 +26,92 @@ const localData = {
     news_section: {},
   },
 
-  news: [
-    {
-      img: "/images/latestNews1.png",
-      date: "29.01.2025",
-      title: "Ford Explorer: An Outstanding Companion",
-      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+  newsData: {
+    title: "Latest News",
+    news: [
+      {
+        img: "/images/latestNews1.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
                 offer if you're shopping for a three-row crossover SUV. Its
                 outstanding quietness</p>`,
-    },
-    {
-      img: "/images/latestNews2.png",
-      date: "29.01.2025",
-      title: "Ford Explorer: An Outstanding Companion",
-      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+      },
+      {
+        img: "/images/latestNews2.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
                 offer if you're shopping for a three-row crossover SUV. Its
                 outstanding quietness</p>`,
-    },
-    {
-      img: "/images/latestNews3.png",
-      date: "29.01.2025",
-      title: "Ford Explorer: An Outstanding Companion",
-      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+      },
+      {
+        img: "/images/latestNews1.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
                 offer if you're shopping for a three-row crossover SUV. Its
                 outstanding quietness</p>`,
-    },
-  ],
+      },
+      {
+        img: "/images/latestNews2.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+      },
+      {
+        img: "/images/latestNews1.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+      },
+      {
+        img: "/images/latestNews2.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+      },
+      {
+        img: "/images/latestNews1.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+      },
+      {
+        img: "/images/latestNews2.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+      },
+      {
+        img: "/images/latestNews3.png",
+        slug: "news",
+        date: "29.01.2025",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+      },
+    ],
+  },
 };
 
 import InnerHero from "@/components/common/InnerHero";
@@ -71,7 +131,7 @@ export default function News() {
       }
     : null;
 
-  const news = localData?.news;
+  const news = localData?.newsData?.news;
 
   return (
     <div>

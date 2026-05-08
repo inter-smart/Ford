@@ -4,6 +4,7 @@
 import parse from "html-react-parser";
 import { Heading } from "@/components/layout/Heading";
 import Image from "next/image";
+import Link from "next/link";
 
 
 const newsData = {
@@ -12,6 +13,7 @@ const newsData = {
     {
       img: "/images/latestNews1.png",
       date: "29.01.2025",
+      slug: "news",
       title: "Ford Explorer: An Outstanding Companion",
       description: `<p>Available with plenty of features the Ford Explorer has a lot to
                 offer if you're shopping for a three-row crossover SUV. Its
@@ -20,6 +22,61 @@ const newsData = {
     {
       img: "/images/latestNews2.png",
       date: "29.01.2025",
+      slug: "news",
+      title: "Ford Explorer: An Outstanding Companion",
+      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+    },
+    {
+      img: "/images/latestNews1.png",
+      date: "29.01.2025",
+      slug: "news",
+      title: "Ford Explorer: An Outstanding Companion",
+      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+    },
+    {
+      img: "/images/latestNews2.png",
+      date: "29.01.2025",
+      slug: "news",
+      title: "Ford Explorer: An Outstanding Companion",
+      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+    },
+    {
+      img: "/images/latestNews1.png",
+      date: "29.01.2025",
+      slug: "news",
+      title: "Ford Explorer: An Outstanding Companion",
+      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+    },
+    {
+      img: "/images/latestNews2.png",
+      date: "29.01.2025",
+      slug: "news",
+      title: "Ford Explorer: An Outstanding Companion",
+      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+    },
+    {
+      img: "/images/latestNews1.png",
+      date: "29.01.2025",
+      slug: "news",
+      title: "Ford Explorer: An Outstanding Companion",
+      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+    },
+    {
+      img: "/images/latestNews2.png",
+      date: "29.01.2025",
+      slug: "news",
       title: "Ford Explorer: An Outstanding Companion",
       description: `<p>Available with plenty of features the Ford Explorer has a lot to
                 offer if you're shopping for a three-row crossover SUV. Its
@@ -27,6 +84,7 @@ const newsData = {
     },
     {
       img: "/images/latestNews3.png",
+      slug: "news",
       date: "29.01.2025",
       title: "Ford Explorer: An Outstanding Companion",
       description: `<p>Available with plenty of features the Ford Explorer has a lot to
@@ -50,7 +108,7 @@ export default function LatestNews({data=newsData}) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 w-full lg:h-[320px] xl:h-[399px] 2xl:h-[478px] 3xl:h-[557px] mt-[20px] gap-[14px] xl:gap-[25px] 2xl:gap-[30px]">
           {/* News 1 */}
-          <div className="flex flex-col h-full">
+          <Link href={`/news/${data?.news[0]?.slug}`} className="flex flex-col h-full">
             <div className="relative w-full h-[163px] lg:h-[218px] xl:h-[272px] 2xl:h-[326px] shrink-0">
               <Image
                 src="/images/latestNews1.png"
@@ -74,7 +132,7 @@ export default function LatestNews({data=newsData}) {
                 {parse(data?.news[0]?.description)
 }              </div>
             </div>
-          </div>
+          </Link>
 
           {/* News 2 and News 3 */}
           <div className="grid grid-rows-2 sm:grid-cols-1 sm:grid-rows-2 gap-[14px] xl:gap-[25px] 2xl:gap-[30px]">
@@ -94,7 +152,7 @@ export default function LatestNews({data=newsData}) {
 
 function NewsSectionCard({news}) {
   return (
-    <div className="flex gap-4">
+    <Link href={`/news/${news?.slug}`} className="flex gap-4">
       <div className="relative aspect-square xl:aspect-[3/2]">
         <Image
           src="/images/latestNews2.png"
@@ -119,6 +177,6 @@ function NewsSectionCard({news}) {
             {parse(news?.description)}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

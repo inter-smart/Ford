@@ -189,9 +189,7 @@ const localData = {
       },
     },
   },
-}
-
-}
+}}
 
 async function getFooterData() {
   try {
