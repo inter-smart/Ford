@@ -36,7 +36,7 @@ export default function FleetContactSection({ data }) {
               <Text
                 as="div"
                 size="text1"
-                className="text-[black] [&_p]:mb-[15px] xl:[&_p]:mb-[25px] 2xl:[&_p]:mb-[30px] 3xl:[&_p]:mb-[35px]"
+                className="text-black [&_p]:mb-[15px] xl:[&_p]:mb-[25px] 2xl:[&_p]:mb-[30px] 3xl:[&_p]:mb-[35px]"
               >
                 {data?.description}
               </Text>
