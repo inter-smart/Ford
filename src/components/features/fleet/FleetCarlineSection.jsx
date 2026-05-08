@@ -9,7 +9,7 @@ import { Heading } from "@/components/layout/Heading";
 import { Text } from "@/components/layout/Text";
 
 export default function FleetCarlineSection({ categories, data }) {
-  const [activeFilter, setActiveFilter] = useState(categories?.[0]?.slug ?? "");
+  const [activeFilter, setActiveFilter] = useState(categories?.[1]?.slug ?? "");
 
   const filteredVehicles =
     data?.filter((item) => item.category === activeFilter) || [];
@@ -55,12 +55,7 @@ export default function FleetCarlineSection({ categories, data }) {
         </div>
       </div>
 
-      <div
-        className={cn(
-          "w-full sm:max-w-[calc(var(--breakpoint-sm)/2+50%)] md:max-w-[calc(var(--breakpoint-md)/2+50%)] lg:max-w-[calc(var(--breakpoint-lg)/2+50%)] xl:max-w-[calc(var(--breakpoint-xl)/2+50%)] 2xl:max-w-[calc(var(--breakpoint-2xl)/2+50%)] 3xl:max-w-[calc(var(--breakpoint-3xl)/2+50%)]",
-          "pl-4 ml-auto",
-        )}
-      >
+      <div className="container">
         {filteredVehicles.length > 0 ? (
           <div ref={emblaRef} className="w-full max-w-full overflow-hidden">
             <div className="flex touch-pan-y touch-pinch-zoom -mx-2 lg:-mx-3">
@@ -68,7 +63,7 @@ export default function FleetCarlineSection({ categories, data }) {
                 <div
                   key={item?.id}
                   className={cn(
-                    "flex-[0_0_280px] sm:flex-[0_0_340px] lg:flex-[0_0_420px] 2xl:flex-[0_0_480px] 3xl:flex-[0_0_540px] min-w-0 select-none px-2 lg:px-3 group",
+                    "flex-[0_0_220px] sm:flex-[0_0_268px] lg:flex-[0_0_33.333%] min-w-0 select-none px-2 lg:px-3 group",
                   )}
                 >
                   <Link href={item.link || "#"} className="block w-full">
@@ -82,12 +77,24 @@ export default function FleetCarlineSection({ categories, data }) {
                       />
                     </div>
                     <div className="flex items-center justify-between px-1">
-                      <span className="text-black font-bold text-lg md:text-xl">
-                        {item.name}
-                      </span>
-                      <span className="text-[#008dd2] text-sm md:text-base font-semibold flex items-center gap-1 group-hover:underline">
-                        Learn More <span className="text-xs">&gt;</span>
-                      </span>
+                      <Text
+                        as="div"
+                        size="text1"
+                        className="font-semibold text-black"
+                        animate={false}
+                      >
+                        {item?.name}
+                      </Text>
+                      <div className="text-[10px] xl:text-[11.4px] 2xl:text-[13.9px] 3xl:text-[13.6px] leading-none font-bold text-[#1577F0] flex items-center gap-1 hover:text-[#0061d8]">
+                        Learn More
+                        <Image
+                          src="/images/fleet-icon.svg"
+                          alt="fleet-icon"
+                          width={10}
+                          height={6}
+                          className="w-[4px] 2xl:w-[5px] 3xl:w-[5.5px] block mt-[2px]"
+                        />
+                      </div>
                     </div>
                   </Link>
                 </div>
@@ -108,12 +115,7 @@ export default function FleetCarlineSection({ categories, data }) {
 
 function FilterItems({ items, activeFilter, onFilterChange, className }) {
   return (
-    <div
-      className={cn(
-        "flex flex-wrap items-center gap-2 sm:gap-4 md:gap-6",
-        className,
-      )}
-    >
+    <div className={cn("flex flex-wrap items-center", className)}>
       {items?.map((item) => {
         const isActive = activeFilter === item?.slug;
         return (
@@ -122,10 +124,10 @@ function FilterItems({ items, activeFilter, onFilterChange, className }) {
             type="button"
             onClick={() => onFilterChange(item?.slug)}
             className={cn(
-              "text-sm md:text-base transition-all duration-300",
+              "text-[12px] sm:text-[14px] xl:text-[16px] 2xl:text-[19.2px] 3xl:text-[24px] leading-none font-normal rounded-full h-[35.5px] 2xl:h-[42.5px] 3xl:h-[53.3px] p-[5px_15px_3px] xl:p-[7px_22px_5px] 2xl:p-[7px_26px] 3xl:p-[8px_32px_6px] transition-all duration-300 border border-white",
               isActive
-                ? "text-black font-semibold border border-[#008dd2] rounded-full px-5 py-2"
-                : "text-black hover:text-[#008dd2] px-4 py-2",
+                ? "font-semibold text-black border-[#008dd2]"
+                : "text-black hover:text-[#008dd2]",
             )}
           >
             {item?.name}

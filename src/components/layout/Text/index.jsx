@@ -28,8 +28,23 @@ const sizes = {
     "3xl:text-[18px] 2xl:text-[16px] xl:text-[12px] text-[12px] font-normal leading-normal",
 };
 
-const Text = ({ children, className = "", as, size, ...restProps }) => {
+const Text = ({
+  children,
+  className = "",
+  as,
+  size,
+  animate = true,
+  ...restProps
+}) => {
   const Component = as || "p";
+
+  if (!animate) {
+    return (
+      <Component className={`${className} ${sizes[size]} `} {...restProps}>
+        {children}
+      </Component>
+    );
+  }
 
   return (
     <motion.div

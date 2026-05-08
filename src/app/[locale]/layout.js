@@ -69,7 +69,7 @@ async function getHeaderData() {
       `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/header`,
       {
         cache: "no-store", // No caching, always fetch fresh
-      }
+      },
     );
 
     if (!res.ok) {
@@ -92,7 +92,7 @@ async function getFooterData() {
       `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/footer`,
       {
         cache: "no-store",
-      }
+      },
     );
 
     if (!res.ok) {

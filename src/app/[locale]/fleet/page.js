@@ -3,45 +3,45 @@ import FleetCarlineSection from "@/components/features/fleet/FleetCarlineSection
 import FleetContactSection from "@/components/features/fleet/FleetContactSection";
 import FleetInfoSection from "@/components/features/fleet/FleetInfoSection";
 
-async function getPageData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/contact`,
-    { next: { revalidate: 60 } },
-  );
+// async function getPageData() {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/contact`,
+//     { next: { revalidate: 60 } },
+//   );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch data");
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
 
-export async function generateMetadata() {
-  const data = await getPageData();
+// export async function generateMetadata() {
+//   const data = await getPageData();
 
-  return {
-    title: data?.seo?.title,
-    description: data?.seo?.description,
-    openGraph: {
-      title: data?.seo?.title,
-      description: data?.seo?.description,
-      images: [
-        {
-          url: data?.seo?.image,
-          width: 1200,
-          height: 630,
-          alt: data?.seo?.title || "Ford",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: data?.seo?.title,
-      description: data?.seo?.description,
-      images: [data?.seo?.image],
-    },
-  };
-}
+//   return {
+//     title: data?.seo?.title,
+//     description: data?.seo?.description,
+//     openGraph: {
+//       title: data?.seo?.title,
+//       description: data?.seo?.description,
+//       images: [
+//         {
+//           url: data?.seo?.image,
+//           width: 1200,
+//           height: 630,
+//           alt: data?.seo?.title || "Ford",
+//         },
+//       ],
+//     },
+//     twitter: {
+//       card: "summary_large_image",
+//       title: data?.seo?.title,
+//       description: data?.seo?.description,
+//       images: [data?.seo?.image],
+//     },
+//   };
+// }
 
 const local_data = {
   hero: {
@@ -100,23 +100,30 @@ const local_data = {
     {
       id: 1,
       name: "Edge",
-      image: "/images/fleet/edge.jpg",
+      image: "/images/fleet-carline-1.jpg",
       category: "cuv-suv",
       link: "/vehicles/edge",
     },
     {
       id: 2,
       name: "Explorer",
-      image: "/images/fleet/explorer.jpg",
+      image: "/images/fleet-carline-2.jpg",
       category: "cuv-suv",
       link: "/vehicles/explorer",
     },
     {
       id: 3,
       name: "Expedition",
-      image: "/images/fleet/expedition.jpg",
+      image: "/images/fleet-carline-3.jpg",
       category: "cuv-suv",
       link: "/vehicles/expedition",
+    },
+    {
+      id: 4,
+      name: "Edge",
+      image: "/images/fleet-carline-1.jpg",
+      category: "cuv-suv",
+      link: "/vehicles/edge",
     },
   ],
 
@@ -127,21 +134,24 @@ const local_data = {
     cards: [
       {
         id: 1,
-        icon: "/icons/contact.svg",
+        icon: "/images/fleet-contact-1.svg",
+        title: "Contact Us",
         description: "Lorem Ipsum is simply dummy text of the printing",
         buttonText: "Contact Us",
         buttonLink: "/contact",
       },
       {
         id: 2,
-        icon: "/icons/test-drive.svg",
+        icon: "/images/fleet-contact-2.svg",
+        title: "Book a Test Drive",
         description: "Lorem Ipsum is simply dummy text of the printing",
         buttonText: "Book a Test Drive",
         buttonLink: "/test-drive",
       },
       {
         id: 3,
-        icon: "/icons/quote.svg",
+        icon: "/images/fleet-contact-3.svg",
+        title: "Request a Quote",
         description: "Lorem Ipsum is simply dummy text of the printing",
         buttonText: "Request a Quote",
         buttonLink: "/quote",
