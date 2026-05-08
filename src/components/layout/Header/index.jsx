@@ -192,7 +192,7 @@ export default function Header({ locale, data: header_acf }) {
                       }
                       alt={locale === "en" ? "Arabic" : "English"}
                       width={20}
-                      height={15}
+                      height={18}
                       className="w-[20px] h-[18px] object-contain"
                     />
                     <span
