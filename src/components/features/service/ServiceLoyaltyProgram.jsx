@@ -27,7 +27,7 @@ export default function ServiceLoyaltyProgram({ data }) {
           {parse(data?.description)}
         </div>
 
-        <div className="w-full bg-[#00095b] rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] p-[20px_20px] sm:p-[40px_30px] xl:p-[61.2px_43.7px] 2xl:p-[74px_52.5px] 3xl:p-[91px_65px] flex flex-wrap [&>div]:w-full sm:[&>div]:w-[calc(50%-10px)] gap-5 mt-[30px] xl:mt-[70px] 2xl:mt-[80px] 3xl:mt-[100px]">
+        <div className="w-full bg-[#00095b] rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] p-[20px_20px] sm:p-[40px_30px] xl:p-[61.2px_43.7px] 2xl:p-[74px_52.5px] 3xl:p-[91px_65px] flex flex-wrap [&>div]:w-full sm:[&>div]:w-[calc(50%-10px)] gap-5 mt-[30px] xl:mt-[60px] 2xl:mt-[80px] 3xl:mt-[100px]">
           <div>
             <div className="text-[18px] sm:text-[21.3px] xl:text-[26.7px] 2xl:text-[32px] 3xl:text-[40px] leading-normal font-normal text-white mb-[4px] 2xl:mb-[6px]">
               {data?.howWorks?.title}

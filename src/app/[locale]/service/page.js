@@ -1,6 +1,4 @@
 import InnerHero from "@/components/common/InnerHero";
-import FleetCarlineSection from "@/components/features/fleet/FleetCarlineSection";
-import FleetContactSection from "@/components/features/fleet/FleetContactSection";
 import ServiceBranchDirectory from "@/components/features/service/ServiceBranchDirectory";
 import ServiceInfoSection from "@/components/features/service/ServiceInfoSection";
 import ServiceIntervalSection from "@/components/features/service/ServiceIntervalSection";
@@ -53,12 +51,10 @@ const local_data = {
   banner: {
     enable__disable_banner_section: true,
     desktop_image: {
-      title: "contactBanner",
       alt: "contactBanner",
       url: "/images/banner-service-1.jpg",
     },
     mobile_image: {
-      title: "contactBanner",
       alt: "contactBanner",
       url: "/images/banner-service-1.jpg",
     },
@@ -434,7 +430,7 @@ export default function page({ data = local_data }) {
   return (
     <>
       {data?.banner?.enable__disable_banner_section && (
-        <InnerHero data={local_data?.hero} />
+        <InnerHero data={local_data?.banner} />
       )}
       <ServiceInfoSection data={local_data?.infoService} />
       <ServiceIntervalSection data={local_data?.serviceInterval} />
@@ -442,11 +438,6 @@ export default function page({ data = local_data }) {
       <ServiceWhatWillReplacedSection data={local_data?.whatWillReplaced} />
       <ServiceLoyaltyProgram data={local_data?.loyaltyProgram} />
       <ServiceBranchDirectory data={local_data?.branchDirectory} />
-      {/* <FleetCarlineSection
-        categories={local_data?.categories}
-        data={local_data?.vehicles}
-      />
-      <FleetContactSection data={local_data?.contactSection} /> */}
     </>
   );
 }

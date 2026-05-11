@@ -30,7 +30,7 @@ export default function ServiceIntervalSection({ data }) {
             {data?.button?.label}
           </Link>
         </div>
-        <div className="flex flex-wrap -mx-[5px] xl:-mx-[10px] 2xl:-mx-[12px] 3xl:-mx-[15px] mt-[20px] xl:mt-[70px] 2xl:mt-[80px] 3xl:mt-[100px]">
+        <div className="flex flex-wrap -mx-[5px] xl:-mx-[10px] 2xl:-mx-[12px] 3xl:-mx-[15px] mt-[20px] xl:mt-[60px] 2xl:mt-[80px] 3xl:mt-[100px]">
           {data?.items?.map((item, idx) => {
             return (
               <div
