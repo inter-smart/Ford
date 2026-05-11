@@ -9,14 +9,14 @@ export default function ServiceInfoSection({ data }) {
   return (
     <section className="w-full h-auto block pt-5 sm:pt-[40px] xl:pt-[60px] 2xl:pt-[75px] 3xl:pt-[85px] pb-5 sm:pb-[40px] xl:pb-[60px] 2xl:pb-[75px] 3xl:pb-[85px] overflow-hidden">
       <div className="container">
-        <div className="flex">
+        <div className="flex gap-5 justify-between">
           <div>
             <Heading
               as="h2"
               size={"none"}
               className="text-[20px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-normal font-semibold text-black mb-[15px] xl:mb-[20px] 2xl:mb-[25px] 3xl:mb-[30px]"
             >
-              {data?.title}
+              {data?.sectionTitle}
             </Heading>
           </div>
           <div>
@@ -28,13 +28,13 @@ export default function ServiceInfoSection({ data }) {
                     key={item?.id}
                     href={item?.slug}
                     className={cn(
-                      "text-[12px] sm:text-[14px] xl:text-[16px] 2xl:text-[19.2px] 3xl:text-[24px] leading-none font-normal rounded-full h-[35.5px] 2xl:h-[42.5px] 3xl:h-[53.3px] p-[5px_15px_3px] xl:p-[7px_22px_5px] 2xl:p-[7px_26px] 3xl:p-[8px_32px_6px] transition-all duration-300 border border-white",
+                      "text-[12px] sm:text-[14px] xl:text-[16px] 2xl:text-[19.2px] 3xl:text-[24px] leading-none font-normal rounded-full h-[35.5px] 2xl:h-[42.5px] 3xl:h-[53.3px] p-[5px_15px_3px] xl:p-[7px_22px_5px] 2xl:p-[7px_26px] 3xl:p-[8px_32px_6px] bg-red-500 flex items-center justify-center transition-all duration-300 border border-white",
                       isActive
                         ? "font-semibold text-black border-[#008dd2]"
                         : "text-black hover:text-[#008dd2]",
                     )}
                   >
-                    {item?.name}
+                    {item?.title}
                   </Link>
                 );
               })}

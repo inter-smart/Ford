@@ -1,7 +1,12 @@
 import InnerHero from "@/components/common/InnerHero";
 import FleetCarlineSection from "@/components/features/fleet/FleetCarlineSection";
 import FleetContactSection from "@/components/features/fleet/FleetContactSection";
+import ServiceBranchDirectory from "@/components/features/service/ServiceBranchDirectory";
 import ServiceInfoSection from "@/components/features/service/ServiceInfoSection";
+import ServiceIntervalSection from "@/components/features/service/ServiceIntervalSection";
+import ServiceLoyaltyProgram from "@/components/features/service/ServiceLoyaltyProgram";
+import ServiceVisitSection from "@/components/features/service/ServiceVisitSection";
+import ServiceWhatWillReplacedSection from "@/components/features/service/ServiceWhatWillReplacedSection";
 import { url } from "zod";
 
 // async function getPageData() {
@@ -64,7 +69,6 @@ const local_data = {
       isExternal: false,
     },
   },
-
   infoService: {
     media: {
       url: "/images/service-info-1.jpg",
@@ -87,7 +91,6 @@ const local_data = {
     description:
       "<p>At Ford Oman, servicing your vehicle is more than a routine job it's our promise of safety, performance, and peace of mind. Backed by factory-trained technicians and genuine Ford parts, our service centers ensure your Ford stays as reliable as the day you bought it.</p><h5>We follow Ford global service standards to offer</h5><ul><li>Precision diagnostics and repairs</li><li>Transparent service process and pricing</li><li>Ford Genuine Parts</li><li>Dedicated customer support</li></ul>",
   },
-
   serviceInterval: {
     title: "Recommended service Intervals",
     description:
@@ -110,13 +113,11 @@ const local_data = {
       },
     ],
   },
-
   firstServiceVisit: {
     title: "First service visit",
     description:
-      "<p><b>What to Expect During Your First Visit</b></p><p><b>Your first service is vital to ensure your vehicle’s systems are operating as intended. At your initial appointment, our technicians will</b></p><ul><li>Inspect all critical systems (engine, brakes, fluids, lights)</li><li>Top up essential fluids</li><li>Check tyre pressure and alignment</li><li>Conduct a roadworthiness inspection</li><li>Update service history and provide maintenance tips</li></ul><p>Expect a smooth, guided process where everything is explained clearly—and your vehicle is returned in optimal condition.</p>",
+      "<p><b>What to Expect During Your First Visit</b></br><b>Your first service is vital to ensure your vehicle’s systems are operating as intended. At your initial appointment, our technicians will</b></p><ul><li>Inspect all critical systems (engine, brakes, fluids, lights)</li><li>Top up essential fluids</li><li>Check tyre pressure and alignment</li><li>Conduct a roadworthiness inspection</li><li>Update service history and provide maintenance tips</li></ul><p>Expect a smooth, guided process where everything is explained clearly—and your vehicle is returned in optimal condition.</p>",
   },
-
   whatWillReplaced: {
     title: "What will be replaced",
     items: [
@@ -312,7 +313,6 @@ const local_data = {
       },
     ],
   },
-
   loyaltyProgram: {
     title: "Ford Mazhaya Loyalty program",
     media: {
@@ -328,7 +328,6 @@ const local_data = {
         "<ul><li>Service or repair your Ford at any ACM facility</li><li>Purchase genuine Ford spare parts</li></ul>",
     },
   },
-
   branchDirectory: {
     title: "Branch directory",
     cards: [
@@ -358,6 +357,11 @@ export default function page({ data = local_data }) {
         <InnerHero data={local_data?.hero} />
       )}
       <ServiceInfoSection data={local_data?.infoService} />
+      <ServiceIntervalSection data={local_data?.serviceInterval} />
+      <ServiceVisitSection data={local_data?.firstServiceVisit} />
+      <ServiceWhatWillReplacedSection data={local_data?.whatWillReplaced} />
+      <ServiceLoyaltyProgram data={local_data?.loyaltyProgram} />
+      <ServiceBranchDirectory data={local_data?.branchDirectory} />
       {/* <FleetCarlineSection
         categories={local_data?.categories}
         data={local_data?.vehicles}
