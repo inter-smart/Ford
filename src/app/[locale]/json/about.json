@@ -1,0 +1,124 @@
+ 
+
+export interface HeroSection {
+  title: string;
+  subtitle?: string;
+  backgroundImage: string;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
+export interface AboutStat {
+  id: number;
+  value: string;
+  label: string;
+}
+
+export interface AboutSection {
+  title: string;
+  highlight: string;
+  description: string;
+  mapImage: string;
+  stats: AboutStat[];
+}
+
+export interface DealerLocation {
+  id: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+}
+
+export interface FindDealerSection {
+  title: string;
+  description: string;
+  searchPlaceholder: string;
+  mapImage: string;
+  locations: DealerLocation[];
+}
+
+export interface ContactSection {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
+export interface AboutPageData {
+  heroSection: HeroSection;
+  aboutSection: AboutSection;
+  findDealerSection: FindDealerSection;
+  contactSection: ContactSection;
+}
+
+// data/about-page.json
+
+{
+  "heroSection": {
+    "title": "About Us",
+    "backgroundImage": "/images/about/about-banner.jpg"
+  },
+
+  "aboutSection": {
+    "title": "Ford Oman:",
+    "highlight": "A Legacy Of Excellence",
+    "description": "Arabian Car Marketing Co. LLC is the official distributor of Ford vehicles in the Sultanate of Oman. With a strong legacy of automotive excellence, we deliver advanced vehicle technology, exceptional customer service, and a network of showrooms and service centers across the country. Our partnership with Ford Motor Company stands on shared values of durability, performance, and innovation.",
+    "mapImage": "/images/about/oman-map.png",
+    "stats": [
+      {
+        "id": 1,
+        "value": "25+",
+        "label": "Ford Models"
+      },
+      {
+        "id": 2,
+        "value": "20+",
+        "label": "Branches"
+      },
+      {
+        "id": 3,
+        "value": "1000+",
+        "label": "Satisfied Customers"
+      },
+      {
+        "id": 4,
+        "value": "Full Range",
+        "label": "Of Ford Vehicles"
+      }
+    ]
+  },
+
+  "findDealerSection": {
+    "title": "Find A Ford Near You",
+    "description": "Locate your nearest Ford showroom, service center, or dealer branch across Oman.",
+    "searchPlaceholder": "Search by city or branch",
+    "mapImage": "/images/about/oman-dealer-map.jpg",
+    "locations": [
+      {
+        "id": 1,
+        "name": "Muscat Branch",
+        "latitude": 23.588,
+        "longitude": 58.3829
+      },
+      {
+        "id": 2,
+        "name": "Sohar Branch",
+        "latitude": 24.347,
+        "longitude": 56.7097
+      },
+      {
+        "id": 3,
+        "name": "Salalah Branch",
+        "latitude": 17.0194,
+        "longitude": 54.0897
+      }
+    ]
+  },
+
+  "contactSection": {
+    "title": "Connect With Us",
+    "description": "Looking for assistance, dealership support, or financing options? Our team is here for you.",
+    "buttonText": "Reach Out",
+    "buttonLink": "/contact-us"
+  }
+}

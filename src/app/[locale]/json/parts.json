@@ -1,0 +1,397 @@
+export interface PartsHero {
+  title: string;
+  buttonText: string;
+  backgroundImage: string;
+}
+
+export interface PartsTab {
+  label: string;
+  active: boolean;
+}
+
+export interface PartsContent {
+  heading: string;
+  description: string;
+}
+
+export interface PartsSection {
+  title: string;
+  tabs: PartsTab[];
+  image: string;
+  content: PartsContent;
+}
+
+export interface MaintenanceGroup {
+  title: string;
+  items: string[];
+}
+
+export interface MaintenanceChecklist {
+  sectionBackground: string;
+  title: string;
+  subtitle: string;
+  image: string;
+  dailyChecks: MaintenanceGroup;
+  monthlyChecks: MaintenanceGroup;
+}
+
+export interface SafetyCard {
+  id: number;
+  icon: string;
+  text: string;
+}
+
+export interface SafetyAdvice {
+  title: string;
+  cards: SafetyCard[];
+}
+
+export interface WhatsappButton {
+  enabled: boolean;
+  icon: string;
+}
+
+/* ========================================= */
+
+export interface AccessoriesHero {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  image: string;
+}
+
+export interface FeatureCard {
+  id: number;
+  icon: string;
+  title: string;
+  active: boolean;
+}
+
+export interface KeyFeatures {
+  title: string;
+  features: FeatureCard[];
+}
+
+export interface GalleryImage {
+  id: number;
+  image: string;
+  alt: string;
+}
+
+export interface GallerySection {
+  title: string;
+  mainImage: string;
+  thumbnails: GalleryImage[];
+}
+
+export interface MotorcraftFeature {
+  id: number;
+  title: string;
+  description: string;
+}
+
+export interface MotorcraftSection {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  image: string;
+  features: MotorcraftFeature[];
+}
+
+/* ========================================= */
+
+export interface MotorcraftHero {
+  title: string;
+  features: string[];
+  image: string;
+  backgroundColor: string;
+}
+
+export interface BranchItem {
+  id: number;
+  city: string;
+  address: string;
+  phone: string;
+  timing: string;
+  buttonText: string;
+  mapLink: string;
+}
+
+export interface BranchDirectory {
+  title: string;
+  branches: BranchItem[];
+}
+
+/* ========================================= */
+
+export interface ServicePageData {
+  partsHero: PartsHero;
+  partsSection: PartsSection;
+  maintenanceChecklist: MaintenanceChecklist;
+  safetyAdvice: SafetyAdvice;
+  whatsappButton: WhatsappButton;
+
+  accessoriesHero: AccessoriesHero;
+  keyFeatures: KeyFeatures;
+  gallery: GallerySection;
+  motorcraftSection: MotorcraftSection;
+
+  motorcraftHero: MotorcraftHero;
+  branchDirectory: BranchDirectory;
+}
+
+
+{
+  "partsHero": {
+    "title": "Parts and Service",
+    "buttonText": "Contact Us",
+    "backgroundImage": "/images/parts-service/banner.jpg"
+  },
+
+  "partsSection": {
+    "title": "Parts",
+
+    "tabs": [
+      {
+        "label": "Parts",
+        "active": true
+      },
+      {
+        "label": "Service",
+        "active": false
+      }
+    ],
+
+    "image": "/images/parts-service/parts.jpg",
+
+    "content": {
+      "heading": "Maintenance and Genuine Care",
+      "description": "Have your vehicle serviced regularly to maintain its performance, safety, and resale value. With a wide network of Ford Authorised Parts Outlets and Service Centres, keeping your Ford in prime condition has never been easier."
+    }
+  },
+
+  "maintenanceChecklist": {
+    "sectionBackground": "#001A72",
+
+    "title": "Maintenance Checklist",
+
+    "subtitle": "Your Fords Maintenance Essentials",
+
+    "image": "/images/parts-service/checklist.jpg",
+
+    "dailyChecks": {
+      "title": "Daily Checks",
+
+      "items": [
+        "Exterior lamps",
+        "Interior lamps",
+        "Warning lamps and indicators"
+      ]
+    },
+
+    "monthlyChecks": {
+      "title": "Monthly Checks",
+
+      "items": [
+        "Engine coolant level and engine oil",
+        "Power steering and brake fluid",
+        "Air conditioning system",
+        "Horn",
+        "Wheel nut tightness",
+        "Radiator seals",
+        "Tyre condition and pressure"
+      ]
+    }
+  },
+
+  "safetyAdvice": {
+    "title": "Safety Advice",
+
+    "cards": [
+      {
+        "id": 1,
+        "icon": "/icons/power.svg",
+        "text": "Always switch off the ignition before checks"
+      },
+      {
+        "id": 2,
+        "icon": "/icons/engine.svg",
+        "text": "Don't open filler caps when the engine is hot"
+      },
+      {
+        "id": 3,
+        "icon": "/icons/windshield.svg",
+        "text": "Avoid applying polish to windshields to prevent wiper issues"
+      }
+    ]
+  },
+
+  "whatsappButton": {
+    "enabled": true,
+    "icon": "/icons/whatsapp.svg"
+  },
+
+  "accessoriesHero": {
+    "title": "Ford Accessories: Personalize Your Ford",
+
+    "description": "Have your vehicle serviced regularly to maintain its performance, safety, and resale value. With a wide network of Ford Authorised Parts Outlets and Service Centres, keeping your Ford in prime condition has never been easier.",
+
+    "buttonText": "View More",
+
+    "buttonLink": "/accessories",
+
+    "image": "/images/accessories/hero.jpg"
+  },
+
+  "keyFeatures": {
+    "title": "Key Features",
+
+    "features": [
+      {
+        "id": 1,
+        "icon": "/icons/engineer.svg",
+        "title": "Designed and tested by Ford engineers",
+        "active": false
+      },
+      {
+        "id": 2,
+        "icon": "/icons/warranty.svg",
+        "title": "Maintains vehicle warranty and resale value",
+        "active": false
+      },
+      {
+        "id": 3,
+        "icon": "/icons/integration.svg",
+        "title": "Seamless integration with your vehicle's design",
+        "active": true
+      },
+      {
+        "id": 4,
+        "icon": "/icons/technician.svg",
+        "title": "Installed by Ford-trained technicians",
+        "active": false
+      }
+    ]
+  },
+
+  "gallery": {
+    "title": "Gallery",
+
+    "mainImage": "/images/accessories/gallery-main.jpg",
+
+    "thumbnails": [
+      {
+        "id": 1,
+        "image": "/images/accessories/gallery-1.jpg",
+        "alt": "Ford technician working under vehicle"
+      },
+      {
+        "id": 2,
+        "image": "/images/accessories/gallery-2.jpg",
+        "alt": "Ford service inspection"
+      },
+      {
+        "id": 3,
+        "image": "/images/accessories/gallery-3.jpg",
+        "alt": "Ford technician repairing engine"
+      }
+    ]
+  },
+
+  "motorcraftSection": {
+    "title": "Motorcraft: Quality You Can Trust",
+
+    "description": "Motorcraft parts are the official parts brand of Ford Motor Company—trusted by Ford service centers around the world. Whether it's a routine oil change or a complex transmission assembly, Motorcraft ensures that your vehicle runs the way it was built to.",
+
+    "buttonText": "Download brochure",
+
+    "buttonLink": "/brochures/motorcraft.pdf",
+
+    "image": "/images/accessories/motorcraft.jpg",
+
+    "features": [
+      {
+        "id": 1,
+        "title": "Each part is tested under extreme conditions to deliver",
+        "description": "Precision Fit"
+      },
+      {
+        "id": 2,
+        "title": "Engineered for Ford, Lincoln, and Mercury vehicles",
+        "description": "Proven Reliability"
+      },
+      {
+        "id": 3,
+        "title": "Lab-tested and road-verified",
+        "description": "Top Performance"
+      },
+      {
+        "id": 4,
+        "title": "Maintains peak fuel efficiency and safety",
+        "description": "Broad Range"
+      }
+    ]
+  },
+
+  "motorcraftHero": {
+    "title": "Why Motorcraft",
+
+    "features": [
+      "Product line depth and breadth",
+      "The perfect fit",
+      "Less shop time",
+      "Factory innovations and upgrades",
+      "Tested Tough",
+      "Backed By Ford"
+    ],
+
+    "image": "/images/motorcraft/hero-products.png",
+
+    "backgroundColor": "#001A72"
+  },
+
+  "branchDirectory": {
+    "title": "Branch Directory",
+
+    "branches": [
+      {
+        "id": 1,
+        "city": "Seeb",
+        "address": "Seeb Al Mawaleh, Near Carrefour, Seeb",
+        "phone": "26887635",
+        "timing": "10 am to 6 pm",
+        "buttonText": "Let's Go",
+        "mapLink": "/branches/seeb"
+      },
+      {
+        "id": 2,
+        "city": "Barka",
+        "address": "Muscat Sohar Road, Near Barka",
+        "phone": "26887635",
+        "timing": "10 am to 6 pm",
+        "buttonText": "Let's Go",
+        "mapLink": "/branches/barka"
+      },
+      {
+        "id": 3,
+        "city": "Salalah",
+        "address": "Sarnaya, Salalah",
+        "phone": "26887635",
+        "timing": "10 am to 6 pm",
+        "buttonText": "Let's Go",
+        "mapLink": "/branches/salalah"
+      },
+      {
+        "id": 4,
+        "city": "Sohar",
+        "address": "Al Bahja Street, Near Sultan Palace, Sohar",
+        "phone": "26887635",
+        "timing": "10 am to 6 pm",
+        "buttonText": "Let's Go",
+        "mapLink": "/branches/sohar"
+      }
+    ]
+  }
+}
