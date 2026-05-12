@@ -2,7 +2,7 @@ import InnerHero from "@/components/common/InnerHero";
 import OfferListSection from "@/components/features/offers/OfferListSection";
 
 const local_data = {
-  
+
   banner: {
     enable__disable_banner_section: true,
     desktop_image: {
@@ -19,70 +19,70 @@ const local_data = {
   },
 
   offers: [
-  {
-    slug: "complimentary-service-package",
-    image: "/images/offer-1.jpg",
-    title: "Complimentary Service Package",
-    subTitle: "Get free service for 3 years or 60,000 km",
-    description: "When you buy any new Ford SUV or pickup.",
-    btnTxt: "Enquire Now"
-  },
-  {
-    slug: "limited-time-cash-back",
-    image: "/images/offer-2.jpg",
-    title: "Limited-Time Cash Back",
-    subTitle: "Get up to OMR 2,000 cash back on select models this month only!",
-    description: "Don’t miss the deal.",
-    btnTxt: "Enquire Now"
-  },
-  {
-    slug: "corporate-and-fleet-offers",
-    image: "/images/offer-3.jpg",
-    title: "Corporate and Fleet offers",
-    subTitle: "Special pricing, extended warranty, and priority support",
-    description: "for corporate clients and SMEs.",
-    btnTxt: "Enquire Now"
-  },
-  {
-    slug: "",
-    image: "/images/offer-3.jpg",
-    title: "Corporate and Fleet offers",
-    subTitle: "Special pricing, extended warranty, and priority support",
-    description: "for corporate clients and SMEs.",
-    btnTxt: "Enquire Now"
-  },
-  {
-    slug: "",
-    image: "/images/offer-1.jpg",
-    title: "Complimentary Service Package",
-    subTitle: "Get free service for 3 years or 60,000 km",
-    description: "When you buy any new Ford SUV or pickup.",
-    btnTxt: "Enquire Now"
-  },
-  {
-    slug: "",
-    image: "/images/offer-2.jpg",
-    title: "Limited-Time Cash Back",
-    subTitle: "Get up to OMR 2,000 cash back on select models this month only!",
-    description: "Don’t miss the deal.",
-    btnTxt: "Enquire Now"
-  },
-  {
-    slug: "",
-    image: "/images/offer-1.jpg",
-    title: "Complimentary Service Package",
-    subTitle: "Get free service for 3 years or 60,000 km",
-    description: "When you buy any new Ford SUV or pickup.",
-    btnTxt: "Enquire Now"
-  },
-  {
-    image: "/images/offer-2.jpg",
-    title: "Limited-Time Cash Back",
-    subTitle: "Get up to OMR 2,000 cash back on select models this month only!",
-    description: "Don’t miss the deal.",
-    btnTxt: "Enquire Now"
-  },
-],
+    {
+      slug: "complimentary-service-package",
+      image: "/images/offer-1.jpg",
+      title: "Complimentary Service Package",
+      subTitle: "Get free service for 3 years or 60,000 km",
+      description: "When you buy any new Ford SUV or pickup.",
+      btnTxt: "Enquire Now"
+    },
+    {
+      slug: "limited-time-cash-back",
+      image: "/images/offer-2.jpg",
+      title: "Limited-Time Cash Back",
+      subTitle: "Get up to OMR 2,000 cash back on select models this month only!",
+      description: "Don’t miss the deal.",
+      btnTxt: "Enquire Now"
+    },
+    {
+      slug: "corporate-and-fleet-offers",
+      image: "/images/offer-3.jpg",
+      title: "Corporate and Fleet offers",
+      subTitle: "Special pricing, extended warranty, and priority support",
+      description: "for corporate clients and SMEs.",
+      btnTxt: "Enquire Now"
+    },
+    {
+      slug: "",
+      image: "/images/offer-3.jpg",
+      title: "Corporate and Fleet offers",
+      subTitle: "Special pricing, extended warranty, and priority support",
+      description: "for corporate clients and SMEs.",
+      btnTxt: "Enquire Now"
+    },
+    {
+      slug: "",
+      image: "/images/offer-1.jpg",
+      title: "Complimentary Service Package",
+      subTitle: "Get free service for 3 years or 60,000 km",
+      description: "When you buy any new Ford SUV or pickup.",
+      btnTxt: "Enquire Now"
+    },
+    {
+      slug: "",
+      image: "/images/offer-2.jpg",
+      title: "Limited-Time Cash Back",
+      subTitle: "Get up to OMR 2,000 cash back on select models this month only!",
+      description: "Don’t miss the deal.",
+      btnTxt: "Enquire Now"
+    },
+    {
+      slug: "",
+      image: "/images/offer-1.jpg",
+      title: "Complimentary Service Package",
+      subTitle: "Get free service for 3 years or 60,000 km",
+      description: "When you buy any new Ford SUV or pickup.",
+      btnTxt: "Enquire Now"
+    },
+    {
+      image: "/images/offer-2.jpg",
+      title: "Limited-Time Cash Back",
+      subTitle: "Get up to OMR 2,000 cash back on select models this month only!",
+      description: "Don’t miss the deal.",
+      btnTxt: "Enquire Now"
+    },
+  ],
 }
 
 export default function page({ data = local_data }) {
@@ -96,14 +96,3 @@ export default function page({ data = local_data }) {
   );
 }
 
-// export default async function page() {
-//   const data = await getPageData();
-//   const banner = data.heroData?.[0] || {};
-
-//   return (
-//     <>
-//       <InnerHero data={banner} />
-//       <OfferListSection data={data} />
-//     </>
-//   );
-// }
