@@ -5,7 +5,7 @@ import ProductListSection from "@/components/features/products/ProductListSectio
 async function getPageData() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/wp-json/custom/v1/product`,
-    { next: { revalidate: 60 } } 
+    { next: { revalidate: 60 } }
   );
 
   if (!res.ok) {
