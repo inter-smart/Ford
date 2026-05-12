@@ -72,7 +72,7 @@ export default function FleetInfoSection({}) {
             <div className="w-[110px] lg:w-[116px] xl:w-[145px] 2xl:w-[174px] 3xl:w-[218px]">
               <Link
                 href={"/"}
-                className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-[1] font-bold text-white w-full h-[30.5] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] p-2 rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center"
+                className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-[1] font-bold text-white w-full h-[30.5px] xl:h-[35.5px] 2xl:h-[42.6px] 3xl:h-[53.4px] p-2 rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center"
               >
                 Request a Quote
               </Link>

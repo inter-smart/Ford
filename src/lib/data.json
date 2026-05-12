@@ -953,5 +953,502 @@
         }
       ]
     }
+  },
+  "product_page": {
+    "heroData": {
+      "title": "",
+      "description": null,
+      "media": {
+        "type": "(image, video)",
+        "desktop": {
+          "path": "",
+          "alt": ""
+        },
+        "mobile": {
+          "path": "",
+          "alt": ""
+        }
+      },
+      "button": null
+    },
+    "product": [
+      {
+        "id": 1,
+        "badge": "",
+        "modelName": "taurus",
+        "slug": "",
+        "modelCategory": "(sedan, suv, truck, performance, commercial_vehicle)",
+        "media": {
+          "type": "(image, video)",
+          "path": "",
+          "alt": ""
+        }
+      }
+    ]
+  },
+  "product_detil_page": {
+    "heroData": {
+      "title": "mustang",
+      "description": "<p>Confidence On Every Drive</p>",
+      "media": {
+        "type": "(image, video)",
+        "desktop": {
+          "path": "",
+          "alt": ""
+        },
+        "mobile": {
+          "path": "",
+          "alt": ""
+        }
+      },
+      "button": {
+        "type": "link",
+        "isExternal": false,
+        "label": "Enquire Now",
+        "link": "/"
+      }
+    },
+    "aboutVehicle": {
+      "badge": "",
+      "title": "",
+      "description": "",
+      "media": {
+        "type": "(image, video)",
+        "path": "",
+        "alt": ""
+      },
+      "button": {
+        "type": "link",
+        "isExternal": false,
+        "label": "Book a Test Drive",
+        "link": "/"
+      }
+    },
+    "vehicleDetail": {
+      "year": 2024,
+      "modelCode": "gt-5.0",
+      "modelName": "mustang",
+      "badge": "",
+      "keyFeatureTitle": "",
+      "keyFeatureDescription": "",
+      "modelCategory": "(sedan, suv, truck, performance, commercial_vehicle)",
+      "media": {
+        "type": "(image, video)",
+        "path": "",
+        "alt": ""
+      },
+      "specification": {
+        "engine": {
+          "type": 5.0,
+          "unit": "L V8",
+          "title": "engine"
+        },
+        "horsepower": {
+          "value": 460,
+          "unit": "HP",
+          "title": "power"
+        },
+        "torque": {
+          "value": 569,
+          "unit": "NM",
+          "title": "torque"
+        }
+      },
+      "interior": {
+        "media": {
+          "type": "(image, video)",
+          "path": "",
+          "alt": ""
+        },
+        "title": "Interior",
+        "description": "",
+        "highlight": [
+          {
+            "id": 1,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "Selectable Electric Power-assisted"
+          },
+          {
+            "id": 2,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "SYNC®3"
+          },
+          {
+            "id": 3,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "Track Apps®"
+          },
+          {
+            "id": 5,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "12-inch Lcd Digital Instrument Cluster With Mycolor®"
+          }
+        ],
+        "gallery": [
+          {
+            "id": 1,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          },
+          {
+            "id": 2,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          }
+        ]
+      },
+      "exterior": {
+        "media": {
+          "type": "(image, video)",
+          "path": "",
+          "alt": ""
+        },
+        "title": "Exterior",
+        "description": "",
+        "highlight": [
+          {
+            "id": 1,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "Torque About Town"
+          },
+          {
+            "id": 2,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "5.0L V8"
+          },
+          {
+            "id": 3,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "Dual Exhaust and Active Valve Performance Exhaust"
+          },
+          {
+            "id": 5,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "Launch Control and Electronic Line-lock"
+          },
+          {
+            "id": 6,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "Led Front Lighting"
+          },
+          {
+            "id": 7,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            },
+            "title": "Make It Colorfully Personal"
+          }
+        ],
+        "gallery": [
+          {
+            "id": 1,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          },
+          {
+            "id": 2,
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          }
+        ]
+      },
+      "color_switch": {
+        "car_name": "",
+        "colorOption": [
+          {
+            "id": 1,
+            "name": "Shadow Black",
+            "hexCode": "#1a1a1a",
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          },
+          {
+            "id": 2,
+            "name": "Oxford White",
+            "hexCode": "#f5f5f5",
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          },
+          {
+            "id": 3,
+            "name": "Race Red",
+            "hexCode": "#cc0000",
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          },
+          {
+            "id": 4,
+            "name": "Grabber Blue",
+            "hexCode": "#4a90e2",
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          },
+          {
+            "id": 5,
+            "name": "Dark Matter Gray",
+            "hexCode": "#4a4a4a",
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          },
+          {
+            "id": 6,
+            "name": "Deep Impact Blue",
+            "hexCode": "#1e3a8a",
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          },
+          {
+            "id": 7,
+            "name": "Velocity Blue",
+            "hexCode": "#0066cc",
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          },
+          {
+            "id": 8,
+            "name": "Orange Fury",
+            "hexCode": "#ff6600",
+            "media": {
+              "type": "(image, video)",
+              "path": "",
+              "alt": ""
+            }
+          }
+        ]
+      }
+    },
+    "gallery_section": {
+      "title": "",
+      "interior": [
+        {
+          "id": 1,
+          "media": {
+            "type": "(image, video)",
+            "path": "",
+            "alt": ""
+          }
+        },
+        {
+          "id": 2,
+          "media": {
+            "type": "(image, video)",
+            "path": "",
+            "alt": ""
+          }
+        },
+        {
+          "id": 3,
+          "media": {
+            "type": "(image, video)",
+            "path": "",
+            "alt": ""
+          }
+        }
+      ],
+      "exterior": [
+        {
+          "id": 1,
+          "media": {
+            "type": "(image, video)",
+            "path": "",
+            "alt": ""
+          }
+        },
+        {
+          "id": 2,
+          "media": {
+            "type": "(image, video)",
+            "path": "",
+            "alt": ""
+          }
+        },
+        {
+          "id": 3,
+          "media": {
+            "type": "(image, video)",
+            "path": "",
+            "alt": ""
+          }
+        }
+      ]
+    },
+    "afterSale": {
+      "title": "",
+      "description": "",
+      "media": {
+        "type": "(image, video)",
+        "path": "",
+        "alt": ""
+      },
+      "button": {
+        "type": "link",
+        "isExternal": false,
+        "label": "Explore After Sales Service",
+        "link": "/"
+      }
+    }
+  },
+  "contact_page": {
+    "offices": {
+      "headOffice": {
+        "title": "Head Office",
+        "address": [
+          "Office 1002, A-block, Centurion Star Tower, behind Day To Day,",
+          "Port Saeed 3A St. Deira,",
+          "Dubai, United Arab Emirates.",
+          "PO Box: 22637"
+        ],
+        "phone": "97143200021",
+        "email": "info@shayan.ae"
+      },
+      "corporateOffice": {
+        "title": "Corporate Office",
+        "address": [
+          "SAIF Office Q1-08-125/A,",
+          "P.O.Box 22637,",
+          "Sharjah - U.A.E"
+        ],
+        "phone": "+971 4 272 8150",
+        "email": "auto@shayan.ae"
+      }
+    },
+    "media": {
+      "type": "(image, video)",
+      "path": "",
+      "alt": ""
+    },
+    "branches": [
+      {
+        "title": "Seeb",
+        "address": "Seeb Al Mawaleh, Near Carrefour, Seeb",
+        "phone": "26887635",
+        "time": "10 am to 6 pm",
+        "button": {
+          "type": "link",
+          "isExternal": false,
+          "label": "Explore After Sales Service",
+          "link": "/"
+        }
+      },
+      {
+        "title": "Seeb",
+        "address": "Seeb Al Mawaleh, Near Carrefour, Seeb",
+        "phone": "26887635",
+        "time": "10 am to 6 pm",
+        "button": {
+          "type": "link",
+          "isExternal": false,
+          "label": "Explore After Sales Service",
+          "link": "/"
+        }
+      },
+      {
+        "title": "Seeb",
+        "address": "Seeb Al Mawaleh, Near Carrefour, Seeb",
+        "phone": "26887635",
+        "time": "10 am to 6 pm",
+        "button": {
+          "type": "link",
+          "isExternal": false,
+          "label": "Explore After Sales Service",
+          "link": "/"
+        }
+      },
+      {
+        "title": "Seeb",
+        "address": "Seeb Al Mawaleh, Near Carrefour, Seeb",
+        "phone": "26887635",
+        "time": "10 am to 6 pm",
+        "button": {
+          "type": "link",
+          "isExternal": false,
+          "label": "Explore After Sales Service",
+          "link": "/"
+        }
+      },
+      {
+        "title": "Seeb",
+        "address": "Seeb Al Mawaleh, Near Carrefour, Seeb",
+        "phone": "26887635",
+        "time": "10 am to 6 pm",
+        "button": {
+          "type": "link",
+          "isExternal": false,
+          "label": "Explore After Sales Service",
+          "link": "/"
+        }
+      }
+    ]
   }
 }
