@@ -1,6 +1,4 @@
 import InnerHero from "@/components/common/InnerHero";
-import FleetCarlineSection from "@/components/features/fleet/FleetCarlineSection";
-import FleetContactSection from "@/components/features/fleet/FleetContactSection";
 import ServiceBranchDirectory from "@/components/features/service/ServiceBranchDirectory";
 import ServiceInfoSection from "@/components/features/service/ServiceInfoSection";
 import ServiceIntervalSection from "@/components/features/service/ServiceIntervalSection";
@@ -53,12 +51,10 @@ const local_data = {
   banner: {
     enable__disable_banner_section: true,
     desktop_image: {
-      title: "contactBanner",
       alt: "contactBanner",
       url: "/images/banner-service-1.jpg",
     },
     mobile_image: {
-      title: "contactBanner",
       alt: "contactBanner",
       url: "/images/banner-service-1.jpg",
     },
@@ -92,7 +88,7 @@ const local_data = {
       "<p>At Ford Oman, servicing your vehicle is more than a routine job it's our promise of safety, performance, and peace of mind. Backed by factory-trained technicians and genuine Ford parts, our service centers ensure your Ford stays as reliable as the day you bought it.</p><h5>We follow Ford global service standards to offer</h5><ul><li>Precision diagnostics and repairs</li><li>Transparent service process and pricing</li><li>Ford Genuine Parts</li><li>Dedicated customer support</li></ul>",
   },
   serviceInterval: {
-    title: "Recommended service Intervals",
+    title: "Recommended Service Intervals",
     description:
       "<p>Regular maintenance keeps your Ford operating efficiently and extends its life. Follow our manufacturer-recommended service intervals to maintain engine performance, fuel economy, and safety.</p>",
     button: {
@@ -107,19 +103,19 @@ const local_data = {
           "<p>1st Service <br/><b>5,000 km</b></p><p>Regular Intervals </br><b>Every 10,000 km or 6 months thereafter</b></p><p>Comprehensive Checks <br/> <b>At 40,000 km and 80,000 km</b></p>",
       },
       {
-        title: "We also advise monthly checks of",
+        title: "We also Advise Monthly Checks Of",
         description:
           "<ul><li>Engine oil, coolant, brake fluid</li><li>Tyre pressure and tread condition</li><li>Lights and indicators</li></ul>",
       },
     ],
   },
   firstServiceVisit: {
-    title: "First service visit",
+    title: "First Service Visit",
     description:
       "<p><b>What to Expect During Your First Visit</b></br><b>Your first service is vital to ensure your vehicle’s systems are operating as intended. At your initial appointment, our technicians will</b></p><ul><li>Inspect all critical systems (engine, brakes, fluids, lights)</li><li>Top up essential fluids</li><li>Check tyre pressure and alignment</li><li>Conduct a roadworthiness inspection</li><li>Update service history and provide maintenance tips</li></ul><p>Expect a smooth, guided process where everything is explained clearly—and your vehicle is returned in optimal condition.</p>",
   },
   whatWillReplaced: {
-    title: "What will be replaced",
+    title: "What Will Be Replaced",
     items: [
       {
         title: "Engine Oil and Filter",
@@ -320,7 +316,7 @@ const local_data = {
       alt: "loyalty-program",
     },
     description:
-      "<h5>Exclusive Loyalty for Ford Owners in Oman</h5><p>Ford Mazaya is a rewarding service loyalty program crafted exclusively for Ford owners in the Sultanate of Oman. It’s our way of saying thank you for trusting us with your vehicle. As a valued Ford Mazaya member, you’ll enjoy peace of mind and added benefits every time you visit our world-class ACM service facilities across the country.</p>",
+      "<h3>Exclusive Loyalty for Ford Owners in Oman</h3><p>Ford Mazaya is a rewarding service loyalty program crafted exclusively for Ford owners in the Sultanate of Oman. It’s our way of saying thank you for trusting us with your vehicle. As a valued Ford Mazaya member, you’ll enjoy peace of mind and added benefits every time you visit our world-class ACM service facilities across the country.</p>",
     howWorks: {
       title: "How Does It Work?",
       description: "<p>Get rewarded with Mazaya Points every time you</p>",
@@ -329,7 +325,7 @@ const local_data = {
     },
   },
   branchDirectory: {
-    title: "Branch directory",
+    title: "Branch Directory",
     cards: [
       {
         id: 1,
@@ -347,6 +343,86 @@ const local_data = {
         timing: "10 am to 6 pm",
         directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
       },
+      {
+        id: 3,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
+      {
+        id: 4,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
+      {
+        id: 5,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
+      {
+        id: 6,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
+      {
+        id: 7,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
+      {
+        id: 8,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
+      {
+        id: 9,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
+      {
+        id: 10,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
+      {
+        id: 11,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
+      {
+        id: 12,
+        title: "Seeb",
+        description: "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        phone: "+968 24516668",
+        timing: "10 am to 6 pm",
+        directionUrl: "https://maps.app.goo.gl/58bKrye7bN79Vb2r5",
+      },
     ],
   },
 };
@@ -354,7 +430,7 @@ export default function page({ data = local_data }) {
   return (
     <>
       {data?.banner?.enable__disable_banner_section && (
-        <InnerHero data={local_data?.hero} />
+        <InnerHero data={local_data?.banner} />
       )}
       <ServiceInfoSection data={local_data?.infoService} />
       <ServiceIntervalSection data={local_data?.serviceInterval} />
@@ -362,11 +438,6 @@ export default function page({ data = local_data }) {
       <ServiceWhatWillReplacedSection data={local_data?.whatWillReplaced} />
       <ServiceLoyaltyProgram data={local_data?.loyaltyProgram} />
       <ServiceBranchDirectory data={local_data?.branchDirectory} />
-      {/* <FleetCarlineSection
-        categories={local_data?.categories}
-        data={local_data?.vehicles}
-      />
-      <FleetContactSection data={local_data?.contactSection} /> */}
     </>
   );
 }
