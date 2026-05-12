@@ -21,7 +21,7 @@ const textVariants = {
 
 const sizes = {
   heading1:
-    "3xl:text-[54px] 2xl:text-[46px] xl:text-[40px] lg:text-[30px] md:text-28px] sm:text-[25px] text-[20px] font-medium leading-[1.2]",
+    "3xl:text-[50px] 2xl:text-[40px] xl:text-[33px] lg:text-[27px] md:text-25px] sm:text-[23px] text-[20px] font-medium leading-[1.2]",
   heading2:
     "text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[24px] font-medium leading-[1.5]",
   heading3:
