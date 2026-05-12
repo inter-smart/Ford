@@ -13,13 +13,9 @@ export default function ServiceVisitSection({ data }) {
         >
           {data?.title}
         </Heading>
-        <Text
-          as="div"
-          size="text1"
-          className="text-black [&_p]:mb-[15px] xl:[&_p]:mb-[25px] 2xl:[&_p]:mb-[30px] 3xl:[&_p]:mb-[35px] mb-[10px] xl:mb-[15px] 2xl:mb-[25px] 3xl:mb-[30px]"
-        >
+        <div className="typography [--text-color:#000]">
           {parse(data?.description)}
-        </Text>
+        </div>
       </div>
     </section>
   );

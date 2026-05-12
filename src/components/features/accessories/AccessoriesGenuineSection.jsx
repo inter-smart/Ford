@@ -5,7 +5,7 @@ import parse from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ServiceBranchDirectory({ data }) {
+export default function AccessoriesGenuineSection({ data }) {
   return (
     <section className="w-full h-auto block py-[20px_30px] sm:py-[30px_60px] xl:py-[37px_80px] 2xl:py-[45px_95px] 3xl:py-[55px_120px]">
       <div className="container">
