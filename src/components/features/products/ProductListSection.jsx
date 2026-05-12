@@ -69,7 +69,7 @@ export default function ProductListSection({ data }) {
   return (
     <section className="w-full h-auto py-[40px] sm:py-[50px_40px] lg:py-[70px_50px] 2xl:py-[85px_65px] block">
       <div className="container">
-        <div className="w-full h-auto mb-[20px] sm:mb-[30px] 2xl:mb-[40px] flex flex-wrap items-center">
+        <div className="w-full h-auto flex flex-wrap items-center mb-[20px] sm:mb-[30px] 2xl:mb-[40px] ">
           <div className="w-full sm:w-[30%] max-sm:mb-[20px]">
             <div className="w-full h-auto sm:max-w-[320px] 2xl:max-w-[370px] relative z-0">
               <input
