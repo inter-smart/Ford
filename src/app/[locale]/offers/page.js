@@ -1,54 +1,109 @@
 import InnerHero from "@/components/common/InnerHero";
 import OfferListSection from "@/components/features/offers/OfferListSection";
 
-async function getPageData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/wp-json/custom/v1/offer`,
-    { next: { revalidate: 60 } } 
-  );
+const local_data = {
+  
+  banner: {
+    enable__disable_banner_section: true,
+    desktop_image: {
+      title: "contactBanner",
+      alt: "contactBanner",
+      url: "/images/offer-bnr.jpg",
+    },
+    mobile_image: {
+      title: "contactBanner",
+      alt: "contactBanner",
+      url: "/images/offer-bnr.jpg",
+    },
+    title: "Offers",
+  },
 
-  // if (!res.ok) {
-  //   throw new Error("Failed to fetch data");
-  // }
-
-  return res.json();
+  offers: [
+  {
+    slug: "complimentary-service-package",
+    image: "/images/offer-1.jpg",
+    title: "Complimentary Service Package",
+    subTitle: "Get free service for 3 years or 60,000 km",
+    description: "When you buy any new Ford SUV or pickup.",
+    btnTxt: "Enquire Now"
+  },
+  {
+    slug: "limited-time-cash-back",
+    image: "/images/offer-2.jpg",
+    title: "Limited-Time Cash Back",
+    subTitle: "Get up to OMR 2,000 cash back on select models this month only!",
+    description: "Don’t miss the deal.",
+    btnTxt: "Enquire Now"
+  },
+  {
+    slug: "corporate-and-fleet-offers",
+    image: "/images/offer-3.jpg",
+    title: "Corporate and Fleet offers",
+    subTitle: "Special pricing, extended warranty, and priority support",
+    description: "for corporate clients and SMEs.",
+    btnTxt: "Enquire Now"
+  },
+  {
+    slug: "",
+    image: "/images/offer-3.jpg",
+    title: "Corporate and Fleet offers",
+    subTitle: "Special pricing, extended warranty, and priority support",
+    description: "for corporate clients and SMEs.",
+    btnTxt: "Enquire Now"
+  },
+  {
+    slug: "",
+    image: "/images/offer-1.jpg",
+    title: "Complimentary Service Package",
+    subTitle: "Get free service for 3 years or 60,000 km",
+    description: "When you buy any new Ford SUV or pickup.",
+    btnTxt: "Enquire Now"
+  },
+  {
+    slug: "",
+    image: "/images/offer-2.jpg",
+    title: "Limited-Time Cash Back",
+    subTitle: "Get up to OMR 2,000 cash back on select models this month only!",
+    description: "Don’t miss the deal.",
+    btnTxt: "Enquire Now"
+  },
+  {
+    slug: "",
+    image: "/images/offer-1.jpg",
+    title: "Complimentary Service Package",
+    subTitle: "Get free service for 3 years or 60,000 km",
+    description: "When you buy any new Ford SUV or pickup.",
+    btnTxt: "Enquire Now"
+  },
+  {
+    image: "/images/offer-2.jpg",
+    title: "Limited-Time Cash Back",
+    subTitle: "Get up to OMR 2,000 cash back on select models this month only!",
+    description: "Don’t miss the deal.",
+    btnTxt: "Enquire Now"
+  },
+],
 }
 
-export async function generateMetadata() {
-  const data = await getPageData();
-
-  return {
-    title: data?.seo?.title,
-    description: data?.seo?.description,
-    openGraph: {
-      title: data?.seo?.title,
-      description: data?.seo?.description,
-      images: [
-        {
-          url: data?.seo?.image,
-          width: 1200,
-          height: 630,
-          alt: data?.seo?.title || "BRD LUXE",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: data?.seo?.title,
-      description: data?.seo?.description,
-      images: [data?.seo?.image],
-    },
-  };
-}
-
-export default async function page() {
-  const data = await getPageData();
-  const banner = data.heroData?.[0] || {};
-
+export default function page({ data = local_data }) {
   return (
     <>
-      <InnerHero data={banner} />
-      <OfferListSection data={data} />
+      {data?.banner?.enable__disable_banner_section && (
+        <InnerHero data={local_data?.banner} />
+      )}
+      <OfferListSection data={local_data?.offers} />
     </>
   );
 }
+
+// export default async function page() {
+//   const data = await getPageData();
+//   const banner = data.heroData?.[0] || {};
+
+//   return (
+//     <>
+//       <InnerHero data={banner} />
+//       <OfferListSection data={data} />
+//     </>
+//   );
+// }
