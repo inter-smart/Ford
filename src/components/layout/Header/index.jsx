@@ -115,11 +115,15 @@ export default function Header({ locale, data: header_acf }) {
     };
   }, [searchOpen]);
 
+  const isDarkBgPage =
+    pathname.includes("/privacy-policy") ||
+    pathname.includes("/terms-conditions");
+
   if (!header_acf) return null;
 
   return (
     <header>
-      <div className="w-full absolute top-0 left-0 z-10 bg-transparent">
+      <div className={`w-full absolute top-0 left-0 z-10 ${isDarkBgPage ? "bg-[#0A0A0A]" : "bg-transparent"}`}>
         <div className="container">
           <div className="w-full flex flex-wrap items-center justify-between py-[20px]">
             {/* Main menu */}
