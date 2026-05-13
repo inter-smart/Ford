@@ -22,7 +22,7 @@ const local_data = {
       url: "/images/accessories-info-1.jpg",
       alt: "accessories-info",
     },
-    title: "Ford Accessories: Personalize your Ford",
+    title: "Ford Accessories:<br /> Personalize your Ford",
     description:
       "<p>Have your vehicle serviced regularly to maintain its performance, safety, and resale value. With a wide network of Ford Authorised Parts Outlets and Service Centres, keeping your Ford in prime condition has never been easier.</p>",
     button: {
@@ -54,6 +54,7 @@ const local_data = {
     ],
   },
 };
+
 export default function page({ data = local_data }) {
   return (
     <>

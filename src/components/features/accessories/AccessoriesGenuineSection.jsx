@@ -1,3 +1,8 @@
+"use client";
+
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+
 import { Heading } from "@/components/layout/Heading";
 import { Text } from "@/components/layout/Text";
 import { cn } from "@/lib/utils";
@@ -6,70 +11,56 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function AccessoriesGenuineSection({ data }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: false,
+      align: "start",
+      slidesToScroll: 1,
+      containScroll: "trimSnaps",
+    },
+    [Autoplay({ delay: 5000, stopOnInteraction: true, pauseOnHover: true })],
+  );
+
   return (
     <section className="w-full h-auto block py-[20px_30px] sm:py-[30px_60px] xl:py-[37px_80px] 2xl:py-[45px_95px] 3xl:py-[55px_120px]">
       <div className="container">
         <Heading
           as="h2"
           size={"none"}
-          className="text-[20px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-normal font-normal text-black mb-[15px] xl:mb-[32px] 2xl:mb-[40px] 3xl:mb-[50px]"
+          className="text-[20px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-normal font-semibold text-black mb-[15px] xl:mb-[20px] 2xl:mb-[30px] 3xl:mb-[40px]"
         >
           {data?.title}
         </Heading>
-        <div className="flex flex-wrap rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden border-t-[1px] border-l-[1px] border-[#c4c4c4]">
-          {data?.cards?.map((item, idx) => {
-            return (
-              <div key={"branch" + idx} className="w-full sm:w-1/2 lg:w-1/4">
-                <div className="w-full h-full border-r-[1px] border-b-[1px] border-[#c4c4c4] p-[18px_15px] sm:p-[20px_18px] xl:p-[25px_30px] 2xl:p-[30px_35px] 3xl:p-[38px_44px]">
-                  <div className="text-[14px] xl:text-[17.7px] 2xl:text-[21.3px] 3xl:text-[26.6px] leading-normal font-normal text-[#434343] mb-[4px] xl:mb-[6px] 2xl:mb-[8px]">
+        <div ref={emblaRef} className="w-full max-w-full overflow-hidden">
+          <div className="flex touch-pan-y touch-pinch-zoom -mx-[4px] lg:-mx-[6px] xl:-mx-[9px] 2xl:-mx-[11px] 3xl:-mx-[14px]">
+            {data?.items?.map((item, idx) => (
+              <div
+                key={"items" + idx}
+                className={cn(
+                  "flex-[0_0_180px] sm:flex-[0_0_200px] lg:flex-[0_0_25%] min-w-0 select-none px-[4px] lg:px-[6px] xl:px-[9px] 2xl:px-[11px] 3xl:px-[14px]",
+                )}
+              >
+                <div className="w-full h-full block bg-[#f7f7f7] rounded-[8.8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] p-[24px_18px]  xl:p-[38px_22px] 2xl:p-[46px_26px] 3xl:p-[50px_33px]">
+                  <div className="w-full mb-[10px] xl:mb-[15px] 2xl:mb-[25px] 3xl:mb-[30px]">
+                    <Image
+                      src={item?.iconPath}
+                      alt={item?.title}
+                      width={60}
+                      height={54}
+                      className="w-[40px] xl:w-[54px] 2xl:w-[64px] 3xl:w-[80px] object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <Text
+                    as="div"
+                    size="text1"
+                    className="text-black xl:max-w-10/12"
+                  >
                     {item?.title}
-                  </div>
-                  <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343]">
-                    {parse(item?.description)}
-                  </div>
-                  {item?.phone && (
-                    <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] xl:my-[6px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
-                      <Image
-                        src="/images/icon-telephone-call.svg"
-                        alt="icon-telephone-call"
-                        width={18}
-                        height={18}
-                        className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain"
-                      />
-                      {parse(item?.phone)}
-                    </div>
-                  )}
-                  {item?.timing && (
-                    <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] xl:my-[6px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
-                      <Image
-                        src="/images/icon-clock.svg"
-                        alt="icon-clock"
-                        width={18}
-                        height={18}
-                        className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain"
-                      />
-                      {parse(item?.timing)}
-                    </div>
-                  )}
-                  {item?.directionUrl && (
-                    <Link
-                      href={item?.directionUrl}
-                      className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-none font-bold text-white w-max max-w-full h-[28.5] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[12px] xl:px-[16px]  2xl:px-[18px] 3xl:px-[23.3px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center gap-1 xl:gap-2 2xl:gap-3 hover:bg-[#005fd3] mt-5 2xl:mt-6"
-                    >
-                      <Image
-                        src="/images/btn-loc.svg"
-                        alt="btn-loc"
-                        width={18}
-                        height={18}
-                        className="w-[14px] xl:w-[18px] 2xl:w-[22px] 3xl:w-[28px] object-contain"
-                      />
-                      Let’s Go
-                    </Link>
-                  )}
+                  </Text>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
     </section>

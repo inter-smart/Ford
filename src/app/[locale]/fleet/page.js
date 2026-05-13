@@ -44,11 +44,7 @@ import FleetInfoSection from "@/components/features/fleet/FleetInfoSection";
 // }
 
 const local_data = {
-  hero: {
-    title: "Fleet",
-    backgroundImage: "/images/fleet/banner.jpg",
-  },
-
+  
   banner: {
     enable__disable_banner_section: true,
     desktop_image: {
