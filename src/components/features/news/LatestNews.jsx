@@ -47,7 +47,7 @@ export default function LatestNews({ data }) {
               <Heading
                 as={"h5"}
                 size={"heading5"}
-                className=" text-black leading-[1.2] font-semibold">
+                className=" text-black font-semibold">
                 {data[0]?.title}
               </Heading>
               <p className="text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[18px] text-gray-400">

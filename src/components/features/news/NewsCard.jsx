@@ -22,8 +22,8 @@ export default function NewsCard({ news, page = "" }) {
       <div className="">
         <Heading
           as={"h5"}
-          size={"heading4"}
-          className="leading-[1.5]  font-semibold text-[#00142E]"
+          size={"heading5"}
+          className="leading-[1.5] font-semibold text-[#00142E]"
         >
           {news?.title}
         </Heading>
