@@ -14,12 +14,6 @@ export default function PrivacyPolicyContent({ data }) {
           >
             {parse(data?.title || "")}
           </Heading>
-          {data?.text && (
-            <div className="typography [--text-color:#000] mb-4 lg:mb-8 xl:mb-10 2xl:mb-12 3xl:mb-14">
-              {parse(data?.text || "")}
-            </div>
-          )}
-
           <div
             className="typography [--text-color:#000] [[&_:is(h1,h2,h3,h4,h5,h6)]:my-[15px]
 sm:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[18px]
