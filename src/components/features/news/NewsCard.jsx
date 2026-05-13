@@ -8,12 +8,16 @@ import { Text } from "@/components/layout/Text";
 
 
 export default function NewsCard({ news, page = "" }) {
+  
+
+   console.log(news)
+
   return (
     <Link href={`/news/${news?.slug}`} className="w-full h-auto">
       <div className="w-full aspect-[403/306] h-[200px] lg:h-[218px] xl:h-[272px] 2xl:h-[326px] shrink-0 relative mb-[10px] md:mb-[15px] xl:mb-[18px] 2xl:mb-[21px]">
         <Image
-          src={news?.img}
-          alt="latestNews1"
+          src={news?.media?.url}
+          alt={news?.media?.alt}
           fill
           className="object-cover rounded-[10px]"
         />
