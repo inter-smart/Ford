@@ -29,7 +29,7 @@ const localData = {
 };
 
 export default function NewsDetailsPage() {
-      const banner = localData?.news_acf?.banner;
+  const banner = localData?.news_acf?.banner;
   const heroData = banner?.enable_disable_banner_section
     ? {
         title: banner?.banner_title,
@@ -41,11 +41,10 @@ export default function NewsDetailsPage() {
       }
     : null;
 
-  
   return (
-    <div>
+    <>
       <InnerHero data={heroData} />
       <NewsDetails />
-    </div>
+    </>
   );
 }
