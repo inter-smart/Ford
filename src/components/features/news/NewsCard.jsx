@@ -6,37 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Text } from "@/components/layout/Text";
 
-const newsData = {
-  title: "Latest News",
-  news: [
-    {
-      img: "/images/latestNews1.png",
-      date: "29.01.2025",
-      title: "Ford Explorer: An Outstanding Companion",
-      Description: `<p>Available with plenty of features the Ford Explorer has a lot to
-                offer if you're shopping for a three-row crossover SUV. Its
-                outstanding quietness</p>`,
-    },
-    {
-      img: "/images/latestNews2.png",
-      date: "29.01.2025",
-      title: "Ford Explorer: An Outstanding Companion",
-      Description: `<p>Available with plenty of features the Ford Explorer has a lot to
-                offer if you're shopping for a three-row crossover SUV. Its
-                outstanding quietness</p>`,
-    },
-    {
-      img: "/images/latestNews3.png",
-      date: "29.01.2025",
-      title: "Ford Explorer: An Outstanding Companion",
-      Description: `<p>Available with plenty of features the Ford Explorer has a lot to
-                offer if you're shopping for a three-row crossover SUV. Its
-                outstanding quietness</p>`,
-    },
-  ],
-};
 
-export default function NewsCard({ news = newsData, page = "" }) {
+export default function NewsCard({ news, page = "" }) {
   return (
     <Link href={`/news/${news?.slug}`} className="w-full h-auto">
       <div className="w-full aspect-[403/306] h-[200px] lg:h-[218px] xl:h-[272px] 2xl:h-[326px] shrink-0 relative mb-[10px] md:mb-[15px] xl:mb-[18px] 2xl:mb-[21px]">
@@ -52,7 +23,7 @@ export default function NewsCard({ news = newsData, page = "" }) {
         <Heading
           as={"h5"}
           size={"heading4"}
-          className="leading-[1.5] font-semibold text-[#00142E]"
+          className="leading-[1.5]  font-semibold text-[#00142E]"
         >
           {news?.title}
         </Heading>
@@ -66,7 +37,7 @@ export default function NewsCard({ news = newsData, page = "" }) {
             dangerouslySetInnerHTML={{
               __html: news?.description,
             }}
-            className="text-[#434343] mb-[15px]"
+            className="text-[#434343]"
           ></Text>
         )}
       </div>

@@ -13,8 +13,8 @@ export default function NewsDetails({ data }) {
   return (
     <div className="w-full h-auto py-[45px_36px] lg:py-[60px_48px] xl:py-[75px_60px] 2xl:py-[90px_72px]">
       <div className="container">
-        <div className="flex flex-col lg:flex-row justify-between gap-[49px] lg:gap-[65px]  xl:gap-[82px] 2xl:gap-[98px]">
-          <div className="w-full   lg:w-[55%] xl:w-[672px] 2xl:w-[806px]">
+        <div className="flex flex-col lg:flex-row gap-[49px] lg:gap-[65px]  xl:gap-[82px] 2xl:gap-[98px]">
+          <div className="w-full lg:w-[55%] xl:w-[60%]">
             <Heading
               as="h1"
               size=""
@@ -26,13 +26,14 @@ export default function NewsDetails({ data }) {
               29.01.2025
             </p>
 
-            <Image
-              src="/images/latestNews1.png"
-              alt="News banner image"
-              width={756}
-              height={402}
-              className="my-[12px_20px] lg:my-[16px_26px] xl:my-[20px_33px] 2xl:my-[25px_40px] w-full rounded-[10px] rounded-[6px] lg:rounded-[7px] xl:rounded-[9px] 2xl:rounded-[11px]"
-            />
+            <div className="aspect-[756/402] relative my-[12px] mb-[20px] lg:my-[16px] lg:mb-[26px] xl:my-[20px] xl:mb-[33px] 2xl:my-[25px] 2xl:mb-[40px]">
+              <Image
+                src="/images/latestNews1.png"
+                alt="News banner image"
+                fill
+                className="w-full rounded-[6px] lg:rounded-[7px] xl:rounded-[9px] 2xl:rounded-[11px] object-cover"
+              />
+            </div>
 
             <Text
               as="div"
@@ -43,7 +44,7 @@ export default function NewsDetails({ data }) {
             </Text>
           </div>
 
-          <div className="text-start lg:flex-1 w-full ">
+          <div className="text-start w-full lg:flex-1">
             <Heading
               as="h2"
               size="heading2"
@@ -63,13 +64,13 @@ export default function NewsDetails({ data }) {
                     alt={news?.title}
                     width={172}
                     height={132}
-                    className=" rounded-[10px] rounded-[6px] lg:rounded-[7px] xl:rounded-[9px] 2xl:rounded-[11px]"
+                    className="rounded-[6px] lg:rounded-[7px] xl:rounded-[9px] 2xl:rounded-[11px]"
                   />
 
-                  <div className="my-[12px] lg:my-[16px] xl:my-[20px] 2xl:my-[25px] lg:w-[180px] xl:w-[228px]  2xl:w-[272px]">
+                  <div className="my-[12px] lg:my-[16px] xl:my-[20px] 2xl:my-[25px] flex-1 min-w-0">
                     <Heading
                       as={"h4"}
-                      className="text-[10px] lg:text-[13px] xl:text-[16px] 2xl:text-[19px] 3xl:text-[22px] leading-[1.5] font-semibold text-[#00142E]"
+                      className="text-[10px] lg:text-[13px] xl:text-[16px] 2xl:text-[19px] 3xl:text-[22px}] font-semibold text-[#00142E]"
                     >
                       {news?.title}
                     </Heading>
