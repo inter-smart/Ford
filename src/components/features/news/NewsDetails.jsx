@@ -48,7 +48,7 @@ export default function NewsDetails({ data }) {
             <Heading
               as="h2"
               size="heading2"
-              className="text-[16px] xl:text-[20px] 2xl:text-[25px] 3xl:text-[30px] leading-[1.35] font-semibold text-[#434343] mb-[10px] xl:mb-[15px] 2xl:mb-[20px]"
+              className="text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[27px] 3xl:text-[32px] leading-[1.35] font-semibold text-[#000000] mb-[10px] xl:mb-[15px] 2xl:mb-[20px]"
             >
               {data?.related_news_title}
             </Heading>
@@ -70,7 +70,7 @@ export default function NewsDetails({ data }) {
                   <div className="my-[12px] lg:my-[16px] xl:my-[20px] 2xl:my-[25px] flex-1 min-w-0">
                     <Heading
                       as={"h4"}
-                      className="text-[10px] lg:text-[13px] xl:text-[16px] 2xl:text-[19px] 3xl:text-[22px}] font-semibold text-[#00142E]"
+                      className="text-[10px] lg:text-[13px] xl:text-[16px] 2xl:text-[19px] 3xl:text-[22px] font-semibold text-[#00142E]"
                     >
                       {news?.title}
                     </Heading>
