@@ -26,9 +26,9 @@ const localData = {
       banner_title: "News",
     },
   },
-  news_section : {
-  title: "Ford Explorer: An Outstanding Companion",
-  description: `
+  news_section: {
+    title: "Ford Explorer: An Outstanding Companion",
+    description: `
   <p>A household name among American carbuyers, the Ford Explorer has evolved from its long-ago roots as a body-on-frame SUV into the comprehensively modern three-row crossover it is today. Ford Explorer is a great looking SUV that is a joy to experience. It is well-equipped to make every journey pleasant, whilst also comfortably seating a large family on weekend journeys. The Explorer has an impressive combination of power, luxury and advanced technology features. The refreshed Ford Explorer is better looking than it's ever been with a raft of new technologies. The Explorer is available in Standard, XLT and Limited trim lines.
       <br/>
         <br/>
@@ -47,46 +47,46 @@ const localData = {
       For 2017, the Ford Explorer is equipped with Ford's latest Sync 3 infotainment system is available this year, replacing the previous MyFord Touch system.
       </p>`,
 
-  related_news_title: "Related News",
-  related_news: [
-    {
-      img: "/images/latestNews1.png",
-      date: "29.01.2025",
-      slug: "news",
-      title: "Ford Explorer: An Outstanding Companion",
-      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+    related_news_title: "Related News",
+    related_news: [
+      {
+        img: "/images/latestNews1.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
                 offer if you're shopping for a three-row crossover SUV. Its
                 outstanding quietness</p>`,
-    },
-    {
-      img: "/images/latestNews2.png",
-      date: "29.01.2025",
-      slug: "news",
-      title: "Ford Explorer: An Outstanding Companion",
-      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+      },
+      {
+        img: "/images/latestNews2.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
                 offer if you're shopping for a three-row crossover SUV. Its
                 outstanding quietness</p>`,
-    },
-    {
-      img: "/images/latestNews1.png",
-      date: "29.01.2025",
-      slug: "news",
-      title: "Ford Explorer: An Outstanding Companion",
-      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+      },
+      {
+        img: "/images/latestNews1.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
                 offer if you're shopping for a three-row crossover SUV. Its
                 outstanding quietness</p>`,
-    },
-    {
-      img: "/images/latestNews3.png",
-      date: "29.01.2025",
-      slug: "news",
-      title: "Ford Explorer: An Outstanding Companion",
-      description: `<p>Available with plenty of features the Ford Explorer has a lot to
+      },
+      {
+        img: "/images/latestNews3.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
                 offer if you're shopping for a three-row crossover SUV. Its
                 outstanding quietness</p>`,
-    },
-  ],
-}
+      },
+    ],
+  },
 };
 
 export default function NewsDetailsPage() {
@@ -102,7 +102,6 @@ export default function NewsDetailsPage() {
       }
     : null;
 
-  
   return (
     <>
       <InnerHero data={heroData} />
