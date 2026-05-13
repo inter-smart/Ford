@@ -10,6 +10,8 @@ import NewsCard from "./NewsCard";
 
 
 export default function LatestNews({ data }) {
+
+
   return (
     <div className="py-[40px_34px] lg:py-[53px_45px] xl:py-[66px_54px] 2xl:py-[80px_66px]">
       <div className="container">
@@ -18,12 +20,12 @@ export default function LatestNews({ data }) {
           size="heading1"
           className="text-[22px] sm:text-[24px] md:text-[28px] xl:text-[32px] 2xl:text-[38px] leading-[1] font-semibold text-black"
         >
-          Latest News
+          {data?.title}
         </Heading>
 
         {/* Mobile / tablet list view (< lg) */}
         <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 mt-[20px] xs:hidden">
-          {data?.slice(0, 3).map((item, index) => (
+          {data?.items?.map((item, index) => (
             <NewsCard key={index} news={item} />
           ))}
         </div>
@@ -32,13 +34,13 @@ export default function LatestNews({ data }) {
         <div className="hidden xs:grid grid-cols-2 w-full mt-[20px] gap-[14px] xl:gap-[25px] 2xl:gap-[30px]">
           {/* News 1 */}
           <Link
-            href={`/news/${data[0]?.slug}`}
+            href={`/news/${data?.items[0]?.slug}`}
             className="flex flex-col h-full"
           >
             <div className="relative aspect-[573/272] shrink-0">
               <Image
-                src="/images/latestNews1.png"
-                alt="latestNews1"
+                src={data?.items[0]?.media?.url}
+                alt={data?.items[0]?.media?.alt}
                 fill
                 className="object-cover rounded-[10px]"
               />
@@ -48,16 +50,16 @@ export default function LatestNews({ data }) {
                 as={"h5"}
                 size={"heading5"}
                 className=" text-black font-semibold">
-                {data[0]?.title}
+                {data?.items[0]?.title}
               </Heading>
               <p className="text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[18px] text-gray-400">
-                {data[0]?.date}
+                {data?.items[0]?.date}
               </p>
                <Text
                   size="text2"
                   as="div"
                   dangerouslySetInnerHTML={{
-                    __html: data[0]?.description || "",
+                    __html: data?.items[0]?.description || "",
                   }}
                   className="text-[#434343] mb-[15px]"
                 >
@@ -68,9 +70,9 @@ export default function LatestNews({ data }) {
           {/* News 2 and News 3 */}
           <div className="grid grid-rows-2 sm:grid-cols-1 sm:grid-rows-2 gap-[14px] xl:gap-[25px] 2xl:gap-[30px]">
             {/* News 2 */}
-            <NewsSectionCard news={data[1]} />
+            <NewsSectionCard news={data?.items[1]} />
             {/* News 3 */}
-            <NewsSectionCard news={data[2]} />
+            <NewsSectionCard news={data?.items[2]} />
           </div>
         </div>
       </div>
