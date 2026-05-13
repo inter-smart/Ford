@@ -11,7 +11,7 @@ export default function NewsCardList({ data }) {
   return (
     <div className="container mb-[44px] xl:mb-[58px] xl:mb-[72px] 2xl:mb-[86px]">
       <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
-        {data?.slice(0, visibleCount).map((item, index) => (
+        {data?.slice(3, visibleCount).map((item, index) => (
           <NewsCard key={index} news={item} />
         ))}
       </div>

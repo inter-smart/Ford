@@ -5,6 +5,7 @@ import { Heading } from "@/components/layout/Heading";
 import Image from "next/image";
 import Link from "next/link";
 import { Text } from "@/components/layout/Text";
+import NewsCard from "./NewsCard";
 
 
 
@@ -20,7 +21,15 @@ export default function LatestNews({ data }) {
           Latest News
         </Heading>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 w-full mt-[20px] gap-[14px] xl:gap-[25px] 2xl:gap-[30px]">
+        {/* Mobile / tablet list view (< lg) */}
+        <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 mt-[20px] xs:hidden">
+          {data?.slice(0, 3).map((item, index) => (
+            <NewsCard key={index} news={item} />
+          ))}
+        </div>
+
+        {/* Desktop layout (>= lg) */}
+        <div className="hidden xs:grid grid-cols-2 w-full mt-[20px] gap-[14px] xl:gap-[25px] 2xl:gap-[30px]">
           {/* News 1 */}
           <Link
             href={`/news/${data[0]?.slug}`}
@@ -44,9 +53,15 @@ export default function LatestNews({ data }) {
               <p className="text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[18px] text-gray-400">
                 {data[0]?.date}
               </p>
-              <div className="text-[11px] lg:text-[12px] xl:text-[13px] text-gray-600 leading-[1.4] line-clamp-2`">
-                {parse(data[0]?.description)}{" "}
-              </div>
+               <Text
+                  size="text2"
+                  as="div"
+                  dangerouslySetInnerHTML={{
+                    __html: data[0]?.description || "",
+                  }}
+                  className="text-[#434343] mb-[15px]"
+                >
+                </Text>
             </div>
           </Link>
 
@@ -85,7 +100,7 @@ function NewsSectionCard({ news }) {
         </Heading>
         <Text
           as="div"
-          size="text1"
+          size="text2"
           className="text-[#434343] [&_p]:mb-[15px] xl:[&_p]:mb-[25px] 2xl:[&_p]:mb-[30px] 3xl:[&_p]:mb-[35px]"
         >
           {news?.date}
