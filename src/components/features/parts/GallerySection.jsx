@@ -35,26 +35,28 @@ export default function GallerySection({ data }) {
                         navigation
                         modules={[Navigation]}
                         className="gallery-slider !h-full
-                        [&_.swiper-button-prev]:w-[30px]
-                        [&_.swiper-button-prev]:h-[30px]
+                        [&_.swiper-button-prev]:!w-[38px]
+                        [&_.swiper-button-prev]:!h-[38px]
                         [&_.swiper-button-prev]:rounded-full
                         [&_.swiper-button-prev]:bg-white
                         [&_.swiper-button-prev]:text-black
                         [&_.swiper-button-prev]:shadow-lg
-                        [&_.swiper-button-prev]:left-[-15px]
+                        [&_.swiper-button-prev]:!left-[-15px]
+                        [&_.swiper-button-prev]:!top-[49%]
                         [&_.swiper-button-prev]:transition-all
                         [&_.swiper-button-prev:hover]:bg-[#1A73E8]
                         [&_.swiper-button-prev:hover]:text-white
                          [&_.swiper-button-prev_svg]:max-w-[20%]
                         [&_.swiper-button-next_svg]:max-w-[20%]
 
-                        [&_.swiper-button-next]:w-[30px]
-                        [&_.swiper-button-next]:h-[30px]
+                        [&_.swiper-button-next]:!w-[38px]
+                        [&_.swiper-button-next]:!h-[38px]
                         [&_.swiper-button-next]:rounded-full
                         [&_.swiper-button-next]:bg-white
                         [&_.swiper-button-next]:text-black
                         [&_.swiper-button-next]:shadow-lg
-                        [&_.swiper-button-next]:right-[-15px]
+                        [&_.swiper-button-next]:!right-[-15px]
+                         [&_.swiper-button-next]:!top-[49%]
                         [&_.swiper-button-next]:transition-all
                         [&_.swiper-button-next:hover]:bg-[#1A73E8]
                         [&_.swiper-button-next:hover]:text-white
