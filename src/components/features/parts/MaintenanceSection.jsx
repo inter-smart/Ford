@@ -11,8 +11,8 @@ export default function MaintenanceSection({ data }) {
                         <div className="lg:max-w-[350px]">
                             <Heading
                                 as="h2"
-                                size={"none"}
-                                className="text-[18px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-[130%] font-semibold text-white lg:max-w-[200px] xl:max-w-[235px] 2xl:max-w-[285px] 3xl:max-w-[350px] mb-[15px] xl:mb-[20px] 2xl:mb-[25px]" >
+                                size="heading1"
+                                className=" text-white lg:max-w-[200px] xl:max-w-[235px] 2xl:max-w-[285px] 3xl:max-w-[350px] mb-[15px] xl:mb-[20px] 2xl:mb-[25px]" >
                                 {data?.title}
                             </Heading>
                             <Text

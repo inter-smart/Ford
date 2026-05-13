@@ -14,7 +14,7 @@ export default function AccessorySection({ data }) {
                             <Heading
                                 size="heading1"
                                 as="h2"
-                                className="mb-[15px] md:mb-[25px] max-w-[285px] lg:max-w-[385px] xl:max-w-[480px]"
+                                className="mb-[15px] md:mb-[25px] max-w-[285px] lg:max-w-[310px] xl:max-w-[385px] 2xl:max-w-[480px] 3xl:max-w-[585px]"
                             >
                                 {parse(data?.title)}{" "}
                             </Heading>

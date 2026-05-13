@@ -10,7 +10,7 @@ export default function WhymotocraftSection({ data }) {
                     <div className="w-full sm:w-1/2 ">
                         <div className="relative w-full h-full bg-[#00095B] p-[20px] sm:py-[40px] lg:py-[45px] xl:py-[50px] 2xl:py-[55px] 3xl:py-[70px] md:max-w-[370px] lg:max-w-[430px] 
                         xl:max-w-[542px] 2xl:max-w-[652px] 3xl:max-w-[815px]
-                        after:absolute after:content:'' after:top-0 after:left-[0] after:sm:left-[-50%]   after:sm:w-[400px] after:bg-[#00095B] after:h-full after:-z-10 after:pointer-events-none">
+                        after:absolute after:content:'' after:top-0 after:left-[0] after:sm:left-[-50%] after:sm:w-[400px]  after:xl:w-[800px] after:bg-[#00095B] after:h-full after:-z-10 after:pointer-events-none">
                             <Heading
                                 size="heading1"
                                 as="h2"

@@ -9,8 +9,8 @@ export default function FeatureSection({ data }) {
             <div className="container">
                 <Heading
                     as="h2"
-                    size={"none"}
-                    className="text-[18px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-[130%] font-semibold text-black lg:max-w-[200px] xl:max-w-[235px] 2xl:max-w-[285px] 3xl:max-w-[350px] mb-[15px] xl:mb-[20px] 2xl:mb-[25px]" >
+                    size="heading1"
+                    className="mb-[15px] xl:mb-[20px] 2xl:mb-[25px]" >
                     {data?.title}
                 </Heading>
                 <div className="flex flex-wrap -mx-[5px] lg:-mx-[10px] -my-[5px] lg:-my-[10px] 2xl:-mx-[12px] 3xl:-mx-[14px] 2xl:-my-[12px] 3xl:-my-[14px]">
