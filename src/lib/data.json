@@ -1450,5 +1450,441 @@
         }
       }
     ]
+  },
+  "newsPage": {
+    "banner": {
+      "enable__disable_banner_section": true,
+      "desktop_image": {
+        "alt": "newsBanner",
+        "url": "/images/newsBanner.png"
+      },
+      "mobile_image": {
+        "alt": "newsBanner",
+        "url": "/images/newsBanner.png"
+      },
+      "title": "News",
+      "button_text": null,
+      "button": null
+    },
+    "latestNews": {
+      "title": "Latest News",
+      "items": [
+        {
+          "id": 1,
+          "media": {
+            "url": "/images/latestNews1.png",
+            "alt": "service-info"
+          },
+          "date": "29.01.2025",
+          "slug": "news",
+          "title": "Ford Explorer: An Outstanding Companion",
+          "description": "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>"
+        },
+        {
+          "id": 2,
+          "media": {
+            "url": "/images/latestNews2.png",
+            "alt": "service-info"
+          },
+          "date": "29.01.2025",
+          "slug": "news",
+          "title": "Ford Explorer: An Outstanding Companion",
+          "description": "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>"
+        },
+        {
+          "id": 3,
+          "media": {
+            "url": "/images/latestNews2.png",
+            "alt": "service-info"
+          },
+          "date": "29.01.2025",
+          "slug": "news",
+          "title": "Ford Explorer: An Outstanding Companion",
+          "description": "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>"
+        }
+      ]
+    },
+    "NewsListing": [
+      {
+        "id": 1,
+        "media": {
+          "url": "/images/latestNews1.png",
+          "alt": "service-info"
+        },
+        "date": "29.01.2025",
+        "slug": "news",
+        "title": "Ford Explorer: An Outstanding Companion",
+        "description": "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>"
+      },
+      {
+        "id": 2,
+        "media": {
+          "url": "/images/latestNews2.png",
+          "alt": "service-info"
+        },
+        "date": "29.01.2025",
+        "slug": "news",
+        "title": "Ford Explorer: An Outstanding Companion",
+        "description": "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>"
+      },
+      {
+        "id": 3,
+        "media": {
+          "url": "/images/latestNews2.png",
+          "alt": "service-info"
+        },
+        "date": "29.01.2025",
+        "slug": "news",
+        "title": "Ford Explorer: An Outstanding Companion",
+        "description": "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>"
+      }
+    ]
+  },
+  "newsDetailPage": {
+    "banner": {
+      "enable__disable_banner_section": true,
+      "desktop_image": {
+        "alt": "newsBanner",
+        "url": "/images/news_banner.png"
+      },
+      "mobile_image": {
+        "alt": "newsBanner",
+        "url": "/images/news_banner.png"
+      },
+      "title": "News",
+      "button_text": null,
+      "button": null
+    },
+    "newsData": {
+      "id": 1,
+      "media": {
+        "url": "/images/latestNews1.png",
+        "alt": "service-info"
+      },
+      "title": "Ford Explorer: An Outstanding Companion",
+      "date": "29.01.2025",
+      "description": "<p>A household name among American carbuyers, the Ford Explorer has evolved from its long-ago roots as a body-on-frame SUV into the comprehensively modern three-row crossover it is today. Ford Explorer is a great looking SUV that is a joy to experience. It is well-equipped to make every journey pleasant, whilst also comfortably seating a large family on weekend journeys. The Explorer has an impressive combination of power, luxury and advanced technology features. The refreshed Ford Explorer is better looking than it's ever been with a raft of new technologies. The Explorer is available in Standard, XLT and Limited trim lines.</p><p>The Explorer will draw attention with its attractive fascia, LED signature lights, and well-designed grille, an available dual-panel moonroof, premium silver-painted front and rear skid plate elements, and an 18 and 20-inch aluminium wheel line-up. Technology enthusiasts can revel in the offering of the Explorer with an available front and 180-degree wide rear-view camera with washers, parking assist system that can now park the Explorer perpendicularly and hands-free, foot-activated power liftgate.</p><p>The Explorer is a perfect companion for your journeys. It is equipped with a normally-aspirated 3.5-litre V6 producing an estimated 294 PS and 346 Nm of torque, which is also the available engine on Standard, XLT and Limited trims.</p><p>In the Explorer the intelligent four-wheel drive with Terrain Management System™ is ready for any adventure. It reassesses conditions about 20 times faster than the blink of an eye – providing precise handling and traction. In sand, grass or gravel mode, the antilock braking system changes its pulse rate, which allows material to build up in front of the wheels, acting as a doorstop of sorts to help slow momentum.</p><p>The Explorer boasts of advanced safety features to reward customers with happy journeys. The features include 2nd Generation Driver and Front Passenger, Side Seat Airbags, 3rd Row Safety Canopy with Rollover Sensor, AdvanceTrac® with Roll Stability Control™, BLIS® with Cross Traffic Alert, Front 180-Degree Camera with Washer, Perpendicular Parking, and more.</p><p>For 2017, the Ford Explorer is equipped with Ford's latest Sync 3 infotainment system is available this year, replacing the previous MyFord Touch system.</p>"
+    },
+    "relatedNews": {
+      "title": "Related news",
+      "items": [
+        {
+          "id": 1,
+          "media": {
+            "url": "/images/latestNews1.png",
+            "alt": "service-info"
+          },
+          "date": "29.01.2025",
+          "slug": "news",
+          "title": "Ford Explorer: An Outstanding Companion",
+          "description": "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>"
+        },
+        {
+          "id": 2,
+          "media": {
+            "url": "/images/latestNews2.png",
+            "alt": "service-info"
+          },
+          "date": "29.01.2025",
+          "slug": "news",
+          "title": "Ford Explorer: An Outstanding Companion",
+          "description": "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>"
+        },
+        {
+          "id": 3,
+          "media": {
+            "url": "/images/latestNews2.png",
+            "alt": "service-info"
+          },
+          "date": "29.01.2025",
+          "slug": "news",
+          "title": "Ford Explorer: An Outstanding Companion",
+          "description": "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>"
+        }
+      ]
+    }
+  },
+  "showroomPage": {
+    "banner": {
+      "enable__disable_banner_section": true,
+      "desktop_image": {
+        "alt": "showroomBanner",
+        "url": "/images/showroomBanner.png"
+      },
+      "mobile_image": {
+        "alt": "showroomBanner",
+        "url": "/images/showroomBanner.png"
+      },
+      "title": "Showroom and Service Center",
+      "button_text": null,
+      "button": null
+    },
+    "showroomData": {
+      "title": "Showroom",
+      "tabs": [
+        {
+          "id": 1,
+          "title": "Showroom",
+          "slug": "/showroom"
+        },
+        {
+          "id": 2,
+          "title": "Service Center",
+          "slug": "/service"
+        }
+      ],
+      "items": [
+        {
+          "id": 1,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 2,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 3,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 4,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 5,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 6,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 7,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 8,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 9,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 10,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 11,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        },
+        {
+          "id": 12,
+          "title": "Seeb",
+          "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+          "phone": "+968 24516668",
+          "timing": "10 am to 6 pm",
+          "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+        }
+      ]
+    }
+  },
+  "serviceCenterData": {
+    "title": "Service Center",
+    "items": [
+      {
+        "id": 1,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 2,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 3,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 4,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 5,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 6,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 7,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 8,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 9,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 10,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 11,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      },
+      {
+        "id": 12,
+        "title": "Seeb",
+        "description": "<p>Seeb Al Mawaleh, Near Carrefour, Seeb</p>",
+        "phone": "+968 24516668",
+        "timing": "10 am to 6 pm",
+        "directionUrl": "https://maps.app.goo.gl/58bKrye7bN79Vb2r5"
+      }
+    ]
+  },
+  "termsData": {
+    "id": 1,
+    "title": "Terms and Conditions",
+    "description": "<p>This website is operated by Arabian Car marketing Co LLC (Authorized disturbutor of Ford in Oman) in association with Ford Middle East (Ford). Access to this site is subject to the terms and conditions of use outlined below. </p><h5>Disclaimer</h5><p>Every effort has been made to ensure that the information on this site is correct and up to date. However, Ford Oman (Arabian Car Marketing Co LLC) and Ford do not provide any warranty as to the completeness or accuracy of the information and, subject to applicable laws, does not accept any liability for damages of any kind resulting from the access or use of this site and its contents.<br/>Ford reserves the right to discontinue or change any of the models, prices, colours, materials, equipment or other specifications referred to on this site at any time without notice. Some of the equipment shown or referred to in this site may only be available as an option at extra cost. Always contact us for the latest information about a Ford product, and its availability, before placing an order. </p><h5>Copyright</h5><p>All information on this site is protected by copyright and other intellectual property rights. No images, text or other content from this site may be distributed or reproduced without prior written approval.</p>"
+  },
+  "privacyPolicyData": {
+    "id": 1,
+    "title": "Privacy Policy",
+    "description": "<p>This privacy policy sets out how Ford Oman uses and protects any information that you give Ford Oman when you use this website and submit your personal information. This Privacy Policy sets out our policies on the management of personal information - that is, how we collect personal information, the purposes for which we use this information, and to whom this information is disclosed.Ford Oman is committed to responsible privacy practices and to complying with Oman's laws. Our respect for our customers' privacy is paramount. Ford Oman may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you are up-to-date with any changes.</p><h5>What is personal information?</h5><p>Personal information is information that could identify you. Examples of personal information include your name, address, telephone number and email address.</p><h5>What type of personal information does Ford Oman collect?</h5><p>The type of personal information Ford Oman collects from you depend on the circumstances in which the information is collected:</p><ul><li>Ford Oman may collect contact details including your name, address, email address and phone and fax numbers.</li><li>Where relevant, Ford Oman may also collect your driver’s licence and registration details, date of birth or age group, occupation, gender, information about your vehicle (including its number plate and vehicle identification number), answers you provide to questions we ask and other information in relation to your dealings with us (such as types of vehicle purchased and replaced and repair/service history).</li><li>When using our website (“Site”), we or our third party service providers may collect site usage information such as the IP address you are using, the name of your Internet service provider, your browser version, the Site that referred you to us and the next Site you go to, the pages you request, the date and time of those requests and the country you are in. Except where you provide it to us via the Site, we do not collect personal information such as your name, mailing address, email address or phone number when you are browsing our Site.</li><li>We do not generally require customers to disclose any sensitive data or information (e.g. details of race, religious beliefs, bank details, financial information, sexual orientation, health information etc.) to us. If you do provide sensitive data or information to us for any reason (for example, if you provide us with information about a disability you have), you consent to us collecting that information and to us using and disclosing that information to Ford, Ford Credit, Ford Motor Private Limited and any of their holding, subsidiaries and other affiliate Companies across the world (Collectively referred as “Ford”:) and/ or third party services providers (within Oman or outside Oman) appointed by us or Ford for the purpose for which you disclosed it to us and as permitted by Oman laws</li><li>In addition to the types of personal information identified above, Ford may collect personal information as otherwise permitted or required by Oman's laws.</li></ul>"
+  },
+  "clientsPage": {
+    "banner": {
+      "enable__disable_banner_section": true,
+      "desktop_image": {
+        "alt": "clientsBanner",
+        "url": "/images/clientsBanner.png"
+      },
+      "mobile_image": {
+        "alt": "clientsBanner",
+        "url": "/images/clientsBanner.png"
+      },
+      "title": "Clients",
+      "button_text": null,
+      "button": null
+    },
+    "clientsData": {
+      "title": "Our Clients",
+      "items": [
+        {
+          "id": 1,
+          "media": {
+            "url": "/images/clients1.png",
+            "alt": "clients-info"
+          },
+          "author": "Stella George",
+          "date": "29.01.2025",
+          "rating": "5.0",
+          "description": "<p>Wonderful experience. Their team went above and beyond my expectations. They drove my new vehicle to meet me halfway due to the distance I?m located from the dealership.</p>"
+        },
+        {
+          "id": 2,
+          "media": {
+            "url": "/images/clients2.png",
+            "alt": "clients-info"
+          },
+          "author": "Stanley",
+          "date": "29.01.2025",
+          "rating": "4.0",
+          "description": "<p>First time experience with Ford, they really know how to treat a customer. The salesman really went out of his way to make sure I was taken care of.</p>"
+        }
+      ]
+    }
   }
 }

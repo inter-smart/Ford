@@ -48,10 +48,10 @@ const formSchema = z.object({
 });
 
 const labelClasses =
-  "text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[17px] 3xl:text-[20px] leading-normal font-normal text-black";
+  "text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] leading-normal font-normal text-black";
 
 const inputClasses =
-  "text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[17px] 3xl:text-[20px] leading-normal font-normal text-black placeholder:text-black w-full h-[40px] xl:h-[45px] 2xl:h-[55px] 3xl:h-[60px] rounded-none bg-white dark:bg-white border-white border-b-[#d9d6ce] focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:border-b-black selection:bg-primary-800 appearance-none shadow-none";
+  "text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] leading-normal font-normal text-black placeholder:text-black w-full h-[35px] xl:h-[40px] 2xl:h-[45px] 3xl:h-[50px] rounded-none bg-white dark:bg-white border-white border-b-[#d9d6ce] focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:border-b-black selection:bg-primary-800 appearance-none shadow-none px-0";
 
 const errorClass =
   "text-[10px] md:text-[10px] xl:text-[11px] 3xl:text-[12px] leading-normal font-normal text-red-500 mt-1";
@@ -99,11 +99,8 @@ export function EnquireNowForm() {
   }
 
   return (
-    <form
-      onSubmit={form.handleSubmit(onSubmit)}
-      className="w-full [&>div]:border"
-    >
-      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-5">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           {[{ name: "fullName", placeholder: "Name*" }].map((item) => (
             <FormBlock
@@ -115,7 +112,7 @@ export function EnquireNowForm() {
           ))}
         </div>
       </div>
-      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-5">
+      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           {[
             { name: "email", placeholder: "Email*", type: "email" },
@@ -130,7 +127,7 @@ export function EnquireNowForm() {
           ))}
         </div>
       </div>
-      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-5">
+      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           {[
             {
@@ -149,7 +146,7 @@ export function EnquireNowForm() {
           ))}
         </div>
       </div>
-      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-5">
+      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           <Controller
             name="message"
@@ -162,7 +159,7 @@ export function EnquireNowForm() {
                   placeholder="Message"
                   className={cn(
                     inputClasses,
-                    "min-h-[50px] xl:min-h-[68px] 2xl:min-h-[80px] 3xl:min-h-[100px]",
+                    "min-h-[50px] xl:min-h-[68px] 2xl:min-h-[70px] 3xl:min-h-[90px]",
                   )}
                   disabled={isSubmitting}
                 />
@@ -178,13 +175,18 @@ export function EnquireNowForm() {
           />
         </div>
       </div>
-      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-5">
+      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <Controller
           name="installationSupport"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel className={cn(labelClasses)}>
+              <FieldLabel
+                className={cn(
+                  labelClasses,
+                  "mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4 block",
+                )}
+              >
                 Terms and Conditions. I am happy to receive commercial messages
                 from Ford Motor Company and affiliated authorized partners.
               </FieldLabel>
@@ -217,7 +219,7 @@ export function EnquireNowForm() {
           )}
         />
       </div>
-      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-5">
+      <div className="mb-3 xl:mb-3.5 2xl:mb-4 3xl:mb-5">
         <Controller
           name="agreeToTerms"
           control={form.control}
@@ -285,7 +287,7 @@ function FormBlock({ item, form, isSubmitting, extraDisabled }) {
               <SelectTrigger
                 className={cn(
                   inputClasses,
-                  "data-[placeholder]:text-black data-[size=default]:h-[40px] xl:data-[size=default]:h-[45px] 2xl:data-[size=default]:h-[55px] 3xl:data-[size=default]:h-[60px] justify-between",
+                  "data-[placeholder]:text-black data-[size=default]:h-[35px] xl:data-[size=default]:h-[40px] 2xl:data-[size=default]:h-[45px] 3xl:data-[size=default]:h-[50px] justify-between",
                 )}
               >
                 <SelectValue
