@@ -35,7 +35,7 @@ export default function MotocraftSection({ data }) {
                             <Link
                                 href={data?.button?.link || "/"}
                                 target={data?.button?.isExternal ? "_blank" : "_self"}
-                                className="text-[10px] lg:text-[12px] xl:text-[13px] 2xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[30px] xl:h-[35px] 2xl:h-[40px]  
+                                className="text-[10px] lg:text-[12px] xl:text-[13px] 2xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit min-w-[135px]  xl:min-w-[165px] 2xl:min-w-[200px] 3xl:min-w-[250px] h-[30px] xl:h-[35px] 2xl:h-[40px]  
                                 3xl:h-[53px] bg-[#1A73E8] px-3 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer
                                 mb-[25px] lg-[35px] xl:mb-[45px] 2xl:mb-[55px] 3xl:mb-[70px]"
                             >

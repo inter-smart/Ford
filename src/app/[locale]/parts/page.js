@@ -2,6 +2,7 @@ import InnerHero from "@/components/common/InnerHero";
 import AccessorySection from "@/components/features/parts/AccessorySection";
 import AdviceSection from "@/components/features/parts/AdviceSection";
 import FeatureSection from "@/components/features/parts/FeatureSection";
+import GallerySection from "@/components/features/parts/GallerySection";
 import MaintenanceSection from "@/components/features/parts/MaintenanceSection";
 import MotocraftSection from "@/components/features/parts/MotocraftSection";
 import PartsSection from "@/components/features/parts/PartsSection";
@@ -118,7 +119,7 @@ const local_data = {
         title: "Ford Accessories: <br/> Personalize your Ford",
         description:
             "Have your vehicle serviced regularly to maintain its performance, safety, and resale value. With a wide network of Ford Authorised Parts Outlets and Service Centres, keeping your Ford in prime condition has never been easier. ",
-        button_text: "Contact Us",
+        button_text: "View More",
         button: {
             link: "/",
             isExternal: false,
@@ -157,6 +158,49 @@ const local_data = {
             },
         ]
 
+    },
+
+    GallerySection: {
+        title: "Gallery",
+        slides: [
+            {
+                id: 1,
+                images: [
+                    {
+                        "url": "/images/gallery-1.jpg",
+                        "alt": "Ford technician servicing vehicle"
+                    },
+                    {
+                        "url": "/images/gallery-2.jpg",
+                        "alt": "Technician inspecting vehicle underside"
+                    },
+                    {
+                        "url": "/images/gallery-3.jpg",
+                        "alt": "Ford mechanic repairing engine"
+                    },
+                    {
+                        "url": "/images/gallery-4.jpg",
+                        "alt": "Technician working on vehicle maintenance"
+                    } ,
+                    {
+                        "url": "/images/gallery-4.jpg",
+                        "alt": "Ford service center"
+                    },
+                    {
+                        "url": "/images/gallery-3.jpg",
+                        "alt": "Vehicle inspection service"
+                    },
+                    {
+                        "url": "/images/gallery-2.jpg",
+                        "alt": "Engine maintenance"
+                    },
+                    {
+                        "url": "/images/gallery-1.jpg",
+                        "alt": "Ford repair workshop"
+                    }
+                ]
+            }
+        ]
     },
 
     MotorcraftSection: {
@@ -327,6 +371,7 @@ export default function Page({ data = local_data }) {
             <AdviceSection data={local_data?.AdviceSection} />
             <AccessorySection data={local_data?.AccessorySection} />
             <FeatureSection data={local_data?.FeatureSection} />
+            <GallerySection data={local_data?.GallerySection} />
             <MotocraftSection data={local_data?.MotorcraftSection} />
             <WhymotocraftSection data={local_data?.WhymotocraftSection} />
             <ServiceBranchDirectory data={local_data?.branchDirectory} />

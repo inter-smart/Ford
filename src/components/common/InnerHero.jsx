@@ -29,7 +29,7 @@ export default function InnerHero({ data }) {
           <Heading
             as="h1"
             size="heading1"
-            className="text-[22px] sm:text-[24px] md:text-[28px] xl:text-[32px] 2xl:text-[38px] leading-[1] font-semibold text-white mb-[10px] sm:mb-[15px]"
+            className="text-white mb-[10px] sm:mb-[15px]"
           >
             {data?.title}
           </Heading>

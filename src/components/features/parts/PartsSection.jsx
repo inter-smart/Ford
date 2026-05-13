@@ -13,8 +13,8 @@ export default function PartsSection({ data }) {
                 <div className="flex justify-between mb-[15px] xl:mb-[40px] 2xl:mb-[50px] 3xl:mb-[45px]">
                     <Heading
                         as="h2"
-                        size={"none"}
-                        className="text-[18px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-[1] font-semibold text-black" >
+                        size="heading1"
+                        className="text-black" >
                         {data?.sectionTitle}
                     </Heading>
 

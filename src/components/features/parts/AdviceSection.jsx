@@ -9,8 +9,8 @@ export default function AdviceSection({ data }) {
             <div className="container">
                 <Heading
                     as="h2"
-                    size={"none"}
-                    className="text-[18px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-[130%] font-semibold text-black lg:max-w-[200px] xl:max-w-[235px] 2xl:max-w-[285px] 3xl:max-w-[350px] mb-[15px] xl:mb-[20px] 2xl:mb-[25px]" >
+                    size="heading1"
+                    className=" text-black lg:max-w-[200px] xl:max-w-[235px] 2xl:max-w-[285px] 3xl:max-w-[350px] mb-[15px] xl:mb-[20px] 2xl:mb-[25px]" >
                     {data?.title}
                 </Heading>
                 <div className="flex flex-wrap -mx-[8px] lg:-mx-[10px] -my-[8px] lg:-my-[10px] xl:-mx-[15px] 2xl:-mx-[17px] 3xl:-mx-[24px] xl:-my-[15px] 2xl:-my-[17px] 3xl:-my-[24px]">
@@ -18,7 +18,7 @@ export default function AdviceSection({ data }) {
                         <div
                             key={index}
                             className="w-full xs:w-1/2 lg:w-1/3 p-[8px] lg-p-[10px] xl:p-[15px] 2xl:p-[17px] 3xl:p-[24px]">
-                            <div className="w-full h-full relative bg-[#F7F7F7] rounded-[7px] p-[20px] lg-[35px_30px] xl:p-[30px_20px] 2xl:p-[35px_34px] 3xl:p-[40px_40px] overflow-hidden flex items-center gap-[15px] xl:gap-[20px] 2xl:gap-[30px] 3xl:gap-[40px]">
+                            <div className="w-full h-full relative bg-[#F7F7F7] rounded-[7px] p-[20px_12px] lg-[35px_15px_30px_15px] xl:p-[30px_10px_20px_15px] 2xl:p-[35px_10px_34px_20px] 3xl:p-[40px_15px_40px_20px] overflow-hidden flex items-center gap-[15px] xl:gap-[20px] 2xl:gap-[30px] 3xl:gap-[20px]">
                                 <div className="w-[35px] md:w-[45px] lg:w-[55px] xl:w-[65px] 2xl:w-[75px] 3xl:w-[95px]  overflow-hidden flex p-[3px] rounded-full shrink-0">
                                     <Image
                                         src={item?.icon?.url}
