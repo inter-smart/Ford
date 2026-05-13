@@ -74,7 +74,7 @@ export default function FleetInfoSection({}) {
               <RequestAQuoteDialog
                 imgPath="/images/request-img-1.jpg"
                 title="Request A Quote"
-                description="<p>To get us to call you back, complete all of the fields below, type and send us your enquiry and we will aim to get back to you within the next working day.</p>"
+                description="<p>To request a quote, please complete the fields below.</p>"
               >
                 <button className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-[1] font-bold text-white w-full h-[30.5px] xl:h-[35.5px] 2xl:h-[42.6px] 3xl:h-[53.4px] p-2 rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center">
                   Request a Quote

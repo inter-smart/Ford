@@ -97,9 +97,6 @@ export default function welcome({ data }) {
             {/* Right Button */}
             <div className="relative z-10">
               <BookATestDriveDialog>
-                {/* <Link
-                  href={test_drive_section?.button_url?.url}
-                  target={test_drive_section?.button_url?.target} */}
                 <div className="relative 3xl:text-[20px] 2xl:text-[17px] xl:text-[13px] lg:text-[12px] text-[11px] font-medium text-white text-sm md:text-base rounded-full flex items-center gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
                   {test_drive_section.button_title}
                   <svg
