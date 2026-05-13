@@ -135,10 +135,7 @@
         }
       ]
     },
-    "whatsappButton": {
-      "enabled": true,
-      "icon": "/icons/whatsapp.svg"
-    },
+     
     "accessoriesHero": {
       "title": "Ford Accessories: Personalize Your Ford",
       "description": "Have your vehicle serviced regularly to maintain its performance, safety, and resale value. With a wide network of Ford Authorised Parts Outlets and Service Centres, keeping your Ford in prime condition has never been easier.",
@@ -176,8 +173,7 @@
       ]
     },
     "gallery": {
-      "title": "Gallery",
-      "mainImage": "/images/accessories/gallery-main.jpg",
+      "title": "Gallery", 
       "thumbnails": [
         {
           "id": 1,
