@@ -30,7 +30,11 @@ export default function OfferDetailSection({ offerDtl, benefits }) {
                 {offerDtl?.desc}
               </Text>
               <div className="w-auto flex justify-center">
-                <RequestAQuoteDialog>
+                <RequestAQuoteDialog
+                  imgPath="/images/enquireNow-img-1.jpg"
+                  title="Request A Quote"
+                  description="<p>To get us to call you back, complete all of the fields below, type and send us your enquiry and we will aim to get back to you within the next working day.</p>"
+                >
                   <button className="text-[10px] xl:text-[12px] 2xl:text-[15px] 3xl:text-[17px] leading-[1] font-bold text-[#ffffff] mr-auto px-6 py-3 rounded-[20] bg-[#066FEF] cursor-pointer transition-all">
                     {offerDtl?.btnTxt}
                   </button>

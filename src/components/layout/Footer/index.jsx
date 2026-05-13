@@ -2,6 +2,7 @@ import { Heading } from "@/components/layout/Heading";
 import Image from "next/image";
 import { Text } from "@/components/layout/Text";
 import Link from "next/link";
+import BookATestDriveDialog from "@/components/common/BookATestDriveDialog";
 
 const socialIcons = [
   {
@@ -95,20 +96,15 @@ export default function welcome({ data }) {
 
             {/* Right Button */}
             <div className="relative z-10">
-              <Link
-                href={test_drive_section?.button_url?.url}
-                target={test_drive_section?.button_url?.target}
-                className="relative
-                                3xl:text-[20px] 2xl:text-[17px] xl:text-[13px] lg:text-[12px] text-[11px] font-medium 
-                                text-white text-sm md:text-base rounded-full flex items-center gap-2
-                                transition-all duration-300 ease-in-out 
-                                hover:tracking-wider"
-              >
-                {test_drive_section.button_title}
-                <div className="w-[17px] h-[17px] flex relative overflow-visible">
+              <BookATestDriveDialog>
+                {/* <Link
+                  href={test_drive_section?.button_url?.url}
+                  target={test_drive_section?.button_url?.target} */}
+                <div className="relative 3xl:text-[20px] 2xl:text-[17px] xl:text-[13px] lg:text-[12px] text-[11px] font-medium text-white text-sm md:text-base rounded-full flex items-center gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
+                  {test_drive_section.button_title}
                   <svg
                     viewBox="0 0 512 512"
-                    className="fill-white transition-transform duration-300 ease-in-out group-hover:translate-x-2"
+                    className="w-[16px] h-auto block fill-white transition-transform duration-300 ease-in-out group-hover:translate-x-2"
                   >
                     <path
                       d="M506.134,241.843c-0.006-0.006-0.011-0.013-0.018-0.019l-104.504-104c-7.829-7.791-20.492-7.762-28.285,0.068
@@ -118,7 +114,7 @@ export default function welcome({ data }) {
                     />
                   </svg>
                 </div>
-              </Link>
+              </BookATestDriveDialog>
             </div>
           </div>
         )}
