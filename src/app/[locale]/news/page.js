@@ -2,7 +2,7 @@ import InnerHero from "@/components/common/InnerHero";
 import LatestNews from "@/components/features/news/LatestNews";
 import NewsCardList from "@/components/features/news/NewsCardList";
 
-const newsPage = {
+const local_data = {
   banner: {
     enable__disable_banner_section: true,
     desktop_image: {
@@ -58,7 +58,7 @@ const newsPage = {
       },
     ],
   },
-  NewsListing: [
+  newsListing: [
     {
       id: 1,
       media: {
@@ -98,28 +98,14 @@ const newsPage = {
   ],
 };
 
-export default function News() {
-  const banner = newsPage?.banner;
-  const heroData = banner?.enable__disable_banner_section
-    ? {
-        title: banner?.title,
-        description: null,
-        desktop_image: banner?.desktop_image,
-        mobile_image: banner?.mobile_image,
-        button_text: banner?.button_text,
-        button: banner?.button,
-      }
-    : null;
-
-  const news = newsPage?.latestNews;
-  const newsListing = newsPage?.NewsListing;
-
+export default function NewsPage({ data = local_data }) {
   return (
-    <div>
-      {banner?.enable__disable_banner_section && <InnerHero data={heroData} />}
-      <LatestNews data={news} />
-
-      <NewsCardList data={newsListing} />
-    </div>
+    <>
+      {data?.banner?.enable__disable_banner_section && (
+        <InnerHero data={data?.banner} />
+      )}
+      <LatestNews data={data?.latestNews} />
+      <NewsCardList data={data?.newsListing} />
+    </>
   );
 }
