@@ -105,7 +105,7 @@ export default function NewsDetailsPage() {
   return (
     <>
       <InnerHero data={heroData} />
-      <NewsDetails />
+      <NewsDetails data={localData?.news_section} />
     </>
   );
 }

@@ -2,8 +2,7 @@ import PrivacyPolicyContent from "@/components/features/privacyPolicy/PrivacyPol
 
 const local_data = {
   title: "Privacy Policy",
- content:   
- `
+  content: `
     <p>Arabian Car Marketing Co LLC — Authorized Distributor of Ford in Oman</p>
 
     <p>
@@ -56,7 +55,7 @@ const local_data = {
         privacy statements of each website that collects your personally identifiable information.
       </p>
 
- `
+ `,
 };
 
 export default function page({ data = local_data }) {
