@@ -1,3 +1,7 @@
+import InnerHero from "@/components/common/InnerHero";
+import LatestNews from "@/components/features/news/LatestNews";
+import NewsCardList from "@/components/features/news/NewsCardList";
+
 const newsPage = {
   banner: {
     enable__disable_banner_section: true,
@@ -93,10 +97,6 @@ const newsPage = {
     },
   ],
 };
-
-import InnerHero from "@/components/common/InnerHero";
-import LatestNews from "@/components/features/news/LatestNews";
-import NewsCardList from "@/components/features/news/NewsCardList";
 
 export default function News() {
   const banner = newsPage?.banner;
