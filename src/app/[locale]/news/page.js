@@ -56,6 +56,33 @@ const localData = {
                 offer if you're shopping for a three-row crossover SUV. Its
                 outstanding quietness</p>`,
       },
+         {
+        img: "/images/latestNews1.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+      },
+      {
+        img: "/images/latestNews2.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+      },
+      {
+        img: "/images/latestNews1.png",
+        date: "29.01.2025",
+        slug: "news",
+        title: "Ford Explorer: An Outstanding Companion",
+        description: `<p>Available with plenty of features the Ford Explorer has a lot to
+                offer if you're shopping for a three-row crossover SUV. Its
+                outstanding quietness</p>`,
+      },
       {
         img: "/images/latestNews2.png",
         date: "29.01.2025",
@@ -136,7 +163,7 @@ export default function News() {
   return (
     <div>
       <InnerHero data={heroData} />
-      <LatestNews />
+      <LatestNews data={news} />
 
       <NewsCardList data={news} />
     </div>

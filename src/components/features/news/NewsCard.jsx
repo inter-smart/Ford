@@ -50,9 +50,9 @@ export default function NewsCard({ news = newsData, page="" }) {
 
       <div className="">
         <Heading
-          as={"h3"}
-          size={"heading3"}
-          className="text-[10px] lg:text-[13px] xl:text-[16px] 2xl:text-[19px] 3xl:text-[22px] leading-[1.5] font-semibold text-[#00142E]"
+          as={"h5"}
+          size={"heading4"}
+          className="leading-[1.5] font-semibold text-[#00142E]"
         >
           {news?.title}
         </Heading>
