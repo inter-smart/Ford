@@ -2,7 +2,7 @@ import PrivacyPolicyContent from "@/components/features/privacyPolicy/PrivacyPol
 
 const local_data = {
   title: "Privacy Policy",
-  content: `
+  description: `
     <p>This privacy policy sets out how Ford Oman uses and protects any information that you give Ford Oman when you use this website and submit your personal information.
     </p>
 

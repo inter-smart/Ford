@@ -11,8 +11,8 @@ export default function ServiceBranchDirectory({ data }) {
       <div className="container">
         <Heading
           as="h2"
-          size={"none"}
-          className="text-[20px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-normal font-normal text-black mb-[15px] xl:mb-[32px] 2xl:mb-[40px] 3xl:mb-[50px]"
+          size="heading1"
+          className="text-black mb-[15px] xl:mb-[32px] 2xl:mb-[40px] 3xl:mb-[50px]"
         >
           {data?.title}
         </Heading>
