@@ -6,7 +6,6 @@ import NewsCard from "./NewsCard";
 export default function NewsCardList({ data }) {
   const [visibleCount, setVisibleCount] = useState(9);
 
-  console.log("data", data);
   const hasMore = visibleCount < (data?.length ?? 0);
 
   return (

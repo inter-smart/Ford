@@ -11,7 +11,6 @@ import NewsCard from "./NewsCard";
 
 export default function LatestNews({ data }) {
 
-  console.log("news ", data)
 
   return (
     <div className="py-[40px_34px] lg:py-[53px_45px] xl:py-[66px_54px] 2xl:py-[80px_66px]">
