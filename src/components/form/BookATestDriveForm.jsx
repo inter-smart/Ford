@@ -32,6 +32,12 @@ const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   phone: z.string().min(8, { message: "Invalid phone number" }),
   selectDealer: z.string().min(1, { message: "Dealer is required" }),
+  vehicleModel: z.string().min(1, { message: "Vehicle Model is required" }),
+  vehicleRegistrationNumber: z.string().optional(),
+  vehicleMake: z.string().min(1, { message: "Vehicle Make is required" }),
+  vehicleMileage: z.string().min(1, { message: "Vehicle Mileage is required" }),
+  preferredDate: z.string().min(1, { message: "Preferred Date is required" }),
+  preferredTime: z.string().min(1, { message: "Preferred Time is required" }),
   message: z.string().optional(),
   installationSupport: z.string().optional(),
   agreeToTerms: z.literal(true, {
@@ -51,7 +57,7 @@ const inputClasses =
 const errorClass =
   "text-[10px] md:text-[10px] xl:text-[11px] 3xl:text-[12px] leading-normal font-normal text-red-500 mt-1";
 
-export function EnquireNowForm() {
+export function BookATestDriveForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -62,6 +68,12 @@ export function EnquireNowForm() {
       email: "",
       phone: "",
       selectDealer: "",
+      vehicleModel: "",
+      vehicleRegistrationNumber: "",
+      vehicleMake: "",
+      vehicleMileage: "",
+      preferredDate: "",
+      preferredTime: "",
       message: "",
       installationSupport: "Yes",
       agreeToTerms: false,
@@ -76,6 +88,15 @@ export function EnquireNowForm() {
       formData.append("email", data.email);
       formData.append("phone", data.phone);
       formData.append("dealer", data.selectDealer);
+      formData.append("vehicle_model", data.vehicleModel);
+      formData.append(
+        "vehicle_registration_number",
+        data.vehicleRegistrationNumber || "",
+      );
+      formData.append("vehicle_make", data.vehicleMake);
+      formData.append("vehicle_mileage", data.vehicleMileage);
+      formData.append("preferred_date", data.preferredDate);
+      formData.append("preferred_time", data.preferredTime);
       formData.append("message", data.message || "");
       formData.append("commercial_messages", data.installationSupport);
       formData.append("agree_to_terms", data.agreeToTerms ? "1" : "0");
@@ -96,40 +117,34 @@ export function EnquireNowForm() {
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
       <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
-        <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
-          {[{ name: "fullName", placeholder: "Name*" }].map((item) => (
-            <FormBlock
-              key={item.name}
-              item={item}
-              form={form}
-              isSubmitting={isSubmitting}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           {[
+            { name: "fullName", placeholder: "Name*" },
             { name: "email", placeholder: "Email*", type: "email" },
             { name: "phone", placeholder: "Phone*" },
-          ].map((item) => (
-            <FormBlock
-              key={item.name}
-              item={item}
-              form={form}
-              isSubmitting={isSubmitting}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
-        <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
-          {[
             {
               name: "selectDealer",
-              placeholder: "Select Dealer*",
+              placeholder: "Dealer*",
               type: "select",
-              options: ["states1", "states2", "states3"],
+              options: ["dealer 1", "dealer 2", "dealer 3"],
+            },
+            {
+              name: "vehicleRegistrationNumber",
+              placeholder: "Vehicle Registration Number",
+            },
+            {
+              name: "vehicleMake",
+              placeholder: "Vehicle Make*",
+            },
+            {
+              name: "vehicleModel",
+              placeholder: "Vehicle Model*",
+              type: "select",
+              options: ["model 1", "model 2", "model 3"],
+            },
+            {
+              name: "vehicleMileage",
+              placeholder: "Vehicle Mileage*",
             },
           ].map((item) => (
             <FormBlock
@@ -141,7 +156,7 @@ export function EnquireNowForm() {
           ))}
         </div>
       </div>
-      <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
+      <div className="mb-3 xl:mb-4 2xl:mb-5 3xl:mb-6">
         <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           <Controller
             name="message"
