@@ -1,9 +1,8 @@
 import PrivacyPolicyContent from "@/components/features/privacyPolicy/PrivacyPolicyContent";
 
 const local_data = {
-  title: "Privacy Policy",
- description:   
- `
+  title: "Terms and Conditions",
+  description: `
     <p>Arabian Car Marketing Co LLC — Authorized Distributor of Ford in Oman</p>
 
     <p>

@@ -250,7 +250,6 @@ const local_data = {
 export default function page({ data = local_data }) {
   return (
     <>
-      {" "}
       <PrivacyPolicyContent data={data} />
     </>
   );

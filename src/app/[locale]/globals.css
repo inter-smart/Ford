@@ -109,7 +109,7 @@ body {
     }
 
     p, &, li, td {
-      @apply text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-(--text-color);
+      @apply text-[12px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-(--text-color);
     }
 
     h1, h2, h3, h4, h5, h6 {

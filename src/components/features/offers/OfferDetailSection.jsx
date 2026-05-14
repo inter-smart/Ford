@@ -6,7 +6,7 @@ import RequestAQuoteDialog from "@/components/common/RequestAQuoteDialog";
 export default function OfferDetailSection({ offerDtl, benefits }) {
   return (
     <>
-      <section className="w-full h-auto block mt-[20px] mb-[10px] sm:mt-[30px] sm:mb-[15px] xl:mt-[80px] xl:mb-[50px] 2xl:mt-[100px] 2xl:mb-[60px]">
+      <section className="w-full h-auto block mt-8 mb-2.5 sm:mt-[30px] sm:mb-[15px] xl:mt-[80px] xl:mb-[50px] 2xl:mt-[100px] 2xl:mb-[60px]">
         <div className="container">
           <div className="flex flex-wrap items-center -mx-[16px] xl:-mx-[20px] 2xl:-mx-[24px] [&>*]:px-[16px] [&>*]:xl:px-[20px] [&>*]:2xl:px-[24px]">
             {/* LEFT */}

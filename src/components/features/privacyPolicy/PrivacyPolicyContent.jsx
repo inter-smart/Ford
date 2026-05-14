@@ -4,7 +4,7 @@ import parse from "html-react-parser";
 
 export default function PrivacyPolicyContent({ data }) {
   return (
-    <section className="w-full h-auto block  pt-5 sm:pt-[84px] lg:pt-[116px] xl:pt-[146px] 2xl:pt-[170px] 3xl:pt-[200px] pb-5 sm:pb-[48px] lg:pb-[64px] xl:pb-[80px] 2xl:pb-[96px] 3xl:pb-[112px] overflow-hidden mt-[69px] xl:mt-[73px] 2xl:mt-[76px] 3xl:mt-[78px]">
+    <section className="w-full h-auto block py-10 sm:py-[50px] xl:py-[65px] 2xl:py-[80px] 3xl:py-[100px] mt-[69px] xl:mt-[73px] 2xl:mt-[76px] 3xl:mt-[78px]">
       <div className="container">
         <Heading
           as="h2"
@@ -13,9 +13,7 @@ export default function PrivacyPolicyContent({ data }) {
         >
           {parse(data?.title || "")}
         </Heading>
-        <div
-          className="typography [--text-color:#000] [&_:is(h1,h2,h3,h4,h5,h6)]:my-[15px] sm:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[18px] xl:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[22px] 2xl:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[28px] 3xl:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[35px] [&_li]:list-image-none [&_li]:list-disc"
-        >
+        <div className="typography [--text-color:#000] [&_p]:text-[#434343] [&_:is(h1,h2,h3,h4,h5,h6)]:my-[15px] sm:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[18px] xl:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[22px] 2xl:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[28px] 3xl:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[35px] [&_li]:list-image-none [&_li]:list-disc">
           <ParsedContent html={data?.description} />
         </div>
       </div>
