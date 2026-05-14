@@ -20,15 +20,20 @@ export default function LatestNews({ data }) {
         </Heading>
         <div className="flex flex-wrap -mx-[20px] xl:-mx-[30px] 2xl:-mx-[40px] 3xl:-mx-[100px] [&>*]:px-[20px] xl:[&>*]:px-[30px] 2xl:[&>*]:px-[40px] 3xl:[&>*]:px-[100px]">
           <div className="w-full sm:w-1/2">
-            <Link href={item.link || "#"} className="w-full block">
-              <div className="relative w-full aspect-[4/2.5] rounded-xl overflow-hidden mb-4 bg-gray-100">
+            <Link href={firstItem?.link || "#"} className="w-full block">
+              <div className="w-full aspect-[86/41] rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden relative z-0 mb-[15px] xl:mb-[20px] 2xl:mb-[25px] 3xl:mb-[30px]">
                 <Image
-                  src={item.image}
-                  alt={item.name}
+                  src={firstItem?.image}
+                  alt={firstItem?.name}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  unoptimized
                 />
+              </div>
+              <div className="text-[14px] xl:text-[16px] 2xl:text-[19.2px] 3xl:text-[24px] leading-normal font-semibold text-black mb-[10px] xl:mb-[10px] 2xl:mb-[15px] 3xl:mb-[17px]">
+                {firstItem?.name}
+              </div>
+              <div className="text-[11px] xl:text-[12.4px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-normal text-[#838383] mb-[10px] xl:mb-[10px] 2xl:mb-[15px] 3xl:mb-[17px]">
+                {firstItem?.date}
               </div>
               <div className="flex items-center justify-between px-1">
                 <Text
@@ -37,7 +42,7 @@ export default function LatestNews({ data }) {
                   className="font-semibold text-black"
                   animate={false}
                 >
-                  {item?.name}
+                  {firstItem?.name}
                 </Text>
                 <div className="text-[10px] xl:text-[11.4px] 2xl:text-[13.9px] 3xl:text-[13.6px] leading-none font-bold text-[#1577F0] flex items-center gap-1 hover:text-[#0061d8]">
                   Learn More
