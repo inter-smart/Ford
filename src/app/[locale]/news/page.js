@@ -1,6 +1,6 @@
 import InnerHero from "@/components/common/InnerHero";
-import LatestNews from "@/components/features/news/LatestNews";
-import NewsCardList from "@/components/features/news/NewsCardList";
+import LatestNewsSection from "@/components/features/news/LatestNewsSection";
+import NewsListSection from "@/components/features/news/NewsListSection";
 
 const local_data = {
   banner: {
@@ -27,7 +27,7 @@ const local_data = {
           alt: "service-info",
         },
         date: "29.01.2025",
-        slug: "news",
+        slug: "detail",
         title: "Ford Explorer: An Outstanding Companion",
         description:
           "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
@@ -39,7 +39,7 @@ const local_data = {
           alt: "service-info",
         },
         date: "29.01.2025",
-        slug: "news",
+        slug: "detail",
         title: "Ford Explorer: An Outstanding Companion",
         description:
           "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
@@ -47,11 +47,11 @@ const local_data = {
       {
         id: 3,
         media: {
-          url: "/images/latestNews2.png",
+          url: "/images/latestNews3.png",
           alt: "service-info",
         },
         date: "29.01.2025",
-        slug: "news",
+        slug: "detail",
         title: "Ford Explorer: An Outstanding Companion",
         description:
           "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
@@ -62,11 +62,11 @@ const local_data = {
     {
       id: 1,
       media: {
-        url: "/images/latestNews1.png",
+        url: "/images/product-1.jpg",
         alt: "service-info",
       },
       date: "29.01.2025",
-      slug: "news",
+      slug: "detail",
       title: "Ford Explorer: An Outstanding Companion",
       description:
         "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
@@ -74,11 +74,11 @@ const local_data = {
     {
       id: 2,
       media: {
-        url: "/images/latestNews2.png",
+        url: "/images/product-2.jpg",
         alt: "service-info",
       },
       date: "29.01.2025",
-      slug: "news",
+      slug: "detail",
       title: "Ford Explorer: An Outstanding Companion",
       description:
         "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
@@ -86,11 +86,83 @@ const local_data = {
     {
       id: 3,
       media: {
-        url: "/images/latestNews2.png",
+        url: "/images/product-3.jpg",
         alt: "service-info",
       },
       date: "29.01.2025",
-      slug: "news",
+      slug: "detail",
+      title: "Ford Explorer: An Outstanding Companion",
+      description:
+        "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
+    },
+    {
+      id: 4,
+      media: {
+        url: "/images/product-4.jpg",
+        alt: "service-info",
+      },
+      date: "29.01.2025",
+      slug: "detail",
+      title: "Ford Explorer: An Outstanding Companion",
+      description:
+        "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
+    },
+    {
+      id: 5,
+      media: {
+        url: "/images/product-5.jpg",
+        alt: "service-info",
+      },
+      date: "29.01.2025",
+      slug: "detail",
+      title: "Ford Explorer: An Outstanding Companion",
+      description:
+        "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
+    },
+    {
+      id: 6,
+      media: {
+        url: "/images/product-6.jpg",
+        alt: "service-info",
+      },
+      date: "29.01.2025",
+      slug: "detail",
+      title: "Ford Explorer: An Outstanding Companion",
+      description:
+        "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
+    },
+    {
+      id: 7,
+      media: {
+        url: "/images/product-7.jpg",
+        alt: "service-info",
+      },
+      date: "29.01.2025",
+      slug: "detail",
+      title: "Ford Explorer: An Outstanding Companion",
+      description:
+        "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
+    },
+    {
+      id: 8,
+      media: {
+        url: "/images/product-8.jpg",
+        alt: "service-info",
+      },
+      date: "29.01.2025",
+      slug: "detail",
+      title: "Ford Explorer: An Outstanding Companion",
+      description:
+        "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
+    },
+    {
+      id: 9,
+      media: {
+        url: "/images/product-9.jpg",
+        alt: "service-info",
+      },
+      date: "29.01.2025",
+      slug: "detail",
       title: "Ford Explorer: An Outstanding Companion",
       description:
         "<p>Available with plenty of features the Ford Explorer has a lot to offer if you're shopping for a three-row crossover SUV. Its outstanding quietness</p>",
@@ -104,8 +176,8 @@ export default function NewsPage({ data = local_data }) {
       {data?.banner?.enable__disable_banner_section && (
         <InnerHero data={data?.banner} />
       )}
-      <LatestNews data={data?.latestNews} />
-      <NewsCardList data={data?.newsListing} />
+      <LatestNewsSection data={data?.latestNews} />
+      <NewsListSection data={data?.newsListing} />
     </>
   );
 }
