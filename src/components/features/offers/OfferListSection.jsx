@@ -80,11 +80,11 @@ export default function OfferListSection({ data }) {
 
     const buttonLabel = visibleCount >= offerList.length ? "No more offers" : "Loading More ...";
     return (
-        <section className="w-full h-auto block my-[20px_40px] xl:my-[30px_74px] 2xl:my-[40px_90px] ">
+        <section className="w-full h-auto block my-[10px_20px] sm:my-[20px_40px] xl:my-[30px_74px] 2xl:my-[40px_90px] ">
             <div className="container">
-                <div className="flex flex-wrap w-full h-auto -mx-[-6px] xl:-mx-[-10px] 2xl:-mx-[-13px]">
+                <div className="flex flex-wrap h-auto -mx-[0] sm:-mx-[-6px] xl:-mx-[-10px] 2xl:-mx-[-13px]">
                       {visibleOffers.map((item, index) => (
-                        <div key={index} className="w-full sm:w-1/2 lg:w-1/3 h-auto p-[20px_6px] xl:p-[40px_10px] 2xl:p-[50px_12px] opacity-0 translate-y-[20px] animate-fadeUp">
+                        <div key={index} className="w-full sm:w-1/2 lg:w-1/3 h-auto p-[10px_0] sm:p-[20px_6px] xl:p-[40px_10px] 2xl:p-[50px_13px] opacity-0 translate-y-[20px] animate-fadeUp">
                             <OfferCard item={item} />
                         </div>
                     ))}

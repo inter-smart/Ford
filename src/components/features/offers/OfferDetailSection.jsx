@@ -6,14 +6,14 @@ import RequestAQuoteDialog from "@/components/common/RequestAQuoteDialog";
 export default function OfferDetailSection({ offerDtl, benefits }) {
   return (
     <>
-      <section className="w-full h-auto block mt-20px mb-10px sm:mb-[30px] sm:mb-[15px] xl:mt-[80px] xl:mb-[50px] 2xl:mt-[100px] 2xl:mb-[60px]">
+      <section className="w-full h-auto block mt-[20px] mb-[10px] sm:mt-[30px] sm:mb-[15px] xl:mt-[80px] xl:mb-[50px] 2xl:mt-[100px] 2xl:mb-[60px]">
         <div className="container">
           <div className="flex flex-wrap items-center -mx-[16px] xl:-mx-[20px] 2xl:-mx-[24px] [&>*]:px-[16px] [&>*]:xl:px-[20px] [&>*]:2xl:px-[24px]">
             {/* LEFT */}
             <div className="w-full sm:w-1/2 mb-[20px] sm:mb-[0]">
               <Heading
                 as="h2"
-                className="text-[20px] xl:text-[25px] 2xl:text-[30px] 3xl:text-[38px] leading-[1.35] font-semibold text-[#00095B] w-[50%] mb-[10px] xl:mb-[15px] 2xl:mb-[20px]"
+                className="text-[20px] xl:text-[25px] 2xl:text-[30px] 3xl:text-[38px] leading-[1.35] font-semibold text-[#00095B] w-[100%] md:w-[50%] mb-[10px] xl:mb-[15px] 2xl:mb-[20px]"
               >
                 {offerDtl?.title}
               </Heading>
