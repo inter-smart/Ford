@@ -73,7 +73,6 @@ export default function FleetCarlineSection({ categories, data }) {
                         alt={item.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        unoptimized
                       />
                     </div>
                     <div className="flex items-center justify-between px-1">

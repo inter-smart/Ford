@@ -43,7 +43,7 @@ export default function ServiceInfoSection({ data }) {
         </div>
         <div className="flex flex-wrap -mx-[20px] xl:-mx-[30px] 2xl:-mx-[40px] 3xl:-mx-[100px] [&>*]:px-[20px] xl:[&>*]:px-[30px] 2xl:[&>*]:px-[40px] 3xl:[&>*]:px-[100px]">
           <div className="w-full sm:w-1/2">
-            <div className="w-full max-w-[320px] sm:max-w-[576px] lg:max-w-full aspect-[86/69] rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px]   overflow-hidden mb-2 lg:mb-0">
+            <div className="w-full max-w-[320px] sm:max-w-[576px] lg:max-w-full aspect-[86/69] rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden mb-2 lg:mb-0">
               <Image
                 src={data?.media?.url}
                 alt={data?.media?.alt}

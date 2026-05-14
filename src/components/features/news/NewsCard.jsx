@@ -1,46 +1,37 @@
-"use client";
-
+import { cn } from "@/lib/utils";
 import parse from "html-react-parser";
-import { Heading } from "@/components/layout/Heading";
 import Image from "next/image";
 import Link from "next/link";
-import { Text } from "@/components/layout/Text";
 
-
-export default function NewsCard({ news, page = "" }) {
-  
+export default function NewsCard({ data, variant = "default" }) {
   return (
-    <Link href={`/news/${news?.slug}`} className="w-full h-auto">
-      <div className="w-full aspect-[403/306] h-[200px] lg:h-[218px] xl:h-[272px] 2xl:h-[326px] shrink-0 relative mb-[10px] md:mb-[15px] xl:mb-[18px] 2xl:mb-[21px]">
-        <Image
-          src={news?.media?.url}
-          alt={news?.media?.alt}
-          fill
-          className="object-cover rounded-[10px]"
-        />
-      </div>
-
-      <div className="">
-        <Heading
-          as={"h5"}
-          size={"heading5"}
-          className="leading-[1.5] font-semibold text-[#00142E]"
-        >
-          {news?.title}
-        </Heading>
-        <p className="text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[18px] text-[#838383] my-1 md:my-2 font-semibold">
-          {news?.date}
-        </p>
-        {page !== "news_detail" && (
-          <Text
-            size="text2"
-            as="div"
-            dangerouslySetInnerHTML={{
-              __html: news?.description,
-            }}
-            className="text-[#434343]"
-          ></Text>
+    <Link
+      href={data?.slug ? `/news/${data?.slug}` : "#"}
+      className="w-full block group"
+    >
+      <div
+        className={cn(
+          "w-full aspect-[244/180] lg:aspect-[86/41] rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden relative z-0 mb-[10px] lg:mb-[15px] xl:mb-[20px] 2xl:mb-[25px] 3xl:mb-[30px]",
+          variant == "list" && "aspect-[244/180] lg:aspect-[537/408]",
         )}
+      >
+        {data?.media?.url && (
+          <Image
+            src={data?.media.url}
+            alt={data?.media?.alt || data?.title || "News"}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        )}
+      </div>
+      <div className="text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[19.2px] 3xl:text-[24px] leading-normal font-semibold tracking-[-1%] text-black mb-[2px] lg:mb-[4px] 2xl:mb-[6px] 3xl:mb-[8px]">
+        {data?.title}
+      </div>
+      <div className="text-[11px] xl:text-[12.4px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-normal text-[#838383] mb-[2px] lg:mb-[4px] 2xl:mb-[6px] 3xl:mb-[8px]">
+        {data?.date}
+      </div>
+      <div className="text-[11px] xl:text-[12.4px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-normal text-[#434343] line-clamp-2 xl:max-w-11/12">
+        {parse(data?.description || "")}
       </div>
     </Link>
   );
