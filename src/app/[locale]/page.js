@@ -2,23 +2,26 @@ import dynamic from "next/dynamic";
 
 import HeroSection from "@/components/features/home/HeroSection";
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS }       from "@/lib/api/endpoints";
-import { buildMetadata }   from "@/lib/api/seo";
+import { ENDPOINTS } from "@/lib/api/endpoints";
+import { buildMetadata } from "@/lib/api/seo";
 
 const WelcomeSection = dynamic(
-  () => import("@/components/features/home/WelcomeSection")
+  () => import("@/components/features/home/WelcomeSection"),
 );
 
 const LegendarySection = dynamic(
-  () => import("@/components/features/home/LegendarySection")
+  () => import("@/components/features/home/LegendarySection"),
 );
 
 const ServiceSection = dynamic(
-  () => import("@/components/features/home/ServiceSection")
+  () => import("@/components/features/home/ServiceSection"),
 );
 
-import LocationSection       from "@/components/features/home/LocationSection";
-import InstagramFeedSection  from "@/components/features/home/InstagramFeedSection";
+const InstagramFeedSection = dynamic(
+  () => import("@/components/features/home/InstagramFeedSection"),
+);
+
+import LocationSection from "@/components/features/home/LocationSection";
 
 export async function generateMetadata() {
   const data = await apiFetch(ENDPOINTS.home, { cache: CACHE.ISR(60) });
@@ -26,7 +29,7 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  const data = await apiFetch(ENDPOINTS.home, { cache: CACHE.ISR(60) });
+  const data = await apiFetch(ENDPOINTS.home, { cache: CACHE.NO_STORE });
   const home_data = data?.home_acf;
 
   return (
@@ -43,9 +46,11 @@ export default async function Home() {
       {home_data?.services?.enable__disable_services && (
         <ServiceSection data={home_data?.services} />
       )}
-      <LocationSection />
+      {/* <LocationSection /> */}
       {/* <InsightSection /> */}
-      <InstagramFeedSection />
+      {/* {home_data?.instagram?.enable__disable_instagram && (
+        <InstagramFeedSection data={home_data?.instagram?.instagram} />
+      )} */}
     </>
   );
 }
