@@ -7,4 +7,5 @@ export const ENDPOINTS = {
   products:   "custom/v1/product",
   offersPage: "ford/v1/offerspage",
   offers:     "ford/v1/offers",
+  news:       "ford/v1/news",
 };
