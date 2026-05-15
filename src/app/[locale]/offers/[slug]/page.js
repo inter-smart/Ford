@@ -73,13 +73,30 @@ const local_data = {
   },
 };
 
-export default function Page({ data = local_data }) {
+
+async function getFormOptions() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/offers-form?locale=en`,
+      { next: { revalidate: 3600 } }
+    );
+    const json = await res.json();
+    return json?.data || null;
+  } catch (error) {
+    console.error("Failed to fetch form options:", error);
+    return null;
+  }
+}
+
+export default async function Page({ data = local_data }) {
+  const formData = await getFormOptions();
+  
   return (
     <>
       {data?.banner?.enable__disable_banner_section && (
         <InnerHero data={local_data?.banner} />
       )}
-      <OfferDetailSection data={local_data?.offerInfo} />
+      <OfferDetailSection data={local_data?.offerInfo} formData={formData} />
     </>
   );
 }
