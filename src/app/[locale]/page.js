@@ -1,68 +1,32 @@
 import dynamic from "next/dynamic";
 
 import HeroSection from "@/components/features/home/HeroSection";
+import { apiFetch, CACHE } from "@/lib/api/client";
+import { ENDPOINTS }       from "@/lib/api/endpoints";
+import { buildMetadata }   from "@/lib/api/seo";
 
 const WelcomeSection = dynamic(
-  () => import("@/components/features/home/WelcomeSection"),
-  { ssr: true }
+  () => import("@/components/features/home/WelcomeSection")
 );
 
 const LegendarySection = dynamic(
-  () => import("@/components/features/home/LegendarySection"),
-  { ssr: true }
+  () => import("@/components/features/home/LegendarySection")
 );
 
 const ServiceSection = dynamic(
-  () => import("@/components/features/home/ServiceSection"),
-  { ssr: true }
+  () => import("@/components/features/home/ServiceSection")
 );
 
-import LocationSection from "@/components/features/home/LocationSection";
-import InsightSection from "@/components/features/home/InsightSection";
-import InstagramFeedSection from "@/components/features/home/InstagramFeedSection";
-
-async function getPageData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/home`,
-    { next: { revalidate: 60 } }
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch Home data");
-  }
-
-  return res.json();
-}
+import LocationSection       from "@/components/features/home/LocationSection";
+import InstagramFeedSection  from "@/components/features/home/InstagramFeedSection";
 
 export async function generateMetadata() {
-  const data = await getPageData();
-
-  return {
-    title: data?.seo?.title,
-    description: data?.seo?.description,
-    openGraph: {
-      title: data?.seo?.title,
-      description: data?.seo?.description,
-      images: [
-        {
-          url: data?.seo?.image,
-          width: 1200,
-          height: 630,
-          alt: data?.seo?.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: data?.seo?.title,
-      description: data?.seo?.description,
-      images: [data?.seo?.image],
-    },
-  };
+  const data = await apiFetch(ENDPOINTS.home, { cache: CACHE.ISR(60) });
+  return buildMetadata(data?.seo);
 }
 
 export default async function Home() {
-  const data = await getPageData();
+  const data = await apiFetch(ENDPOINTS.home, { cache: CACHE.ISR(60) });
   const home_data = data?.home_acf;
 
   return (
@@ -79,9 +43,9 @@ export default async function Home() {
       {home_data?.services?.enable__disable_services && (
         <ServiceSection data={home_data?.services} />
       )}
-      {/* <LocationSection /> */}
+      <LocationSection />
       {/* <InsightSection /> */}
-      {/* <InstagramFeedSection /> */}
+      <InstagramFeedSection />
     </>
   );
 }
