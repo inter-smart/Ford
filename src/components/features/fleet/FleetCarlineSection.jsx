@@ -88,6 +88,7 @@ export default function FleetCarlineSection({ data }) {
                       <Image
                         src={item.image}
                         alt={item.name}
+                        unoptimized
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />

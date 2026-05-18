@@ -33,6 +33,7 @@ export default function InnerHero({ data }) {
             data?.desktop_image?.alt || data?.backgroundImage?.alt || "Banner"
           }
           fill
+          unoptimized
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw"
           className="-z-2 object-cover pointer-events-none"
           priority={true}
