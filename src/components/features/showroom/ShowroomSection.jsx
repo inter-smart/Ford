@@ -5,6 +5,8 @@ import { Heading } from "@/components/layout/Heading";
 import { cn } from "@/lib/utils";
 import parse from "html-react-parser";
 import Image from "next/image";
+import { apiFetch, CACHE } from "@/lib/api/client";
+import { ENDPOINTS } from "@/lib/api/endpoints";
 
 const normalizeLocation = (loc, idx) => ({
   id: idx,
@@ -25,10 +27,10 @@ export default function ShowroomSection({ tabs = [], initialTabIndex = 0, initia
     setActiveTabIndex(tabIndex);
     setLoading(true);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/showroom-service-center/tab/${tabIndex}?page=1&pageSize=12`
+      const json = await apiFetch(
+        `${ENDPOINTS.showroomTab}/${tabIndex}?page=1&pageSize=12`,
+        { cache: CACHE.NO_STORE }
       );
-      const json = await res.json();
       setRawLocations(json?.data?.location_details ?? []);
     } catch (_) {
       setRawLocations([]);
