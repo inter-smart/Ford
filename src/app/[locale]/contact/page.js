@@ -23,19 +23,9 @@ export default async function ContactPage() {
   const branchData = data?.contact_acf?.branches_section;
   const mapData    = data?.contact_acf?.map_section;
 
-  const heroData = banner?.enable__disable_banner_section
-    ? {
-        title:         banner.banner_title,
-        desktop_image: banner.desktop_banner_image,
-        mobile_image:  banner.mobile_banner_image,
-        button_text:   null,
-        button:        null,
-      }
-    : null;
-
   return (
     <>
-      {heroData && <InnerHero data={heroData} />}
+      {banner?.enable__disable_banner_section && <InnerHero data={banner} />}
       {formData?.enable__disable_form_section && <ContactFormSection data={formData} />}
       {branchData?.enable__disable_branches_section && <BranchSection data={branchData} />}
       {mapData?.enable__disable_map_section && <ContactMapSection data={mapData} />}
