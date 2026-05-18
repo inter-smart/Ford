@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import parse from "html-react-parser";
 
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -10,6 +11,14 @@ import { Heading } from "@/components/layout/Heading";
 import { Text } from "@/components/layout/Text";
 
 export default function FleetContactSection({ data }) {
+  const cards = data?.items?.map((item) => ({
+    icon: item.icon?.url,
+    iconAlt: item.icon?.alt || "",
+    description: item.text,
+    buttonText: item.button_text,
+    buttonLink: item.button_link?.url || "#",
+  })) ?? [];
+
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: false,
@@ -38,7 +47,7 @@ export default function FleetContactSection({ data }) {
                 size="text1"
                 className="text-black [&_p]:mb-[15px] xl:[&_p]:mb-[25px] 2xl:[&_p]:mb-[30px] 3xl:[&_p]:mb-[35px]"
               >
-                {data?.description}
+                {parse(data?.description || "")}
               </Text>
             </div>
           </div>
@@ -46,21 +55,18 @@ export default function FleetContactSection({ data }) {
           <div className="w-full sm:w-2/3">
             <div ref={emblaRef} className="w-full max-w-full overflow-hidden">
               <div className="flex touch-pan-y touch-pinch-zoom -mx-2.5 lg:-mx-[13.5px] xl:-mx-[17px] 2xl:-mx-[20px] 3xl:-mx-[25px]">
-                {data?.cards?.map((item, idx) => (
+                {cards.map((item, idx) => (
                   <div
                     key={"items" + idx}
                     className={cn(
                       "flex-[0_0_180px] sm:flex-[0_0_200px] lg:flex-[0_0_33.33%] min-w-0 select-none px-2.5 lg:px-[13.5px] xl:px-[17px] 2xl:px-[20px] 3xl:px-[25px]",
                     )}
                   >
-                    <div
-                      href={"/"}
-                      className="w-full h-full block bg-[#f7f7f7] rounded-[8.8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] p-[15px_18px]  xl:p-[25px_22px] 2xl:p-[30px_26px] 3xl:p-[38px_32px]"
-                    >
+                    <div className="w-full h-full block bg-[#f7f7f7] rounded-[8.8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] p-[15px_18px] xl:p-[25px_22px] 2xl:p-[30px_26px] 3xl:p-[38px_32px]">
                       <div className="w-full mb-[10px] xl:mb-[15px] 2xl:mb-[25px] 3xl:mb-[30px]">
                         <Image
                           src={item?.icon}
-                          alt={item?.title}
+                          alt={item?.iconAlt}
                           width={60}
                           height={54}
                           className="w-[35px] xl:w-[40px] 2xl:w-[47px] 3xl:w-[60px] object-cover group-hover:scale-105 transition-transform duration-500"

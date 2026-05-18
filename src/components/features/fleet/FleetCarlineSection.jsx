@@ -8,11 +8,28 @@ import { cn } from "@/lib/utils";
 import { Heading } from "@/components/layout/Heading";
 import { Text } from "@/components/layout/Text";
 
-export default function FleetCarlineSection({ categories, data }) {
-  const [activeFilter, setActiveFilter] = useState(categories?.[1]?.slug ?? "");
+const toSlug = (name) => name?.toLowerCase().replace(/\s+/g, "-") ?? "";
 
-  const filteredVehicles =
-    data?.filter((item) => item.category === activeFilter) || [];
+export default function FleetCarlineSection({ data }) {
+  const categories = data?.car_types?.map((ct) => ({
+    id: ct.term_id,
+    name: ct.term_name,
+    slug: toSlug(ct.term_name),
+  })) ?? [];
+
+  const vehicles = data?.car_types?.flatMap((ct) =>
+    ct.cars.map((car) => ({
+      id: car.post_id,
+      name: car.title,
+      image: car.image || "/images/placeholder.png",
+      category: toSlug(ct.term_name),
+      link: `/vehicles/${car.slug}`,
+    }))
+  ) ?? [];
+
+  const [activeFilter, setActiveFilter] = useState(categories?.[0]?.slug ?? "");
+
+  const filteredVehicles = vehicles.filter((item) => item.category === activeFilter);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -42,7 +59,7 @@ export default function FleetCarlineSection({ categories, data }) {
                 size={"none"}
                 className="text-[24px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-normal font-semibold text-black"
               >
-                Fleet Carline
+                {data?.title}
               </Heading>
             </div>
             <FilterItems
