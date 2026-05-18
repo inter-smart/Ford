@@ -348,13 +348,13 @@ const onSubmit = async (formData) => {
           />
 
           {/* Submit Button */}
-<Button
-  type="submit"
-  disabled={!form.formState.isValid || form.formState.isSubmitting}
-  className="text-[14px] font-bold text-white bg-[#1577F0] hover:bg-[#0f5eda] px-10 h-[40px] 2xl:h-[45px] 3xl:h-[50px] mt-[20px] rounded-full cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
->
-  {form.formState.isSubmitting ? "Submitting..." : "Send"}
-</Button>
+          <Button
+            type="submit"
+            disabled={!form.formState.isValid || form.formState.isSubmitting}
+            className="text-[14px] font-bold text-white bg-[#1577F0] hover:bg-[#0f5eda] px-10 h-[40px] 2xl:h-[45px] 3xl:h-[50px] mt-[20px] rounded-full cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {form.formState.isSubmitting ? "Submitting..." : "Send"}
+          </Button>
 
         </form>
       </Form>
