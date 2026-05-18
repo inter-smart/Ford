@@ -16,11 +16,11 @@ export default function AboutVehicleSection({ data, badge }) {
               )}
               <Heading
                 as="h1"
-                className="text-[22px] sm:text-[24px] md:text-[28px] xl:text-[32px] 2xl:text-[38px] 3xl:text-[45px] leading-[1] font-semibold text-black mb-[15px] lg:mb-[20px] 3xl:mb-[25px]"
+                className="text-[22px] sm:text-[24px] md:text-[28px] xl:text-[32px] 2xl:text-[38px] 3xl:text-[45px] leading-[1] font-medium font-antenna text-black mb-[15px] lg:mb-[20px] 3xl:mb-[25px]"
               >
                 {data?.title_about_vehicle}
               </Heading>
-              <div className="text-[13px] sm:text-[14px] lg:text-[15px] 2xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-black lg:max-w-[500px] 2xl:max-w-[570px] mb-[20px]">
+              <div className="text-[13px] sm:text-[14px] lg:text-[15px] xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-black lg:max-w-[500px] 2xl:max-w-[570px] mb-[20px]">
                 {data?.description_about_vehicle}
               </div>
               <Link

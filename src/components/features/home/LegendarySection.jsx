@@ -488,8 +488,8 @@ export default function LegendarySection({ data = {} }) {
                   className={`group 2xl:text-[14px] xl:text-[12px] 3xs:text-[11px] text-[10px] text-black h-[40px] w-full flex items-center gap-2 px-4 py-2 rounded-full
                     border border-[#E8E8E8] transition-all cursor-pointer ${
                       selectedCategory === item.name
-                        ? "bg-[#1577F0] text-white"
-                        : "bg-[#F8F9FD] text-black hover:bg-[#1577F0] hover:text-white"
+                        ? "bg-[#1577F0] text-white font-semibold"
+                        : "bg-[#F8F9FD] font-normal text-black hover:bg-[#1577F0] hover:text-white"
                     }`}
                 >
                   {item.image && (
@@ -529,7 +529,7 @@ export default function LegendarySection({ data = {} }) {
                     <TabsTrigger
                       key={brand.name}
                       value={brand.name}
-                      className="flex flex-col items-center gap-1 border-b-2 border-transparent shadow-none h-auto ring-0 cursor-pointer relative
+                      className="group flex flex-col items-center gap-1 border-b-2 border-transparent shadow-none h-auto ring-0 cursor-pointer relative
                       after:absolute after:content-[''] after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:m-auto after:bg-transparent
                       data-[state=active]:after:bg-[#0052FF] data-[state=active]:after:w-full
                       data-[state=active]:text-black rounded-none
@@ -543,7 +543,7 @@ export default function LegendarySection({ data = {} }) {
                         height={50}
                         className="max-w-[90px] mb-[10px] object-contain"
                       />
-                      <span className="text-[14px] 2xl:text-[16px] font-medium text-[#00142E]">
+                      <span className="text-[14px] 2xl:text-[16px] font-normal group-data-[state=active]:font-semibold text-[#00142E]">
                         {brand.name}
                       </span>
                     </TabsTrigger>
@@ -558,7 +558,7 @@ export default function LegendarySection({ data = {} }) {
                           <Heading
                             size="heading1"
                             as="h2"
-                            className="text-black font-medium lg:mb-[35px] sm:mb-[25px] mb-[15px] max-w-[360px] rtl:ml-auto"
+                            className="text-black font-medium lg:mb-[35px] sm:mb-[25px] mb-[15px] max-w-[360px] rtl:ml-auto font-antenna"
                           >
                             {currentCar.name}
                           </Heading>
@@ -573,19 +573,19 @@ export default function LegendarySection({ data = {} }) {
                           )}
                         </div>
 
-                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-0 right-0 lg:top-[-120px] min-w-[200px] sm:mb-0 mb-[30px]">
+                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-[-120px] right-0 min-w-[200px] sm:mb-0 mb-[30px]">
                           <div className="flex items-center rtl:max-sm:justify-end gap-4">
-                            <span className="text-[11px] 2xl:text-[14px] 3xl:text-[16px] text-black font-medium uppercase">
+                            <span className="text-[11px] 2xl:text-[14px] 3xl:text-[16px] text-black font-semibold uppercase">
                               {currentCar.name} Models:
                             </span>
                             <Select
                               value={selectedModelKey}
                               onValueChange={setSelectedModelKey}
                             >
-                              <SelectTrigger className="!text-[11px] md:!text-[12px] 2xl:!text-[14px] max-w-full min-h-[35px] lg:min-h-[40px] 2xl:min-h-[50px] px-6 border border-[#CCCCCC] text-[#000000] w-[150px] lg:w-[200px] bg-[#F8F9FD] rounded-full font-medium">
+                              <SelectTrigger className="!text-[11px] md:!text-[12px] 2xl:!text-[14px] max-w-full min-h-[35px] lg:min-h-[40px] 2xl:min-h-[50px] px-6 border border-[#CCCCCC] text-[#00142E] w-[150px] lg:w-[200px] bg-[#F8F9FD] rounded-full font-normal">
                                 <SelectValue placeholder="Select model" />
                               </SelectTrigger>
-                              <SelectContent className="3xl:text-[18px] 2xl:text-[16px] md:text-[12px] text-[10px] bg-white border border-[#CCCCCC] rounded-md shadow-md font-medium text-[#1D0A44]">
+                              <SelectContent className="3xl:text-[18px] 2xl:text-[16px] md:text-[12px] text-[10px] bg-white border border-[#CCCCCC] rounded-md shadow-md font-normal text-black">
                                 {modelsInSelectedBrand.map((car) => (
                                   <SelectItem key={car.key} value={car.key}>
                                     {car.name}
@@ -594,7 +594,6 @@ export default function LegendarySection({ data = {} }) {
                               </SelectContent>
                             </Select>
                           </div>
-
                           {/* Mini video/image preview */}
                           {isVisible && currentCar.video && (
                             <div className="absolute 2xl:top-[130px] top-[40%] sm:top-[100px] ltr:right-0 rtl:left-0 ltr:sm:right-[100px] rtl:xs:left-[50px] rtl:sm:left-[100px] w-full 2xl:max-w-[230px] lg:max-w-[200px] max-w-[150px] shadow-md">
@@ -629,7 +628,6 @@ export default function LegendarySection({ data = {} }) {
                           )}
                         </div>
                       </div>
-
                       {/* Big car image */}
                       <div className="relative mt-10 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[80px]">
                         <Image
@@ -667,7 +665,6 @@ export default function LegendarySection({ data = {} }) {
 
                               const isSelected =
                                 selectedColorTitle === color.title;
-
                               return (
                                 <button
                                   key={i}
@@ -694,7 +691,7 @@ export default function LegendarySection({ data = {} }) {
                                           backgroundColor: color.code || "#ddd",
                                         }}
                                       />
-                                      <div className="text-[13px] 2xl:text-[14px] leading-[1] font-semibold text-black whitespace-nowrap mx-auto absolute z-1 left-0 right-0 bottom-[-25px] sm:bottom-[-30px] flex justify-center">
+                                      <div className="text-[13px] 2xl:text-[14px] leading-[1] font-normal text-black whitespace-nowrap mx-auto absolute z-1 left-0 right-0 bottom-[-25px] sm:bottom-[-30px] flex justify-center">
                                         {color.title}
                                       </div>
                                     </>

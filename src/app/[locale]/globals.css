@@ -7,7 +7,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-fordAntenna: var(--font-fordAntenna);
+  --font-fordf1: var(--font-fordf1);
+  --font-antenna: var(--font-antenna);
 
   --color-base1: #f1d1a8;
   --color-base2: #cdcdcd;
@@ -88,7 +89,7 @@
 }
 
 body {
-  font-family: var(--font-fordAntenna), Arial, sans-serif;
+  font-family: var(--font-fordf1), Arial, sans-serif;
 }
 
 @layer components {
@@ -101,51 +102,55 @@ body {
   }
 
   .typography {
+    --text-color: black;
+
     & > * {
-      @apply my-[10px] lg:my-[15px];
+      @apply mb-[10px] lg:mb-[24px] 2xl:mb-[30px] 3xl:mb-[35px];
     }
 
-    p,
-    & {
-      @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] font-normal leading-normal text-[#2d2929];
+    p, &, li, td {
+      @apply text-[12px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-(--text-color);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      @apply leading-normal font-semibold text-(--text-color);
     }
 
     h1 {
-      @apply text-[24px] lg:text-[36px] xl:text-[43px] 2xl:text-[48px] 3xl:text-[65px] font-semibold leading-tight text-black;
+      @apply text-[24px] lg:text-[36px] xl:text-[43px] 2xl:text-[48px] 3xl:text-[65px];
     }
 
     h2 {
-      @apply text-[20px] lg:text-[26px] xl:text-[32px] 2xl:text-[44px] 3xl:text-[54px] font-semibold leading-tight text-black;
+      @apply text-[19px] lg:text-[26px] xl:text-[32px] 2xl:text-[44px] 3xl:text-[54px];
     }
 
     h3 {
-      @apply text-[14px] lg:text-[16px] xl:text-[20px] 2xl:text-[26px] 3xl:text-[30px] font-semibold leading-tight text-black;
+      @apply text-[15px] xl:text-[22.2px] 2xl:text-[26.6px] 3xl:text-[33.3px];
     }
 
     h5 {
-      @apply text-[13px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px] 3xl:text-[25px] font-semibold leading-tight text-black;
+      @apply text-[13px] xl:text-[16px] 2xl:text-[19.2px] 3xl:text-[24px];
     }
 
     h6 {
-      @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] font-semibold leading-tight text-black;
+      @apply text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px];
     }
-
-    ul,
-    ol {
-      @apply pl-[20px] lg:pl-[30px];
-    }
-
+    
     ul > li,
     ol > li {
-      @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] font-normal leading-normal text-[#2d2929] my-[10px] lg:my-[15px];
+      @apply mb-[10px] lg:mb-[20px] 2xl:mb-[26px] 3xl:mb-[30px];
     }
 
     ul > li {
-      @apply list-disc;
+      @apply ml-4.5 sm:pl-2 list-image-[url('/images/list-icon.svg')];
     }
-  }
 
- 
+    &[dir="rtl"] ul > li {
+      @apply mr-4.5 sm:pr-2;
+    }
+
+
+  }
 }
 
 .outlined-text {
@@ -167,12 +172,22 @@ body {
   animation: fade-in-up 0.4s ease forwards;
 }
 
-
-.leaflet-marker-icon{
+.leaflet-marker-icon {
   width: 30px !important;
   height: 30px !important;
   object-fit: contain;
 }
-.leaflet-control-attribution{
+.leaflet-control-attribution {
   display: none;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.5s ease forwards;
 }

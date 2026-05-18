@@ -1,19 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      "dev18.intersmarthosting.in",
-    ], 
-  },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        canvas: false,
-      };
-    }
-    return config;
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "dev18.intersmarthosting.in",
+        pathname: "/**",
+      },
+    ],
+    qualities: [75, 100],
   },
 };
+
+
+
 export default nextConfig;

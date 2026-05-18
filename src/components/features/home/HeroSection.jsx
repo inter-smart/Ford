@@ -13,6 +13,8 @@ export default function HeroSection({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
 
+  if (!data?.banners || data.banners.length === 0) return null;
+
   return (
     <section className="w-full max-xs:h-[480px] xs:h-dvh xs:min-h-[570px] 2xl:min-h-[500px] relative z-0">
       <Swiper
@@ -31,7 +33,7 @@ export default function HeroSection({ data }) {
           <SwiperSlide key={index} className="!h-auto">
             <div className="w-full h-full block relative z-0">
               <div className="h-full w-full absolute -z-2 inset-0">
-                {item?.image__video === "video" ? (
+                {item?.image__video === "video" && item?.video_home_banner?.url ? (
                   <video
                     autoPlay
                     preload="auto"
@@ -40,22 +42,24 @@ export default function HeroSection({ data }) {
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover absolute -z-1 top-0 left-0"
+                    className="w-full h-full object-cover absolute -z-1 top-0 left-0 bg-black"
                   >
                     <source
                       src={item?.video_home_banner?.url}
                       type="video/mp4"
                     />
                   </video>
-                ) : (
+                ) : item?.image_home_banner?.url ? (
                   <Image
-                    quality={100}
+                    quality={75}
                     src={item?.image_home_banner?.url}
-                    alt={item?.image_home_banner?.alt}
+                    alt={item?.image_home_banner?.alt || "Banner Image"}
                     fill
-                    sizes="768px"
-                    className="-z-1 object-cover"
+                    sizes="100vw"
+                    className="-z-1 object-cover bg-gray-200"
                   />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-r from-blue-900 to-black -z-1 absolute inset-0" />
                 )}
               </div>
               <div className="container w-full h-full flex max-sm:flex-wrap items-end justify-between relative z-2">
@@ -63,7 +67,7 @@ export default function HeroSection({ data }) {
                   <Heading
                     size="heading1"
                     as="h2"
-                    className="text-white mb-[20px] sm:mb-[30px]"
+                    className="font-semibold text-white mb-[20px] sm:mb-[30px]"
                     dangerouslySetInnerHTML={{
                       __html: item?.title_home_banner || "",
                     }}
@@ -77,7 +81,7 @@ export default function HeroSection({ data }) {
                         item?.button_home_banner?.button_link_home_banner
                           ?.target
                       }
-                      className="2xl:text-[14px] xl:text-[12px] text-[10px] font-normal  text-white  min-w-[130px] 2xl:h-[40px] h-[35px] flex items-center justify-center bg-[#1A73E8] px-6 rounded-full hover:bg-[#fff] hover:text-black transition cursor-pointer"
+                      className="2xl:text-[14px] xl:text-[12px] text-[10px] font-bold  text-white  min-w-[130px] 2xl:h-[40px] h-[35px] flex items-center justify-center bg-[#1A73E8] px-6 rounded-full hover:bg-[#fff] hover:text-black transition cursor-pointer"
                     >
                       {item?.button_home_banner?.button_text_home_banner}
                     </Link>
@@ -99,9 +103,8 @@ export default function HeroSection({ data }) {
                 className="w-[8px] h-[8px] 2xl:w-[12px] 2xl:h-[12px] cursor-pointer flex items-center justify-center"
               >
                 <svg
-                  className={`w-full h-full ${
-                    isActive ? "fill-[#1577F0]" : "fill-white"
-                  }`}
+                  className={`w-full h-full ${isActive ? "fill-[#1577F0]" : "fill-white"
+                    }`}
                   viewBox="0 0 8 10"
                 >
                   <path d="M7.07581 4.53117C7.07581 4.66094 7.01258 4.77988 6.90674 4.84913L0.558838 9.00398C0.499823 9.04282 0.431925 9.06239 0.363877 9.06239C0.306066 9.06239 0.248255 9.04824 0.195563 9.01979C0.0749733 8.95475 0 8.82679 0 8.68602V0.376317C0 0.235704 0.0749731 0.107888 0.195412 0.0426999C0.310131 -0.0193263 0.449389 -0.0134549 0.558838 0.0582065L4.4144 2.58171L6.90674 4.21321C7.01258 4.28246 7.07581 4.4014 7.07581 4.53117Z" />
@@ -113,9 +116,8 @@ export default function HeroSection({ data }) {
             <button
               key={index}
               onClick={() => swiperRef.current?.slideToLoop(index)}
-              className={`w-[8px] h-[8px] 2xl:w-[12px] 2xl:h-[12px] rounded-full cursor-pointer ${
-                isActive ? "bg-[#1577F0]" : "bg-white"
-              }`}
+              className={`w-[8px] h-[8px] 2xl:w-[12px] 2xl:h-[12px] rounded-full cursor-pointer ${isActive ? "bg-[#1577F0]" : "bg-white"
+                }`}
             />
           );
         })}

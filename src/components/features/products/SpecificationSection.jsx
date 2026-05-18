@@ -4,7 +4,7 @@ export default function SpecificationSection({ data }) {
   return (
     <section className="w-full h-auto block">
       <div className="w-full h-auto block relative z-0">
-        <div className="w-full h-auto aspect-[1280/610] overflow-hidden block">
+        <div className="w-full h-auto aspect-[1280/810] sm:aspect-[1280/610]  overflow-hidden block">
           {data?.video_specifications?.url ? (
             <video
               autoPlay
@@ -23,7 +23,7 @@ export default function SpecificationSection({ data }) {
             />
           )}
         </div>
-        <div className="container [&>*]:w-1/3 md:max-w-[670px] 2xl:max-w-[740px] 3xl:max-w-[800px] md:px-0 pb-[20px] sm:pb-[40px] lg:pb-[60px] 2xl:pb-[80px] [&>*]:p-[5px] flex flex-wrap justify-between absolute z-1 inset-[auto_0_0_0]">
+        <div className="container [&>*]:w-1/2 sm:[&>*]:w-1/4 md:max-w-[850px] 2xl:max-w-[1000px] 3xl:max-w-[1200px] md:px-0 pb-[20px] sm:pb-[40px] lg:pb-[60px] 2xl:pb-[80px] [&>*]:p-[5px] flex flex-wrap justify-between absolute z-1 inset-[auto_0_0_0]">
           {data?.specs?.map((item, index) => (
             <div
               key={index}

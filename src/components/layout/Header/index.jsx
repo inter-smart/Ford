@@ -21,7 +21,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { Search, X } from "lucide-react";
 
 const menuLinkClass =
-  "3xl:text-[16px] 2xl:text-[14px] text-[12px] text-white 2xl:px-[20px] xl:px-[15px] px-[8px] hover:text-[#036EEE]";
+  "3xl:text-[16px] 2xl:text-[14px] text-[12px] 2xl:px-[20px] xl:px-[15px] px-[8px] hover:text-[#036EEE] transition-colors duration-200";
 
 export default function Header({ locale, data: header_acf }) {
   const router = useRouter();
@@ -41,6 +41,20 @@ export default function Header({ locale, data: header_acf }) {
   const [allCars, setAllCars] = React.useState([]);
   const [filtered, setFiltered] = React.useState([]);
   const searchRef = React.useRef();
+
+  const isActive = (url) => {
+    if (!url) return false;
+    const normalize = (p) => {
+      if (!p) return "/";
+      try {
+        const path = p.startsWith("http") ? new URL(p).pathname : p;
+        return path.replace(/^\/(en|ar)/, "").replace(/\/$/, "") || "/";
+      } catch (e) {
+        return p.replace(/^\/(en|ar)/, "").replace(/\/$/, "") || "/";
+      }
+    };
+    return normalize(url) === normalize(pathname);
+  };
 
   React.useEffect(() => {
     async function fetchCars() {
@@ -101,21 +115,30 @@ export default function Header({ locale, data: header_acf }) {
     };
   }, [searchOpen]);
 
+  const isDarkBgPage =
+    pathname.includes("/privacy-policy") ||
+    pathname.includes("/terms-conditions");
+
   if (!header_acf) return null;
 
   return (
     <header>
-      <div className="w-full absolute top-0 left-0 z-10 bg-transparent">
+      <div className={`w-full absolute top-0 left-0 z-10 ${isDarkBgPage ? "bg-[#0A0A0A]" : "bg-transparent"}`}>
         <div className="container">
           <div className="w-full flex flex-wrap items-center justify-between py-[20px]">
             {/* Main menu */}
             <NavigationMenu className="max-lg:hidden">
               <NavigationMenuList className="flex gap-0 items-center rtl:flex-row-reverse">
-                {header_acf?.left_menu_items.map((item, index) => (
+                {header_acf?.left_menu_items?.map((item, index) => (
                   <NavigationMenuItem key={index}>
                     <Link href={item?.menu_url?.url} passHref>
                       <NavigationMenuLink asChild>
-                        <span className={menuLinkClass}>
+                        <span
+                          className={`${menuLinkClass} ${isActive(item?.menu_url?.url)
+                              ? "text-[#036EEE] font-semibold"
+                              : "text-white font-normal"
+                            }`}
+                        >
                           {item?.menu_title}
                         </span>
                       </NavigationMenuLink>
@@ -141,11 +164,16 @@ export default function Header({ locale, data: header_acf }) {
             {/* Right Menu */}
             <NavigationMenu>
               <NavigationMenuList className="flex items-center gap-0 rtl:flex-row-reverse">
-                {header_acf?.right_menu_items.map((item, index) => (
+                {header_acf?.right_menu_items?.map((item, index) => (
                   <NavigationMenuItem key={index} className="max-lg:hidden">
                     <Link href={item?.menu_url?.url} passHref>
                       <NavigationMenuLink asChild>
-                        <span className={menuLinkClass}>
+                        <span
+                          className={`${menuLinkClass} ${isActive(item?.menu_url?.url)
+                            ? "text-[#036EEE] font-semibold"
+                            : "text-white font-normal"
+                            }`}
+                        >
                           {item?.menu_title}
                         </span>
                       </NavigationMenuLink>
@@ -168,7 +196,7 @@ export default function Header({ locale, data: header_acf }) {
                       }
                       alt={locale === "en" ? "Arabic" : "English"}
                       width={20}
-                      height={15}
+                      height={18}
                       className="w-[20px] h-[18px] object-contain"
                     />
                     <span
@@ -193,9 +221,8 @@ export default function Header({ locale, data: header_acf }) {
                   {/* Search Panel */}
                   <div
                     ref={searchPanelRef}
-                    className={`absolute right-0 top-10 bg-white rounded-md sm:rounded-lg w-80 overflow-hidden ${
-                      searchOpen ? "max-h-[400px] p-2 sm:p-4" : "max-h-0 p-0"
-                    }`}
+                    className={`absolute right-0 top-10 bg-white rounded-md sm:rounded-lg w-80 overflow-hidden ${searchOpen ? "max-h-[400px] p-2 sm:p-4" : "max-h-0 p-0"
+                      }`}
                   >
                     <input
                       type="text"
@@ -277,10 +304,18 @@ export default function Header({ locale, data: header_acf }) {
                             >
                               <Link
                                 href={item?.menu_url?.url}
-                                className="relative block text-[16px] font-medium  py-1 transition-all duration-300 group"
+                                className={`relative block text-[16px] font-medium py-1 transition-all duration-300 group ${isActive(item?.menu_url?.url)
+                                  ? "text-[#1577F0]"
+                                  : "text-white"
+                                  }`}
                               >
                                 {item?.menu_title}
-                                <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#1577F0] transition-all duration-300 group-hover:w-full"></span>
+                                <span
+                                  className={`absolute left-0 bottom-0 h-[2px] bg-[#1577F0] transition-all duration-300 ${isActive(item?.menu_url?.url)
+                                    ? "w-full"
+                                    : "w-0 group-hover:w-full"
+                                    }`}
+                                ></span>
                               </Link>
                             </li>
                           ))}
