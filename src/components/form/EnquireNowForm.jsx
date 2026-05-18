@@ -184,20 +184,38 @@ export function EnquireNowForm({ dealers = [] }) {
       .replace(/^[ \t]+|[ \t]+$/gm, "");
   };
 
-  async function onSubmit(data) {
+async function onSubmit(data) {
     setIsSubmitting(true);
     try {
-      const formData = new FormData();
-      formData.append("name", data.fullName);
-      formData.append("email", data.email);
-      formData.append("phone", data.phone);
-      formData.append("dealer", data.selectDealer);
-      formData.append("message", data.message || "");
-      formData.append("commercial_messages", data.installationSupport);
-      formData.append("agree_to_terms", data.agreeToTerms ? "1" : "0");
+      const payload = {
+        fullName:            data.fullName,
+        email:               data.email,
+        phone:               data.phone,
+        dealer:              data.selectDealer,
+        message:             data.message || "",
+        commercial_messages: data.installationSupport,
+        agree_to_terms:      data.agreeToTerms ? "1" : "0",
+        source_page_id:      typeof window !== "undefined" ? window.location.pathname : "",
+        source_page_title:   typeof document !== "undefined" ? document.title : "",
+      };
 
-      setIsSuccess(true);
-      form.reset();
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/offers-form/submit`,
+        {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify(payload),
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+        setIsSuccess(true);
+        form.reset();
+      } else {
+        console.error(result.message || "Submission failed.");
+      }
     } catch (error) {
       console.error("Submission Error:", error);
     } finally {
