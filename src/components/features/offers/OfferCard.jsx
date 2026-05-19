@@ -1,9 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import parse from "html-react-parser";
 import { Heading } from "@/components/layout/Heading";
-import { Text } from "@/components/layout/Text";
 
 export default function OfferCard({ data }) {
+  const imageUrl = data?.offer_image?.path || data?.media?.url || "/images/placeholder.jpg";
+  const imageAlt = data?.offer_image?.alt || data?.media?.alt || "image";
+
   return (
     <Link
       href={`/offers/${data?.slug || ""}`}
@@ -11,8 +14,8 @@ export default function OfferCard({ data }) {
     >
       <div className="w-full h-auto aspect-[418/226] rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden">
         <Image
-          src={data?.media?.url || "/images/placeholder.jpg"}
-          alt={data?.media?.alt || "image"}
+          src={imageUrl}
+          alt={imageAlt}
           width={418}
           height={226}
           className="w-full h-full object-cover group-hover:scale-110 transition duration-500 ease-in-out"
@@ -25,21 +28,14 @@ export default function OfferCard({ data }) {
         >
           {data?.title}
         </Heading>
-        <Heading
-          as="h3"
-          className="text-[13px] xl:text-[16px] 2xl:text-[19px] 3xl:text-[22px] leading-[1.55] font-semibold text-black xl:max-w-[75%] mb-[10px] xl:mb-[15px] 2xl:mb-[20px]"
-        >
-          {data?.subTitle}
-        </Heading>
-        <Text
-          as="p"
-          className="text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-black mb-2.5 xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]"
-        >
-          {data?.description}
-        </Text>
+        {data?.listing_description_banner_offers && (
+          <div className="text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-black mb-2.5 xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]">
+            {parse(data.listing_description_banner_offers)}
+          </div>
+        )}
         <div className="w-auto flex justify-center">
           <button className="text-[10px] xl:text-[12px] 2xl:text-[15px] 3xl:text-[17px] leading-[1] font-bold text-white mr-auto px-6 py-3 rounded-[20] bg-[#066FEF] cursor-pointer transition-all">
-            {data?.button?.label}
+            Enquire Now
           </button>
         </div>
       </div>

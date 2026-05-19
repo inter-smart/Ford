@@ -1,9 +1,11 @@
 "use client";
 
 import * as React from "react";
+import { getRecaptchaToken } from "@/lib/recaptcha";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import RecaptchaScript from "@/components/common/RecaptchaScript";
 import * as z from "zod";
 import {
   Field,
@@ -11,6 +13,7 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
@@ -138,9 +141,8 @@ const inputClasses =
 const errorClass =
   "text-[10px] md:text-[10px] xl:text-[11px] 3xl:text-[12px] leading-normal font-normal text-red-500 mt-1";
 
-export function EnquireNowForm({ dealers = [] }) {
+export function EnquireNowForm({ dealers = [], pageTitle = "" }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -187,16 +189,19 @@ export function EnquireNowForm({ dealers = [] }) {
 async function onSubmit(data) {
     setIsSubmitting(true);
     try {
+        const recaptchaToken = await getRecaptchaToken("submit");
+
       const payload = {
-        fullName:            data.fullName,
-        email:               data.email,
-        phone:               data.phone,
-        dealer:              data.selectDealer,
-        message:             data.message || "",
-        commercial_messages: data.installationSupport,
-        agree_to_terms:      data.agreeToTerms ? "1" : "0",
-        source_page_id:      typeof window !== "undefined" ? window.location.pathname : "",
-        source_page_title:   typeof document !== "undefined" ? document.title : "",
+          fullName:            data.fullName,
+          email:               data.email,
+          phone:               data.phone,
+          dealer:              data.selectDealer,
+          message:             data.message || "",
+          commercial_messages: data.installationSupport,
+          agree_to_terms:      data.agreeToTerms ? "1" : "0",
+          source_page_id:      typeof window !== "undefined" ? window.location.pathname : "",
+          source_page_title:   pageTitle,
+          recaptcha_token:     recaptchaToken,
       };
 
       const response = await fetch(
@@ -211,23 +216,22 @@ async function onSubmit(data) {
       const result = await response.json();
 
       if (result.success) {
-        setIsSuccess(true);
-        form.reset();
+          toast.success("Your enquiry has been submitted successfully! We'll get back to you within the next working day.");
+          form.reset();
       } else {
-        console.error(result.message || "Submission failed.");
+          toast.error(result.message || "Something went wrong. Please try again.");
       }
-    } catch (error) {
-      console.error("Submission Error:", error);
-    } finally {
+      } catch (error) {
+          console.error("Submission Error:", error);
+          toast.error("Failed to submit enquiry. Please try again later.");
+      } finally {
       setIsSubmitting(false);
     }
   }
 
-  if (isSuccess) {
-    return <div>Success</div>;
-  }
-
   return (
+    <>
+    <RecaptchaScript />
     <form onSubmit={form.handleSubmit(onSubmit)} className="w-full" noValidate>
       {/* Full Name */}
       <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
@@ -401,6 +405,7 @@ async function onSubmit(data) {
         </button>
       </div>
     </form>
+    </>
   );
 }
 

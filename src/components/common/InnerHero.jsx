@@ -14,10 +14,10 @@ export default function InnerHero({ data }) {
       
       
       <picture className="absolute -z-2 inset-0">
-        <source media="(max-width: 640px)" srcSet={data?.mobile_image?.url} />
+        <source media="(max-width: 640px)" srcSet={data?.mobile_image?.url || data?.mobile_banner_image?.url || data?.backgroundImage?.url} />
         <Image
-          src={data?.desktop_image?.url || "/images/placeholder.png"}
-          alt={data?.desktop_image?.alt || "Banner"}
+          src={data?.desktop_image?.url || data?.desktop_banner_image?.url || data?.backgroundImage?.url || "/images/placeholder.png"}
+          alt={data?.desktop_image?.alt || data?.backgroundImage?.alt || "Banner"}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw"
           className="-z-2 object-cover pointer-events-none"
@@ -31,7 +31,7 @@ export default function InnerHero({ data }) {
             size="heading1"
             className="text-white mb-[10px] sm:mb-[15px]"
           >
-            {data?.title}
+            {data?.title || data?.banner_title}
           </Heading>
           {data?.description && (
             <Text

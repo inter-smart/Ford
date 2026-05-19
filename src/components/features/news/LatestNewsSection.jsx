@@ -51,11 +51,13 @@ export default function LatestNewsSection({ data }) {
                     <div className="flex flex-wrap gap-[15px] xl:gap-[20px] 2xl:gap-[25px] 3xl:gap-[30px] items-center">
                       <div className="w-[120px] lg:w-[180px] xl:w-[244px] 2xl:w-[292px] 3xl:w-[365px] shrink-0">
                         <div className="w-full aspect-[244/180] rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden relative z-0">
-                          {secondSetItem?.media?.url && (
+                          {(secondSetItem?.acf?.main_image?.url || secondSetItem?.media?.url || secondSetItem?.featured_image?.url) && (
                             <Image
-                              src={secondSetItem.media.url}
+                              src={secondSetItem?.acf?.main_image?.url || secondSetItem?.media?.url || secondSetItem?.featured_image?.url}
                               alt={
+                                secondSetItem?.acf?.main_image?.alt ||
                                 secondSetItem?.media?.alt ||
+                                secondSetItem?.featured_image?.alt ||
                                 secondSetItem?.title ||
                                 "News"
                               }
@@ -73,7 +75,7 @@ export default function LatestNewsSection({ data }) {
                           {secondSetItem?.date}
                         </div>
                         <div className="text-[11px] xl:text-[12.4px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-normal text-[#434343] line-clamp-2 xl:max-w-11/12">
-                          {parse(secondSetItem?.description || "")}
+                          {parse(secondSetItem?.description || secondSetItem?.excerpt || "")}
                         </div>
                       </div>
                     </div>
