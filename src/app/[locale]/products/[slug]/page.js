@@ -1,4 +1,7 @@
 import dynamic from "next/dynamic";
+import { apiFetch, CACHE } from "@/lib/api/client";
+import { ENDPOINTS }        from "@/lib/api/endpoints";
+import { buildMetadata }    from "@/lib/api/seo";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"), {
   ssr: true,
@@ -29,41 +32,14 @@ const AfterSaleSection = dynamic(
 );
 
 async function getPageData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/wp-json/custom/v1/product`,
-    { next: { revalidate: 60 } }
-  );
-  if (!res.ok) throw new Error("Failed to fetch product data");
-  return res.json();
+  return apiFetch(ENDPOINTS.products, { cache: CACHE.ISR(60) });
 }
 
 export async function generateMetadata({ params }) {
   const data = await getPageData();
   const cars = Array.isArray(data?.product) ? data.product : [];
-  const post = cars.find((car) => car.slug === params.slug) || null;
-
-  return {
-    title: post?.seo?.title || data?.seo?.title,
-    description: post?.seo?.description || data?.seo?.description,
-    openGraph: {
-      title: post?.seo?.title || data?.seo?.title,
-      description: post?.seo?.description || data?.seo?.description,
-      images: [
-        {
-          url: post?.seo?.image || data?.seo?.image,
-          width: 1200,
-          height: 630,
-          alt: post?.seo?.title || "Ford",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post?.seo?.title || data?.seo?.title,
-      description: post?.seo?.description || data?.seo?.description,
-      images: [post?.seo?.image || data?.seo?.image],
-    },
-  };
+  const post = cars.find((car) => car.slug === params.slug) ?? null;
+  return buildMetadata(post?.seo ?? {}, data?.seo ?? {});
 }
 
 export default async function Page({ params }) {
