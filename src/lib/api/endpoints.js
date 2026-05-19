@@ -9,4 +9,8 @@ export const ENDPOINTS = {
   offers:      "ford/v1/offers",
   news:        "ford/v1/news",
   servicePage: "ford/v1/services",
+  fleetPage:      "ford/v1/fleetpage",
+  accessoriesPage: "ford/v1/accessories",
+  showroomPage:    "ford/v1/showroom-service-center",
+  showroomTab:     "ford/v1/showroom-service-center/tab",
 };

@@ -1,68 +1,44 @@
+import { apiFetch, CACHE } from "@/lib/api/client";
+import { ENDPOINTS } from "@/lib/api/endpoints";
+import { buildMetadata } from "@/lib/api/seo";
 import InnerHero from "@/components/common/InnerHero";
-import AccessoriesGenuineSection from "@/components/features/accessories/AccessoriesGenuineSection";
 import AccessoriesInfoSection from "@/components/features/accessories/AccessoriesInfoSection";
+import AccessoriesGenuineSection from "@/components/features/accessories/AccessoriesGenuineSection";
 
-const local_data = {
-  banner: {
-    enable__disable_banner_section: true,
-    desktop_image: {
-      alt: "contactBanner",
-      url: "/images/banner-accessories-1.jpg",
-    },
-    mobile_image: {
-      alt: "contactBanner",
-      url: "/images/banner-accessories-1.jpg",
-    },
-    title: "Ford Accessories",
-    button_text: null,
-    button: null,
-  },
-  accessoriesInfo: {
-    media: {
-      url: "/images/accessories-info-1.jpg",
-      alt: "accessories-info",
-    },
-    title: "Ford Accessories:<br /> Personalize your Ford",
-    description:
-      "<p>Have your vehicle serviced regularly to maintain its performance, safety, and resale value. With a wide network of Ford Authorised Parts Outlets and Service Centres, keeping your Ford in prime condition has never been easier.</p>",
-    button: {
-      label: "Ford Middle East Accessories",
-      link: "/",
-      isExternal: false,
-    },
-    accessoriesEnquiry: "+968 2450 0500",
-  },
-  accessoriesGenuine: {
-    title: "Why Choose Ford Genuine Accessories?",
-    items: [
-      {
-        iconPath: "/images/accessories-genuine-1.svg",
-        title: "100% Compatibility with your Ford vehicle",
-      },
-      {
-        iconPath: "/images/accessories-genuine-2.svg",
-        title: "Tested for Safety and Durability",
-      },
-      {
-        iconPath: "/images/accessories-genuine-3.svg",
-        title: "Backed by Ford Warranty",
-      },
-      {
-        iconPath: "/images/accessories-genuine-4.svg",
-        title: "Professionally Installed at Authorized Workshops",
-      },
-    ],
-  },
-};
+async function getPageData() {
+  return apiFetch(ENDPOINTS.accessoriesPage, { cache: CACHE.NO_STORE });
+}
 
-export default function page({ data = local_data }) {
+export async function generateMetadata() {
+  const data = await getPageData();
+  return buildMetadata(data?.seo);
+}
+
+export default async function AccessoriesPage() {
+  const data = await getPageData();
+  const heroRaw = data?.heroData?.[0];
+  const infoRaw = data?.info?.[0];
+  const whyRaw = data?.whyChoose?.[0];
+
   return (
     <>
-      {data?.banner?.enable__disable_banner_section && (
-        <InnerHero data={local_data?.banner} />
+      {heroRaw?.enable__disable_banner && (
+        <InnerHero
+          data={{
+            desktop_image: heroRaw.desktop_image,
+            mobile_image: heroRaw.mobile_image,
+            title: heroRaw.title,
+          }}
+        />
       )}
-      <AccessoriesInfoSection data={local_data?.accessoriesInfo} />
-      <AccessoriesGenuineSection data={local_data?.accessoriesGenuine} />
+
+      {infoRaw?.enable__disable_info_accessories && (
+        <AccessoriesInfoSection data={infoRaw} />
+      )}
+
+      {whyRaw?.enable__disable_why_choose_accessories && (
+        <AccessoriesGenuineSection data={whyRaw} />
+      )}
     </>
   );
 }
