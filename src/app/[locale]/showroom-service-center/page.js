@@ -25,6 +25,7 @@ export default async function ShowroomServiceCenterPage() {
   const bannerRaw        = pageData?.banner;
   const tabs             = pageData?.tabs ?? [];
   const initialLocations = tabData?.location_details ?? [];
+  const initialTotalPages = tabData?.total_pages ?? 1;
 
   return (
     <>
@@ -41,6 +42,7 @@ export default async function ShowroomServiceCenterPage() {
         tabs={tabs}
         initialTabIndex={0}
         initialLocations={initialLocations}
+        initialTotalPages={initialTotalPages}
       />
     </>
   );

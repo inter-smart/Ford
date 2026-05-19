@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { Heading } from "@/components/layout/Heading";
 import { cn } from "@/lib/utils";
@@ -17,26 +17,63 @@ const normalizeLocation = (loc, idx) => ({
   directionUrl: loc.map_url || "#",
 });
 
-export default function ShowroomSection({ tabs = [], initialTabIndex = 0, initialLocations = [] }) {
+export default function ShowroomSection({
+  tabs = [],
+  initialTabIndex = 0,
+  initialLocations = [],
+  initialTotalPages = 1,
+}) {
   const [activeTabIndex, setActiveTabIndex] = useState(initialTabIndex);
-  const [rawLocations, setRawLocations] = useState(initialLocations);
-  const [loading, setLoading] = useState(false);
+  const [rawLocations,   setRawLocations]   = useState(initialLocations);
+  const [loading,        setLoading]        = useState(false);
+  const [loadingMore,    setLoadingMore]    = useState(false);
+  const [searchQuery,    setSearchQuery]    = useState("");
+  const [page,           setPage]          = useState(1);
+  const [totalPages,     setTotalPages]    = useState(initialTotalPages);
+  const debounceRef = useRef(null);
 
-  const handleTabChange = async (tabIndex) => {
-    if (tabIndex === activeTabIndex) return;
-    setActiveTabIndex(tabIndex);
-    setLoading(true);
+  const fetchLocations = async ({ tabIndex, page, search, replace }) => {
+    replace ? setLoading(true) : setLoadingMore(true);
     try {
+      const params = new URLSearchParams({ page, pageSize: 12 });
+      if (search) params.set("search", search);
+
       const json = await apiFetch(
-        `${ENDPOINTS.showroomTab}/${tabIndex}?page=1&pageSize=12`,
+        `${ENDPOINTS.showroomTab}/${tabIndex}?${params}`,
         { cache: CACHE.NO_STORE }
       );
-      setRawLocations(json?.data?.location_details ?? []);
+      const newLocations  = json?.data?.location_details ?? [];
+      const newTotalPages = json?.data?.total_pages       ?? 1;
+
+      setRawLocations(prev => replace ? newLocations : [...prev, ...newLocations]);
+      setTotalPages(newTotalPages);
+      setPage(page);
     } catch (_) {
-      setRawLocations([]);
+      if (replace) setRawLocations([]);
     } finally {
-      setLoading(false);
+      replace ? setLoading(false) : setLoadingMore(false);
     }
+  };
+
+  const handleTabChange = (tabIndex) => {
+    if (tabIndex === activeTabIndex) return;
+    clearTimeout(debounceRef.current);
+    setActiveTabIndex(tabIndex);
+    setSearchQuery("");
+    fetchLocations({ tabIndex, page: 1, search: "", replace: true });
+  };
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      fetchLocations({ tabIndex: activeTabIndex, page: 1, search: value, replace: true });
+    }, 400);
+  };
+
+  const loadMore = () => {
+    fetchLocations({ tabIndex: activeTabIndex, page: page + 1, search: searchQuery, replace: false });
   };
 
   const activeTab = tabs.find((t) => t.tab_index === activeTabIndex);
@@ -62,6 +99,8 @@ export default function ShowroomSection({ tabs = [], initialTabIndex = 0, initia
               <div className="relative w-full sm:max-w-[300px] md:max-w-[260px] xl:max-w-[330px] 2xl:max-w-[390px] 3xl:max-w-[490px] h-[45px] md:h-[40px] 2xl:h-[44px] 3xl:h-[56px] bg-[#F8F9FD] rounded-[4px] overflow-hidden">
                 <input
                   type="text"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
                   placeholder="Enter Street, Suburb, State or distributor"
                   className="2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[11px] w-full h-full px-5 pr-12 border border-gray-200 rounded-[4px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
@@ -104,9 +143,19 @@ export default function ShowroomSection({ tabs = [], initialTabIndex = 0, initia
 
         {/* Location Cards */}
         <div className={cn(
-          "flex flex-wrap rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden border-t-[1px] border-l-[1px] border-[#c4c4c4] transition-opacity duration-200",
+          "relative flex flex-wrap rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden border-t-[1px] border-l-[1px] border-[#c4c4c4] transition-opacity duration-200",
           loading && "opacity-50"
         )}>
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <div className="w-8 h-8 border-[3px] border-[#008dd2] border-t-transparent rounded-full animate-spin" />
+            </div>
+          )}
+          {!loading && locations.length === 0 && (
+            <div className="w-full border-r-[1px] border-b-[1px] border-[#c4c4c4] py-[40px] text-center text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#888]">
+              No results found
+            </div>
+          )}
           {locations.map((item, idx) => (
             <div key={"branch" + idx} className="w-full sm:w-1/2 lg:w-1/4">
               <div className="w-full h-full border-r-[1px] border-b-[1px] border-[#c4c4c4] p-[18px_15px] sm:p-[20px_18px] xl:p-[25px_30px] 2xl:p-[30px_35px] 3xl:p-[38px_44px]">
@@ -159,6 +208,19 @@ export default function ShowroomSection({ tabs = [], initialTabIndex = 0, initia
             </div>
           ))}
         </div>
+
+        {/* Load More */}
+        {page < totalPages && (
+          <div className="w-full flex justify-center mt-[15px] 2xl:mt-[20px] 3xl:mt-[25px]">
+            <button
+              onClick={loadMore}
+              disabled={loadingMore}
+              className="text-[11px] xl:text-[12.4px] 2xl:text-[14.9px] 3xl:text-[18.6px] font-bold text-[#1577f0] hover:text-[#0065e0] transition-colors disabled:opacity-50 cursor-pointer"
+            >
+              {loadingMore ? "Loading..." : "Load More"}
+            </button>
+          </div>
+        )}
 
       </div>
     </section>
