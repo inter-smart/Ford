@@ -6,7 +6,7 @@ import { ENDPOINTS } from "@/lib/api/endpoints";
 import { buildMetadata } from "@/lib/api/seo";
 
 async function getPageData() {
-  return apiFetch(ENDPOINTS.offersPage, { cache: CACHE.ISR(60) });
+  return apiFetch(ENDPOINTS.offersPage, { cache: CACHE.NO_STORE });
 }
 
 async function getOffersData() {

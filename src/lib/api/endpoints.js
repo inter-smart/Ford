@@ -17,6 +17,8 @@ export const ENDPOINTS = {
   productDetail:   "ford/v1/product-detail",
   testDriveForm:      "ford/v1/test-drive-form",
   requestAQuoteForm:  "ford/v1/request-a-quote-form",
+  privacy:            "ford/v1/privacy",
+  terms:              "ford/v1/terms",
 };
 
 
