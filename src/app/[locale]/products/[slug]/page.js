@@ -35,6 +35,15 @@ async function getPageData(slug) {
   return apiFetch(`${ENDPOINTS.productDetail}/${slug}`, { cache: CACHE.NO_STORE });
 }
 
+async function getDealersData() {
+  try {
+    const res = await apiFetch(ENDPOINTS.testDriveForm, { cache: CACHE.ISR(3600) });
+    return res?.data?.dealers ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const res = await getPageData(slug);
@@ -43,7 +52,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { slug } = await params;
-  const res  = await getPageData(slug);
+  const [res, dealers] = await Promise.all([getPageData(slug), getDealersData()]);
   const data = res?.data;
 
   if (!data) return <div className="text-center py-20">Car not found.</div>;
@@ -64,7 +73,7 @@ export default async function Page({ params }) {
       {banner?.enabled && <InnerHero data={banner} />}
 
       {about?.enabled && (
-        <AboutVehicleSection data={about} badge={data.badge} />
+        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} />
       )}
 
       {spec?.enabled && <SpecificationSection data={spec} />}
