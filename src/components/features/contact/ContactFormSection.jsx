@@ -28,7 +28,7 @@ export default function ContactFormSection({ data }) {
                   {data?.address_title}
                 </div>
                 <ul className="lg:max-w-[450px]">
-                  <li className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px]">
+                  <li className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px] whitespace-pre-line">
                     {data?.address}
                   </li>
                   <li className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px]">
