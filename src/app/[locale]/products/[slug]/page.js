@@ -43,10 +43,12 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const data = await getPageData();
+  
   const cars = Array.isArray(data?.product) ? data.product : [];
+  console.log("cars ==>", cars);
   const post = cars.find((car) => car.slug === slug) || null;
 
   if (!post) return <div className="text-center py-20">Car not found.</div>;
