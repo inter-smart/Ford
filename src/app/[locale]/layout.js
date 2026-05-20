@@ -70,7 +70,9 @@ async function getDealersData() {
 
 
 
-export default async function RootLayout({ children }) {
+export default async function RootLayout({ children, params }) {
+  const { locale } = await params;
+
   const [headerData, footerData, dealers] = await Promise.all([
     getHeaderData(),
     getFooterData(),
@@ -78,9 +80,9 @@ export default async function RootLayout({ children }) {
   ]);
 
   return (
-    <html lang="en">
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={`${fordf1.variable} ${fordAntenna.variable}`}>
-        <Header data={headerData} />
+        <Header data={headerData} locale={locale} />
         <main className="flex-grow">
           {children}
           <ToasterWrapper />

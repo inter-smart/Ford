@@ -191,3 +191,18 @@ body {
 .animate-fadeUp {
   animation: fadeUp 0.5s ease forwards;
 }
+
+/* ─── RTL / Arabic support ──────────────────────────────────────────────── */
+
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="ltr"] {
+  text-align: left;
+}
+
+/* Ford Antenna has broader Unicode coverage — better Arabic glyph rendering */
+:root[lang="ar"] body {
+  font-family: var(--font-antenna), "Segoe UI", "Tahoma", "Arial Unicode MS", sans-serif;
+}

@@ -15,3 +15,10 @@ export const ENDPOINTS = {
   showroomTab:     "ford/v1/showroom-service-center/tab",
   partsPage:       "ford/v1/parts",
 };
+
+
+export function getLocalizedEndpoint(resource, locale) {
+  return locale === "ar"
+    ? `ford/v1/ar/${resource}`
+    : `ford/v1/${resource}`;
+}
