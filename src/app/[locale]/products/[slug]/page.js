@@ -79,6 +79,7 @@ export default async function Page({ params }) {
   const spec       = firstItem(data.specifications);
   const kf         = firstItem(data.key_features);
   const service    = firstItem(data.service);
+  const lang = locale === "ar" ? "ar" : "en";
 
   console.log("Product Detail color_options:", firstItem(data.color_options)?.enabled);
 
@@ -95,6 +96,7 @@ export default async function Page({ params }) {
               dealers={raqFormData?.dealers || []}
               pageTitle={data.modelName}
               submitEndpoint={`${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form/submit`}
+              lang={lang}
             >
               <button className="text-[12px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer">
                 {banner.button_text}
@@ -105,7 +107,7 @@ export default async function Page({ params }) {
       )}
 
       {about?.enabled && (
-        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} />
+        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} pageTitle={data.modelName} modelName={data.modelName} modelBrand={data.modelBrand?.[0] || ""} />
       )}
 
       {spec?.enabled && <SpecificationSection data={spec} />}

@@ -96,7 +96,7 @@ export default function Footer({ data, dealers = [] }) {
 
             {/* Right Button */}
             <div className="relative z-10">
-              <BookATestDriveDialog dealers={dealers}>
+              <BookATestDriveDialog dealers={dealers} pageTitle="Footer">
                 <button className="relative 3xl:text-[20px] 2xl:text-[17px] xl:text-[13px] lg:text-[12px] text-[11px] font-medium text-white text-sm md:text-base rounded-full flex items-center gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
                   {test_drive_section.button_title}
                   <svg

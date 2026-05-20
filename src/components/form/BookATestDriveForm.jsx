@@ -194,7 +194,7 @@ const timeSlots = [
 // Today's date formatted as YYYY-MM-DD for min attribute
 const todayDate = new Date().toISOString().split("T")[0];
 
-export function BookATestDriveForm({ dealers = [] }) {
+export function BookATestDriveForm({ dealers = [], pageTitle = "", prefillModel = "", prefillMake = "",}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm({
@@ -204,9 +204,9 @@ export function BookATestDriveForm({ dealers = [] }) {
       email: "",
       phone: "",
       selectDealer: "",
-      vehicleModel: "",
+      vehicleModel:  prefillModel,
+      vehicleMake:   prefillMake,
       vehicleRegistrationNumber: "",
-      vehicleMake: "",
       vehicleMileage: "",
       preferredDate: "",
       preferredTime: "",
@@ -260,6 +260,8 @@ export function BookATestDriveForm({ dealers = [] }) {
         message:                     data.message || "",
         commercial_messages:         data.installationSupport,
         agree_to_terms:              data.agreeToTerms ? "1" : "0",
+        source_page_title:           pageTitle,
+        source_page_id:              typeof window !== "undefined" ? window.location.pathname : "",
         recaptcha_token:             recaptchaToken,
       };
 
@@ -321,8 +323,8 @@ export function BookATestDriveForm({ dealers = [] }) {
         {/* Vehicle Model + Vehicle Make */}
         <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
-            <FormBlock item={{ name: "vehicleModel", placeholder: "Vehicle Model*" }} form={form} isSubmitting={isSubmitting} onBlurTrim={handleBlurTrim} />
-            <FormBlock item={{ name: "vehicleMake", placeholder: "Vehicle Make*" }} form={form} isSubmitting={isSubmitting} onBlurTrim={handleBlurTrim} />
+            <FormBlock item={{ name: "vehicleModel", placeholder: "Vehicle Model*" }} form={form} isSubmitting={isSubmitting} onBlurTrim={handleBlurTrim} extraDisabled={!!prefillModel} />
+            <FormBlock item={{ name: "vehicleMake", placeholder: "Vehicle Make*" }} form={form} isSubmitting={isSubmitting} onBlurTrim={handleBlurTrim} extraDisabled={!!prefillMake} />
           </div>
         </div>
 

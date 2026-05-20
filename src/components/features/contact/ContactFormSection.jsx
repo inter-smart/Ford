@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ContactForm from "./ContactForm";
 import Link from "next/link";
-export default function ContactFormSection({ data }) {
+export default function ContactFormSection({ data, lang }) {
   return (
     <section className="py-[40px] xl:py-[50px] 2xl:py-[70px] 3xl:py-[90px] bg-[#F7F7F7]">
       <div className="container">
@@ -28,7 +28,7 @@ export default function ContactFormSection({ data }) {
                   {data?.address_title}
                 </div>
                 <ul className="lg:max-w-[450px]">
-                  <li className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px] whitespace-pre-line">
+                  <li className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px]">
                     {data?.address}
                   </li>
                   <li className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px]">
@@ -128,7 +128,7 @@ export default function ContactFormSection({ data }) {
                 </div>
               </div>
               <div className="w-full xs:w-[50%] p-[8px] xs:pl-[30px] xl:pl-[50px]">
-                <ContactForm data={data} />
+                <ContactForm data={data} lang={lang} />
               </div>
             </div>
           </div>

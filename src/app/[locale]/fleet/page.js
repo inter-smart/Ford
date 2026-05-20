@@ -43,6 +43,7 @@ export default async function FleetPage({ params }) {
   const quoteRaw   = data?.quote?.[0];
   const carsRaw    = data?.cars?.[0];
   const contactRaw = data?.contact?.[0];
+  const lang = locale === "ar" ? "ar" : "en";
 
   return (
     <>
@@ -57,7 +58,7 @@ export default async function FleetPage({ params }) {
       )}
 
       {introRaw?.enable__disable_banner && (
-        <FleetInfoSection introData={introRaw} quoteData={quoteRaw} raqFormData={raqFormData} />
+        <FleetInfoSection introData={introRaw} quoteData={quoteRaw} raqFormData={raqFormData} lang={lang} />
       )}
 
       {carsRaw?.enable__disable_cars_fleet && (

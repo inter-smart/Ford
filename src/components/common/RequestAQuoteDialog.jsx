@@ -20,7 +20,8 @@ export default function RequestAQuoteDialog({
   description,
   dealers = [],
   pageTitle = "",
-  submitEndpoint = "" 
+  submitEndpoint = "",
+  lang = "en",
 }) {
   const [open, setOpen] = useState(false);
 
@@ -62,7 +63,7 @@ export default function RequestAQuoteDialog({
               <div className="typography [&_p]:last:mb-0 [--text-color:#000] mb-[10px] xl:mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px]">
                 {parse(description)}
               </div>
-              <EnquireNowForm dealers={dealers} pageTitle={pageTitle} submitEndpoint={submitEndpoint} />
+              <EnquireNowForm dealers={dealers} pageTitle={pageTitle} submitEndpoint={submitEndpoint} lang={lang} />
             </div>
           </div>
         </div>

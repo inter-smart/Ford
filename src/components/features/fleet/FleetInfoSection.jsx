@@ -4,7 +4,7 @@ import { Heading } from "@/components/layout/Heading";
 import { Text } from "@/components/layout/Text";
 import RequestAQuoteDialog from "@/components/common/RequestAQuoteDialog";
 
-export default function FleetInfoSection({ introData, quoteData, raqFormData }) {
+export default function FleetInfoSection({ introData, quoteData, raqFormData, lang = "en" }) {
   return (
     <section className="w-full h-auto block pt-5 sm:pt-[40px] xl:pt-[60px] 2xl:pt-[75px] 3xl:pt-[85px] pb-5 sm:pb-[40px] xl:pb-[60px] 2xl:pb-[75px] 3xl:pb-[85px] overflow-hidden">
       <div className="container">
@@ -59,6 +59,7 @@ export default function FleetInfoSection({ introData, quoteData, raqFormData }) 
                 dealers={raqFormData?.dealers || []}
                 pageTitle="Fleet"
                 submitEndpoint={`${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form/submit`}
+                lang={lang}
               >
                 <button className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-[1] font-bold text-white w-full h-[30.5px] xl:h-[35.5px] 2xl:h-[42.6px] 3xl:h-[53.4px] p-2 rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center">
                   {quoteData?.button_text_quote_sec || "Request a Quote"}

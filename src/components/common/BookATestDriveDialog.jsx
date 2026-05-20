@@ -11,7 +11,7 @@ import {
 import { Heading } from "../layout/Heading";
 import { BookATestDriveForm } from "../form/BookATestDriveForm";
 
-export default function BookATestDriveDialog({ children, dealers = [] }) {
+export default function BookATestDriveDialog({ children, dealers = [], pageTitle = "", prefillModel = "", prefillMake = "", }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -44,7 +44,7 @@ export default function BookATestDriveDialog({ children, dealers = [] }) {
               select your preferred booking date and time slot.
             </p>
           </div>
-          <BookATestDriveForm dealers={dealers} />
+          <BookATestDriveForm dealers={dealers} pageTitle={pageTitle} prefillModel={prefillModel} prefillMake={prefillMake} />
         </div>
       </DialogContent>
     </Dialog>
