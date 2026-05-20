@@ -31,65 +31,55 @@ const AfterSaleSection = dynamic(
   { ssr: true }
 );
 
-async function getPageData() {
-  return apiFetch(ENDPOINTS.products, { cache: CACHE.NO_STORE });
+async function getPageData(slug) {
+  return apiFetch(`${ENDPOINTS.productDetail}/${slug}`, { cache: CACHE.NO_STORE });
 }
 
 export async function generateMetadata({ params }) {
-  const data = await getPageData();
-  const cars = Array.isArray(data?.product) ? data.product : [];
-  const post = cars.find((car) => car.slug === params.slug) ?? null;
-  return buildMetadata(post?.seo ?? {}, data?.seo ?? {});
+  const { slug } = await params;
+  const res = await getPageData(slug);
+  return buildMetadata(res?.meta?.seo);
 }
 
 export default async function Page({ params }) {
   const { slug } = await params;
+  const res  = await getPageData(slug);
+  const data = res?.data;
 
-  const data = await getPageData();
-  
-  const cars = Array.isArray(data?.product) ? data.product : [];
-  console.log("cars ==>", cars);
-  const post = cars.find((car) => car.slug === slug) || null;
-
-  if (!post) return <div className="text-center py-20">Car not found.</div>;
-
-  const details = post.detail_page;
+  if (!data) return <div className="text-center py-20">Car not found.</div>;
 
   const firstItem = (arr) =>
     Array.isArray(arr) && arr.length > 0 ? arr[0] : null;
 
+  const banner     = firstItem(data.banner);
+  const about      = firstItem(data.about_vehicle);
+  const spec       = firstItem(data.specifications);
+  const kf         = firstItem(data.key_features);
+  const service    = firstItem(data.service);
+
+  console.log("Product Detail color_options:", firstItem(data.color_options)?.enabled);
+
   return (
     <>
-      {firstItem(details?.Banner)?.enable__disable_banner_detail_page && (
-        <InnerHero data={details.Banner[0]} />
+      {banner?.enabled && <InnerHero data={banner} />}
+
+      {about?.enabled && (
+        <AboutVehicleSection data={about} badge={data.badge} />
       )}
 
-      {firstItem(details?.about_vehicle)?.enable__disable_about_vehicle && (
-        <AboutVehicleSection
-          data={details.about_vehicle[0]}
-          badge={details.badge}
-        />
+      {spec?.enabled && <SpecificationSection data={spec} />}
+
+      {kf?.enabled && <VehicleDetailSection data={kf} />}
+
+      {firstItem(data.color_options)?.enabled && (
+        <ColorSwitchSection data={data.color_options} />
       )}
 
-      {details?.specifications?.[0]?.enable__disable_specifications && (
-        <SpecificationSection data={details.specifications[0]} />
+      {firstItem(data.gallery)?.enabled && (
+        <GallerySection data={firstItem(data.gallery)} />
       )}
 
-      {details?.key_features?.[0]?.enable__disable_key_features && (
-        <VehicleDetailSection data={details.key_features[0]} />
-      )}
-
-      {firstItem(details?.color_options)?.enable__disable_color_options && (
-        <ColorSwitchSection data={details.color_options} />
-      )}
-
-      {firstItem(details?.gallery)?.enable__disable_gallery && (
-        <GallerySection data={details.gallery[0]} />
-      )}
-
-      {firstItem(details?.service)?.enable__disable_service && (
-        <AfterSaleSection data={details.service[0]} />
-      )}
+      {service?.enabled && <AfterSaleSection data={service} />}
     </>
   );
 }

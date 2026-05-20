@@ -100,19 +100,19 @@ export default function VehicleDetailSection({ data }) {
             <div className="w-full sm:w-1/2 h-auto p-[30px_25px_20px_0px] sm:p-[40px_0px_40px_30px] lg:p-[50px_0px_50px_50px] xl:p-[60px_0px_60px_70px] 2xl:p-[70px_0px_70px_80px] 3xl:p-[80px_0px_80px_90px] flex flex-col justify-center">
               <div className="w-full h-auto mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">
                 <div className="text-[18px] sm:text-[20px] lg:text-[22px] 2xl:text-[25px] 3xl:text-[28px] leading-[1] font-semibold text-black mb-[10px] lg:mb-[15px]">
-                  {data?.interior?.title_interior}
+                  {data?.interior?.title}
                 </div>
                 <div className="text-[13px] sm:text-[14px] lg:text-[15px] xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-[#434343] max-w-[450px]">
-                  {data?.interior?.description_interior}
+                  {data?.interior?.description}
                 </div>
               </div>
               <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
-                {data?.interior?.interior_highlights?.map((item, index) => (
+                {data?.interior?.highlights?.map((item, index) => (
                   <div key={index} className="flex items-center">
                     {/* <div className="w-[25px] sm:w-[35px] lg:w-[40px] 2xl:w-[50px] 3xl:w-[55px] h-auto aspect-square overflow-hidden flex items-center justify-center">
                       <Image
-                        src={item?.icon_interior?.url || "/images/placeholder.png"}
-                        alt={item?.icon_interior?.alt || "Interior"}
+                        src={item?.icon?.url || "/images/placeholder.png"}
+                        alt={item?.icon?.alt || "Interior"}
                         width={780}
                         height={680}
                         className="w-full h-full object-contain"
@@ -120,7 +120,7 @@ export default function VehicleDetailSection({ data }) {
                     </div> */}
                     {/* <div className="w-[calc(100%-25px)] sm:w-[calc(100%-35px)] lg:w-[calc(100%-40px)] 2xl:w-[calc(100%-50px)] 3xl:w-[calc(100%-55px)] pl-[15px] 2xl:pl-[20px]"> */}
                     <div className="text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] pl-[15px] lg:pl-[20px] relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:left-0 before:top-[6px] before:sm:top-[8px]">
-                      {item?.text_interior}
+                      {item?.text}
                     </div>
                     {/* </div> */}
                   </div>
@@ -132,19 +132,19 @@ export default function VehicleDetailSection({ data }) {
             <div className="w-full sm:w-1/2 h-auto p-[20px_25px_30px_0px] sm:p-[40px_30px_40px_0px] lg:p-[50px_50px_50px_0px] xl:p-[60px_70px_60px_70px] 2xl:p-[70px_80px_70px_80px] 3xl:p-[80px_90px_80px_90px] bg-white flex flex-col justify-center">
               <div className="w-full h-auto mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">
                 <div className="text-[18px] sm:text-[20px] lg:text-[22px] 2xl:text-[25px] 3xl:text-[28px] leading-[1] font-semibold text-black mb-[10px] lg:mb-[15px]">
-                  {data?.exterior?.title_exterior}
+                  {data?.exterior?.title}
                 </div>
                 <div className="text-[13px] sm:text-[14px] lg:text-[15px] xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-[#434343] max-w-[450px]">
-                  {data?.exterior?.description_exterior}
+                  {data?.exterior?.description}
                 </div>
               </div>
               <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
-                {data?.exterior?.exterior_highlights?.map((item, index) => (
+                {data?.exterior?.highlights?.map((item, index) => (
                   <div key={index} className="flex items-center">
                     {/* <div className="w-[25px] sm:w-[35px] lg:w-[40px] 2xl:w-[50px] 3xl:w-[55px] h-auto aspect-square overflow-hidden flex items-center justify-center">
                       <Image
-                        src={item?.icon_exterior?.url || "/images/placeholder.png"}
-                        alt={item?.icon_exterior?.alt || "Exterior"}
+                        src={item?.icon?.url || "/images/placeholder.png"}
+                        alt={item?.icon?.alt || "Exterior"}
                         width={780}
                         height={680}
                         className="w-full h-full object-contain"
@@ -152,7 +152,7 @@ export default function VehicleDetailSection({ data }) {
                     </div> */}
                     {/* <div className="w-[calc(100%-25px)] sm:w-[calc(100%-35px)] lg:w-[calc(100%-40px)] 2xl:w-[calc(100%-50px)] 3xl:w-[calc(100%-55px)] pl-[15px] 2xl:pl-[20px]"> */}
                     <div className="text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] pl-[15px] lg:pl-[20px] relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:left-0 before:top-[6px] before:sm:top-[8px]">
-                      {item?.text_exterior}
+                      {item?.text}
                     </div>
                     {/* </div> */}
                   </div>
@@ -216,21 +216,21 @@ export default function VehicleDetailSection({ data }) {
             <div className="w-full sm:w-1/2 h-auto p-[30px_25px_20px_0px] sm:p-[40px_0px_40px_30px] lg:p-[50px_0px_50px_50px] xl:p-[60px_0px_60px_70px] 2xl:p-[70px_0px_70px_80px] 3xl:p-[80px_0px_80px_90px] flex flex-col justify-center">
               <div className="w-full h-auto mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">
                 <div className="text-[18px] sm:text-[20px] lg:text-[22px] 2xl:text-[25px] 3xl:text-[28px] leading-[1] font-semibold text-black mb-[10px] lg:mb-[15px]">
-                  {data?.performance?.title_performance || "Performance"}
+                  {data?.other_features?.items?.[0]?.title || "Performance"}
                 </div>
                 <div className="text-[13px] sm:text-[14px] lg:text-[15px] xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-[#434343] max-w-[450px]">
-                  {data?.performance?.description_performance || "Experience unmatched power and precision engineered for the road ahead."}
+                  {data?.other_features?.items?.[0]?.description || "Experience unmatched power and precision engineered for the road ahead."}
                 </div>
               </div>
               <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
-                {(data?.performance?.performance_highlights || [
+                {(data?.other_features?.items?.[0]?.highlights || [
                   { text: "5.0L V8 Engine" },
                   { text: "480 Horsepower" },
                   { text: "0–60 mph in 4.2 seconds" },
                 ])?.map((item, index) => (
                   <div key={index} className="flex items-center">
                     <div className="text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] pl-[15px] lg:pl-[20px] relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:left-0 before:top-[6px] before:sm:top-[8px]">
-                      {item?.text_performance || item?.text}
+                      {item?.text}
                     </div>
                   </div>
                 ))}
@@ -245,21 +245,21 @@ export default function VehicleDetailSection({ data }) {
             <div className="w-full sm:w-1/2 h-auto p-[20px_25px_30px_0px] sm:p-[40px_30px_40px_0px] lg:p-[50px_50px_50px_0px] xl:p-[60px_70px_60px_70px] 2xl:p-[70px_80px_70px_80px] 3xl:p-[80px_90px_80px_90px] bg-white flex flex-col justify-center">
               <div className="w-full h-auto mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">
                 <div className="text-[18px] sm:text-[20px] lg:text-[22px] 2xl:text-[25px] 3xl:text-[28px] leading-[1] font-semibold text-black mb-[10px] lg:mb-[15px]">
-                  {data?.technology?.title_technology || "Technology"}
+                  {data?.other_features?.items?.[1]?.title || "Technology"}
                 </div>
                 <div className="text-[13px] sm:text-[14px] lg:text-[15px] xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-[#434343] max-w-[450px]">
-                  {data?.technology?.description_technology || "Cutting-edge tech designed to keep you connected, informed, and in control."}
+                  {data?.other_features?.items?.[1]?.description || "Cutting-edge tech designed to keep you connected, informed, and in control."}
                 </div>
               </div>
               <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
-                {(data?.technology?.technology_highlights || [
+                {(data?.other_features?.items?.[1]?.highlights || [
                   { text: "12-inch SYNC 4 Touchscreen" },
                   { text: "Wireless Apple CarPlay & Android Auto" },
                   { text: "B&O Premium Audio System" },
                 ])?.map((item, index) => (
                   <div key={index} className="flex items-center">
                     <div className="text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] pl-[15px] lg:pl-[20px] relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:left-0 before:top-[6px] before:sm:top-[8px]">
-                      {item?.text_technology || item?.text}
+                      {item?.text}
                     </div>
                   </div>
                 ))}
@@ -322,21 +322,21 @@ export default function VehicleDetailSection({ data }) {
             <div className="w-full sm:w-1/2 h-auto p-[30px_25px_20px_0px] sm:p-[40px_0px_40px_30px] lg:p-[50px_0px_50px_50px] xl:p-[60px_0px_60px_70px] 2xl:p-[70px_0px_70px_80px] 3xl:p-[80px_0px_80px_90px] flex flex-col justify-center">
               <div className="w-full h-auto mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">
                 <div className="text-[18px] sm:text-[20px] lg:text-[22px] 2xl:text-[25px] 3xl:text-[28px] leading-[1] font-semibold text-black mb-[10px] lg:mb-[15px]">
-                  {data?.safety?.title_safety || "Safety"}
+                  {data?.other_features?.items?.[2]?.title || "Safety"}
                 </div>
                 <div className="text-[13px] sm:text-[14px] lg:text-[15px] xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-[#434343] max-w-[450px]">
-                  {data?.safety?.description_safety || "Advanced driver-assistance systems that protect you and everyone around you."}
+                  {data?.other_features?.items?.[2]?.description || "Advanced driver-assistance systems that protect you and everyone around you."}
                 </div>
               </div>
               <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
-                {(data?.safety?.safety_highlights || [
+                {(data?.other_features?.items?.[2]?.highlights || [
                   { text: "Pre-Collision Assist" },
                   { text: "Blind-Spot Information System" },
                   { text: "Lane-Keeping System" },
                 ])?.map((item, index) => (
                   <div key={index} className="flex items-center">
                     <div className="text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] pl-[15px] lg:pl-[20px] relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:left-0 before:top-[6px] before:sm:top-[8px]">
-                      {item?.text_safety || item?.text}
+                      {item?.text}
                     </div>
                   </div>
                 ))}

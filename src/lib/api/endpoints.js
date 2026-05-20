@@ -14,6 +14,7 @@ export const ENDPOINTS = {
   showroomPage:    "ford/v1/showroom-service-center",
   showroomTab:     "ford/v1/showroom-service-center/tab",
   partsPage:       "ford/v1/parts",
+  productDetail:   "ford/v1/product-detail",
 };
 
 
