@@ -141,7 +141,7 @@ const inputClasses =
 const errorClass =
   "text-[10px] md:text-[10px] xl:text-[11px] 3xl:text-[12px] leading-normal font-normal text-red-500 mt-1";
 
-export function EnquireNowForm({ dealers = [], pageTitle = "" }) {
+export function EnquireNowForm({ dealers = [], pageTitle = "", submitEndpoint = "" }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm({
@@ -205,7 +205,7 @@ async function onSubmit(data) {
       };
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/offers-form/submit`,
+        submitEndpoint || `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/offers-form/submit`,
         {
           method:  "POST",
           headers: { "Content-Type": "application/json" },

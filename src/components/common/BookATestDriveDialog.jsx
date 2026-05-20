@@ -11,7 +11,7 @@ import {
 import { Heading } from "../layout/Heading";
 import { BookATestDriveForm } from "../form/BookATestDriveForm";
 
-export default function BookATestDriveDialog({ children }) {
+export default function BookATestDriveDialog({ children, dealers = [] }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -44,7 +44,7 @@ export default function BookATestDriveDialog({ children }) {
               select your preferred booking date and time slot.
             </p>
           </div>
-          <BookATestDriveForm />
+          <BookATestDriveForm dealers={dealers} />
         </div>
       </DialogContent>
     </Dialog>

@@ -24,13 +24,13 @@ async function getFormOptions() {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const data = await getOfferDetail(slug);
   return buildMetadata(data?.seo);
 }
 
 export default async function OfferDetailPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const data = await getOfferDetail(slug);
   const formData = await getFormOptions();
 
