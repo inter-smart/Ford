@@ -6,7 +6,7 @@ import localFont from "next/font/local";
 import Script from "next/script";
 
 import { apiFetch, CACHE }           from "@/lib/api/client";
-import { ENDPOINTS }                 from "@/lib/api/endpoints";
+import { getLocalizedEndpoint }      from "@/lib/api/endpoints";
 import { FALLBACK_HEADER, FALLBACK_FOOTER } from "@/lib/api/fallbacks";
 
 export const metadata = {
@@ -36,47 +36,40 @@ export const fordAntenna = localFont({
   display: "swap",
 });
 
-async function getHeaderData() {
+async function getHeaderData(locale) {
   try {
-    const data = await apiFetch(ENDPOINTS.header, { cache: CACHE.NO_STORE });
+    const data = await apiFetch(getLocalizedEndpoint("header", locale), { cache: CACHE.NO_STORE });
     return data?.header_acf ?? FALLBACK_HEADER;
   } catch {
     return FALLBACK_HEADER;
   }
 }
 
-async function getFooterData() {
+async function getFooterData(locale) {
   try {
-    const data = await apiFetch(ENDPOINTS.footer, { cache: CACHE.NO_STORE });
+    const data = await apiFetch(getLocalizedEndpoint("footer", locale), { cache: CACHE.NO_STORE });
     return data?.footer_acf ?? FALLBACK_FOOTER;
   } catch {
     return FALLBACK_FOOTER;
   }
 }
 
-
-async function getDealersData() {
+async function getDealersData(locale) {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/test-drive-form`,
-      { next: { revalidate: 3600 } }
-    );
-    const json = await res.json();
-    return json?.data?.dealers || [];
+    const res = await apiFetch(getLocalizedEndpoint("test-drive-form", locale), { cache: CACHE.NO_STORE });
+    return res?.data?.dealers || [];
   } catch {
     return [];
   }
 }
 
-
-
 export default async function RootLayout({ children, params }) {
   const { locale } = await params;
 
   const [headerData, footerData, dealers] = await Promise.all([
-    getHeaderData(),
-    getFooterData(),
-    getDealersData(),
+    getHeaderData(locale),
+    getFooterData(locale),
+    getDealersData(locale),
   ]);
 
   return (
