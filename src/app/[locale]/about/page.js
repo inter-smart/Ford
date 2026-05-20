@@ -13,7 +13,7 @@ const FindfordSection = dynamic(
 );
 
 async function getPageData() {
-  return apiFetch(ENDPOINTS.about, { cache: CACHE.ISR(60) });
+  return apiFetch(ENDPOINTS.about, { cache: CACHE.NO_STORE });
 }
 
 export async function generateMetadata() {

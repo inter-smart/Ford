@@ -32,7 +32,7 @@ const AfterSaleSection = dynamic(
 );
 
 async function getPageData() {
-  return apiFetch(ENDPOINTS.products, { cache: CACHE.ISR(60) });
+  return apiFetch(ENDPOINTS.products, { cache: CACHE.NO_STORE });
 }
 
 export async function generateMetadata({ params }) {

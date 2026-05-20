@@ -10,7 +10,7 @@ async function getPageData() {
 }
 
 async function getOffersData() {
-  return apiFetch(`${ENDPOINTS.offers}?page=1`, { cache: CACHE.ISR(60) });
+  return apiFetch(`${ENDPOINTS.offers}?page=1`, { cache: CACHE.NO_STORE });
 }
 
 export async function generateMetadata() {

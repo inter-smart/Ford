@@ -6,7 +6,7 @@ import { ENDPOINTS } from "@/lib/api/endpoints";
 import { buildMetadata } from "@/lib/api/seo";
 
 async function getNewsDetail(slug) {
-  return apiFetch(`${ENDPOINTS.news}/${slug}`, { cache: CACHE.ISR(60) });
+  return apiFetch(`${ENDPOINTS.news}/${slug}`, { cache: CACHE.NO_STORE });
 }
 
 export async function generateMetadata({ params }) {

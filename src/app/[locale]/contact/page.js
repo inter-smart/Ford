@@ -7,7 +7,7 @@ import ContactFormSection  from "@/components/features/contact/ContactFormSectio
 import ContactMapSection   from "@/components/features/contact/MapSection";
 
 async function getPageData() {
-  return apiFetch(ENDPOINTS.contact, { cache: CACHE.ISR(60) });
+  return apiFetch(ENDPOINTS.contact, { cache: CACHE.NO_STORE });
 }
 
 export async function generateMetadata() {
