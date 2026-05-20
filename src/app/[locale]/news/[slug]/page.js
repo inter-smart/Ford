@@ -2,22 +2,22 @@ import InnerHero from "@/components/common/InnerHero";
 import NewsDetailSection from "@/components/features/news/NewsDetailSection";
 
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS } from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata } from "@/lib/api/seo";
 
-async function getNewsDetail(slug) {
-  return apiFetch(`${ENDPOINTS.news}/${slug}`, { cache: CACHE.NO_STORE });
+async function getNewsDetail(slug, locale) {
+  return apiFetch(`${getLocalizedEndpoint("news", locale)}/${slug}`, { cache: CACHE.NO_STORE });
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const data = await getNewsDetail(slug);
+  const { slug, locale } = await params;
+  const data = await getNewsDetail(slug, locale);
   return buildMetadata(data?.data?.seo);
 }
 
 export default async function NewsDetailPage({ params }) {
-  const { slug } = await params;
-  const data = await getNewsDetail(slug);
+  const { slug, locale } = await params;
+  const data = await getNewsDetail(slug, locale);
 
   const newsData = data?.data;
   const banner = newsData?.acf?.banner;

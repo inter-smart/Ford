@@ -3,20 +3,22 @@ import LatestNewsSection from "@/components/features/news/LatestNewsSection";
 import NewsListSection from "@/components/features/news/NewsListSection";
 
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS } from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata } from "@/lib/api/seo";
 
-async function getNewsData() {
-  return apiFetch(ENDPOINTS.news, { cache: CACHE.NO_STORE });
+async function getNewsData(locale) {
+  return apiFetch(getLocalizedEndpoint("news", locale), { cache: CACHE.NO_STORE });
 }
 
-export async function generateMetadata() {
-  const data = await getNewsData();
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const data = await getNewsData(locale);
   return buildMetadata(data?.data?.page?.seo);
 }
 
-export default async function NewsPage() {
-  const data = await getNewsData();
+export default async function NewsPage({ params }) {
+  const { locale } = await params;
+  const data = await getNewsData(locale);
 
   const banner = data?.data?.page?.banner;
   const news = data?.data?.news ?? [];

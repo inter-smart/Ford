@@ -1,21 +1,23 @@
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS } from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata } from "@/lib/api/seo";
 import InnerHero from "@/components/common/InnerHero";
 import AccessoriesInfoSection from "@/components/features/accessories/AccessoriesInfoSection";
 import AccessoriesGenuineSection from "@/components/features/accessories/AccessoriesGenuineSection";
 
-async function getPageData() {
-  return apiFetch(ENDPOINTS.accessoriesPage, { cache: CACHE.NO_STORE });
+async function getPageData(locale) {
+  return apiFetch(getLocalizedEndpoint("accessories", locale), { cache: CACHE.NO_STORE });
 }
 
-export async function generateMetadata() {
-  const data = await getPageData();
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const data = await getPageData(locale);
   return buildMetadata(data?.seo);
 }
 
-export default async function AccessoriesPage() {
-  const data = await getPageData();
+export default async function AccessoriesPage({ params }) {
+  const { locale } = await params;
+  const data = await getPageData(locale);
   const heroRaw = data?.heroData?.[0];
   const infoRaw = data?.info?.[0];
   const whyRaw = data?.whyChoose?.[0];

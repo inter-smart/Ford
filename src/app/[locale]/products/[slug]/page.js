@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS }        from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata }    from "@/lib/api/seo";
 import RequestAQuoteDialog  from "@/components/common/RequestAQuoteDialog";
 
@@ -32,13 +32,13 @@ const AfterSaleSection = dynamic(
   { ssr: true }
 );
 
-async function getPageData(slug) {
-  return apiFetch(`${ENDPOINTS.productDetail}/${slug}`, { cache: CACHE.NO_STORE });
+async function getPageData(slug, locale) {
+  return apiFetch(`${getLocalizedEndpoint("product-detail", locale)}/${slug}`, { cache: CACHE.NO_STORE });
 }
 
-async function getDealersData() {
+async function getDealersData(locale) {
   try {
-    const res = await apiFetch(ENDPOINTS.testDriveForm, { cache: CACHE.ISR(3600) });
+    const res = await apiFetch(getLocalizedEndpoint("test-drive-form", locale), { cache: CACHE.ISR(3600) });
     return res?.data?.dealers ?? [];
   } catch {
     return [];
@@ -59,14 +59,14 @@ async function getRaqFormData() {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const res = await getPageData(slug);
+  const { slug, locale } = await params;
+  const res = await getPageData(slug, locale);
   return buildMetadata(res?.meta?.seo);
 }
 
 export default async function Page({ params }) {
-  const { slug } = await params;
-  const [res, dealers, raqFormData] = await Promise.all([getPageData(slug), getDealersData(), getRaqFormData()]);
+  const { slug, locale } = await params;
+  const [res, dealers, raqFormData] = await Promise.all([getPageData(slug, locale), getDealersData(locale), getRaqFormData()]);
   const data = res?.data;
 
   if (!data) return <div className="text-center py-20">Car not found.</div>;

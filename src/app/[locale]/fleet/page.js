@@ -1,13 +1,13 @@
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS }       from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata }   from "@/lib/api/seo";
 import InnerHero           from "@/components/common/InnerHero";
 import FleetCarlineSection from "@/components/features/fleet/FleetCarlineSection";
 import FleetContactSection from "@/components/features/fleet/FleetContactSection";
 import FleetInfoSection    from "@/components/features/fleet/FleetInfoSection";
 
-async function getPageData() {
-  return apiFetch(ENDPOINTS.fleetPage, { cache: CACHE.NO_STORE });
+async function getPageData(locale) {
+  return apiFetch(getLocalizedEndpoint("fleetpage", locale), { cache: CACHE.NO_STORE });
 }
 
 
@@ -25,14 +25,16 @@ async function getRaqFormData() {
 }
 
 
-export async function generateMetadata() {
-  const data = await getPageData();
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const data = await getPageData(locale);
   return buildMetadata(data?.seo);
 }
 
-export default async function FleetPage() {
+export default async function FleetPage({ params }) {
+  const { locale } = await params;
   const [data, raqFormData] = await Promise.all([
-    getPageData(),
+    getPageData(locale),
     getRaqFormData(),
   ]);
 
