@@ -9,6 +9,20 @@ async function getOfferDetail(slug) {
   return apiFetch(`${ENDPOINTS.offers}/${slug}`, { cache: CACHE.NO_STORE });
 }
 
+async function getFormOptions() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/offers-form?locale=en`,
+      { next: { revalidate: 3600 } }
+    );
+    const json = await res.json();
+    return json?.data || null;
+  } catch (error) {
+    console.error("Failed to fetch form options:", error);
+    return null;
+  }
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const data = await getOfferDetail(slug);
@@ -18,6 +32,7 @@ export async function generateMetadata({ params }) {
 export default async function OfferDetailPage({ params }) {
   const { slug } = await params;
   const data = await getOfferDetail(slug);
+  const formData = await getFormOptions();
 
   const banner = data?.detail_page?.Banner?.[0];
 
@@ -26,7 +41,7 @@ export default async function OfferDetailPage({ params }) {
       {banner?.enable__disable_banner_offers && (
         <InnerHero data={{ ...banner, title: "Offers" }} />
       )}
-      <OfferDetailSection data={data} />
+      <OfferDetailSection data={data} formData={formData} />
     </>
   );
 }

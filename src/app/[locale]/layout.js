@@ -3,6 +3,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ToasterWrapper from "@/components/common/ToasterWrapper";
 import localFont from "next/font/local";
+import Script from "next/script";
 
 import { apiFetch, CACHE }           from "@/lib/api/client";
 import { ENDPOINTS }                 from "@/lib/api/endpoints";
@@ -53,10 +54,27 @@ async function getFooterData() {
   }
 }
 
+
+async function getDealersData() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/test-drive-form`,
+      { next: { revalidate: 3600 } }
+    );
+    const json = await res.json();
+    return json?.data?.dealers || [];
+  } catch {
+    return [];
+  }
+}
+
+
+
 export default async function RootLayout({ children }) {
-  const [headerData, footerData] = await Promise.all([
+  const [headerData, footerData, dealers] = await Promise.all([
     getHeaderData(),
     getFooterData(),
+    getDealersData(),
   ]);
 
   return (
@@ -67,7 +85,11 @@ export default async function RootLayout({ children }) {
           {children}
           <ToasterWrapper />
         </main>
-        <Footer data={footerData} />
+        <Footer data={footerData} dealers={dealers} />
+        <Script
+          src="https://www.google.com/recaptcha/api.js?render=6LcnDSUsAAAAAPzuIuNcagH8xs8f_HIbB7_GYaBD"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

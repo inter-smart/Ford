@@ -10,13 +10,31 @@ async function getPageData() {
   return apiFetch(ENDPOINTS.fleetPage, { cache: CACHE.NO_STORE });
 }
 
+
+async function getRaqFormData() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form`,
+      { next: { revalidate: 3600 } }
+    );
+    const json = await res.json();
+    return json?.data || null;
+  } catch {
+    return null;
+  }
+}
+
+
 export async function generateMetadata() {
   const data = await getPageData();
   return buildMetadata(data?.seo);
 }
 
 export default async function FleetPage() {
-  const data = await getPageData();
+  const [data, raqFormData] = await Promise.all([
+    getPageData(),
+    getRaqFormData(),
+  ]);
 
   const heroRaw    = data?.heroData?.[0];
   const introRaw   = data?.introduction?.[0];
@@ -37,7 +55,7 @@ export default async function FleetPage() {
       )}
 
       {introRaw?.enable__disable_banner && (
-        <FleetInfoSection introData={introRaw} quoteData={quoteRaw} />
+        <FleetInfoSection introData={introRaw} quoteData={quoteRaw} raqFormData={raqFormData} />
       )}
 
       {carsRaw?.enable__disable_cars_fleet && (

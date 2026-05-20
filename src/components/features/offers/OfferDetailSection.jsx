@@ -3,7 +3,7 @@ import { Heading } from "@/components/layout/Heading";
 import RequestAQuoteDialog from "@/components/common/RequestAQuoteDialog";
 import parse from "html-react-parser";
 
-export default function OfferDetailSection({ data }) {
+export default function OfferDetailSection({ data, formData }) {
   const detail = data?.detail_page;
   const benefits = detail?.benefits_section?.[0];
   const imageUrl = detail?.detail_page_image?.url;
@@ -32,9 +32,14 @@ export default function OfferDetailSection({ data }) {
               </div>
             )}
             <RequestAQuoteDialog
-              imgPath="/images/enquireNow-img-1.jpg"
-              title="Enquire Now"
-              description="<p>To get us to call you back, complete all of the fields below, type and send us your enquiry and we will aim to get back to you within the next working day.</p>"
+              imgPath={formData?.offers_image?.url || ""}
+              imgAlt={formData?.offers_image?.alt || ""}
+              imgWidth={formData?.offers_image?.width || 505}
+              imgHeight={formData?.offers_image?.height || 631}
+              title={formData?.offers_title || "Enquire Now"}
+              description={formData?.offers_short_desription || ""}
+              dealers={formData?.dealers || []}
+              pageTitle={data?.title || ""}
             >
               <button className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-[1] font-bold text-white w-max max-w-full h-[30px] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[15px] xl:px-[18px] 2xl:px-[23px] 3xl:px-[28px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center hover:bg-[#005fd3]">
                 Enquire Now
@@ -54,7 +59,6 @@ export default function OfferDetailSection({ data }) {
           </div>
         </div>
 
-        
         {benefits?.enable__disable_benefits_section &&
           benefits?.benefits_items?.length > 0 && (
             <div className="flex flex-wrap -mx-[6px] xl:-mx-[10px] 2xl:-mx-[13px] mt-[20px] xl:mt-[50px] 2xl:mt-[40px] 3xl:mt-[50px]">

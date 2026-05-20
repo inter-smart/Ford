@@ -1,9 +1,11 @@
 "use client";
 
 import * as React from "react";
+import { getRecaptchaToken } from "@/lib/recaptcha";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import RecaptchaScript from "@/components/common/RecaptchaScript";
 import * as z from "zod";
 import {
   Field,
@@ -11,11 +13,11 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
 import {
   Select,
   SelectContent,
@@ -28,12 +30,100 @@ import { Textarea } from "../ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
-  fullName: z.string().min(1, { message: "Name is required" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  phone: z.string().min(8, { message: "Invalid phone number" }),
-  selectDealer: z.string().min(1, { message: "Dealer is required" }),
-  message: z.string().optional(),
-  installationSupport: z.string().optional(),
+  fullName: z
+    .string()
+    .trim()
+    .min(1, { message: "Name is required" })
+    .min(2, { message: "Name must be at least 2 characters" })
+    .max(50, { message: "Name cannot exceed 50 characters" })
+    .refine((value) => {
+      const trimmed = value.trim();
+      if (!trimmed) return false;
+      if (/[\t\n]/.test(trimmed)) return false;
+      if (/\d/.test(trimmed)) return false;
+      if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
+      if (/<img[\s\S]*?>/i.test(trimmed)) return false;
+      if (/javascript:/i.test(trimmed)) return false;
+      const sqlPattern =
+        /\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|EXEC|UNION)\b/i;
+      if (sqlPattern.test(trimmed)) return false;
+      if (!/^[^\d!@#$%^&*()_+=\[\]{};:"\\|,.<>\/?`~]+$/u.test(trimmed))
+        return false;
+      return true;
+    }, "Invalid name"),
+
+  email: z
+    .string()
+    .min(5, { message: "Email is required" })
+    .max(254, { message: "Email is too long" })
+    .refine((value) => {
+      const trimmed = value.trim();
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
+      if (!trimmed) return false;
+      if (!emailRegex.test(trimmed)) return false;
+      if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
+      if (/["'`;]|--/.test(trimmed)) return false;
+      if ((trimmed.match(/@/g) || []).length !== 1) return false;
+      return true;
+    }, "Invalid email address"),
+
+  phone: z
+    .string()
+    .min(10, { message: "Phone number is required" })
+    .max(20, { message: "Phone number is too long" })
+    .refine((value) => {
+      const trimmed = value.trim();
+      const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
+      if (!validPattern.test(trimmed)) return false;
+      if ((trimmed.match(/\+/g) || []).length > 1) return false;
+      const digitsOnly = trimmed.replace(/\D/g, "");
+      if (/^0+$/.test(digitsOnly)) return false;
+      if (digitsOnly.length > 15) return false;
+      if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(trimmed)) return false;
+      return true;
+    }, "Invalid phone number, max 15 digits allowed"),
+
+  selectDealer: z
+    .string()
+    .min(1, { message: "Please select a dealer" })
+    .refine((value) => {
+      if (!value || !value.trim()) return false;
+      if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(value)) return false;
+      if (/javascript:/i.test(value)) return false;
+      return true;
+    }, "Invalid dealer selection"),
+
+  message: z
+    .string()
+    .optional()
+    .refine((value) => {
+      if (!value) return true;
+      const trimmed = value.replace(/\s+/g, " ").trim();
+      if (trimmed.length < 2) return false;
+      const forbiddenPatterns = [
+        /<script[\s\S]*?>[\s\S]*?<\/script>/i,
+        /<img[\s\S]*?>/i,
+        /<iframe[\s\S]*?>/i,
+        /{{.*?constructor.*?}}/i,
+        /['";]?\s*DROP\s+TABLE/i,
+        /javascript:/i,
+      ];
+      for (const pattern of forbiddenPatterns) {
+        if (pattern.test(trimmed)) return false;
+      }
+      if (!/[a-zA-Z0-9]/.test(trimmed)) return false;
+      if (trimmed.length > 2000) return false;
+      return true;
+    }, "Please enter a valid message"),
+
+  installationSupport: z
+    .string()
+    .min(1, { message: "Please select an option" })
+    .refine(
+      (value) => ["Yes", "No"].includes(value),
+      "Invalid option selected"
+    ),
+
   agreeToTerms: z.literal(true, {
     errorMap: () => ({
       message:
@@ -51,9 +141,8 @@ const inputClasses =
 const errorClass =
   "text-[10px] md:text-[10px] xl:text-[11px] 3xl:text-[12px] leading-normal font-normal text-red-500 mt-1";
 
-export function EnquireNowForm() {
+export function EnquireNowForm({ dealers = [], pageTitle = "", submitEndpoint = "" }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -67,80 +156,130 @@ export function EnquireNowForm() {
       agreeToTerms: false,
     },
   });
-  async function onSubmit(data) {
+
+  // Trim on blur — same pattern as old form
+  const handleBlurTrim = (fieldName) => {
+    const value = form.getValues(fieldName);
+    if (typeof value === "string") {
+      const trimmed = value.trim();
+      if (trimmed !== value) {
+        form.setValue(fieldName, trimmed, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+      } else {
+        form.trigger(fieldName);
+      }
+    } else {
+      form.trigger(fieldName);
+    }
+  };
+
+  const normalizeText = (value) => {
+    if (!value) return "";
+    return value
+      .replace(/\\n/g, "\n")
+      .replace(/\\t/g, "    ")
+      .replace(/\t+/g, "    ")
+      .replace(/\r\n|\r/g, "\n")
+      .replace(/ {2,}/g, " ")
+      .replace(/^[ \t]+|[ \t]+$/gm, "");
+  };
+
+async function onSubmit(data) {
     setIsSubmitting(true);
     try {
-      const formData = new FormData();
+        const recaptchaToken = await getRecaptchaToken("submit");
 
-      formData.append("name", data.fullName);
-      formData.append("email", data.email);
-      formData.append("phone", data.phone);
-      formData.append("dealer", data.selectDealer);
-      formData.append("message", data.message || "");
-      formData.append("commercial_messages", data.installationSupport);
-      formData.append("agree_to_terms", data.agreeToTerms ? "1" : "0");
+      const payload = {
+          fullName:            data.fullName,
+          email:               data.email,
+          phone:               data.phone,
+          dealer:              data.selectDealer,
+          message:             data.message || "",
+          commercial_messages: data.installationSupport,
+          agree_to_terms:      data.agreeToTerms ? "1" : "0",
+          source_page_id:      typeof window !== "undefined" ? window.location.pathname : "",
+          source_page_title:   pageTitle,
+          recaptcha_token:     recaptchaToken,
+      };
 
-      setIsSuccess(true);
-      form.reset();
-    } catch (error) {
-      console.error("Submission Error:", error);
-    } finally {
+      const response = await fetch(
+        submitEndpoint || `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/offers-form/submit`,
+        {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify(payload),
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+          toast.success("Your enquiry has been submitted successfully! We'll get back to you within the next working day.");
+          form.reset();
+      } else {
+          toast.error(result.message || "Something went wrong. Please try again.");
+      }
+      } catch (error) {
+          console.error("Submission Error:", error);
+          toast.error("Failed to submit enquiry. Please try again later.");
+      } finally {
       setIsSubmitting(false);
     }
   }
 
-  if (isSuccess) {
-    return <div>Successs</div>;
-  }
-
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+    <>
+    <RecaptchaScript />
+    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full" noValidate>
+      {/* Full Name */}
       <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
-          {[{ name: "fullName", placeholder: "Name*" }].map((item) => (
-            <FormBlock
-              key={item.name}
-              item={item}
-              form={form}
-              isSubmitting={isSubmitting}
-            />
-          ))}
+          <FormBlock
+            item={{ name: "fullName", placeholder: "Name*" }}
+            form={form}
+            isSubmitting={isSubmitting}
+            onBlurTrim={handleBlurTrim}
+          />
         </div>
       </div>
+
+      {/* Email + Phone */}
       <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
-          {[
-            { name: "email", placeholder: "Email*", type: "email" },
-            { name: "phone", placeholder: "Phone*" },
-          ].map((item) => (
-            <FormBlock
-              key={item.name}
-              item={item}
-              form={form}
-              isSubmitting={isSubmitting}
-            />
-          ))}
+          <FormBlock
+            item={{ name: "email", placeholder: "Email*", type: "email" }}
+            form={form}
+            isSubmitting={isSubmitting}
+            onBlurTrim={handleBlurTrim}
+          />
+          <FormBlock
+            item={{ name: "phone", placeholder: "Phone*" }}
+            form={form}
+            isSubmitting={isSubmitting}
+            onBlurTrim={handleBlurTrim}
+          />
         </div>
       </div>
+
+      {/* Select Dealer */}
       <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
-          {[
-            {
+          <FormBlock
+            item={{
               name: "selectDealer",
               placeholder: "Select Dealer*",
               type: "select",
-              options: ["states1", "states2", "states3"],
-            },
-          ].map((item) => (
-            <FormBlock
-              key={item.name}
-              item={item}
-              form={form}
-              isSubmitting={isSubmitting}
-            />
-          ))}
+              options: dealers.map((d) => d.dealer),
+            }}
+            form={form}
+            isSubmitting={isSubmitting}
+          />
         </div>
       </div>
+
+      {/* Message */}
       <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           <Controller
@@ -154,11 +293,17 @@ export function EnquireNowForm() {
                   placeholder="Message"
                   className={cn(
                     inputClasses,
-                    "min-h-[50px] xl:min-h-[68px] 2xl:min-h-[70px] 3xl:min-h-[90px]",
+                    "min-h-[50px] xl:min-h-[68px] 2xl:min-h-[70px] 3xl:min-h-[90px]"
                   )}
                   disabled={isSubmitting}
+                  onBlur={() => {
+                    field.onBlur();
+                    const normalized = normalizeText(field.value);
+                    form.setValue("message", normalized);
+                    form.trigger("message");
+                    handleBlurTrim("message");
+                  }}
                 />
-
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
@@ -170,6 +315,8 @@ export function EnquireNowForm() {
           />
         </div>
       </div>
+
+      {/* Commercial Messages Radio */}
       <div className="mb-3 xl:mb-3.5 2xl:mb-4 3xl:mb-5">
         <Controller
           name="installationSupport"
@@ -179,7 +326,7 @@ export function EnquireNowForm() {
               <FieldLabel
                 className={cn(
                   labelClasses,
-                  "mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4 block",
+                  "mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4 block"
                 )}
               >
                 Terms and Conditions. I am happy to receive commercial messages
@@ -203,7 +350,6 @@ export function EnquireNowForm() {
                   </div>
                 ))}
               </RadioGroup>
-
               {fieldState.invalid && (
                 <FieldError
                   errors={[fieldState.error]}
@@ -214,6 +360,8 @@ export function EnquireNowForm() {
           )}
         />
       </div>
+
+      {/* Agree to Terms */}
       <div className="mb-3 xl:mb-3.5 2xl:mb-4 3xl:mb-5">
         <Controller
           name="agreeToTerms"
@@ -246,6 +394,7 @@ export function EnquireNowForm() {
         />
       </div>
 
+      {/* Submit */}
       <div>
         <button
           type="submit"
@@ -256,10 +405,11 @@ export function EnquireNowForm() {
         </button>
       </div>
     </form>
+    </>
   );
 }
 
-function FormBlock({ item, form, isSubmitting, extraDisabled }) {
+function FormBlock({ item, form, isSubmitting, extraDisabled, onBlurTrim }) {
   return (
     <Controller
       name={item.name}
@@ -282,7 +432,7 @@ function FormBlock({ item, form, isSubmitting, extraDisabled }) {
               <SelectTrigger
                 className={cn(
                   inputClasses,
-                  "data-[placeholder]:text-black data-[size=default]:h-[35px] xl:data-[size=default]:h-[40px] 2xl:data-[size=default]:h-[45px] 3xl:data-[size=default]:h-[50px] justify-between",
+                  "data-[placeholder]:text-black data-[size=default]:h-[35px] xl:data-[size=default]:h-[40px] 2xl:data-[size=default]:h-[45px] 3xl:data-[size=default]:h-[50px] justify-between"
                 )}
               >
                 <SelectValue
@@ -305,14 +455,6 @@ function FormBlock({ item, form, isSubmitting, extraDisabled }) {
                 </SelectGroup>
               </SelectContent>
             </Select>
-          ) : item.type === "date" ? (
-            <Input
-              {...field}
-              type="date"
-              placeholder={item.placeholder}
-              className={cn(inputClasses, "date-input [color-scheme:dark]")}
-              disabled={isSubmitting || extraDisabled}
-            />
           ) : (
             <div className="flex flex-col">
               <Input
@@ -321,12 +463,11 @@ function FormBlock({ item, form, isSubmitting, extraDisabled }) {
                 placeholder={item.placeholder}
                 className={inputClasses}
                 disabled={isSubmitting || extraDisabled}
+                onBlur={() => {
+                  field.onBlur();
+                  if (onBlurTrim) onBlurTrim(item.name);
+                }}
               />
-              {item.note && (
-                <span className="text-[9px] xl:text-[10px] 3xl:text-[11px] text-white/50 mt-1.5 ml-1 inline-block">
-                  {item.note}
-                </span>
-              )}
             </div>
           )}
           {fieldState.invalid && (

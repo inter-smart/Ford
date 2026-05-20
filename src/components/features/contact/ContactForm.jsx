@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import RecaptchaScript from "@/components/common/RecaptchaScript";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
+import { getRecaptchaToken } from "@/lib/recaptcha";
+
 
 import {
   Form,
@@ -186,18 +188,6 @@ export default function ContactForm({ data }) {
     },
   });
 
-
-  /* ---------------------------
-      LOAD reCAPTCHA SCRIPT
-  ----------------------------*/
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "https://www.google.com/recaptcha/api.js?render=6LcnDSUsAAAAAPzuIuNcagH8xs8f_HIbB7_GYaBD";
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
-
   const onSubmit = async (formData) => {
     try {
       const finalData = {
@@ -207,7 +197,7 @@ export default function ContactForm({ data }) {
         message: formData.message?.trim() || "",
       };
 
-      const token = await grecaptcha.execute("6LcnDSUsAAAAAPzuIuNcagH8xs8f_HIbB7_GYaBD", { action: "submit" });
+      const token = await getRecaptchaToken("submit");
       finalData.recaptcha = token;
 
       const response = await fetch("https://dev18.intersmarthosting.in/Ford/wp-json/ford/v1/enquiry", {
@@ -236,10 +226,10 @@ export default function ContactForm({ data }) {
 
   return (
     <div className="w-full">
+      <RecaptchaScript />
       <h3 className="text-[25px] text-black font-normal mb-[15px] lg:mb-[20px] xl:mb-[35px] 2xl:mb-[50px]">
         {data?.form_title}
       </h3>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {/* Name */}
