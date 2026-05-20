@@ -15,7 +15,8 @@ export const ENDPOINTS = {
   showroomTab:     "ford/v1/showroom-service-center/tab",
   partsPage:       "ford/v1/parts",
   productDetail:   "ford/v1/product-detail",
-  testDriveForm:   "ford/v1/test-drive-form",
+  testDriveForm:      "ford/v1/test-drive-form",
+  requestAQuoteForm:  "ford/v1/request-a-quote-form",
 };
 
 

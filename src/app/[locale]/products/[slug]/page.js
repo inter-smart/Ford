@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { apiFetch, CACHE } from "@/lib/api/client";
 import { ENDPOINTS }        from "@/lib/api/endpoints";
 import { buildMetadata }    from "@/lib/api/seo";
+import RequestAQuoteDialog  from "@/components/common/RequestAQuoteDialog";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"), {
   ssr: true,
@@ -44,6 +45,19 @@ async function getDealersData() {
   }
 }
 
+async function getRaqFormData() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form`,
+      { next: { revalidate: 3600 } }
+    );
+    const json = await res.json();
+    return json?.data || null;
+  } catch {
+    return null;
+  }
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const res = await getPageData(slug);
@@ -52,7 +66,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { slug } = await params;
-  const [res, dealers] = await Promise.all([getPageData(slug), getDealersData()]);
+  const [res, dealers, raqFormData] = await Promise.all([getPageData(slug), getDealersData(), getRaqFormData()]);
   const data = res?.data;
 
   if (!data) return <div className="text-center py-20">Car not found.</div>;
@@ -70,7 +84,25 @@ export default async function Page({ params }) {
 
   return (
     <>
-      {banner?.enabled && <InnerHero data={banner} />}
+      {banner?.enabled && (
+        <InnerHero
+          data={banner}
+          buttonSlot={
+            <RequestAQuoteDialog
+              imgPath={raqFormData?.raq_image?.url || "/images/request-img-1.jpg"}
+              title={raqFormData?.raq_title || "Request A Quote"}
+              description={raqFormData?.raq_short_desription || "<p>To request a quote, please complete the fields below.</p>"}
+              dealers={raqFormData?.dealers || []}
+              pageTitle={data.modelName}
+              submitEndpoint={`${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form/submit`}
+            >
+              <button className="text-[12px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer">
+                {banner.button_text}
+              </button>
+            </RequestAQuoteDialog>
+          }
+        />
+      )}
 
       {about?.enabled && (
         <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} />
