@@ -21,15 +21,15 @@ export default function ProductCard({ item }) {
         )}
       </div>
       <div className="w-full h-auto flex items-center [&>*]:w-[50%]">
-        <div className="text-[14px] 2xl:text-[16px] 3xl:text-[18px] leading-[1] font-semibold text-black">
+        <div className="text-[12px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-semibold text-black">
           {item?.modelName}
         </div>
         <Link
           href={`/products/${item?.slug}`}
-          className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1] font-bold text-[#1577F0] gap-[5px] flex items-center justify-end group/arrow"
+          className="text-[12.44px] 2xl:text-[15px] 3xl:text-[18px] leading-none font-bold text-[#1577F0] gap-[5px] flex items-center justify-end group/arrow"
         >
           Learn More
-          <span className="w-[9px] 2xl:w-[10px] 3xl:w-[13px] h-auto aspect-[10/10] flex items-center justify-center relative z-0 bottom-[-1px] group-hover/arrow:translate-x-[3px] transition duration-500 ease-in-out">
+          <span className="w-[12px] 2xl:w-[13px] 3xl:w-[14px] h-auto aspect-[8/5] flex items-center justify-center group-hover/arrow:translate-x-[3px] transition duration-500 ease-in-out -mt-[1px]">
             <Image
               src="/images/product_learmore_arrow.svg"
               alt="arrow-right"

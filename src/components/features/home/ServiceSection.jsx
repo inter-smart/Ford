@@ -16,12 +16,13 @@ export default function ServiceSection({ data }) {
       <div className="container">
         <Swiper
           slidesPerView={1}
-          spaceBetween={20}
+          spaceBetween={10}
           breakpoints={{
-            478: { slidesPerView: 2 },
+            478: { slidesPerView: 2, pagination: true, spaceBetween: 15 },
             678: {
               slidesPerView: 3,
-              spaceBetween: 25,
+              spaceBetween: 20,
+              pagination: false,
             },
             1024: {
               slidesPerView: 4,
@@ -43,7 +44,7 @@ export default function ServiceSection({ data }) {
               <SwiperSlide key={index} className="!h-auto">
                 <div
                   onMouseEnter={() => setActiveIndex(index)}
-                  className={`w-full h-full flex flex-col justify-start rounded-[10px_10px_0_0] overflow-hidden p-[10px] sm:pb-[25px] pb-[45px] group cursor-pointer transition-all ${
+                  className={`w-full h-full flex flex-col justify-start rounded-[10px_10px_0_0] overflow-hidden p-[10px] pb-[20px] sm:pb-[25px] group cursor-pointer transition-all ${
                     isActive
                       ? "bg-[#0A1572]"
                       : "max-sm:bg-[#0A1572] hover:bg-[#0A1572]"
@@ -94,7 +95,7 @@ export default function ServiceSection({ data }) {
                     <Heading
                       size="heading2"
                       as="h4"
-                      className="text-white mb-[15px] line-clamp-2 max-w-[245px]"
+                      className="text-white mb-[15px] line-clamp-2 xl:max-w-[245px]"
                     >
                       {item?.title_service}
                     </Heading>

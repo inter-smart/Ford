@@ -10,7 +10,7 @@ export default function ProductListSection({ data }) {
   const categories = [
     { value: "all", label: "All" },
     ...Array.from(
-      new Set(productRaw.flatMap((p) => p.modelCategory || []))
+      new Set(productRaw.flatMap((p) => p.modelCategory || [])),
     ).map((cat) => ({
       value: cat.toLowerCase(),
       label: cat,
@@ -34,7 +34,7 @@ export default function ProductListSection({ data }) {
       : String(modelBrandRaw).toLowerCase();
 
     const categoriesLower = (item.modelCategory || []).map((c) =>
-      String(c).toLowerCase()
+      String(c).toLowerCase(),
     );
 
     const matchCategory =
@@ -67,11 +67,39 @@ export default function ProductListSection({ data }) {
     visibleCount < productList.length ? "Load More" : "Load Less";
 
   return (
-    <section className="w-full h-auto py-[40px] sm:py-[50px_40px] lg:py-[70px_50px] 2xl:py-[85px_65px] block">
+    <section className="w-full h-auto block py-[40px_30px] sm:py-[60px_40px] lg:py-[80px_57px] 2xl:py-[100px_70px] 3xl:py-[122px_80px]">
       <div className="container">
-        <div className="w-full h-auto flex flex-wrap items-center mb-[20px] sm:mb-[30px] 2xl:mb-[40px] ">
-          <div className="w-full sm:w-[30%] max-sm:mb-[20px]">
-            <div className="w-full h-auto sm:max-w-[320px] 2xl:max-w-[370px] relative z-0">
+        <div className="flex flex-wrap items-center flex-col-reverse sm:flex-row gap-5 mb-[20px] xl:mb-[30px] 2xl:mb-[45px] 3xl:mb-[50px]">
+          <div className="w-full sm:flex-1 overflow-hidden relative">
+            <div className="embla__viewport" ref={tabsEmblaRef}>
+              <div className="embla__container flex pr-5">
+                {categories.map((item, index) => (
+                  <div
+                    className="embla__slide w-auto"
+                    key={index}
+                  >
+                    <button
+                      onClick={() => {
+                        setActiveCategory(item.value);
+                        setVisibleCount(18);
+                      }}
+                      className={`text-[12px] sm:text-[14px] xl:text-[16px] 2xl:text-[19.2px] 3xl:text-[24px] leading-none font-normal capitalize rounded-full h-[30px] xl:h-[35.5px] 2xl:h-[42.5px] 3xl:h-[53.3px] p-[5px_15px_3px] xl:p-[7px_22px_5px] 2xl:p-[7px_24px] 3xl:p-[8px_26px_6px] bg-white border flex items-center justify-center transition-all duration-300 whitespace-nowrap
+                        ${
+                          activeCategory === item.value
+                            ? "font-semibold text-black border-[#008dd2]"
+                            : "border-white text-black hover:text-[#008dd2]"
+                        }`}
+                    >
+                      {item?.label}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-[60px] bg-gradient-to-l from-white to-transparent z-10" />
+          </div>
+          <div className="w-full sm:w-[268px] xl:w-[327px] 2xl:w-[392px] 3xl:w-[490px]">
+            <div className="w-full h-auto relative z-0">
               <input
                 type="text"
                 placeholder="Search..."
@@ -92,40 +120,13 @@ export default function ProductListSection({ data }) {
               </button>
             </div>
           </div>
-          <div className="w-full sm:w-[65%] sm:ml-auto overflow-hidden relative">
-            <div className="embla__viewport" ref={tabsEmblaRef}>
-              <div className="embla__container flex">
-                {categories.map((item, index) => (
-                  <div
-                    className="embla__slide w-auto mr-[10px] lg:mr-[30px] 2xl:mr-[40px]"
-                    key={index}
-                  >
-                    <button
-                      onClick={() => {
-                        setActiveCategory(item.value);
-                        setVisibleCount(18);
-                      }}
-                      className={`text-[14px] lg:text-[16px] 2xl:text-[18px] leading-[1] font-normal whitespace-nowrap text-black w-auto h-auto p-[7px_10px] sm:p-[10px_15px] lg:p-[10px_20px] rounded-full border transition-all
-                        ${activeCategory === item.value
-                          ? "font-semibold border-[#1577F0]"
-                          : "border-white hover:bg-gray-100"
-                        }`}
-                    >
-                      {item?.label}
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-[60px] bg-gradient-to-l from-white to-transparent z-10" />
-          </div>
         </div>
-        <div className="w-full h-full sm:mx-[-5px] lg:mx-[-7px] flex flex-wrap">
+        <div className="flex flex-wrap -mx-[-10px] sm:-mx-[6px] xl:-mx-[8px] 2xl:-mx-[10px] 3xl:-mx-[13px]">
           {visibleProducts.length > 0 ? (
             visibleProducts.map((item, index) => (
               <div
-                key={index}
-                className="w-full sm:w-1/2 lg:w-1/3 h-auto p-[10px_0px] sm:p-[15px_5px] lg:p-[20px_7px] 2xl:p-[30px_7px]"
+                key={"product" + index}
+                className="w-full sm:w-1/2 lg:w-1/3 p-[10px] sm:p-[15px_6px] xl:p-[19px_8px] 2xl:p-[22px_10px] 3xl:p-[28px_13px]"
               >
                 <ProductCard item={item} />
               </div>

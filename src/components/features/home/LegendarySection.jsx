@@ -157,23 +157,23 @@ export default function LegendarySection({ data = {} }) {
   if (categories.length === 0) return null;
 
   return (
-    <section className="min-h-[670px] relative z-0 2xl:py-[120px_40px] xl:py-[60px_40px] py-[40px_20px]">
+    <section className="min-h-[670px] relative z-0 2xl:py-[120px_80px] xl:py-[60px_60px] py-[40px_40px]">
       <div className="container">
-        <Heading size="heading3" as="h2" className="text-black mb-[45px]">
+        <Heading size="heading3" as="h2" className="text-black mb-[20px] lg:mb-[45px]">
           Discover Ford's Legendary Line up
         </Heading>
 
-        <div className="flex flex-col lg:flex-row gap-10">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
           {/* Sidebar */}
           <div className="w-full 2xl:w-[200px] lg:w-[160px] flex flex-wrap lg:flex-col m-[-3px] lg:my-[-7px]">
             {categories.map((item, index) => (
               <div
                 key={index}
-                className="lg:w-full sm:w-[calc(100%/4)] w-[calc(100%/2)] p-[3px] lg:py-[7px]"
+                className="lg:w-full p-[3px] lg:py-[7px]"
               >
                 <button
                   onClick={() => setSelectedCategory(item.name)}
-                  className={`group 2xl:text-[14px] xl:text-[12px] 3xs:text-[11px] text-[10px] text-black h-[40px] w-full flex items-center gap-2 px-4 py-2 rounded-full
+                  className={`group 2xl:text-[14px] xl:text-[12px] 3xs:text-[11px] text-[10px] leading-none text-black h-[35px] lg:h-[40px] w-full flex items-center gap-2 px-4 py-2 rounded-full
                     border border-[#E8E8E8] transition-all cursor-pointer ${
                       selectedCategory === item.name
                         ? "bg-[#1577F0] text-white font-semibold"
@@ -212,7 +212,7 @@ export default function LegendarySection({ data = {} }) {
                 onValueChange={setSelectedBrand}
                 className="w-full"
               >
-                <TabsList className="bg-transparent gap-6 2xl:mb-[45px] sm:mb-[30px] mb-[15px] h-auto p-0 rtl:ml-auto flex flex-wrap ">
+                <TabsList className="bg-transparent gap-4 xl:gap-6 2xl:mb-[45px] sm:mb-[30px] mb-[15px] h-auto p-0 rtl:ml-auto flex flex-wrap ">
                   {brandsInCategory.map((brand) => (
                     <TabsTrigger
                       key={brand.name}
@@ -222,7 +222,7 @@ export default function LegendarySection({ data = {} }) {
                       data-[state=active]:after:bg-[#0052FF] data-[state=active]:after:w-full
                       data-[state=active]:text-black rounded-none
                       data-[state=active]:shadow-none
-                      text-gray-500 px-2 pb-2"
+                      text-gray-500 px-0 pt-0"
                     >
                       <Image
                         src={brand.logo || "/images/placeholder.png"}
@@ -231,7 +231,7 @@ export default function LegendarySection({ data = {} }) {
                         height={50}
                         className="max-w-[90px] mb-[10px] object-contain"
                       />
-                      <span className="text-[14px] 2xl:text-[16px] font-normal group-data-[state=active]:font-semibold text-[#00142E]">
+                      <span className="text-[14px] 2xl:text-[16px] font-normal group-data-[state=active]:font-semibold text-[#00142E] w-full text-start">
                         {brand.name}
                       </span>
                     </TabsTrigger>
@@ -241,7 +241,8 @@ export default function LegendarySection({ data = {} }) {
                 <TabsContent value={selectedBrand} className="mt-0 relative">
                   {currentCar && (
                     <>
-                      <div className="flex flex-col ltr:sm:flex-row rtl:sm:flex-row-reverse justify-between gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
+                      {/* <div className="flex flex-col ltr:sm:flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full"> */}
+                      <div className="flex flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
                         <div className="sm:w-1/3">
                           <Heading
                             size="heading1"
@@ -261,8 +262,8 @@ export default function LegendarySection({ data = {} }) {
                           )}
                         </div>
 
-                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-[-120px] right-0 min-w-[200px] sm:mb-0 mb-[30px]">
-                          <div className="flex items-center rtl:max-sm:justify-end gap-4">
+                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-[-120px] right-0 min-w-[200px]">
+                          <div className="flex flex-col xl:flex-row items-center max-lg:items-end gap-1 xl:gap-2 3xl:gap-4">
                             <span className="text-[11px] 2xl:text-[14px] 3xl:text-[16px] text-black font-semibold uppercase">
                               {currentCar.name} Models:
                             </span>
@@ -270,7 +271,7 @@ export default function LegendarySection({ data = {} }) {
                               value={selectedModelKey}
                               onValueChange={setSelectedModelKey}
                             >
-                              <SelectTrigger className="!text-[11px] md:!text-[12px] 2xl:!text-[14px] max-w-full min-h-[35px] lg:min-h-[40px] 2xl:min-h-[50px] px-6 border border-[#CCCCCC] text-[#00142E] w-[150px] lg:w-[200px] bg-[#F8F9FD] rounded-full font-normal">
+                              <SelectTrigger className="!text-[11px] md:!text-[12px] 2xl:!text-[14px] max-w-full min-h-[35px] lg:min-h-[40px] 2xl:min-h-[50px] px-3 xl:px-4 2xl:px-6 border border-[#CCCCCC] text-[#00142E] w-[120px] lg:w-[170px] 2xl::w-[200px] 3xl::w-[255px] bg-[#F8F9FD] rounded-full font-normal">
                                 <SelectValue placeholder="Select model" />
                               </SelectTrigger>
                               <SelectContent className="3xl:text-[18px] 2xl:text-[16px] md:text-[12px] text-[10px] bg-white border border-[#CCCCCC] rounded-md shadow-md font-normal text-black">
@@ -317,7 +318,7 @@ export default function LegendarySection({ data = {} }) {
                         </div>
                       </div>
                       {/* Big car image */}
-                      <div className="relative mt-10 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[80px]">
+                      <div className="relative mt-15 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[80px]">
                         <Image
                           src={
                             selectedColorImage ||
@@ -330,7 +331,7 @@ export default function LegendarySection({ data = {} }) {
                           className="w-full max-w-5xl mx-auto object-contain z-1"
                         />
                         {currentCar.modelLogo && (
-                          <div className="absolute sm:top-[-30%] top-[-25%] left-0 right-0 m-auto  w-full lg:max-w-[350px] max-w-[250px] z-[-1]">
+                          <div className="absolute z-[-1] top-[-10%] xl:top-[-15%] 2xl:top-[-20%] left-0 right-0 m-auto w-full max-w-[150px] xl:max-w-[300px] 2xl:max-w-[350px]">
                             <Image
                               src={currentCar.modelLogo}
                               alt={currentCar.modelLogoAlt}
@@ -379,7 +380,7 @@ export default function LegendarySection({ data = {} }) {
                                           backgroundColor: color.code || "#ddd",
                                         }}
                                       />
-                                      <div className="text-[13px] 2xl:text-[14px] leading-[1] font-normal text-black whitespace-nowrap mx-auto absolute z-1 left-0 right-0 bottom-[-25px] sm:bottom-[-30px] flex justify-center">
+                                      <div className="text-[11px] xl:text-[13px] 2xl:text-[14px] leading-[1] font-normal text-black whitespace-nowrap mx-auto absolute z-1 left-0 right-0 bottom-[-20px] xl:bottom-[-30px] flex justify-center">
                                         {color.title}
                                       </div>
                                     </>

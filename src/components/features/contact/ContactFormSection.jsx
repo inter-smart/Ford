@@ -1,6 +1,10 @@
 import Image from "next/image";
 import ContactForm from "./ContactForm";
 import Link from "next/link";
+
+const addressStyle =
+  "text-[14px] xl:text-[14.22px] 2xl:text-[17.1px] 3xl:text-[21.33px] leading-normal font-normal text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px]";
+
 export default function ContactFormSection({ data, lang }) {
   return (
     <section className="py-[40px] xl:py-[50px] 2xl:py-[70px] 3xl:py-[90px] bg-[#F7F7F7]">
@@ -14,24 +18,22 @@ export default function ContactFormSection({ data, lang }) {
                 <div className="w-[75px]">
                   <Image
                     src={data?.logo_image?.url || "/images/placeholder.png"}
-                    className="w-full h-full object-contain"
+                    alt={data?.logo_image?.alt || "Logo"}
                     width={75}
                     height={30}
-                    alt={data?.logo_image?.alt || "Logo"}
+                    className="w-full h-full object-contain"
                   />
                 </div>
               </div>
 
               {/* Head Office */}
-              <div className="w-full ">
+              <div className="w-full mb-2.5 ">
                 <div className="text-[16px] xl:text-[18px] 3xl:text-[22px] font-semibold text-black mb-[15px] xl:mb-[20px] 2xl:mb-[30px]">
                   {data?.address_title}
                 </div>
                 <ul className="lg:max-w-[450px]">
-                  <li className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px]">
-                    {data?.address}
-                  </li>
-                  <li className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px]">
+                  <li className={addressStyle}>{data?.address}</li>
+                  <li className={addressStyle}>
                     Phone:
                     <a
                       href={`tel:${data?.phone_number}`}
@@ -40,7 +42,7 @@ export default function ContactFormSection({ data, lang }) {
                       {data?.phone_number}
                     </a>
                   </li>
-                  <li className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-[#434343] mb-[5px] first-of-type:mb-[10px] first-of-type:lg:mb-[30px] first-of-type:2xl:mb-[40px]">
+                  <li className={addressStyle}>
                     Email:
                     <a
                       href={`mailto:${data?.["e-mail_id"]}`}
@@ -86,10 +88,12 @@ export default function ContactFormSection({ data, lang }) {
 
               <Link
                 href={data?.map_url}
-                className="text-[14px] flex items-center text-white font-bold justify-center bg-[#1577F0] hover:bg-[#0f5eda] transition-colors rounded-[50px] overflow-hidden h-[35px] 3xl:h-[40px] px-[15px] mt-[25px] md:mt-[40px] w-fit"
+                className="text-[14px] flex items-center text-white font-bold justify-center bg-[#1577F0] hover:bg-[#0f5eda] transition-colors rounded-[50px] overflow-hidden h-[35px] 3xl:h-[40px] px-[15px] mt-[10px] xl:mt-[20px] w-fit"
               >
                 <div className="w-[18px] 3xl:w-[21px] h-[18px] 3xl:h-[21px]">
-                  <svg width="21" height="21" viewBox="0 0 21 21">
+                  <svg width="21" height="21" viewBox="0 0 21 21"
+                  className="w-full h-full block"
+                  >
                     <g clipPath="url(#clip0_1693_6703)">
                       <path
                         d="M10.5 6.5625C8.32912 6.5625 6.5625 8.32912 6.5625 10.5C6.5625 12.6709 8.32912 14.4375 10.5 14.4375C12.6709 14.4375 14.4375 12.6709 14.4375 10.5C14.4375 8.32912 12.6709 6.5625 10.5 6.5625ZM10.5 13.125C9.05231 13.125 7.875 11.9477 7.875 10.5C7.875 9.05231 9.05231 7.875 10.5 7.875C11.9477 7.875 13.125 9.05231 13.125 10.5C13.125 11.9477 11.9477 13.125 10.5 13.125Z"

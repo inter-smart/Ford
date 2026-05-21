@@ -95,6 +95,7 @@ export default function LatestNewsSection({ data }) {
               </div>
             ))}
         </div>
+        <hr className="lg:hidden border-[#E5E5E5] mt-4" />
       </div>
     </section>
   );
