@@ -424,7 +424,7 @@ export function EnquireNowForm({
               </Field>
             )}
           />
-        </div>
+        </div> 
 
         {/* Agree to Terms */}
         <div className="mb-3 xl:mb-3.5 2xl:mb-4 3xl:mb-5">
