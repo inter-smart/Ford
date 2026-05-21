@@ -27,6 +27,8 @@ const t = {
     fullName:        "Name*",
     email:           "Email*",
     phone:           "Phone*",
+    phoneShort: "Phone number must be at least 10 digits",
+    phoneRepeat: "Invalid phone number",
     selectDealer:    "Select Dealer*",
     message:         "Message",
     // radio / checkbox
@@ -64,6 +66,8 @@ const t = {
     fullName:        "الاسم*",
     email:           "البريد الإلكتروني*",
     phone:           "رقم الهاتف*",
+    phoneShort:  "يجب أن يحتوي رقم الهاتف على 10 أرقام على الأقل",
+    phoneRepeat: "رقم هاتف غير صالح",
     selectDealer:    "اختر الوكيل*",
     message:         "الرسالة",
     // radio / checkbox
@@ -118,6 +122,8 @@ function buildSchema(tr) {
         const sqlPattern = /\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|EXEC|UNION)\b/i;
         if (sqlPattern.test(trimmed)) return false;
         if (!/^[^\d!@#$%^&*()_+=\[\]{};:"\\|,.<>\/?`~]+$/u.test(trimmed)) return false;
+        if (/<iframe[\s\S]*?>/i.test(trimmed)) return false;
+        if (/\bon\w+\s*=/i.test(trimmed)) return false;
         return true;
       }, tr.nameInvalid),
 
@@ -132,25 +138,33 @@ function buildSchema(tr) {
         if (!emailRegex.test(trimmed)) return false;
         if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
         if (/["'`;]|--/.test(trimmed)) return false;
+        if (/<|>|javascript:/i.test(trimmed)) return false;
         if ((trimmed.match(/@/g) || []).length !== 1) return false;
         return true;
       }, tr.emailInvalid),
 
-    phone: z
-      .string()
-      .min(10, { message: tr.phoneRequired })
-      .max(20, { message: tr.phoneTooLong })
-      .refine((value) => {
-        const trimmed = value.trim();
-        const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
-        if (!validPattern.test(trimmed)) return false;
-        if ((trimmed.match(/\+/g) || []).length > 1) return false;
-        const digitsOnly = trimmed.replace(/\D/g, "");
-        if (/^0+$/.test(digitsOnly)) return false;
-        if (digitsOnly.length > 15) return false;
-        if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(trimmed)) return false;
-        return true;
-      }, tr.phoneInvalid),
+  phone: z
+    .string()
+    .min(1, { message: tr.phoneRequired })
+    .max(20, { message: tr.phoneTooLong })
+    .refine((value) => {
+      // catches too-short numbers separately
+      const digitsOnly = value.trim().replace(/\D/g, "");
+      return digitsOnly.length >= 10;
+    }, { message: tr.phoneShort })          // ← "must be at least 10 digits"
+    .refine((value) => {
+      const trimmed = value.trim();
+      if (/<|>|script|javascript:/i.test(trimmed)) return false;
+      const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
+      if (!validPattern.test(trimmed)) return false;
+      if ((trimmed.match(/\+/g) || []).length > 1) return false;
+      const digitsOnly = trimmed.replace(/\D/g, "");
+      if (/^0+$/.test(digitsOnly)) return false;
+      if (/^(\d)\1+$/.test(digitsOnly)) return false;
+      if (digitsOnly.length > 15) return false;
+      if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(trimmed)) return false;
+      return true;
+    }, { message: tr.phoneInvalid }),
 
     selectDealer: z
       .string()
@@ -176,6 +190,7 @@ function buildSchema(tr) {
           /{{.*?constructor.*?}}/i,
           /['";]?\s*DROP\s+TABLE/i,
           /javascript:/i,
+          /\bon\w+\s*=/i,
         ];
         for (const pattern of forbiddenPatterns) {
           if (pattern.test(trimmed)) return false;
@@ -190,8 +205,10 @@ function buildSchema(tr) {
       .min(1, { message: tr.radioRequired })
       .refine((value) => ["Yes", "No"].includes(value), tr.radioInvalid),
 
-    agreeToTerms: z.literal(true, {
-      errorMap: () => ({ message: tr.termsRequired }),
+    agreeToTerms: z
+      .boolean()
+      .refine((val) => val === true, {
+        message: tr.termsRequired,
     }),
   });
 }
@@ -424,7 +441,7 @@ export function EnquireNowForm({
               </Field>
             )}
           />
-        </div> 
+        </div>
 
         {/* Agree to Terms */}
         <div className="mb-3 xl:mb-3.5 2xl:mb-4 3xl:mb-5">
@@ -472,6 +489,7 @@ export function EnquireNowForm({
 
 // ─── FormBlock (unchanged except placeholder now comes from parent) ───────────
 function FormBlock({ item, form, isSubmitting, extraDisabled, onBlurTrim }) {
+  const [open, setOpen] = React.useState(false);   // ← ADD
   return (
     <Controller
       name={item.name}
@@ -490,11 +508,14 @@ function FormBlock({ item, form, isSubmitting, extraDisabled, onBlurTrim }) {
               }
               value={field.value}
               disabled={isSubmitting || item.disabled || extraDisabled}
+              open={open}
+              onOpenChange={setOpen}
             >
               <SelectTrigger
                 className={cn(
                   inputClasses,
-                  "data-[placeholder]:text-black data-[size=default]:h-[35px] xl:data-[size=default]:h-[40px] 2xl:data-[size=default]:h-[45px] 3xl:data-[size=default]:h-[50px] justify-between"
+                  "data-[placeholder]:text-black data-[size=default]:h-[35px] xl:data-[size=default]:h-[40px] 2xl:data-[size=default]:h-[45px] 3xl:data-[size=default]:h-[50px] justify-between [&>svg]:transition-transform [&>svg]:duration-200",
+                  open && "[&>svg]:rotate-180"
                 )}
               >
                 <SelectValue placeholder={item.placeholder} disabled={isSubmitting || item.isLoading} />
