@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 import parse from "html-react-parser";
+import TabNav from "@/components/common/TabNav";
 
 export default function PartsSection({ data }) {
     return (
@@ -18,25 +17,7 @@ export default function PartsSection({ data }) {
                         {data?.sectionTitle}
                     </Heading>
 
-                    <div className={cn("flex flex-wrap items-center")}>
-                        {data?.tabs?.map((item) => {
-                            const isActive = item?.slug === "/parts";
-                            return (
-                                <Link
-                                    key={item?.id}
-                                    href={item?.slug}
-                                    className={cn(
-                                        "text-[12px] sm:text-[14px] xl:text-[16px] 2xl:text-[19.2px] 3xl:text-[24px] leading-none font-normal rounded-full h-[30px] xl:h-[35.5px] 2xl:h-[42.5px] 3xl:h-[53.3px] p-[5px_15px_3px] xl:p-[7px_22px_5px] 2xl:p-[7px_26px] 3xl:p-[8px_32px_6px] bg-white border flex items-center justify-center transition-all duration-300",
-                                        isActive
-                                            ? "font-semibold text-black border-[#008dd2]"
-                                            : "border-white text-black hover:text-[#008dd2]",
-                                    )}
-                                >
-                                    {item?.title}
-                                </Link>
-                            );
-                        })}
-                    </div>
+                    <TabNav tabs={data?.tabs} activeSlug="/parts" />
                 </div>
                 <div className="flex flex-wrap max-md:gap-[15px] ">
                     <div className="w-full md:w-1/2">
@@ -55,7 +36,7 @@ export default function PartsSection({ data }) {
                             <Heading
                                 size="heading1"
                                 as="h2"
-                                className="mb-[15px] md:mb-[25px] max-w-[285px] lg:max-w-[385px] xl:max-w-[480px]"
+                                className="mb-[10px] md:mb-[15px] xl:max-w-[385px] 2xl:max-w-[480px]"
                             >
                                 {data?.title}{" "}
                             </Heading>

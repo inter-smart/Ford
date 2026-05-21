@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 import RequestAQuoteDialog from "@/components/common/RequestAQuoteDialog";
+import { EnquireNowForm } from "@/components/form/EnquireNowForm";
 import parse from "html-react-parser";
 
 export default function OfferDetailSection({ data, formData }) {
@@ -40,6 +41,7 @@ export default function OfferDetailSection({ data, formData }) {
               description={formData?.offers_short_desription || ""}
               dealers={formData?.dealers || []}
               pageTitle={data?.title || ""}
+              formComponent={EnquireNowForm}
             >
               <button className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-[1] font-bold text-white w-max max-w-full h-[30px] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[15px] xl:px-[18px] 2xl:px-[23px] 3xl:px-[28px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center hover:bg-[#005fd3]">
                 Enquire Now

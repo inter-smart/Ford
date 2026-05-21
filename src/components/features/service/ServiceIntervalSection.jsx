@@ -43,10 +43,10 @@ export default function ServiceIntervalSection({ data }) {
                     idx === 0 ? "bg-[#00095b]" : "bg-[#066fef]",
                   )}
                 >
-                  <div className="text-[16px] sm:text-[21.3px] xl:text-[26.6px] 2xl:text-[32px] 3xl:text-[40px] leading-normal font-medium text-white mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[35px]">
+                  <div className="text-[16px] sm:text-[21.3px] xl:text-[26.6px] 2xl:text-[32px] 3xl:text-[40px] leading-normal font-medium tracking-tight text-white mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[35px]">
                     {item?.title}
                   </div>
-                  <div className="typography [--text-color:#fff] [&_li]:list-image-[url('/images/list-icon-white.svg')]">
+                  <div className="typography [--text-color:#fff] [&_li]:list-image-[url('/images/list-icon-white.svg')] [&_p_b]:block">
                     {parse(item?.description)}
                   </div>
                 </div>

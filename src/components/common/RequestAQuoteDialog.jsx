@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { RequestAQuoteForm } from "../form/RequestAQuoteForm";
 import { EnquireNowForm } from "../form/EnquireNowForm";
 import { Heading } from "../layout/Heading";
 import Image from "next/image";
@@ -20,7 +21,8 @@ export default function RequestAQuoteDialog({
   description,
   dealers = [],
   pageTitle = "",
-  submitEndpoint = "" 
+  submitEndpoint = "",
+  formComponent: FormComponent = RequestAQuoteForm
 }) {
   const [open, setOpen] = useState(false);
 
@@ -62,7 +64,7 @@ export default function RequestAQuoteDialog({
               <div className="typography [&_p]:last:mb-0 [--text-color:#000] mb-[10px] xl:mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px]">
                 {parse(description)}
               </div>
-              <EnquireNowForm dealers={dealers} pageTitle={pageTitle} submitEndpoint={submitEndpoint} />
+              <FormComponent dealers={dealers} pageTitle={pageTitle} submitEndpoint={submitEndpoint} />
             </div>
           </div>
         </div>

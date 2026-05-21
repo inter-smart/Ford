@@ -6,7 +6,7 @@ import { Heading } from "../layout/Heading";
 export default function InnerHero({ data }) {
   return (
     <section
-      className="w-full h-auto min-h-[350px] sm:min-h-[450px] xl:min-h-[540px] 2xl:min-h-[580px] flex items-end relative z-0 
+      className="w-full h-auto min-h-[350px] sm:min-h-[420px] xl:min-h-[496px] 2xl:min-h-[580px] 3xl:min-h-[720px] flex items-end relative z-0 
      before:content-[''] before:w-full before:h-[30%] before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-40 before:absolute before:z-[-1] 
      before:inset-auto_0_0_0
      after:content-[''] after:w-full after:h-[30%] after:bg-gradient-to-b after:from-black after:to-transparent after:opacity-90 after:absolute after:z-[-1] 
