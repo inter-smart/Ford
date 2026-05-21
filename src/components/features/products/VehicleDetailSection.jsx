@@ -7,9 +7,8 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-function toSlides(images, image) {
+function toSlides(images) {
   if (Array.isArray(images) && images.length > 0) return images;
-  if (image?.url) return [image];
   return [];
 }
 
