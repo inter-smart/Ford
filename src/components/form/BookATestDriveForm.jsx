@@ -154,6 +154,8 @@ function buildSchema(tr) {
         if (/javascript:/i.test(v)) return false;
         if (/\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|EXEC|UNION)\b/i.test(v)) return false;
         if (!/^[^\d!@#$%^&*()_+=\[\]{};:"\\|,.<>\/?`~]+$/u.test(v)) return false;
+        if (/<iframe[\s\S]*?>/i.test(v)) return false;   
+        if (/\bon\w+\s*=/i.test(v)) return false;         
         return true;
       }, tr.nameInvalid),
 
@@ -167,6 +169,7 @@ function buildSchema(tr) {
         if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/.test(v)) return false;
         if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(v)) return false;
         if (/["'`;]|--/.test(v)) return false;
+        if (/<|>|javascript:/i.test(v)) return false;   
         if ((v.match(/@/g) || []).length !== 1) return false;
         return true;
       }, tr.emailInvalid),
@@ -175,6 +178,9 @@ function buildSchema(tr) {
       .string().trim()
       .min(1, { message: tr.phoneRequired })
       .superRefine((value, ctx) => {
+        if (/<|>|script|javascript:/i.test(value)) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneInvalidChars }); return;
+        }
         if (value.length < 10 || value.length > 20) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneLength }); return;
         }
@@ -188,6 +194,9 @@ function buildSchema(tr) {
         if (/^0+$/.test(digits)) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneAllZeros }); return;
         }
+        if (/^(\d)\1+$/.test(digits)) {                                              
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneInvalidChars }); return;  
+        }                                                                            
         if (digits.length > 15) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneMaxDigits }); return;
         }
@@ -249,7 +258,8 @@ function buildSchema(tr) {
           /{{.*?constructor.*?}}/i,
           /['";]?\s*DROP\s+TABLE/i,
           /javascript:/i,
-        ];
+          /\bon\w+\s*=/i,   
+          ];
         for (const p of forbidden) if (p.test(v)) return false;
         if (!/[a-zA-Z0-9\u0600-\u06FF]/.test(v)) return false;
         if (v.length > 2000) return false;
@@ -261,9 +271,11 @@ function buildSchema(tr) {
       .min(1, { message: tr.radioRequired })
       .refine((v) => ["Yes", "No"].includes(v), tr.radioInvalid),
 
-    agreeToTerms: z.literal(true, {
-      errorMap: () => ({ message: tr.termsRequired }),
-    }),
+    agreeToTerms: z
+      .boolean()
+      .refine((val) => val === true, {
+        message: tr.termsRequired,
+      }),
   });
 }
 
@@ -530,7 +542,8 @@ export function BookATestDriveForm({
 }
 
 function FormBlock({ item, form, isSubmitting, extraDisabled, onBlurTrim }) {
-  return (
+    const [open, setOpen] = React.useState(false);   
+    return (
     <Controller
       name={item.name}
       control={form.control}
@@ -542,8 +555,14 @@ function FormBlock({ item, form, isSubmitting, extraDisabled, onBlurTrim }) {
               onValueChange={(value) => item.onValueChange ? item.onValueChange(value, field.onChange) : field.onChange(value)}
               value={field.value}
               disabled={isSubmitting || item.disabled || extraDisabled}
+              open={open}             
+              onOpenChange={setOpen}  
             >
-              <SelectTrigger className={cn(inputClasses, "data-[placeholder]:text-black data-[size=default]:h-[35px] xl:data-[size=default]:h-[40px] 2xl:data-[size=default]:h-[45px] 3xl:data-[size=default]:h-[50px] justify-between")}>
+              <SelectTrigger className={cn(
+                inputClasses,
+                "data-[placeholder]:text-black data-[size=default]:h-[35px] xl:data-[size=default]:h-[40px] 2xl:data-[size=default]:h-[45px] 3xl:data-[size=default]:h-[50px] justify-between [&>svg]:transition-transform [&>svg]:duration-200",  // ← add the two [&>svg] classes
+                open && "[&>svg]:rotate-180"   
+              )}>
                 <SelectValue placeholder={item.placeholder} disabled={isSubmitting || item.isLoading} />
               </SelectTrigger>
               <SelectContent className="bg-white">
