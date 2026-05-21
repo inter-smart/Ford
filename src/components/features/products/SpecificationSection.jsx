@@ -5,7 +5,7 @@ export default function SpecificationSection({ data }) {
     <section className="w-full h-auto block">
       <div className="w-full h-auto block relative z-0">
         <div className="w-full h-auto aspect-[1280/810] sm:aspect-[1280/610]  overflow-hidden block">
-          {data?.video_specifications?.url ? (
+          {data?.video?.url ? (
             <video
               autoPlay
               loop
@@ -13,7 +13,7 @@ export default function SpecificationSection({ data }) {
               playsInline
               className="w-full h-full object-cover absolute inset-0 -z-2"
             >
-              <source src={data.video_specifications.url} type="video/mp4" />
+              <source src={data.video.url} type="video/mp4" />
             </video>
           ) : (
             <img

@@ -1,5 +1,5 @@
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS } from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata } from "@/lib/api/seo";
 import InnerHero from "@/components/common/InnerHero";
 import AccessorySection from "@/components/features/parts/AccessorySection";
@@ -17,17 +17,19 @@ function extractListItems(html) {
     return [...html.matchAll(/<li>([\s\S]*?)<\/li>/g)].map((m) => m[1].trim());
 }
 
-async function getPageData() {
-    return apiFetch(ENDPOINTS.partsPage, { cache: CACHE.NO_STORE });
+async function getPageData(locale) {
+    return apiFetch(getLocalizedEndpoint("parts", locale), { cache: CACHE.NO_STORE });
 }
 
-export async function generateMetadata() {
-    const data = await getPageData();
+export async function generateMetadata({ params }) {
+    const { locale } = await params;
+    const data = await getPageData(locale);
     return buildMetadata(data?.seo);
 }
 
-export default async function Page() {
-    const data = await getPageData();
+export default async function Page({ params }) {
+    const { locale } = await params;
+    const data = await getPageData(locale);
 
     const heroRaw       = data?.heroData?.[0];
     const infoRaw       = data?.info?.[0];

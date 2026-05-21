@@ -16,7 +16,7 @@ export default function BranchSection({ data }) {
                   <div className=" text-[17px] lg:text-[18px] xl:text-[20px] text-[#434343] mb-[5px] font-normal">
                     {item?.branch_title}
                   </div>
-                  <div className="text-[14px] lg:text-[16px] text-[#434343] mb-[15px]">
+                  <div className="text-[14px] lg:text-[16px] text-[#434343] mb-[15px] whitespace-pre-line">
                     {item?.address}
                   </div>
 

@@ -1,20 +1,22 @@
 import { apiFetch, CACHE }  from "@/lib/api/client";
-import { ENDPOINTS }         from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata }     from "@/lib/api/seo";
 import InnerHero             from "@/components/common/InnerHero";
 import ProductListSection    from "@/components/features/products/ProductListSection";
 
-async function getPageData() {
-  return apiFetch(ENDPOINTS.products, { cache: CACHE.NO_STORE });
+async function getPageData(locale) {
+  return apiFetch(getLocalizedEndpoint("product", locale), { cache: CACHE.NO_STORE });
 }
 
-export async function generateMetadata() {
-  const data = await getPageData();
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const data = await getPageData(locale);
   return buildMetadata(data?.seo);
 }
 
-export default async function Page() {
-  const data   = await getPageData();
+export default async function Page({ params }) {
+  const { locale } = await params;
+  const data   = await getPageData(locale);
   const banner = data?.heroData?.[0] ?? {};
 
   return (

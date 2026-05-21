@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 
 import HeroSection from "@/components/features/home/HeroSection";
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS } from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata } from "@/lib/api/seo";
 
 const WelcomeSection = dynamic(
@@ -23,13 +23,31 @@ const InstagramFeedSection = dynamic(
 
 import LocationSection from "@/components/features/home/LocationSection";
 
-export async function generateMetadata() {
-  const data = await apiFetch(ENDPOINTS.home, { cache: CACHE.ISR(60) });
-  return buildMetadata(data?.seo);
+async function getPageData(locale) {
+  const endpoint = getLocalizedEndpoint("home", locale);
+  return apiFetch(endpoint, { cache: CACHE.NO_STORE });
 }
 
-export default async function Home() {
-  const data = await apiFetch(ENDPOINTS.home, { cache: CACHE.NO_STORE });
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const data = await getPageData(locale);
+  const base = process.env.NEXT_PUBLIC_API_URL ?? "";
+
+  return {
+    ...buildMetadata(data?.seo),
+    alternates: {
+      canonical: `${base}/${locale}`,
+      languages: {
+        en: `${base}/en`,
+        ar: `${base}/ar`,
+      },
+    },
+  };
+}
+
+export default async function Home({ params }) {
+  const { locale } = await params;
+  const data = await getPageData(locale);
   const home_data = data?.home_acf;
 
   return (

@@ -8,7 +8,7 @@ export default function AfterSaleSection({ data }) {
         <div className="w-full h-auto p-[40px_20px] sm:p-[50px_30px] lg:p-[60px_40px] 2xl:p-[70px_50px] 3xl:p-[80px_50px] bg-[#00095B] rounded-[10px] flex flex-wrap items-center max-xs:text-center">
           <div className="w-full xl:w-[55%] max-xl:mb-[25px]">
             <div className="text-[13px] lg:text-[14px] xl:text-[16px] 3xl:text-[18px] leading-[1.5] font-normal text-white">
-              {data?.description_service}
+              {data?.description}
             </div>
           </div>
           <div className="w-full xl:w-[45%] flex flex-wrap gap-[10px] xl:justify-end">

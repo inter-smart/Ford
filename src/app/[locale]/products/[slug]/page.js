@@ -1,7 +1,8 @@
 import dynamic from "next/dynamic";
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS }        from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata }    from "@/lib/api/seo";
+import RequestAQuoteDialog  from "@/components/common/RequestAQuoteDialog";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"), {
   ssr: true,
@@ -31,65 +32,97 @@ const AfterSaleSection = dynamic(
   { ssr: true }
 );
 
-async function getPageData() {
-  return apiFetch(ENDPOINTS.products, { cache: CACHE.NO_STORE });
+async function getPageData(slug, locale) {
+  return apiFetch(`${getLocalizedEndpoint("product-detail", locale)}/${slug}`, { cache: CACHE.NO_STORE });
+}
+
+async function getDealersData(locale) {
+  try {
+    const res = await apiFetch(getLocalizedEndpoint("test-drive-form", locale), { cache: CACHE.ISR(3600) });
+    return res?.data?.dealers ?? [];
+  } catch {
+    return [];
+  }
+}
+
+async function getRaqFormData() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form`,
+      { next: { revalidate: 3600 } }
+    );
+    const json = await res.json();
+    return json?.data || null;
+  } catch {
+    return null;
+  }
 }
 
 export async function generateMetadata({ params }) {
-  const data = await getPageData();
-  const cars = Array.isArray(data?.product) ? data.product : [];
-  const post = cars.find((car) => car.slug === params.slug) ?? null;
-  return buildMetadata(post?.seo ?? {}, data?.seo ?? {});
+  const { slug, locale } = await params;
+  const res = await getPageData(slug, locale);
+  return buildMetadata(res?.meta?.seo);
 }
 
 export default async function Page({ params }) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
+  const [res, dealers, raqFormData] = await Promise.all([getPageData(slug, locale), getDealersData(locale), getRaqFormData()]);
+  const data = res?.data;
 
-  const data = await getPageData();
-  
-  const cars = Array.isArray(data?.product) ? data.product : [];
-  console.log("cars ==>", cars);
-  const post = cars.find((car) => car.slug === slug) || null;
-
-  if (!post) return <div className="text-center py-20">Car not found.</div>;
-
-  const details = post.detail_page;
+  if (!data) return <div className="text-center py-20">Car not found.</div>;
 
   const firstItem = (arr) =>
     Array.isArray(arr) && arr.length > 0 ? arr[0] : null;
 
+  const banner     = firstItem(data.banner);
+  const about      = firstItem(data.about_vehicle);
+  const spec       = firstItem(data.specifications);
+  const kf         = firstItem(data.key_features);
+  const service    = firstItem(data.service);
+  const lang = locale === "ar" ? "ar" : "en";
+
+  console.log("Product Detail color_options:", firstItem(data.color_options)?.enabled);
+
   return (
     <>
-      {firstItem(details?.Banner)?.enable__disable_banner_detail_page && (
-        <InnerHero data={details.Banner[0]} />
-      )}
-
-      {firstItem(details?.about_vehicle)?.enable__disable_about_vehicle && (
-        <AboutVehicleSection
-          data={details.about_vehicle[0]}
-          badge={details.badge}
+      {banner?.enabled && (
+        <InnerHero
+          data={banner}
+          buttonSlot={
+            <RequestAQuoteDialog
+              imgPath={raqFormData?.raq_image?.url || "/images/request-img-1.jpg"}
+              title={raqFormData?.raq_title || "Request A Quote"}
+              description={raqFormData?.raq_short_desription || "<p>To request a quote, please complete the fields below.</p>"}
+              dealers={raqFormData?.dealers || []}
+              pageTitle={data.modelName}
+              submitEndpoint={`${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form/submit`}
+              lang={lang}
+            >
+              <button className="text-[12px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer">
+                {banner.button_text}
+              </button>
+            </RequestAQuoteDialog>
+          }
         />
       )}
 
-      {details?.specifications?.[0]?.enable__disable_specifications && (
-        <SpecificationSection data={details.specifications[0]} />
+      {about?.enabled && (
+        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} pageTitle={data.modelName} modelName={data.modelName} modelBrand={data.modelBrand?.[0] || ""} lang={lang} />
       )}
 
-      {details?.key_features?.[0]?.enable__disable_key_features && (
-        <VehicleDetailSection data={details.key_features[0]} />
+      {spec?.enabled && <SpecificationSection data={spec} />}
+
+      {kf?.enabled && <VehicleDetailSection data={kf} />}
+
+      {firstItem(data.color_options)?.enabled && (
+        <ColorSwitchSection data={data.color_options} />
       )}
 
-      {firstItem(details?.color_options)?.enable__disable_color_options && (
-        <ColorSwitchSection data={details.color_options} />
+      {firstItem(data.gallery)?.enabled && (
+        <GallerySection data={firstItem(data.gallery)} />
       )}
 
-      {firstItem(details?.gallery)?.enable__disable_gallery && (
-        <GallerySection data={details.gallery[0]} />
-      )}
-
-      {firstItem(details?.service)?.enable__disable_service && (
-        <AfterSaleSection data={details.service[0]} />
-      )}
+      {service?.enabled && <AfterSaleSection data={service} />}
     </>
   );
 }

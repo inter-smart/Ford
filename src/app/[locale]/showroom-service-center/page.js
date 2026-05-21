@@ -1,26 +1,29 @@
 import { apiFetch, CACHE } from "@/lib/api/client";
-import { ENDPOINTS }        from "@/lib/api/endpoints";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata }    from "@/lib/api/seo";
 import InnerHero            from "@/components/common/InnerHero";
 import ShowroomSection      from "@/components/features/showroom/ShowroomSection";
 
-async function getPageData() {
-  const res = await apiFetch(ENDPOINTS.showroomPage, { cache: CACHE.NO_STORE });
+async function getPageData(locale) {
+  const res = await apiFetch(getLocalizedEndpoint("showroom-service-center", locale), { cache: CACHE.NO_STORE });
   return res?.data;
 }
 
-async function getInitialTabData() {
-  const res = await apiFetch(`${ENDPOINTS.showroomTab}/0?page=1&pageSize=12`, { cache: CACHE.NO_STORE });
+async function getInitialTabData(locale) {
+  const base = getLocalizedEndpoint("showroom-service-center/tab", locale);
+  const res = await apiFetch(`${base}/0?page=1&pageSize=12`, { cache: CACHE.NO_STORE });
   return res?.data;
 }
 
-export async function generateMetadata() {
-  const res = await apiFetch(ENDPOINTS.showroomPage, { cache: CACHE.NO_STORE });
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const res = await apiFetch(getLocalizedEndpoint("showroom-service-center", locale), { cache: CACHE.NO_STORE });
   return buildMetadata(res?.data?.seo);
 }
 
-export default async function ShowroomServiceCenterPage() {
-  const [pageData, tabData] = await Promise.all([getPageData(), getInitialTabData()]);
+export default async function ShowroomServiceCenterPage({ params }) {
+  const { locale } = await params;
+  const [pageData, tabData] = await Promise.all([getPageData(locale), getInitialTabData(locale)]);
 
   const bannerRaw        = pageData?.banner;
   const tabs             = pageData?.tabs ?? [];

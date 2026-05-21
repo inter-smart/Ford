@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Text } from "../layout/Text";
 import { Heading } from "../layout/Heading";
 
-export default function InnerHero({ data }) {
+export default function InnerHero({ data, buttonSlot }) {
   return (
     <section
       className="w-full h-auto min-h-[350px] sm:min-h-[420px] xl:min-h-[496px] 2xl:min-h-[580px] 3xl:min-h-[720px] flex items-end relative z-0 
@@ -56,15 +56,15 @@ export default function InnerHero({ data }) {
               {data?.description}
             </Text>
           )}
-          {data?.button_text && (
+          {buttonSlot ?? (data?.button_text && (
             <Link
               href={data?.button?.link || "/"}
               target={data?.button?.isExternal ? "_blank" : "_self"}
-              className="text-[12px] xl:text-[13px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer"
+              className="text-[12px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer"
             >
               {data?.button_text}
             </Link>
-          )}
+          ))}
         </div>
       </div>
     </section>
