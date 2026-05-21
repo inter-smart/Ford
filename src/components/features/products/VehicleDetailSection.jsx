@@ -7,9 +7,8 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-function toSlides(images, image) {
+function toSlides(images) {
   if (Array.isArray(images) && images.length > 0) return images;
-  if (image?.url) return [image];
   return [];
 }
 
@@ -44,8 +43,8 @@ function ImageSlider({ slides, delay = 3000, aspectClass = "aspect-[300/250]" })
 export default function VehicleDetailSection({ data }) {
   const otherItems = data?.other_features?.enabled ? (data?.other_features?.items || []) : [];
 
-  const interiorSlides = toSlides(data?.interior?.images, data?.interior?.image);
-  const exteriorSlides = toSlides(data?.exterior?.images, data?.exterior?.image);
+  const interiorSlides = toSlides(data?.interior?.images);
+  const exteriorSlides = toSlides(data?.exterior?.images);
 
   return (
     <section className="w-full h-auto block">
@@ -130,7 +129,7 @@ export default function VehicleDetailSection({ data }) {
         {/* Other features — alternating layout per item */}
         {otherItems.map((item, index) => {
           const isOdd = index % 2 === 0;
-          const slides = toSlides(item.images, item.image);
+          const slides = toSlides(item.images);
           const containerClass = isOdd
             ? "container container-sm !p-0 xl:max-w-full xl:!pr-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-sm-gap-xl))] 2xl:!pr-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-sm-gap-2xl))] 3xl:!pr-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-sm-gap-3xl))]"
             : "container container-sm !p-0 xl:max-w-full xl:!pl-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-sm-gap-xl))] 2xl:!pl-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-sm-gap-2xl))] 3xl:!pl-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-sm-gap-3xl))]";
