@@ -31,8 +31,12 @@ export async function generateMetadata({ params }) {
 
 export default async function OfferDetailPage({ params }) {
   const { slug, locale } = await params;
-  const data = await getOfferDetail(slug, locale);
-  const formData = await getFormOptions(locale);
+  const lang = locale === "ar" ? "ar" : "en";
+
+  const [data, formData] = await Promise.all([
+    getOfferDetail(slug, locale),
+    getFormOptions(locale),
+  ]);
 
   const banner = data?.detail_page?.Banner?.[0];
 
@@ -41,7 +45,7 @@ export default async function OfferDetailPage({ params }) {
       {banner?.enable__disable_banner_offers && (
         <InnerHero data={{ ...banner, title: "Offers" }} />
       )}
-      <OfferDetailSection data={data} formData={formData} />
+      <OfferDetailSection data={data} formData={formData} lang={lang} />
     </>
   );
 }

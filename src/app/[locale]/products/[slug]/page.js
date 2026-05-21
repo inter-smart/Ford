@@ -107,7 +107,7 @@ export default async function Page({ params }) {
       )}
 
       {about?.enabled && (
-        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} pageTitle={data.modelName} modelName={data.modelName} modelBrand={data.modelBrand?.[0] || ""} />
+        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} pageTitle={data.modelName} modelName={data.modelName} modelBrand={data.modelBrand?.[0] || ""} lang={lang} />
       )}
 
       {spec?.enabled && <SpecificationSection data={spec} />}

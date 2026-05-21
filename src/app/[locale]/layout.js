@@ -65,6 +65,7 @@ async function getDealersData(locale) {
 
 export default async function RootLayout({ children, params }) {
   const { locale } = await params;
+  const lang = locale === "ar" ? "ar" : "en";
 
   const [headerData, footerData, dealers] = await Promise.all([
     getHeaderData(locale),
@@ -80,7 +81,7 @@ export default async function RootLayout({ children, params }) {
           {children}
           <ToasterWrapper />
         </main>
-        <Footer data={footerData} dealers={dealers} />
+        <Footer data={footerData} dealers={dealers} lang={lang} />
         <Script
           src="https://www.google.com/recaptcha/api.js?render=6LcnDSUsAAAAAPzuIuNcagH8xs8f_HIbB7_GYaBD"
           strategy="afterInteractive"

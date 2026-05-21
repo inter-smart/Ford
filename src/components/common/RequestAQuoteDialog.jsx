@@ -33,6 +33,7 @@ export default function RequestAQuoteDialog({
           "lg:max-w-[900px] xl:max-w-[940px] 2xl:max-w-[1120px] 3xl:max-w-[1376px] p-0 border-0 shadow-none max-h-[100dvh] rounded-none max-h-[calc(100dvh-2rem)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         }
         closeClassName="[&_svg:not([class*='size-'])]:size-5 lg:[&_svg:not([class*='size-'])]:size-6 3xl:[&_svg:not([class*='size-'])]:size-8 top-3 lg:top-5 right-3 lg:right-5"
+        dir={lang === "ar" ? "rtl" : "ltr"}
       >
         <DialogHeader className="sr-only">
           <DialogTitle>{title}</DialogTitle>
