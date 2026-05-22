@@ -57,6 +57,9 @@ const footerHeading =
 export default function Footer({ data, dealers = [], lang = "en" }) {
   if (!data) return null;
 
+  const localHref = (url) =>
+    `/${lang}/${(url ?? "").replace(new RegExp(`^/?${lang}/`), "").replace(/^\//, "")}`;
+
   const {
     test_drive_section,
     first_menu_section,
@@ -130,7 +133,7 @@ export default function Footer({ data, dealers = [], lang = "en" }) {
                   {first_menu_section?.menu_items?.map((item, index) => (
                     <li key={index}>
                       <Link
-                        href={item?.menu_url?.url}
+                        href={localHref(item?.menu_url?.url)}
                         target={item?.menu_url?.target || "_self"}
                         className={footerLink}
                       >
@@ -151,7 +154,7 @@ export default function Footer({ data, dealers = [], lang = "en" }) {
                   {second_menu_section?.menu_items?.map((item, index) => (
                     <li key={index}>
                       <Link
-                        href={item?.menu_url?.url}
+                        href={localHref(item?.menu_url?.url)}
                         target={item?.menu_url?.target || "_self"}
                         className={footerLink}
                       >
@@ -172,7 +175,7 @@ export default function Footer({ data, dealers = [], lang = "en" }) {
                   {third_menu_section?.menu_items?.map((item, index) => (
                     <li key={index}>
                       <Link
-                        href={item?.menu_url?.url}
+                        href={localHref(item?.menu_url?.url)}
                         target={item?.menu_url?.target || "_self"}
                         className={footerLink}
                       >
@@ -193,7 +196,7 @@ export default function Footer({ data, dealers = [], lang = "en" }) {
                   {fourth_menu_section?.menu_items?.map((item, index) => (
                     <li key={index}>
                       <Link
-                        href={item?.menu_url?.url}
+                        href={localHref(item?.menu_url?.url)}
                         target={item?.menu_url?.target || "_self"}
                         className={footerLink}
                       >

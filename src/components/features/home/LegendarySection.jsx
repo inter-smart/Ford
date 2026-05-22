@@ -32,7 +32,7 @@ export default function LegendarySection({ data = {} }) {
         key,
         name: car?.modelName || "Unknown Model",
         brandName: car?.modelBrand?.[0]?.name || "Unknown",
-        brandLogo: car?.modelBrand?.[0]?.featured_image?.url || "",
+        brandLogo: car?.modelBrand?.[0]?.featured_image?.url || "/images/placeholder.png",
         modelLogo: modelLogoUrl,
         modelLogoAlt,
         tagline:

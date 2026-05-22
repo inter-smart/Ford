@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Text } from "../layout/Text";
 import { Heading } from "../layout/Heading";
 
-export default function InnerHero({ data, buttonSlot }) {
+export default function InnerHero({ data, buttonSlot, brandTitle="" }) {
   return (
     <section
       className="w-full h-auto min-h-[350px] sm:min-h-[420px] xl:min-h-[496px] 2xl:min-h-[580px] 3xl:min-h-[720px] flex items-end relative z-0 
@@ -46,7 +46,7 @@ export default function InnerHero({ data, buttonSlot }) {
             size="heading1"
             className="text-white mb-[10px] sm:mb-[15px]"
           >
-            {data?.title || data?.banner_title}
+            {data?.title || data?.banner_title || brandTitle}
           </Heading>
           {data?.description && (
             <Text

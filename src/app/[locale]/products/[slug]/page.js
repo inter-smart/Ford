@@ -88,6 +88,7 @@ export default async function Page({ params }) {
       {banner?.enabled && (
         <InnerHero
           data={banner}
+          brandTitle = {data.modelName}
           buttonSlot={
             <RequestAQuoteDialog
               imgPath={raqFormData?.raq_image?.url || "/images/request-img-1.jpg"}
@@ -112,7 +113,7 @@ export default async function Page({ params }) {
 
       {spec?.enabled && <SpecificationSection data={spec} />}
 
-      {kf?.enabled && <VehicleDetailSection data={kf} />}
+      {kf?.enabled && <VehicleDetailSection data={kf} lang={lang} />}
 
       {firstItem(data.color_options)?.enabled && (
         <ColorSwitchSection data={data.color_options} />

@@ -23,7 +23,7 @@ export default function FleetCarlineSection({ data }) {
       name: car.title,
       image: car.image || "/images/placeholder.png",
       category: toSlug(ct.term_name),
-      link: `/vehicles/${car.slug}`,
+      link: `/products/${car.slug}`,
     }))
   ) ?? [];
 

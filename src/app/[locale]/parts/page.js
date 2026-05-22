@@ -42,7 +42,7 @@ export default async function Page({ params }) {
   const galleryRaw = data?.gallery?.[0];
   const motorcraftRaw = data?.motorcraft?.[0];
   const whyMotoRaw = data?.whymotorcraft?.[0];
-  const branchRaw = data?.branch;
+  const branchRaw = data?.branch?.[0];
 
   return (
     <>

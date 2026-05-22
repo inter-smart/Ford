@@ -25,7 +25,7 @@ export default function ServiceBranchDirectory({ data }) {
           {data?.title}
         </Heading>
         <div className="flex flex-wrap rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden border-t-[1px] border-l-[1px] border-[#c4c4c4]">
-          {data?.cards?.map((item, idx) => {
+          {data?.branches?.map((item, idx) => {
             return (
               <div key={"branch" + idx} className="w-full sm:w-1/2 lg:w-1/4">
                 <div className="w-full h-full border-r-[1px] border-b-[1px] border-[#c4c4c4] p-[18px_15px] sm:p-[20px_18px] xl:p-[25px_30px] 2xl:p-[30px_35px] 3xl:p-[38px_44px]">
@@ -33,7 +33,7 @@ export default function ServiceBranchDirectory({ data }) {
                     {item?.title}
                   </div>
                   <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343]">
-                    {parse(item?.description)}
+                    {parse(item?.Content)}
                   </div>
                   {item?.phone && (
                     <InfoItem icon="/images/icon-telephone-call.svg" alt="icon-telephone-call" text={item.phone} />
