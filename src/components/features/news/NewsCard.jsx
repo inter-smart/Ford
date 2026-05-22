@@ -4,6 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function NewsCard({ data, variant = "default" }) {
+  const imageUrl = data?.acf?.main_image?.url || data?.media?.url || data?.featured_image?.url;
+  const imageAlt = data?.acf?.main_image?.alt || data?.media?.alt || data?.featured_image?.alt || data?.title || "News";
+  const description = data?.description || data?.excerpt || "";
+
   return (
     <Link
       href={data?.slug ? `/news/${data?.slug}` : "#"}
@@ -15,10 +19,10 @@ export default function NewsCard({ data, variant = "default" }) {
           variant == "list" && "aspect-[244/180] lg:aspect-[537/408]",
         )}
       >
-        {data?.media?.url && (
+        {imageUrl && (
           <Image
-            src={data?.media.url}
-            alt={data?.media?.alt || data?.title || "News"}
+            src={imageUrl}
+            alt={imageAlt}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
@@ -31,7 +35,7 @@ export default function NewsCard({ data, variant = "default" }) {
         {data?.date}
       </div>
       <div className="text-[11px] xl:text-[12.4px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-normal text-[#434343] line-clamp-2 xl:max-w-11/12">
-        {parse(data?.description || "")}
+        {parse(description)}
       </div>
     </Link>
   );

@@ -3,22 +3,37 @@ import Image from "next/image";
 import { Text } from "../layout/Text";
 import { Heading } from "../layout/Heading";
 
-export default function InnerHero({ data }) {
+export default function InnerHero({ data, buttonSlot }) {
   return (
-    <section className="w-full h-auto min-h-[350px] sm:min-h-[450px] xl:min-h-[540px] 2xl:min-h-[580px] flex items-end relative z-0 
+    <section
+      className="w-full h-auto min-h-[350px] sm:min-h-[450px] xl:min-h-[540px] 2xl:min-h-[580px] flex items-end relative z-0 
      before:content-[''] before:w-full before:h-[30%] before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-40 before:absolute before:z-[-1] 
      before:inset-auto_0_0_0
      after:content-[''] after:w-full after:h-[30%] after:bg-gradient-to-b after:from-black after:to-transparent after:opacity-90 after:absolute after:z-[-1] 
      after:top-0
-     ">
-      
-      
+     "
+    >
       <picture className="absolute -z-2 inset-0">
-        <source media="(max-width: 640px)" srcSet={data?.mobile_image?.url} />
+        <source
+          media="(max-width: 640px)"
+          srcSet={
+            data?.mobile_image?.url ||
+            data?.mobile_banner_image?.url ||
+            data?.backgroundImage?.url
+          }
+        />
         <Image
-          src={data?.desktop_image?.url || "/images/placeholder.png"}
-          alt={data?.desktop_image?.alt || "Banner"}
+          src={
+            data?.desktop_image?.url ||
+            data?.desktop_banner_image?.url ||
+            data?.backgroundImage?.url ||
+            "/images/placeholder.png"
+          }
+          alt={
+            data?.desktop_image?.alt || data?.backgroundImage?.alt || "Banner"
+          }
           fill
+          unoptimized
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw"
           className="-z-2 object-cover pointer-events-none"
           priority={true}
@@ -31,7 +46,7 @@ export default function InnerHero({ data }) {
             size="heading1"
             className="text-white mb-[10px] sm:mb-[15px]"
           >
-            {data?.title}
+            {data?.title || data?.banner_title}
           </Heading>
           {data?.description && (
             <Text
@@ -41,15 +56,15 @@ export default function InnerHero({ data }) {
               {data?.description}
             </Text>
           )}
-          {data?.button_text && (
+          {buttonSlot ?? (data?.button_text && (
             <Link
               href={data?.button?.link || "/"}
               target={data?.button?.isExternal ? "_blank" : "_self"}
-              className="text-[12px] xl:text-[13px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer"
+              className="text-[12px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer"
             >
               {data?.button_text}
             </Link>
-          )}
+          ))}
         </div>
       </div>
     </section>

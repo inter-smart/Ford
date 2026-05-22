@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ContactForm from "./ContactForm";
 import Link from "next/link";
-export default function ContactFormSection({ data }) {
+export default function ContactFormSection({ data, lang }) {
   return (
     <section className="py-[40px] xl:py-[50px] 2xl:py-[70px] 3xl:py-[90px] bg-[#F7F7F7]">
       <div className="container">
@@ -128,7 +128,7 @@ export default function ContactFormSection({ data }) {
                 </div>
               </div>
               <div className="w-full xs:w-[50%] p-[8px] xs:pl-[30px] xl:pl-[50px]">
-                <ContactForm data={data} />
+                <ContactForm data={data} lang={lang} />
               </div>
             </div>
           </div>

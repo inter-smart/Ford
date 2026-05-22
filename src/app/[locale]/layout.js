@@ -3,6 +3,11 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ToasterWrapper from "@/components/common/ToasterWrapper";
 import localFont from "next/font/local";
+import Script from "next/script";
+
+import { apiFetch, CACHE }           from "@/lib/api/client";
+import { getLocalizedEndpoint }      from "@/lib/api/endpoints";
+import { FALLBACK_HEADER, FALLBACK_FOOTER } from "@/lib/api/fallbacks";
 
 export const metadata = {
   title: "Ford",
@@ -11,21 +16,9 @@ export const metadata = {
 
 export const fordf1 = localFont({
   src: [
-    {
-      path: "../../../public/fonts/FordF-1-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../../public/fonts/FordF-1-Semibold.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../../../public/fonts/FordF-1-Bold.woff2",
-      weight: "800",
-      style: "normal",
-    },
+    { path: "../../../public/fonts/FordF-1-Regular.woff2",  weight: "400", style: "normal" },
+    { path: "../../../public/fonts/FordF-1-Semibold.woff2", weight: "500", style: "normal" },
+    { path: "../../../public/fonts/FordF-1-Bold.woff2",     weight: "800", style: "normal" },
   ],
   variable: "--font-fordf1",
   preload: true,
@@ -34,201 +27,65 @@ export const fordf1 = localFont({
 
 export const fordAntenna = localFont({
   src: [
-    {
-      path: "../../../public/fonts/FordAntenna-Light.woff2",
-      weight: "300",
-      style: "light",
-    },
-    {
-      path: "../../../public/fonts/FordAntenna-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../../public/fonts/FordAntenna-Medium.woff2",
-      weight: "500",
-      style: "medium",
-    },
+    { path: "../../../public/fonts/FordAntenna-Light.woff2",   weight: "300", style: "light"  },
+    { path: "../../../public/fonts/FordAntenna-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../../../public/fonts/FordAntenna-Medium.woff2",  weight: "500", style: "medium" },
   ],
   variable: "--font-antenna",
   preload: true,
   display: "swap",
 });
 
-// const barlow = Barlow({
-//   subsets: ["latin"],
-//   weight: ["100", "200", "300", "400", "600", "700", "800", "900"],
-//   display: "swap",
-// });
-
-async function getHeaderData() {
+async function getHeaderData(locale) {
   try {
-    console.log("Fetching header data (server-side)");
-
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/header`,
-      {
-        cache: "no-store", // No caching, always fetch fresh
-      },
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch header data");
-    }
-
-    const data = await res.json();
-    return data?.header_acf || null;
-  } catch (error) {
-    console.error("Header fetch failed:", error);
-    return null;
+    const data = await apiFetch(getLocalizedEndpoint("header", locale), { cache: CACHE.NO_STORE });
+    return data?.header_acf ?? FALLBACK_HEADER;
+  } catch {
+    return FALLBACK_HEADER;
   }
 }
 
-
-
-const localData = {
-  headerData : {
-  header_acf: {
-    left_menu_items: [
-      { menu_title: "Home", menu_url: { url: "/", target: "_self" } },
-      { menu_title: "Product", menu_url: { url: "/products/", target: "_self" } },
-    ],
-    logo_image: {
-      title: "logo",
-      alt: "logo",
-      url: "https://dev18.intersmarthosting.in/Ford/wp-content/uploads/2025/12/logo-8.svg",
-    },
-    right_menu_items: [
-      { menu_title: "Contact Us", menu_url: { url: "/contact", target: "_self" } },
-    ],
-  },
-},  
-  footerData : {
-  footer_acf: {
-    test_drive_section: {
-      enable_disable_test_drive_section: true,
-      title: "Want to take a test drive?",
-      description: "Schedule your appointment at a time that works best for you.",
-      button_title: "Book A Test Drive",
-      button_url: {
-        url: "/contact",
-        target: "_self",
-      },
-    },
-    first_menu_section: {
-      enable_disable_first_menu_section: true,
-      title: "SUVs",
-      menu_items: [
-        { menu_title: "Bronco", menu_url: { url: "/products/bronco-ford/", target: "_self" } },
-        { menu_title: "Bronco Raptor", menu_url: { url: "/products/bronco-raptor/", target: "_self" } },
-        { menu_title: "Everest", menu_url: { url: "/products/everest/", target: "_self" } },
-        { menu_title: "Explorer", menu_url: { url: "/products/explorer/", target: "_self" } },
-        { menu_title: "Territory", menu_url: { url: "/products/territory/", target: "_self" } },
-      ],
-    },
-    second_menu_section: {
-      enable_disable_second_menu_section: true,
-      title: "Trucks",
-      menu_items: [
-        { menu_title: "F 150", menu_url: { url: "/products/f-150/", target: "_self" } },
-        { menu_title: "F 150 Raptor", menu_url: { url: "/products/f-150-raptor/", target: "_self" } },
-        { menu_title: "Ranger", menu_url: { url: "/products/ranger/", target: "_self" } },
-        { menu_title: "Ranger Raptor", menu_url: { url: "/products/ranger-raptor/", target: "_self" } },
-      ],
-    },
-    third_menu_section: {
-      enable_disable_third_menu_section: true,
-      title: "Useful Links",
-      menu_items: [
-        { menu_title: "Products", menu_url: { url: "/products/", target: "_self" } },
-      ],
-    },
-    fourth_menu_section: {
-      enable_disable_fourth_menu_section: true,
-      title: "Customer Service",
-      menu_items: [
-        { menu_title: "Contact Us", menu_url: { url: "/contact", target: "_self" } },
-      ],
-    },
-    footer_logo: {
-      title: "logo",
-      alt: "logo",
-      url: "https://dev18.intersmarthosting.in/Ford/wp-content/uploads/2025/12/logo-8.svg",
-    },
-    phone_number: "+19819812319",
-    email_id: "hello@logoipsum.com",
-    app_link_section: {
-      enable_disable_app_link_section: true,
-      app_links: [
-        {
-          image: {
-            title: "googlePlay",
-            alt: "googlePlay",
-            url: "https://dev18.intersmarthosting.in/Ford/wp-content/uploads/2025/12/googlePlay.webp",
-          },
-          download_link: { url: "#", target: "_self" },
-        },
-        {
-          image: {
-            title: "appStore",
-            alt: "appStore",
-            url: "https://dev18.intersmarthosting.in/Ford/wp-content/uploads/2025/12/appStore.webp",
-          },
-          download_link: { url: "#", target: "_blank" },
-        },
-      ],
-    },
-    social_media_section: {
-      enable_disable_social_media_section: true,
-      social_media_icons: {
-        fb_link: { url: "#", target: "_blank" },
-        youtube_link: { url: "#", target: "_blank" },
-        instagram_link: { url: "#", target: "_blank" },
-        linkedin_link: { url: "#", target: "_blank" },
-        twitter_link: { url: "#", target: "_blank" },
-      },
-    },
-  },
-}}
-
-async function getFooterData() {
+async function getFooterData(locale) {
   try {
-    console.log("Fetching footer data (server-side)");
-
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/footer`,
-      {
-        cache: "no-store",
-      },
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch footer data");
-    }
-
-    const data = await res.json();
-    return data?.footer_acf || null;
-  } catch (err) {
-    console.error("Footer fetch failed", err);
-    return null;
+    const data = await apiFetch(getLocalizedEndpoint("footer", locale), { cache: CACHE.NO_STORE });
+    return data?.footer_acf ?? FALLBACK_FOOTER;
+  } catch {
+    return FALLBACK_FOOTER;
   }
 }
 
-export default async function RootLayout({ children }) {
-  const [headerData, footerData] = await Promise.all([
-    getHeaderData(),
-    getFooterData(),
+async function getDealersData(locale) {
+  try {
+    const res = await apiFetch(getLocalizedEndpoint("test-drive-form", locale), { cache: CACHE.NO_STORE });
+    return res?.data?.dealers || [];
+  } catch {
+    return [];
+  }
+}
+
+export default async function RootLayout({ children, params }) {
+  const { locale } = await params;
+  const lang = locale === "ar" ? "ar" : "en";
+
+  const [headerData, footerData, dealers] = await Promise.all([
+    getHeaderData(locale),
+    getFooterData(locale),
+    getDealersData(locale),
   ]);
 
   return (
-    <html lang="en">
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={`${fordf1.variable} ${fordAntenna.variable}`}>
-        <Header data={headerData} />
+        <Header data={headerData} locale={locale} />
         <main className="flex-grow">
           {children}
           <ToasterWrapper />
         </main>
-        <Footer data={footerData} />
+        <Footer data={footerData} dealers={dealers} lang={lang} />
+        <Script
+          src="https://www.google.com/recaptcha/api.js?render=6LcnDSUsAAAAAPzuIuNcagH8xs8f_HIbB7_GYaBD"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

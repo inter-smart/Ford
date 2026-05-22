@@ -1,63 +1,5 @@
 import Link from "next/link";
 
-// const branches = [
-//     {
-//         id: 1,
-//         name: "Seeb",
-//         address: "Seeb Al Mawaleh, Near Carrefour, Seeb",
-//         phone: "26887635",
-//         timing: "10 am to 6 pm"
-//     },
-//     {
-//         id: 2,
-//         name: "Barka",
-//         address: "Muscat Sohar Road, Near Barka R/A, Barka",
-//         phone: "26887635",
-//         timing: "10 am to 6 pm"
-//     },
-//     {
-//         id: 3,
-//         name: "Salalah",
-//         address: "Sanayya, Salalah",
-//         phone: "26887635",
-//         timing: "10 am to 6 pm"
-//     },
-//     {
-//         id: 4,
-//         name: "Sohar",
-//         address: "Al Bahja Street, Near Sultan Palace, Sohar",
-//         phone: "26887635",
-//         timing: "10 am to 6 pm"
-//     },
-//     {
-//         id: 5,
-//         name: "Sur",
-//         address: "Toyota R/A, Near SUR Plaza Hotel, Sur Souq Shinas Oman",
-//         phone: "26887635",
-//         timing: "10 am to 6 pm"
-//     },
-//     {
-//         id: 6,
-//         name: "Ford Approved - Wattayah",
-//         address: "Al Romelah Street, Ford Approved - Wattayah",
-//         phone: "26887635",
-//         timing: "10 am to 6 pm"
-//     },
-//     {
-//         id: 7,
-//         name: "Wattayah",
-//         address: "134 Al Romelah Street, Wattayah, Muscat",
-//         phone: "26887635",
-//         timing: "10 am to 6 pm"
-//     },
-//     {
-//         id: 8,
-//         name: "Seeb",
-//         address: "Seeb Al Mawaleh, Near Carrefour, Seeb",
-//         phone: "26887635",
-//         timing: "10 am to 6 pm"
-//     }
-// ];
 export default function BranchSection({ data }) {
   return (
     <section className="py-[35px] 2xl:py-[50px_40px] 3xl:py-[80px_45px]">
@@ -74,7 +16,7 @@ export default function BranchSection({ data }) {
                   <div className=" text-[17px] lg:text-[18px] xl:text-[20px] text-[#434343] mb-[5px] font-normal">
                     {item?.branch_title}
                   </div>
-                  <div className="text-[14px] lg:text-[16px] text-[#434343] mb-[15px]">
+                  <div className="text-[14px] lg:text-[16px] text-[#434343] mb-[15px] whitespace-pre-line">
                     {item?.address}
                   </div>
 

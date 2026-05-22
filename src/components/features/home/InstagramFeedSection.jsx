@@ -94,7 +94,7 @@ export default function InstagramFeedSection({
               as="h2"
               className="font-semibold text-black mb-[10px]"
             >
-              {data?.title}
+              {data?.title_instagram}
             </Heading>
             <Text size="text2" as="p" className="text-[#00142E]">
               {data?.description}

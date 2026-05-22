@@ -1,50 +1,23 @@
-import InnerHero from "@/components/common/InnerHero";
-import ProductListSection from "@/components/features/products/ProductListSection";
+import { apiFetch, CACHE }  from "@/lib/api/client";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
+import { buildMetadata }     from "@/lib/api/seo";
+import InnerHero             from "@/components/common/InnerHero";
+import ProductListSection    from "@/components/features/products/ProductListSection";
 
-
-async function getPageData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/wp-json/custom/v1/product`,
-    { next: { revalidate: 60 } }
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
+async function getPageData(locale) {
+  return apiFetch(getLocalizedEndpoint("product", locale), { cache: CACHE.NO_STORE });
 }
 
-export async function generateMetadata() {
-  const data = await getPageData();
-
-  return {
-    title: data?.seo?.title,
-    description: data?.seo?.description,
-    openGraph: {
-      title: data?.seo?.title,
-      description: data?.seo?.description,
-      images: [
-        {
-          url: data?.seo?.image,
-          width: 1200,
-          height: 630,
-          alt: data?.seo?.title || "BRD LUXE",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: data?.seo?.title,
-      description: data?.seo?.description,
-      images: [data?.seo?.image],
-    },
-  };
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const data = await getPageData(locale);
+  return buildMetadata(data?.seo);
 }
 
-export default async function page() {
-  const data = await getPageData();
-  const banner = data.heroData?.[0] || {};
+export default async function Page({ params }) {
+  const { locale } = await params;
+  const data   = await getPageData(locale);
+  const banner = data?.heroData?.[0] ?? {};
 
   return (
     <>
