@@ -39,6 +39,7 @@ export default function OfferDetailSection({ data, formData, lang = "en" }) {
               </div>
             )}
             <RequestAQuoteDialog
+              formType="enquiry"
               imgPath={formData?.offers_image?.url || ""}
               imgAlt={formData?.offers_image?.alt || ""}
               imgWidth={formData?.offers_image?.width || 505}

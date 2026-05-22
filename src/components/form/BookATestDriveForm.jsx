@@ -27,11 +27,9 @@ const t = {
     fullName:           "Name*",
     email:              "Email*",
     phone:              "Phone*",
-    selectDealer:       "Select Dealer*",
+    selectDealer:       "Locations*",
+    vehicleType:        "Vehicle Type*",
     vehicleModel:       "Vehicle Model*",
-    vehicleMake:        "Vehicle Make*",
-    regNumber:          "Registration Number",
-    vehicleMileage:     "Vehicle Mileage*",
     preferredDate:      "Preferred Date*",
     preferredTime:      "Preferred Time*",
     message:            "Message",
@@ -62,14 +60,13 @@ const t = {
     phoneAllZeros:      "Phone number cannot be all zeros",
     phoneMaxDigits:     "Phone number cannot exceed 15 digits",
     phoneInvalidChars:  "Phone number contains invalid characters",
-    dealerRequired:     "Please select a dealer",
-    dealerInvalid:      "Invalid dealer selection",
+    dealerRequired:     "Please select a location",
+dealerInvalid:      "Invalid location selection",
+typeRequired:       "Vehicle type is required",
+typeTooLong:        "Vehicle type is too long",
     modelRequired:      "Vehicle model is required",
     modelTooLong:       "Vehicle model is too long",
-    makeRequired:       "Vehicle make is required",
-    makeTooLong:        "Vehicle make is too long",
-    mileageRequired:    "Vehicle mileage is required",
-    mileageTooLong:     "Mileage value is too long",
+    
     dateRequired:       "Preferred date is required",
     datePast:           "Date cannot be in the past",
     timeRequired:       "Preferred time is required",
@@ -83,11 +80,9 @@ const t = {
     fullName:           "الاسم*",
     email:              "البريد الإلكتروني*",
     phone:              "رقم الهاتف*",
-    selectDealer:       "اختر الوكيل*",
+    selectDealer:       "المواقع*",
+    vehicleType:        "نوع السيارة*",
     vehicleModel:       "موديل السيارة*",
-    vehicleMake:        "ماركة السيارة*",
-    regNumber:          "رقم التسجيل",
-    vehicleMileage:     "عداد المسافة*",
     preferredDate:      "التاريخ المفضل*",
     preferredTime:      "الوقت المفضل*",
     message:            "الرسالة",
@@ -118,14 +113,13 @@ const t = {
     phoneAllZeros:      "لا يمكن أن يكون رقم الهاتف أصفاراً فقط",
     phoneMaxDigits:     "لا يمكن أن يتجاوز رقم الهاتف 15 رقماً",
     phoneInvalidChars:  "رقم الهاتف يحتوي على أحرف غير صالحة",
-    dealerRequired:     "يرجى اختيار وكيل",
-    dealerInvalid:      "اختيار وكيل غير صالح",
+    dealerRequired:     "يرجى اختيار موقع",
+dealerInvalid:      "اختيار موقع غير صالح",
+typeRequired:       "نوع السيارة مطلوب",
+typeTooLong:        "نوع السيارة طويل جداً",
     modelRequired:      "موديل السيارة مطلوب",
     modelTooLong:       "موديل السيارة طويل جداً",
-    makeRequired:       "ماركة السيارة مطلوبة",
-    makeTooLong:        "ماركة السيارة طويلة جداً",
-    mileageRequired:    "عداد المسافة مطلوب",
-    mileageTooLong:     "قيمة عداد المسافة طويلة جداً",
+    
     dateRequired:       "التاريخ المفضل مطلوب",
     datePast:           "لا يمكن أن يكون التاريخ في الماضي",
     timeRequired:       "الوقت المفضل مطلوب",
@@ -220,27 +214,20 @@ function buildSchema(tr) {
       .min(1, { message: tr.modelRequired })
       .max(100, { message: tr.modelTooLong }),
 
-    vehicleMake: z
-      .string()
-      .min(1, { message: tr.makeRequired })
-      .max(100, { message: tr.makeTooLong }),
+    vehicleType: z
+  .string()
+  .min(1, { message: tr.typeRequired })
+  .max(100, { message: tr.typeTooLong }),
 
-    vehicleRegistrationNumber: z.string().optional(),
-
-    vehicleMileage: z
-      .string()
-      .min(1, { message: tr.mileageRequired })
-      .max(20, { message: tr.mileageTooLong }),
-
-    preferredDate: z
-      .string()
-      .min(1, { message: tr.dateRequired })
-      .refine((value) => {
-        const date = new Date(value);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        return date >= today;
-      }, tr.datePast),
+preferredDate: z
+  .string()
+  .min(1, { message: tr.dateRequired })
+  .refine((value) => {
+    if (!value) return false;
+    // Compare as plain date strings (yyyy-mm-dd) — no timezone issues
+    const today = new Date().toISOString().split("T")[0];
+    return value >= today;
+  }, tr.datePast),
 
     preferredTime: z
       .string()
@@ -294,7 +281,8 @@ export function BookATestDriveForm({
   dealers = [],
   pageTitle = "",
   prefillModel = "",
-  prefillMake = "",
+  prefillType = "",
+  carOptions = [],   // footer mode — array of { modelName, modelCategory[] }
   lang = "en",
 }) {
   const tr     = t[lang] ?? t.en;
@@ -310,24 +298,34 @@ export function BookATestDriveForm({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const isFooterMode = carOptions.length > 0;
+
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      fullName:                  "",
-      email:                     "",
-      phone:                     "",
-      selectDealer:              "",
-      vehicleModel:              prefillModel,
-      vehicleMake:               prefillMake,
-      vehicleRegistrationNumber: "",
-      vehicleMileage:            "",
-      preferredDate:             "",
-      preferredTime:             "",
-      message:                   "",
-      installationSupport:       "Yes",
-      agreeToTerms:              false,
-    },
+  fullName:      "",
+  email:         "",
+  phone:         "",
+  selectDealer:  "",
+  vehicleModel:  prefillModel,
+  vehicleType:   prefillType,
+  preferredDate: "",
+  preferredTime: "",
+  message:       "",
+  installationSupport: "Yes",
+  agreeToTerms:  false,
+},
   });
+
+  // When a model is selected in footer mode, auto-populate vehicleType
+const handleModelSelect = (modelName) => {
+  form.setValue("vehicleModel", modelName, { shouldValidate: true });
+  if (isFooterMode) {
+    const car = carOptions.find((c) => c.modelName === modelName);
+    const category = car?.modelCategory?.[0] ?? "";
+    form.setValue("vehicleType", category, { shouldValidate: true });
+  }
+};
 
   const handleBlurTrim = (fieldName) => {
     const value = form.getValues(fieldName);
@@ -356,15 +354,13 @@ export function BookATestDriveForm({
     try {
       const recaptchaToken = await getRecaptchaToken("submit");
       const payload = {
-        fullName:                  data.fullName,
-        email:                     data.email,
-        phone:                     data.phone,
-        dealer:                    data.selectDealer,
-        vehicleModel:              data.vehicleModel,
-        vehicleMake:               data.vehicleMake,
-        vehicleRegistrationNumber: data.vehicleRegistrationNumber || "",
-        vehicleMileage:            data.vehicleMileage,
-        preferredDate:             data.preferredDate,
+  fullName:      data.fullName,
+  email:         data.email,
+  phone:         data.phone,
+  dealer:        data.selectDealer,
+  vehicleModel:  data.vehicleModel,
+  vehicleMake:   data.vehicleType,   // backend key stays vehicleMake
+  preferredDate: data.preferredDate,
         preferredTime:             data.preferredTime,
         message:                   data.message || "",
         commercial_messages:       data.installationSupport,
@@ -426,20 +422,58 @@ export function BookATestDriveForm({
         </div>
 
         {/* Vehicle Model + Make */}
-        <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
-            <FormBlock item={{ name: "vehicleModel", placeholder: tr.vehicleModel }} form={form} isSubmitting={isSubmitting} onBlurTrim={handleBlurTrim} extraDisabled={!!prefillModel} />
-            <FormBlock item={{ name: "vehicleMake",  placeholder: tr.vehicleMake  }} form={form} isSubmitting={isSubmitting} onBlurTrim={handleBlurTrim} extraDisabled={!!prefillMake}  />
-          </div>
-        </div>
+        {/* Vehicle Model + Vehicle Type */}
+<div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
 
-        {/* Registration + Mileage */}
-        <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
-            <FormBlock item={{ name: "vehicleRegistrationNumber", placeholder: tr.regNumber     }} form={form} isSubmitting={isSubmitting} onBlurTrim={handleBlurTrim} />
-            <FormBlock item={{ name: "vehicleMileage",            placeholder: tr.vehicleMileage }} form={form} isSubmitting={isSubmitting} onBlurTrim={handleBlurTrim} />
-          </div>
-        </div>
+    {/* Vehicle Model — dropdown in footer mode, locked text in product-detail mode */}
+    {isFooterMode ? (
+      <FormBlock
+        item={{
+          name: "vehicleModel",
+          placeholder: tr.vehicleModel,
+          type: "select",
+          options: carOptions.map((c) => ({ value: c.modelName, label: c.modelName, key: c.slug })),
+          onValueChange: (value) => handleModelSelect(value),
+        }}
+        form={form}
+        isSubmitting={isSubmitting}
+      />
+    ) : (
+      <FormBlock
+        item={{ name: "vehicleModel", placeholder: tr.vehicleModel }}
+        form={form}
+        isSubmitting={isSubmitting}
+        onBlurTrim={handleBlurTrim}
+        extraDisabled={!!prefillModel}
+      />
+    )}
+
+    {/* Vehicle Type — always read-only, auto-populated */}
+    <Controller
+      name="vehicleType"
+      control={form.control}
+      render={({ field, fieldState }) => (
+        <Field data-invalid={fieldState.invalid} className="w-full space-y-0">
+          <FieldLabel className={cn(labelClasses, "sr-only")}>{tr.vehicleType}</FieldLabel>
+          <Input
+            {...field}
+            type="text"
+            placeholder={tr.vehicleType}
+            readOnly
+            className={cn(inputClasses, "cursor-default text-black/60 placeholder:text-black/40")}
+            tabIndex={-1}
+          />
+          {fieldState.invalid && (
+            <FieldError errors={[fieldState.error]} className={errorClass} />
+          )}
+        </Field>
+      )}
+    />
+
+  </div>
+</div>
+
 
         {/* Preferred Date + Time */}
         <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
@@ -567,11 +601,12 @@ function FormBlock({ item, form, isSubmitting, extraDisabled, onBlurTrim }) {
               </SelectTrigger>
               <SelectContent className="bg-white">
                 <SelectGroup>
-                  {item?.options?.map((opt) => {
+                  {item?.options?.map((opt, idx) => {
                     const isString = typeof opt === "string";
-                    const value = isString ? opt : opt?.slug;
-                    const label = isString ? opt : opt?.title || opt?.name;
-                    return <SelectItem key={value} value={value}>{label}</SelectItem>;
+                    const key   = isString ? `${opt}-${idx}` : (opt?.key ?? opt?.value ?? opt?.slug ?? idx);
+                    const value = isString ? opt : (opt?.value ?? opt?.slug);
+                    const label = isString ? opt : (opt?.label ?? opt?.title ?? opt?.name);
+                    return <SelectItem key={key} value={value}>{label}</SelectItem>;
                   })}
                 </SelectGroup>
               </SelectContent>

@@ -54,7 +54,7 @@ const footerLink =
 const footerHeading =
   "lg:text-[11px] text-[10px] uppercase text-white/40 font-medium lg:mb-3 mb-1";
 
-export default function Footer({ data, dealers = [], lang = "en" }) {
+export default function Footer({ data, dealers = [], carOptions = [], lang = "en" }) {
   if (!data) return null;
 
   const {
@@ -96,7 +96,7 @@ export default function Footer({ data, dealers = [], lang = "en" }) {
 
             {/* Right Button */}
             <div className="relative z-10">
-              <BookATestDriveDialog dealers={dealers} pageTitle="Footer" lang={lang}>
+              <BookATestDriveDialog dealers={dealers} pageTitle="Footer" carOptions={carOptions} lang={lang}>
                 <button className="relative 3xl:text-[20px] 2xl:text-[17px] xl:text-[13px] lg:text-[12px] text-[11px] font-medium text-white text-sm md:text-base rounded-full flex items-center gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
                   {test_drive_section.button_title}
                   <svg
