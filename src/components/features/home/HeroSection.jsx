@@ -63,7 +63,7 @@ export default function HeroSection({ data }) {
                 )}
               </div>
               <div className="container w-full h-full flex max-sm:flex-wrap items-end justify-between relative z-2">
-                <div className="w-full h-auto pb-[30px] lg:pb-[40px] 2xl:pb-[60px]">
+                <div className="w-full h-auto pb-[40px] lg:pb-[52px] 2xl:pb-[60px] 3xl:pb-[80px]">
                   <Heading
                     size="heading1"
                     as="h2"

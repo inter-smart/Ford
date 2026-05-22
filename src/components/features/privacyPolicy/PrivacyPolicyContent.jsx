@@ -9,7 +9,7 @@ export default function PrivacyPolicyContent({ data }) {
         <Heading
           as="h2"
           size={"none"}
-          className="text-[20px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-normal font-semibold text-black mb-[15px] xl:mb-[20px] 2xl:mb-[25px] 3xl:mb-[30px]"
+          className="text-[20px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-normal font-medium tracking-tight text-black mb-[15px] xl:mb-[20px] 2xl:mb-[25px] 3xl:mb-[30px]"
         >
           {parse(data?.title || "")}
         </Heading>
