@@ -3,10 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Text } from "@/components/layout/Text";
 import { Heading } from "@/components/layout/Heading";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import { is } from "zod/v4/locales";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Autoplay } from "swiper/modules";
+// import "swiper/css";
+
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 const instagram_feed_section = {
   title: "Instagram Feed",
@@ -84,6 +86,16 @@ const instagram_feed_section = {
 export default function InstagramFeedSection({
   data = instagram_feed_section,
 }) {
+  const [emblaRef] = useEmblaCarousel(
+    {
+      loop: false,
+      align: "start",
+      slidesToScroll: 1,
+      containScroll: "trimSnaps",
+    },
+    [Autoplay({ delay: 5000, stopOnInteraction: true, pauseOnHover: true })],
+  );
+
   return (
     <section className="w-full h-auto block py-[40px] sm:py-[50px] lg:py-[70px] 2xl:py-[90px]">
       <div className="container">
@@ -94,7 +106,7 @@ export default function InstagramFeedSection({
               as="h2"
               className="font-semibold text-black mb-[10px]"
             >
-              {data?.title_instagram}
+              {data?.title}
             </Heading>
             <Text size="text2" as="p" className="text-[#00142E]">
               {data?.description}
@@ -125,7 +137,7 @@ export default function InstagramFeedSection({
             </Link>
           </div>
         </div>
-        <div>
+        {/* <div>
           <Swiper
             slidesPerView={5}
             spaceBetween={30}
@@ -183,7 +195,41 @@ export default function InstagramFeedSection({
                 </Link>
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper> 
+      </div>*/}
+
+        <div ref={emblaRef} className="w-full max-w-full overflow-hidden">
+          <div className="flex touch-pan-y touch-pinch-zoom -mx-[6px] sm:-mx-[10px] lg:-mx-[12px] 2xl:-mx-[15px] 3xl:-mx-[19px]">
+            {data?.instaItems?.map((item, index) => (
+              <div
+                key={"instaItems" + index}
+                className="flex-[0_0_220px] sm:flex-[0_0_268px] lg:flex-[0_0_20%] min-w-0 select-none px-[6px] sm:px-[10px] lg:px-[12px] 2xl:px-[15px] 3xl:px-[19px]"
+              >
+                <Link
+                  href={item?.link?.href}
+                  target={item?.isExternal ? "_blank" : "_self"}
+                  className="w-full h-auto block aspect-[240/420] rounded-[8.8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden relative z-0"
+                >
+                  <Image
+                    src={item?.media?.path}
+                    alt={item?.media?.alt}
+                    width={240}
+                    height={420}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="w-[15px] sm:w-[20px] 2xl:w-[25px] h-auto aspect-square m-[10px] sm:m-[15px] absolute bottom-0 right-0">
+                    <Image
+                      src="/images/instagram_icon.svg"
+                      alt="instagram_icon"
+                      width={25}
+                      height={25}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

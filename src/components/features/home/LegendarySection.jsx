@@ -105,7 +105,7 @@ export default function LegendarySection({ data = {} }) {
     return normalizedCars.filter(
       (car) =>
         car.categories.includes(selectedCategory) &&
-        car.brandName === selectedBrand
+        car.brandName === selectedBrand,
     );
   }, [normalizedCars, selectedCategory, selectedBrand]);
 
@@ -159,7 +159,11 @@ export default function LegendarySection({ data = {} }) {
   return (
     <section className="min-h-[670px] relative z-0 2xl:py-[120px_80px] xl:py-[60px_60px] py-[40px_40px]">
       <div className="container">
-        <Heading size="heading3" as="h2" className="text-black mb-[20px] lg:mb-[45px]">
+        <Heading
+          size="heading3"
+          as="h2"
+          className="text-black mb-[20px] lg:mb-[45px]"
+        >
           Discover Ford's Legendary Line up
         </Heading>
 
@@ -168,7 +172,7 @@ export default function LegendarySection({ data = {} }) {
           <div className="w-full 2xl:w-[200px] lg:w-[160px] flex flex-wrap lg:flex-col m-[-3px] lg:my-[-7px]">
             {categories.map((item, index) => (
               <div
-                key={index}
+                key={"categories" + index}
                 className="lg:w-full p-[3px] lg:py-[7px]"
               >
                 <button
@@ -186,7 +190,7 @@ export default function LegendarySection({ data = {} }) {
                       alt={item.name}
                       width={20}
                       height={20}
-                      className={`sm:w-[40px] w-[30px] h-[40px] transition duration-300 ${
+                      className={`w-[30px] sm:w-[35px] transition duration-300 ${
                         selectedCategory === item.name
                           ? "invert group-hover:brightness-100"
                           : "brightness-[0.3] group-hover:brightness-100 group-hover:invert"

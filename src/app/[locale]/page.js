@@ -65,10 +65,12 @@ export default async function Home({ params }) {
         <ServiceSection data={home_data?.services} />
       )}
       {/* <LocationSection /> */}
+      <LocationSection data={home_data?.services} />
+
       {/* <InsightSection /> */}
-      {/* {home_data?.instagram?.enable__disable_instagram && (
+      {home_data?.instagram?.enable__disable_instagram && (
         <InstagramFeedSection data={home_data?.instagram?.instagram} />
-      )} */}
+      )}
     </>
   );
 }
