@@ -29,151 +29,59 @@ import {
 import { Textarea } from "../ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 
-// ─── Translations ─────────────────────────────────────────────────────────────
-const t = {
-  en: {
-    // placeholders
-    fullName:        "Name*",
-    email:           "Email*",
-    phone:           "Phone*",
-    phoneShort: "Phone number must be at least 10 digits",
-    phoneRepeat: "Invalid phone number",
-    selectDealer:    "Select Dealer*",
-    message:         "Message",
-    // radio / checkbox
-    commercialLabel: "Terms and Conditions. I am happy to receive commercial messages from Ford Motor Company and affiliated authorized partners.",
-    yes:             "Yes",
-    no:              "No",
-    agreeLabel:      "I agree to the terms and conditions and privacy policy of this website.",
-    // button
-    submit:          "Submit Request",
-    submitting:      "Submitting...",
-    // toasts
-    toastSuccess:    "Your enquiry has been submitted successfully! We'll get back to you within the next working day.",
-    toastError:      "Something went wrong. Please try again.",
-    toastException:  "Failed to submit enquiry. Please try again later.",
-    // validation
-    nameRequired:    "Name is required",
-    nameMin2:        "Name must be at least 2 characters",
-    nameMax50:       "Name cannot exceed 50 characters",
-    nameInvalid:     "Invalid name",
-    emailRequired:   "Email is required",
-    emailTooLong:    "Email is too long",
-    emailInvalid:    "Invalid email address",
-    phoneRequired:   "Phone number is required",
-    phoneTooLong:    "Phone number is too long",
-    phoneInvalid:    "Invalid phone number, max 15 digits allowed",
-    dealerRequired:  "Please select a dealer",
-    dealerInvalid:   "Invalid dealer selection",
-    messageInvalid:  "Please enter a valid message",
-    radioRequired:   "Please select an option",
-    radioInvalid:    "Invalid option selected",
-    termsRequired:   "You must agree to the terms and conditions and privacy policy of this website.",
-  },
-  ar: {
-    // placeholders
-    fullName:        "الاسم*",
-    email:           "البريد الإلكتروني*",
-    phone:           "رقم الهاتف*",
-    phoneShort:  "يجب أن يحتوي رقم الهاتف على 10 أرقام على الأقل",
-    phoneRepeat: "رقم هاتف غير صالح",
-    selectDealer:    "اختر الوكيل*",
-    message:         "الرسالة",
-    // radio / checkbox
-    commercialLabel: "الشروط والأحكام. يسعدني تلقي رسائل تجارية من شركة فورد موتور والشركاء المعتمدين.",
-    yes:             "نعم",
-    no:              "لا",
-    agreeLabel:      "أوافق على الشروط والأحكام وسياسة الخصوصية لهذا الموقع.",
-    // button
-    submit:          "إرسال الطلب",
-    submitting:      "جارٍ الإرسال...",
-    // toasts
-    toastSuccess:    "تم إرسال استفسارك بنجاح! سنعود إليك خلال يوم العمل التالي.",
-    toastError:      "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
-    toastException:  "فشل إرسال الاستفسار. يرجى المحاولة لاحقاً.",
-    // validation
-    nameRequired:    "الاسم مطلوب",
-    nameMin2:        "يجب أن يتكون الاسم من حرفين على الأقل",
-    nameMax50:       "لا يمكن أن يتجاوز الاسم 50 حرفاً",
-    nameInvalid:     "اسم غير صالح",
-    emailRequired:   "البريد الإلكتروني مطلوب",
-    emailTooLong:    "البريد الإلكتروني طويل جداً",
-    emailInvalid:    "عنوان البريد الإلكتروني غير صالح",
-    phoneRequired:   "رقم الهاتف مطلوب",
-    phoneTooLong:    "رقم الهاتف طويل جداً",
-    phoneInvalid:    "رقم هاتف غير صالح، الحد الأقصى 15 رقماً",
-    dealerRequired:  "يرجى اختيار وكيل",
-    dealerInvalid:   "اختيار وكيل غير صالح",
-    messageInvalid:  "يرجى إدخال رسالة صحيحة",
-    radioRequired:   "يرجى اختيار خيار",
-    radioInvalid:    "خيار غير صالح",
-    termsRequired:   "يجب الموافقة على الشروط والأحكام وسياسة الخصوصية لهذا الموقع.",
-  },
-};
+const formSchema = z.object({
+  fullName: z
+    .string()
+    .trim()
+    .min(1, { message: "Name is required" })
+    .min(2, { message: "Name must be at least 2 characters" })
+    .max(50, { message: "Name cannot exceed 50 characters" })
+    .refine((value) => {
+      const trimmed = value.trim();
+      if (!trimmed) return false;
+      if (/[\t\n]/.test(trimmed)) return false;
+      if (/\d/.test(trimmed)) return false;
+      if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
+      if (/<img[\s\S]*?>/i.test(trimmed)) return false;
+      if (/javascript:/i.test(trimmed)) return false;
+      const sqlPattern =
+        /\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|EXEC|UNION)\b/i;
+      if (sqlPattern.test(trimmed)) return false;
+      if (!/^[^\d!@#$%^&*()_+=\[\]{};:"\\|,.<>\/?`~]+$/u.test(trimmed))
+        return false;
+      return true;
+    }, "Invalid name"),
 
-// ─── Schema factory ───────────────────────────────────────────────────────────
-function buildSchema(tr) {
-  return z.object({
-    fullName: z
-      .string()
-      .trim()
-      .min(1, { message: tr.nameRequired })
-      .min(2, { message: tr.nameMin2 })
-      .max(50, { message: tr.nameMax50 })
-      .refine((value) => {
-        const trimmed = value.trim();
-        if (!trimmed) return false;
-        if (/[\t\n]/.test(trimmed)) return false;
-        if (/\d/.test(trimmed)) return false;
-        if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
-        if (/<img[\s\S]*?>/i.test(trimmed)) return false;
-        if (/javascript:/i.test(trimmed)) return false;
-        const sqlPattern = /\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|EXEC|UNION)\b/i;
-        if (sqlPattern.test(trimmed)) return false;
-        if (!/^[^\d!@#$%^&*()_+=\[\]{};:"\\|,.<>\/?`~]+$/u.test(trimmed)) return false;
-        if (/<iframe[\s\S]*?>/i.test(trimmed)) return false;
-        if (/\bon\w+\s*=/i.test(trimmed)) return false;
-        return true;
-      }, tr.nameInvalid),
-
-    email: z
-      .string()
-      .min(5, { message: tr.emailRequired })
-      .max(254, { message: tr.emailTooLong })
-      .refine((value) => {
-        const trimmed = value.trim();
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
-        if (!trimmed) return false;
-        if (!emailRegex.test(trimmed)) return false;
-        if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
-        if (/["'`;]|--/.test(trimmed)) return false;
-        if (/<|>|javascript:/i.test(trimmed)) return false;
-        if ((trimmed.match(/@/g) || []).length !== 1) return false;
-        return true;
-      }, tr.emailInvalid),
+  email: z
+    .string()
+    .min(5, { message: "Email is required" })
+    .max(254, { message: "Email is too long" })
+    .refine((value) => {
+      const trimmed = value.trim();
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
+      if (!trimmed) return false;
+      if (!emailRegex.test(trimmed)) return false;
+      if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
+      if (/["'`;]|--/.test(trimmed)) return false;
+      if ((trimmed.match(/@/g) || []).length !== 1) return false;
+      return true;
+    }, "Invalid email address"),
 
   phone: z
     .string()
-    .min(1, { message: tr.phoneRequired })
-    .max(20, { message: tr.phoneTooLong })
-    .refine((value) => {
-      // catches too-short numbers separately
-      const digitsOnly = value.trim().replace(/\D/g, "");
-      return digitsOnly.length >= 10;
-    }, { message: tr.phoneShort })          // ← "must be at least 10 digits"
+    .min(10, { message: "Phone number is required" })
+    .max(20, { message: "Phone number is too long" })
     .refine((value) => {
       const trimmed = value.trim();
-      if (/<|>|script|javascript:/i.test(trimmed)) return false;
       const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
       if (!validPattern.test(trimmed)) return false;
       if ((trimmed.match(/\+/g) || []).length > 1) return false;
       const digitsOnly = trimmed.replace(/\D/g, "");
       if (/^0+$/.test(digitsOnly)) return false;
-      if (/^(\d)\1+$/.test(digitsOnly)) return false;
       if (digitsOnly.length > 15) return false;
       if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(trimmed)) return false;
       return true;
-    }, { message: tr.phoneInvalid }),
+    }, "Invalid phone number, max 15 digits allowed"),
 
   selectDealer: z
     .string()
@@ -185,29 +93,33 @@ function buildSchema(tr) {
       return true;
     }, "Invalid dealer selection"),
 
-    message: z
-      .string()
-      .optional()
-      .refine((value) => {
-        if (!value) return true;
-        const trimmed = value.replace(/\s+/g, " ").trim();
-        if (trimmed.length < 2) return false;
-        const forbiddenPatterns = [
-          /<script[\s\S]*?>[\s\S]*?<\/script>/i,
-          /<img[\s\S]*?>/i,
-          /<iframe[\s\S]*?>/i,
-          /{{.*?constructor.*?}}/i,
-          /['";]?\s*DROP\s+TABLE/i,
-          /javascript:/i,
-          /\bon\w+\s*=/i,
-        ];
-        for (const pattern of forbiddenPatterns) {
-          if (pattern.test(trimmed)) return false;
-        }
-        if (!/[a-zA-Z0-9\u0600-\u06FF]/.test(trimmed)) return false;
-        if (trimmed.length > 2000) return false;
-        return true;
-      }, tr.messageInvalid),
+  vehicleModel: z
+    .string()
+    .min(1, { message: "Vehicle model is required" })
+    .max(100, { message: "Vehicle model is too long" }),
+
+  message: z
+    .string()
+    .optional()
+    .refine((value) => {
+      if (!value) return true;
+      const trimmed = value.replace(/\s+/g, " ").trim();
+      if (trimmed.length < 2) return false;
+      const forbiddenPatterns = [
+        /<script[\s\S]*?>[\s\S]*?<\/script>/i,
+        /<img[\s\S]*?>/i,
+        /<iframe[\s\S]*?>/i,
+        /{{.*?constructor.*?}}/i,
+        /['";]?\s*DROP\s+TABLE/i,
+        /javascript:/i,
+      ];
+      for (const pattern of forbiddenPatterns) {
+        if (pattern.test(trimmed)) return false;
+      }
+      if (!/[a-zA-Z0-9]/.test(trimmed)) return false;
+      if (trimmed.length > 2000) return false;
+      return true;
+    }, "Please enter a valid message"),
 
   installationSupport: z
     .string()
@@ -217,13 +129,13 @@ function buildSchema(tr) {
       "Invalid option selected"
     ),
 
-    agreeToTerms: z
-      .boolean()
-      .refine((val) => val === true, {
-        message: tr.termsRequired,
+  agreeToTerms: z.literal(true, {
+    errorMap: () => ({
+      message:
+        "You must agree to the terms and conditions and privacy policy of this website.",
     }),
-  });
-}
+  }),
+});
 
 const labelClasses =
   "text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] leading-normal font-normal text-black";
@@ -234,7 +146,7 @@ const inputClasses =
 const errorClass =
   "text-[10px] md:text-[10px] xl:text-[11px] 3xl:text-[12px] leading-normal font-normal text-red-500 mt-1";
 
-export function EnquireNowForm({ dealers = [], pageTitle = "", submitEndpoint = "" }) {
+export function RequestAQuoteForm({ dealers = [], pageTitle = "", submitEndpoint = "" }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm({
@@ -244,6 +156,7 @@ export function EnquireNowForm({ dealers = [], pageTitle = "", submitEndpoint = 
       email: "",
       phone: "",
       selectDealer: "",
+      vehicleModel: "",
       message: "",
       installationSupport: "Yes",
       agreeToTerms: false,
@@ -289,6 +202,7 @@ async function onSubmit(data) {
           email:               data.email,
           phone:               data.phone,
           dealer:              data.selectDealer,
+          vehicle_model:       data.vehicleModel,
           message:             data.message || "",
           commercial_messages: data.installationSupport,
           agree_to_terms:      data.agreeToTerms ? "1" : "0",
@@ -356,15 +270,42 @@ async function onSubmit(data) {
         </div>
       </div>
 
-      {/* Select Dealer */}
+      {/* Select Dealer + Vehicle Model */}
       <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
-        <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           <FormBlock
             item={{
               name: "selectDealer",
               placeholder: "Select Dealer*",
               type: "select",
               options: dealers.map((d) => d.dealer),
+            }}
+            form={form}
+            isSubmitting={isSubmitting}
+          />
+          <FormBlock
+            item={{
+              name: "vehicleModel",
+              placeholder: "Vehicle Model*",
+              type: "select",
+              options: [
+                "Ford Ranger",
+                "Ford Everest",
+                "Ford Endeavour",
+                "Ford Mustang",
+                "Ford Explorer",
+                "Ford Escape",
+                "Ford Edge",
+                "Ford Bronco",
+                "Ford F-150",
+                "Ford Maverick",
+                "Ford Transit",
+                "Ford Focus",
+                "Ford EcoSport",
+                "Ford Territory",
+                "Ford Kuga",
+                "Ford Puma",
+              ],
             }}
             form={form}
             isSubmitting={isSubmitting}
@@ -409,45 +350,50 @@ async function onSubmit(data) {
         </div>
       </div>
 
-        {/* Commercial Messages Radio */}
-        <div className="mb-3 xl:mb-3.5 2xl:mb-4 3xl:mb-5">
-          <Controller
-            name="installationSupport"
-            control={form.control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel className={cn(labelClasses, "mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4 block")}>
-                  {tr.commercialLabel}
-                </FieldLabel>
-                <RadioGroup
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  className="flex-1 flex flex-wrap gap-x-2.5 xl:gap-x-[16px] 2xl:gap-x-[18px] 3xl:gap-x-[22px]"
-                >
-                  {/* Values stay "Yes"/"No" — only labels are translated */}
-                  {[
-                    { value: "Yes", label: tr.yes },
-                    { value: "No",  label: tr.no  },
-                  ].map((item) => (
-                    <div key={item.value} className="flex items-center gap-3">
-                      <RadioGroupItem
-                        value={item.value}
-                        id={`install-${item.value}`}
-                        className="text-[#066fef] border-1 [&_svg]:fill-[#066fef] hover:scale-100"
-                      />
-                      <Label htmlFor={`install-${item.value}`} className={labelClasses}>
-                        {item.label}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} className={errorClass} />
+      {/* Commercial Messages Radio */}
+      <div className="mb-3 xl:mb-3.5 2xl:mb-4 3xl:mb-5">
+        <Controller
+          name="installationSupport"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel
+                className={cn(
+                  labelClasses,
+                  "mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4 block"
                 )}
-              </Field>
-            )}
-          />
-        </div>
+              >
+                Terms and Conditions. I am happy to receive commercial messages
+                from Ford Motor Company and affiliated authorized partners.
+              </FieldLabel>
+              <RadioGroup
+                value={field.value}
+                onValueChange={field.onChange}
+                className="flex-1 flex flex-wrap gap-x-2.5 xl:gap-x-[16px] 2xl:gap-x-[18px] 3xl:gap-x-[22px]"
+              >
+                {["Yes", "No"].map((item) => (
+                  <div key={item} className="flex items-center gap-3">
+                    <RadioGroupItem
+                      value={item}
+                      id={`install-${item}`}
+                      className="text-[#066fef] border-1 [&_svg]:fill-[#066fef] hover:scale-100"
+                    />
+                    <Label htmlFor={`install-${item}`} className={labelClasses}>
+                      {item}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+              {fieldState.invalid && (
+                <FieldError
+                  errors={[fieldState.error]}
+                  className={errorClass}
+                />
+              )}
+            </Field>
+          )}
+        />
+      </div>
 
       {/* Agree to Terms */}
       <div className="mb-3 xl:mb-3.5 2xl:mb-4 3xl:mb-5">
@@ -498,7 +444,6 @@ async function onSubmit(data) {
 }
 
 function FormBlock({ item, form, isSubmitting, extraDisabled, onBlurTrim }) {
-  const [open, setOpen] = React.useState(false);   // ← ADD
   return (
     <Controller
       name={item.name}
@@ -517,14 +462,11 @@ function FormBlock({ item, form, isSubmitting, extraDisabled, onBlurTrim }) {
               }
               value={field.value}
               disabled={isSubmitting || item.disabled || extraDisabled}
-              open={open}
-              onOpenChange={setOpen}
             >
               <SelectTrigger
                 className={cn(
                   inputClasses,
-                  "data-[placeholder]:text-black data-[size=default]:h-[35px] xl:data-[size=default]:h-[40px] 2xl:data-[size=default]:h-[45px] 3xl:data-[size=default]:h-[50px] justify-between [&>svg]:transition-transform [&>svg]:duration-200",
-                  open && "[&>svg]:rotate-180"
+                  "data-[placeholder]:text-black data-[size=default]:h-[35px] xl:data-[size=default]:h-[40px] 2xl:data-[size=default]:h-[45px] 3xl:data-[size=default]:h-[50px] justify-between"
                 )}
               >
                 <SelectValue

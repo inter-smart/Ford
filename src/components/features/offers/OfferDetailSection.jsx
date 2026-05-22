@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 import RequestAQuoteDialog from "@/components/common/RequestAQuoteDialog";
+import { EnquireNowForm } from "@/components/form/EnquireNowForm";
 import parse from "html-react-parser";
 
 const enquireT = {
@@ -58,7 +59,7 @@ export default function OfferDetailSection({ data, formData, lang = "en" }) {
           <div className="w-full lg:w-[55%]">
             <div className="w-full max-w-[468px] lg:max-w-full aspect-[753/402] rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden">
               <Image
-                src={imageUrl}
+                src={imageUrl || "/images/placeholder.png"}
                 alt={imageAlt}
                 width={753}
                 height={402}

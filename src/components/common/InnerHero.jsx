@@ -6,7 +6,7 @@ import { Heading } from "../layout/Heading";
 export default function InnerHero({ data, buttonSlot }) {
   return (
     <section
-      className="w-full h-auto min-h-[350px] sm:min-h-[450px] xl:min-h-[540px] 2xl:min-h-[580px] flex items-end relative z-0 
+      className="w-full h-auto min-h-[350px] sm:min-h-[420px] xl:min-h-[496px] 2xl:min-h-[580px] 3xl:min-h-[720px] flex items-end relative z-0 
      before:content-[''] before:w-full before:h-[30%] before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-40 before:absolute before:z-[-1] 
      before:inset-auto_0_0_0
      after:content-[''] after:w-full after:h-[30%] after:bg-gradient-to-b after:from-black after:to-transparent after:opacity-90 after:absolute after:z-[-1] 
@@ -56,15 +56,21 @@ export default function InnerHero({ data, buttonSlot }) {
               {data?.description}
             </Text>
           )}
-          {buttonSlot ?? (data?.button_text && (
-            <Link
-              href={data?.button?.link || "/"}
-              target={data?.button?.isExternal ? "_blank" : "_self"}
-              className="text-[12px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer"
-            >
-              {data?.button_text}
-            </Link>
-          ))}
+          {buttonSlot ??
+            (data?.button_text && (
+              // <Link
+              //   href={data?.button?.link || "/"}
+              //   target={data?.button?.isExternal ? "_blank" : "_self"}
+              //   className="text-[12px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer"
+              // >
+              <Link
+                href={data?.button?.link || "/"}
+                target={data?.button?.isExternal ? "_blank" : "_self"}
+                className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-[1] font-bold text-white w-max max-w-full h-[30px] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[15px] xl:px-[25px] 2xl:px-[30px] 3xl:px-[40px] rounded-full bg-[#066FEF] border border-[#066FEF] cursor-pointer transition-all flex items-center justify-center hover:bg-white hover:text-black"
+              >
+                <span className="mt-[2px]">{data?.button_text}</span>
+              </Link>
+            ))}
         </div>
       </div>
     </section>

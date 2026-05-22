@@ -37,7 +37,7 @@ export default function ServiceLoyaltyProgram({ data }) {
             </Text>
           </div>
           <div>
-            <div className="typography [--text-color:#fff] ">
+            <div className="typography [--text-color:#fff] [&>ul]:my-1">
               {parse(data?.howWorks?.description2)}
             </div>
           </div>

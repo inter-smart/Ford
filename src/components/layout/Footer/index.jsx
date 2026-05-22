@@ -96,7 +96,11 @@ export default function Footer({ data, dealers = [], lang = "en" }) {
 
             {/* Right Button */}
             <div className="relative z-10">
-              <BookATestDriveDialog dealers={dealers} pageTitle="Footer" lang={lang}>
+              <BookATestDriveDialog
+                dealers={dealers}
+                pageTitle="Footer"
+                lang={lang}
+              >
                 <button className="relative 3xl:text-[20px] 2xl:text-[17px] xl:text-[13px] lg:text-[12px] text-[11px] font-medium text-white text-sm md:text-base rounded-full flex items-center gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
                   {test_drive_section.button_title}
                   <svg
@@ -300,15 +304,19 @@ export default function Footer({ data, dealers = [], lang = "en" }) {
 after:left-0 after:right-0 after:h-[1px] after:w-full after:bg-[#051EFF] after:m-auto after:z-[-1] max-sm:after:hidden max-xs:text-center max-xs:px-[20px] max-xs:justify-center"
         >
           <div className="bg-[#00095B] p-[5px]">
-            <Text size="text2" as="p" className="text-white">
-              © 2025 Ford Oman. All rights reserved.
-            </Text>
+            <div className="text-[11px] xl:text-[12.4px] 2xl:text-[15px] 3xl:text-[18px] leading-normal font-normal text-white">
+              © {new Date().getFullYear()} Ford Oman. All rights reserved.
+            </div>
           </div>
           <div className="flex items-center gap-2 bg-[#00095B] p-[5px]">
             <div className="2xl:text-[14px] xl:text-[13px] lg:text-[12px] text-[11px] text-white">
               Designed By:
             </div>
-            <a href="" className="d-block w-12px h-[12px]">
+            <a
+              href="https://www.intersmartsolution.com/"
+              target="_blank"
+              className="d-block w-12px h-[12px]"
+            >
               <Image
                 src="/images/intersmart.svg"
                 alt="App Store"

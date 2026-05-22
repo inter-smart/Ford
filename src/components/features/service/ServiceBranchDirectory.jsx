@@ -1,9 +1,17 @@
 import { Heading } from "@/components/layout/Heading";
-import { Text } from "@/components/layout/Text";
-import { cn } from "@/lib/utils";
 import parse from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
+
+
+function InfoItem({ icon, alt, text }) {
+  return (
+    <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] sm:my-[6px] xl:my-[8px] 2xl:my-[10px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
+      <Image src={icon} alt={alt} width={18} height={18} className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain" />
+      {parse(text)}
+    </div>
+  );
+}
 
 export default function ServiceBranchDirectory({ data }) {
   return (
@@ -28,28 +36,10 @@ export default function ServiceBranchDirectory({ data }) {
                     {parse(item?.description)}
                   </div>
                   {item?.phone && (
-                    <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] xl:my-[6px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
-                      <Image
-                        src="/images/icon-telephone-call.svg"
-                        alt="icon-telephone-call"
-                        width={18}
-                        height={18}
-                        className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain"
-                      />
-                      {parse(item?.phone)}
-                    </div>
+                    <InfoItem icon="/images/icon-telephone-call.svg" alt="icon-telephone-call" text={item.phone} />
                   )}
                   {item?.timing && (
-                    <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] xl:my-[6px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
-                      <Image
-                        src="/images/icon-clock.svg"
-                        alt="icon-clock"
-                        width={18}
-                        height={18}
-                        className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain"
-                      />
-                      {parse(item?.timing)}
-                    </div>
+                    <InfoItem icon="/images/icon-clock.svg" alt="icon-clock" text={item.timing} />
                   )}
                   {item?.directionUrl && (
                     <Link
