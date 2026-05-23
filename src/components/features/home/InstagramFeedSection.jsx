@@ -115,89 +115,20 @@ export default function InstagramFeedSection({
           <div className="w-full sm:w-1/2 flex sm:justify-end">
             <Link
               href="/"
-              className="text-[14px] 2xl:text-[16px] leading-[1.3] font-bold text-[#1577F0] gap-[5px] flex items-center hover:opacity-80 transition-all"
-            >
-              View All
-              <span className="w-[7px] 2xl:w-[10px] h-auto aspect-square flex items-center justify-center">
-                <svg
-                  width="6"
-                  height="11"
-                  viewBox="0 0 6 11"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M4.40512 5.43291L0 0.758947L0.806432 0L5.9725 5.48135L0.782193 10.3474L0.0242382 9.54008L4.40512 5.43291Z"
-                    fill="#1577F0"
-                  />
-                </svg>
+              className="text-[12.44px] 2xl:text-[15px] 3xl:text-[18px] leading-none font-bold text-[#1577F0] gap-[5px] flex items-center justify-start group/arrow"
+            >View All
+              <span className="w-[12px] 2xl:w-[13px] 3xl:w-[14px] h-auto aspect-[8/5] flex items-center justify-center group-hover/arrow:translate-x-[3px] transition duration-500 ease-in-out">
+                <Image
+                  src="/images/product_learmore_arrow.svg"
+                  alt="arrow-right"
+                  width={10}
+                  height={10}
+                  className="w-full h-full object-contain"
+                />
               </span>
             </Link>
           </div>
         </div>
-        {/* <div>
-          <Swiper
-            slidesPerView={5}
-            spaceBetween={30}
-            autoplay={{ delay: 2500 }}
-            speed={800}
-            loop={true}
-            modules={[Autoplay]}
-            breakpoints={{
-              0: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-              },
-              468: {
-                slidesPerView: 3,
-                spaceBetween: 15,
-              },
-              768: {
-                slidesPerView: 4,
-                spaceBetween: 15,
-              },
-              1024: {
-                slidesPerView: 5,
-                spaceBetween: 20,
-              },
-              1536: {
-                slidesPerView: 5,
-                spaceBetween: 30,
-              },
-            }}
-            className="instagramSider"
-          >
-            {data?.instaItems?.map((item, index) => (
-              <SwiperSlide key={index}>
-                <Link
-                  href={item?.link?.href}
-                  target={item?.isExternal ? "_blank" : "_self"}
-                  className="w-full h-auto aspect-[240/420] rounded-[8px] 2xl:rounded-[10px] overflow-hidden relative z-0"
-                >
-                  <Image
-                    src={item?.media?.path}
-                    alt={item?.media?.alt}
-                    width={240}
-                    height={420}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="w-[15px] sm:w-[20px] 2xl:w-[25px] h-auto aspect-square m-[10px] sm:m-[15px] absolute bottom-0 right-0">
-                    <Image
-                      src="/images/instagram_icon.svg"
-                      alt="instagram_icon"
-                      width={25}
-                      height={25}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </Link>
-              </SwiperSlide>
-            ))}
-          </Swiper> 
-      </div>*/}
-
         <div ref={emblaRef} className="w-full max-w-full overflow-hidden">
           <div className="flex touch-pan-y touch-pinch-zoom -mx-[6px] sm:-mx-[10px] lg:-mx-[12px] 2xl:-mx-[15px] 3xl:-mx-[19px]">
             {data?.instaItems?.map((item, index) => (

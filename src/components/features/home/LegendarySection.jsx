@@ -258,7 +258,7 @@ export default function LegendarySection({ data = {} }) {
                           {currentCar.brochure && (
                             <Link
                               href={currentCar.brochure}
-                              className="2xl:text-[14px] text-[12px] text-[#1577F0] font-medium inline-block border rtl:ml-auto border-[#1577F0] 2xl:px-6 px-5 2xl:py-3 py-2
+                              className="text-[10px] xl:text-[12px] 2xl:text-[13px] 3xl:text-[14px] text-[#1577F0] font-medium inline-block border rtl:ml-auto border-[#1577F0] px-2 2xl:px-6 xl:px-4 2xl:py-3 py-2
                                 rounded-full hover:bg-[#0052FF] hover:text-white transition sm:mb-10"
                             >
                               Download Brochure
@@ -266,7 +266,7 @@ export default function LegendarySection({ data = {} }) {
                           )}
                         </div>
 
-                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-[-120px] right-0 min-w-[200px]">
+                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-[-120px] right-0 min-w-[100px] sm:min-w-[200px]">
                           <div className="flex flex-col xl:flex-row items-center max-lg:items-end gap-1 xl:gap-2 3xl:gap-4">
                             <span className="text-[11px] 2xl:text-[14px] 3xl:text-[16px] text-black font-semibold uppercase">
                               {currentCar.name} Models:
@@ -322,7 +322,7 @@ export default function LegendarySection({ data = {} }) {
                         </div>
                       </div>
                       {/* Big car image */}
-                      <div className="relative mt-15 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[80px]">
+                      <div className="relative mt-5 sm:mt-10 xl:mt-15 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[80px]">
                         <Image
                           src={
                             selectedColorImage ||

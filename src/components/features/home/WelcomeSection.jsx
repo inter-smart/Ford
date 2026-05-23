@@ -61,15 +61,6 @@ export default function Welcome({ data }) {
                   className="text-[#434343] mb-[15px]"
                 >
                 </Text>
-                {/* <Link
-                  href={data?.button_about_ford?.button_link_about_ford?.url}
-                  target={
-                    data?.button_about_ford?.button_link_about_ford?.target
-                  }
-                  className="2xl:text-[14px] xl:text-[12px] text-[10px] font-normal text-white max-w-[130px] 2xl:h-[40px] h-[35px] flex items-center justify-center bg-[#1A73E8] px-6 rounded-full hover:bg-[#fff] hover:text-black transition cursor-pointer"
-                >
-                  {data?.button_about_ford?.button_text_about_ford}
-                </Link> */}
                 <div className="mt-[15px] xl:mt-[25px] 2xl:mt-[35px] 3xl:mt-[40px]">
                   <Link
                     href={data?.button_about_ford?.button_link_about_ford?.url}
