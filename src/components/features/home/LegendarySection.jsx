@@ -335,7 +335,7 @@ export default function LegendarySection({ data = {} }) {
                           className="w-full max-w-5xl mx-auto object-contain z-1"
                         />
                         {currentCar.modelLogo && (
-                          <div className="absolute z-[-1] top-[-10%] xl:top-[-15%] 2xl:top-[-20%] left-0 right-0 m-auto w-full max-w-[150px] xl:max-w-[300px] 2xl:max-w-[350px]">
+                          <div className="absolute z-[-1] top-[-5%] xl:top-[-10%] 2xl:top-[-15%] left-0 right-0 m-auto w-full max-w-[150px] xl:max-w-[300px] 2xl:max-w-[350px]">
                             <Image
                               src={currentCar.modelLogo}
                               alt={currentCar.modelLogoAlt}
