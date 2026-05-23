@@ -88,11 +88,7 @@ export default function Footer({ data, dealers = [], carOptions = [], lang = "en
             </div>
 
             <div className="w-[268px] xl:w-[300px] 2xl:w-[360px] 3xl:w-[400px]">
-              <BookATestDriveDialog
-                dealers={dealers}
-                pageTitle="Footer"
-                lang={lang}
-              >
+              <BookATestDriveDialog dealers={dealers} pageTitle="Footer" carOptions={carOptions} lang={lang}>
                 <button className="text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
                   {test_drive_section.button_title}
                   <Image
