@@ -123,7 +123,7 @@ export default function ServiceSection({ data }) {
                       href={item?.button_service?.button_link_service?.url}
                       target={item?.button_service?.button_link_service?.target}
                       className={cn(
-                        "text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider",
+                        "text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center sm:justify-start gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider",
                         isActive ? "opacity-100" : "opacity-0",
                       )}
                     >
