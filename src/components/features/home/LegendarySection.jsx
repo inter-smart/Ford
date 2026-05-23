@@ -243,7 +243,7 @@ export default function LegendarySection({ data = {} }) {
                 </TabsList>
 
                 <TabsContent value={selectedBrand} className="mt-0 relative">
-                  {currentCar && (
+                  {currentCar && ( 
                     <>
                       {/* <div className="flex flex-col ltr:sm:flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full"> */}
                       <div className="flex flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
