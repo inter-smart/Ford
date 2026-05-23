@@ -90,12 +90,13 @@ export default async function Page({ params }) {
           data={banner}
           buttonSlot={
             <RequestAQuoteDialog
+              formType="enquiry"
               imgPath={raqFormData?.raq_image?.url || "/images/request-img-1.jpg"}
               title={raqFormData?.raq_title || "Request A Quote"}
               description={raqFormData?.raq_short_desription || "<p>To request a quote, please complete the fields below.</p>"}
               dealers={raqFormData?.dealers || []}
               pageTitle={data.modelName}
-              submitEndpoint={`${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form/submit`}
+              submitEndpoint={`${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/car-enquiry/submit`}
               lang={lang}
             >
               <button className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-[1] font-bold text-white w-max max-w-full h-[30px] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[15px] xl:px-[25px] 2xl:px-[30px] 3xl:px-[40px] rounded-full bg-[#066FEF] border border-[#066FEF] cursor-pointer transition-all flex items-center justify-center hover:bg-white hover:text-black">
@@ -107,7 +108,7 @@ export default async function Page({ params }) {
       )}
 
       {about?.enabled && (
-        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} pageTitle={data.modelName} modelName={data.modelName} modelBrand={data.modelBrand?.[0] || ""} lang={lang} />
+        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} pageTitle={data.modelName} modelName={data.modelName} modelCategory={data.modelCategory} lang={lang} />
       )}
 
       {spec?.enabled && <SpecificationSection data={spec} />}

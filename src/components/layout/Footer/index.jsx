@@ -55,7 +55,7 @@ const footerLink =
 const footerHeading =
   "text-[10px] xl:text-[11px] 2xl:text-[12px] 3xl:text-[14.6px] leading-normal font-medium tracking-tight uppercase text-[#666b9d] mb-[10px] xl:mb-[15px] 2xl:mb-[20px] 3xl:mb-[25px]";
 
-export default function Footer({ data, dealers = [], lang = "en" }) {
+export default function Footer({ data, dealers = [], carOptions = [], lang = "en" }) {
   if (!data) return null;
 
   const {

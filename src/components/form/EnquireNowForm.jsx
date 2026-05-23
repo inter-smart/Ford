@@ -38,7 +38,7 @@ const t = {
     phone:           "Phone*",
     phoneShort: "Phone number must be at least 10 digits",
     phoneRepeat: "Invalid phone number",
-    selectDealer:    "Select Dealer*",
+    selectDealer:    "Locations*",
     message:         "Message",
     // radio / checkbox
     commercialLabel: "Terms and Conditions. I am happy to receive commercial messages from Ford Motor Company and affiliated authorized partners.",
