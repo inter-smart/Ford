@@ -46,6 +46,11 @@
   --breakpoint-gap-3xl: 100px;
   /* 1920px */
 
+  --header-y: 60px;
+  --header-y-lg: 80px;
+  --header-y-2xl: 95px;
+  --header-y-3xl: 120px;
+
   --animate-fadeDown: fadeDown 0.6s ease-in-out both;
 
   @keyframes fadeDown {
