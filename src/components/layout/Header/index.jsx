@@ -112,21 +112,45 @@ export default function Header({ locale, data: header_acf }) {
     pathname.includes("/privacy-policy") ||
     pathname.includes("/terms-conditions");
 
+  const [visible, setVisible] = React.useState(true);
+  const [scrolled, setScrolled] = React.useState(false);
+  const lastScrollY = React.useRef(0);
+
+  React.useEffect(() => {
+    function handleScroll() {
+      const currentY = window.scrollY;
+      if (currentY > lastScrollY.current && currentY > 80) {
+        setVisible(false);
+      } else if (currentY < lastScrollY.current) {
+        setVisible(true);
+      }
+      setScrolled(currentY > 80);
+      lastScrollY.current = currentY;
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   if (!header_acf) return null;
 
   return (
     <header>
       <div
         className={cn(
-          "w-full h-(--header-y) lg:h-(--header-y-lg) 2xl:h-(--header-y-2xl) 3xl:h-(--header-y-3xl) absolute z-10 top-0 left-0 right-0 [--logo-x:60px] min-[376px]:[--logo-x:70px] sm:[--logo-x:75px] xl:[--logo-x:85px] 2xl:[--logo-x:100px] 3xl:[--logo-x:105px] flex items-center ",
-          isDarkBgPage ? "bg-[#0A0A0A]" : "bg-transparent",
+          "w-full h-(--header-y) lg:h-(--header-y-lg) 2xl:h-(--header-y-2xl) 3xl:h-(--header-y-3xl) fixed z-10 top-0 left-0 right-0 [--logo-x:60px] sm:[--logo-x:65px] xl:[--logo-x:70px] 2xl:[--logo-x:85px] 3xl:[--logo-x:105px] flex items-center transition-transform duration-300",
+          visible ? "translate-y-0" : "-translate-y-full",
+          isDarkBgPage
+            ? "bg-[#0A0A0A]"
+            : scrolled
+              ? "bg-[#00095B]"
+              : "bg-transparent",
         )}
       >
         <div className="container">
           <div className="flex flex-wrap items-center">
             {/* Main menu */}
             <div className="w-[calc((100%-var(--logo-x))/2)] ltr:lg:pr-6 ltr:2xl:pr-8 ltr:3xl:pr-10 max-lg:hidden">
-              <NavigationMenu className={"w-full border"}>
+              <NavigationMenu>
                 <NavigationMenuList className="flex items-center rtl:flex-row-reverse gap-[5px] xl:gap-[20px] 2xl:gap-[30px] 3xl:gap-[50px]">
                   {header_acf?.left_menu_items?.map((item, index) => (
                     <NavigationMenuItem key={"left_menu_items" + index}>
@@ -153,7 +177,7 @@ export default function Header({ locale, data: header_acf }) {
             <div className="w-[var(--logo-x)]">
               <Link
                 href="/"
-                className="w-full lg:max-w-[calc(100%-10px)] h-full block"
+                className="w-full lg:max-w-[calc(100%-10px)] mx-auto h-full block"
               >
                 <Image
                   src={header_acf?.logo_image?.url || "/images/logo.png"}
