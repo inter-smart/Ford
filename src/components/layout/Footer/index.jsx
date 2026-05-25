@@ -1,8 +1,8 @@
-import { Heading } from "@/components/layout/Heading";
 import Image from "next/image";
-import { Text } from "@/components/layout/Text";
 import Link from "next/link";
 import BookATestDriveDialog from "@/components/common/BookATestDriveDialog";
+import { cn } from "@/lib/utils";
+import ScrollToTopButton from "@/components/common/scrollTop";
 
 const socialIcons = [
   {
@@ -50,11 +50,12 @@ const socialIcons = [
 ];
 
 const footerLink =
-  "2xl:text-[14px] xl:text-[12px] md:text-[11px] text-[10px] text-white/60 capitalize font-normal hover:text-white transition-all";
-const footerHeading =
-  "lg:text-[11px] text-[10px] uppercase text-white/40 font-medium lg:mb-3 mb-1";
+  "text-[12px] xl:text-[12.4px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-normal tracking-tight text-[#999dbd] block hover:text-white transition-colors duration-300";
 
-export default function Footer({ data, dealers = [], lang = "en" }) {
+const footerHeading =
+  "text-[10px] xl:text-[11px] 2xl:text-[12px] 3xl:text-[14.6px] leading-normal font-medium tracking-tight uppercase text-[#666b9d] mb-[10px] xl:mb-[15px] 2xl:mb-[20px] 3xl:mb-[25px]";
+
+export default function Footer({ data, dealers = [], carOptions = [], lang = "en" }) {
   if (!data) return null;
 
   const localHref = (url) =>
@@ -74,263 +75,189 @@ export default function Footer({ data, dealers = [], lang = "en" }) {
   } = data;
 
   return (
-    <section className="w-full relative bg-[#00095B] 2xl:py-[65px] xl:py-[50px] sm:py-[40px] py-[30px] z-0 overflow-hidden ">
+    <footer className="w-full block relative bg-[#00095B] 2xl:py-[65px] xl:py-[50px] sm:py-[40px] py-[30px] z-0 overflow-hidden ">
       <div className="container">
         {test_drive_section?.enable__disable_test_drive_section && (
-          <div
-            className="max-w-full mx-auto bg-[#010D7E] rounded-[16px] 3xl:py-[50px] md:py-[35px] md:px-[30px] px-[30px] 
-                    py-[25px] ltr:3xl:pr-[95px] ltr:2xl:pr-[75px] ltr:xl:pr-[45px] rtl:3xl:pl-[95px] rtl:2xl:pl-[75px] rtl:xl:pl-[45px] lg:mb-[50px] mb-[30px] 
-                    flex flex-col md:flex-row justify-between items-center
-                    relative overflow-hidden 
-                    after:absolute after:content-['']  ltr:after:right-0 rtl:after:left-0 after:top-0 after:bottom-0 
-                    3xl:after:w-[480px] 2xl:after:w-[380px] xl:after:w-[300px] lg:after:w-[250px] after:w-[220px] 3xl:after:h-[480px] 2xl:after:h-[380px] 
-                    xl:after:h-[300px] 
-                    lg:after:h-[250px] after:h-[220px] ltr:after:rounded-l-full rtl:after:rounded-r-full after:bg-[#15229F] after:m-auto max-md:after:hidden"
-          >
-            {/* Left Content */}
-            <div className="text-white 3xl:max-w-[580px] md:max-w-[450px] mb-5 md:mb-0 max-md:text-center">
-              <h2 className="2xl:text-[28px] xl:text-[25px] text-white font-medium  mb-2">
+          <div className="w-full bg-[#010D7E] rounded-[14.22px] 2xl:rounded-[17.07px] 3xl:rounded-[21.33px] p-[20px_30px] sm:p-[25px_35px] xl:p-[35px_42px] 2xl:p-[40px_52px] 3xl:p-[45px_65px] mb-[20px] xl:mb-[30px] 2xl:mb-[40px] 3xl:mb-[60px] flex flex-col md:flex-row justify-between items-center relative z-0 overflow-hidden">
+            <div className="absolute -z-1 ltr:right-0 rtl:left-0 top-0 bottom-0 size-[320px] xl:size-[380px] 2xl:size-[468px] 3xl:size-[520px] aspect-square ltr:rounded-l-full rtl:rounded-r-full bg-[#15229F] m-auto max-md:hidden" />
+
+            <div className="w-full sm:flex-1 mb-5 md:mb-0 max-md:text-center">
+              <h5 className="text-[16px] sm:text-[20px] xl:text-[24.8px] 2xl:text-[29.87px] 3xl:text-[37.33px] leading-normal font-semibold tracking-tight text-[#f9fafb] mb-[2px] xl:mb-[2.5px]">
                 {test_drive_section?.title}
-              </h2>
-              <Text size="text2" as="p" className="text-white/60">
-                {test_drive_section.description}
-              </Text>
+              </h5>
+              <div className="text-[14px] xl:text-[14.22px] 2xl:text-[17.1px] 3xl:text-[21.33px] leading-normal font-normal tracking-tight text-[#969bc9]">
+                {test_drive_section?.description}
+              </div>
             </div>
 
-            {/* Right Button */}
-            <div className="relative z-10">
-              <BookATestDriveDialog
-                dealers={dealers}
-                pageTitle="Footer"
-                lang={lang}
-              >
-                <button className="relative 3xl:text-[20px] 2xl:text-[17px] xl:text-[13px] lg:text-[12px] text-[11px] font-medium text-white text-sm md:text-base rounded-full flex items-center gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
+            <div className="w-[268px] xl:w-[300px] 2xl:w-[360px] 3xl:w-[400px]">
+              <BookATestDriveDialog dealers={dealers} pageTitle="Footer" carOptions={carOptions} lang={lang}>
+                <button className="text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
                   {test_drive_section.button_title}
-                  <svg
-                    viewBox="0 0 512 512"
-                    className="w-[16px] h-auto block fill-white transition-transform duration-300 ease-in-out group-hover:translate-x-2"
-                  >
-                    <path
-                      d="M506.134,241.843c-0.006-0.006-0.011-0.013-0.018-0.019l-104.504-104c-7.829-7.791-20.492-7.762-28.285,0.068
-                                    c-7.792,7.829-7.762,20.492,0.067,28.284L443.558,236H20c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h423.557
-                                    l-70.162,69.824c-7.829,7.792-7.859,20.455-0.067,28.284c7.793,7.831,20.457,7.858,28.285,0.068l104.504-104
-                                    c0.006-0.006,0.011-0.013,0.018-0.019C513.968,262.339,513.943,249.635,506.134,241.843z"
-                    />
-                  </svg>
+                  <Image
+                    src="/images/footer-btn-icon.svg"
+                    alt="footer-btn-icon"
+                    width={8}
+                    height={14}
+                    className="w-[5.5px] xl:w-[6px] 3xl:w-[8px] block object-contain transition-transform duration-300 ease-in-out group-hover:translate-x-2"
+                  />
                 </button>
               </BookATestDriveDialog>
             </div>
           </div>
         )}
-        <div className="w-full grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-5 lg:gap-8 3xl:mb-[70px] 2xl:mb-[45px] lg:mb-[30px] mb-[15px]">
-          {/* Column 1: SUVs & Cars */}
-
-          {first_menu_section?.enable__disable_first_menu_section &&
-            first_menu_section?.menu_items?.length > 0 && (
-              <div className="min-w-0 w-full">
-                <h4 className={footerHeading}>{first_menu_section?.title}</h4>
-                <ul className="space-y-2">
-                  {first_menu_section?.menu_items?.map((item, index) => (
-                    <li key={index}>
-                      <Link
-                        href={localHref(item?.menu_url?.url)}
-                        target={item?.menu_url?.target || "_self"}
-                        className={footerLink}
-                      >
-                        {item?.menu_title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-          {/* Column 2: Trucks & Vans */}
-          {second_menu_section?.enable__disable_second_menu_section &&
-            second_menu_section?.menu_items?.length > 0 && (
-              <div className="min-w-0 w-full">
-                <h4 className={footerHeading}>{second_menu_section?.title}</h4>
-                <ul className="space-y-2">
-                  {second_menu_section?.menu_items?.map((item, index) => (
-                    <li key={index}>
-                      <Link
-                        href={localHref(item?.menu_url?.url)}
-                        target={item?.menu_url?.target || "_self"}
-                        className={footerLink}
-                      >
-                        {item?.menu_title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-          {/* Column 3: Useful Links */}
-          {third_menu_section?.enable__disable_third_menu_section &&
-            third_menu_section?.menu_items?.length > 0 && (
-              <div className="min-w-0 w-full">
-                <h4 className={footerHeading}>{third_menu_section?.title}</h4>
-                <ul className="space-y-2">
-                  {third_menu_section?.menu_items?.map((item, index) => (
-                    <li key={index}>
-                      <Link
-                        href={localHref(item?.menu_url?.url)}
-                        target={item?.menu_url?.target || "_self"}
-                        className={footerLink}
-                      >
-                        {item?.menu_title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-          {/* Column 4: Customer Service */}
-          {fourth_menu_section?.enable__disable_fourth_menu_section &&
-            fourth_menu_section?.menu_items?.length > 0 && (
-              <div className="min-w-0 w-full">
-                <h4 className={footerHeading}>{fourth_menu_section?.title}</h4>
-                <ul className="space-y-2">
-                  {fourth_menu_section?.menu_items?.map((item, index) => (
-                    <li key={index}>
-                      <Link
-                        href={localHref(item?.menu_url?.url)}
-                        target={item?.menu_url?.target || "_self"}
-                        className={footerLink}
-                      >
-                        {item?.menu_title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-          {/* Column 5: Contact & App */}
-          <div className="w-full min-w-0 flex flex-col items-start lg:items-end lg:text-right">
-            <Link href="/" className="w-[115px]">
-              <Image
-                src={footer_logo?.url || "/images/logo.svg"}
-                alt={footer_logo?.alt || "Ford"}
-                width={80}
-                height={30}
-                className="w-full sm:max-w-[115px] max-w-[85px] object-fill xl:mb-[50px] sm:mb-[30px] mb-[20px] lg:ml-auto "
-              />
-            </Link>
-            <div className="h-px w-10 bg-white opacity-20 ltr:lg:ml-auto xl:mb-[25px] mb-[15px]" />
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href={`tel:${phone_number}`}
-                  className={`${footerLink} flex lg:justify-end`}
-                >
-                  {phone_number}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`mailto:${email}`}
-                  className={`${footerLink} flex lg:justify-end`}
-                >
-                  {email}
-                </Link>
-              </li>
-            </ul>
+        {/* <div className="w-full grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-5 lg:gap-8 3xl:mb-[70px] 2xl:mb-[45px] lg:mb-[30px] mb-[15px]"> */}
+        <div className="flex flex-wrap flex-row-reverse lg:flex-row -mx-[15px] lg:-mx-[20px] [&>*]:p-[15px] lg:[&>*]:p-[20px] sm:mb-[15px] 2xl:mb-[20px] 3xl:mb-[40px]">
+          {[
+            {
+              section: first_menu_section,
+              enabled: first_menu_section?.enable__disable_first_menu_section,
+            },
+            {
+              section: second_menu_section,
+              enabled: second_menu_section?.enable__disable_second_menu_section,
+            },
+            {
+              section: third_menu_section,
+              enabled: third_menu_section?.enable__disable_third_menu_section,
+            },
+            {
+              section: fourth_menu_section,
+              enabled: fourth_menu_section?.enable__disable_fourth_menu_section,
+            },
+          ].map(
+            ({ section, enabled }) =>
+              enabled &&
+              section?.menu_items?.length > 0 && (
+                <div key={section?.title} className="w-1/2 sm:w-[25%] lg:w-[17.5%]">
+                  <h6 className={footerHeading}>{section?.title}</h6>
+                  <ul className="space-y-[3px] 2xl:space-y-[4px] 3xl:space-y-[6px]">
+                    {section?.menu_items?.map((item, index) => (
+                      <li key={index}>
+                        <Link
+                          href={localHref(item?.menu_url?.url)}
+                          target={item?.menu_url?.target || "_self"}
+                          className={footerLink}
+                        >
+                          {item?.menu_title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ),
+          )}
+          <div className="w-full sm:w-full lg:w-[30%]">
+            <div className="w-full min-w-0 flex flex-col items-start lg:items-end lg:text-end">
+              <Link
+                href="/"
+                className="w-[80px] sm:w-[100px] xl:w-[104px] 2xl:w-[124.6px] 3xl:w-[115px] mb-[20px] xl:mb-[40px] 2xl:mb-[50px] 3xl:mb-[60px]"
+              >
+                <Image
+                  src={footer_logo?.url || "/images/logo.svg"}
+                  alt={footer_logo?.alt || "Ford"}
+                  width={156}
+                  height={62}
+                  className="w-full h-full object-contain block"
+                />
+              </Link>
+              <div className="w-[40px] 2xl:w-[48px] 3xl:w-[60px] h-px bg-white opacity-20 ltr:lg:ml-auto rtl:lg:mr-auto mb-[20px] 2xl:mb-[25px] 3xl:mb-[30px]" />
+              <ul className="space-y-[3px] 2xl:space-y-[4px] 3xl:space-y-[6px]">
+                <li>
+                  <Link
+                    href={`tel:${phone_number}`}
+                    className={`${footerLink} flex lg:justify-end`}
+                  >
+                    {phone_number}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`mailto:${email}`}
+                    className={`${footerLink} flex lg:justify-end`}
+                  >
+                    {email}
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          {/* download section */}
-          <div className="min-w-full w-full lg:col-span-full sm:col-span-3 col-span-full max-sm:text-center">
-            <div className="flex flex-col md:flex-row md:items-center gap-6">
-              {/* App Download Section */}
-              <div>
-                <p className={`${footerHeading} 2xl:mb-[25px] mb-[10px]`}>
-                  Download the App
-                </p>
-                <div className="flex gap-3 lg:max-w-[380px] sm:max-w-[300px] w-full">
-                  {app_link_section?.app_links?.map((item, index) => (
-                    <div key={index} className="w-1/2">
-                      <Link
-                        href={item?.download_link?.url}
-                        target={item?.menu_url?.target || "_self"}
-                        className="w-full 2xl:h-[55px] h-[45px] border border-white 2xl:rounded-[10px] rounded-[5px]  flex items-center px-[15px] justify-center group hover:bg-[#010D7E]"
-                      >
-                        <Image
-                          src={item?.image?.url}
-                          alt={item?.image?.alt}
-                          width={140}
-                          height={35}
-                          className="w-full h-full transition-all object-contain 2xl:max-w-[130px] max-w-[100px] group-hover:scale-[0.75]"
-                        />
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Social Media Section */}
-              <div className="flex flex-wrap items-center sm:gap-4 gap-3 max-sm:justify-center lg:pt-[30px] lg:px-[40px] px-[20px]">
-                <p className="text-[11px] uppercase text-white/40 font-medium">
-                  Follow Us:
-                </p>
-                <div className="flex justify-center gap-4">
-                  {socialIcons.map(({ key, svg }) => {
-                    const link =
-                      social_media_section?.social_media_icons?.[key];
-                    if (!link?.url || link.url.trim() === "") return null;
-                    return (
-                      <a
-                        key={key}
-                        href={link?.url}
-                        target={link?.target || "_self"}
-                        rel="noopener noreferrer"
-                        className=" 2xl:w-[55px] xl:w-[45px] sm:w-[40px] w-[35px] 2xl:h-[55px] xl:h-[45px] sm:h-[40px] h-[35px]
-                                    rounded-full flex items-center justify-center transition-all duration-300
-                                    hover:bg-[#15229F] hover:text-white cursor-pointer"
-                      >
-                        <div className="w-[12px] xl:w-[21px] h-[12px] xl:h-[18px] [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-white">
-                          {svg}
-                        </div>
-                      </a>
-                    );
-                  })}
-                </div>
+        </div>
+        <div className="flex flex-wrap -mx-[15px] lg:-mx-[20px] [&>*]:p-[15px] lg:[&>*]:p-[20px] mb-[10px] sm:mb-[15px] 2xl:mb-[30px] 3xl:mb-[40px]">
+          <div className="w-full sm:w-[50%] lg:w-[35%]">
+            <h6 className={footerHeading}>Download the App</h6>
+            <div className="flex flex-wrap gap-[10px] 2xl:gap-[15px] 3xl:gap-[20px]">
+              {app_link_section?.app_links?.map((item, index) => (
+                <Link
+                  key={"app_links" + index}
+                  href={localHref(item?.download_link?.url)}
+                  target={item?.menu_url?.target || "_self"}
+                  className="group w-[100px] sm:w-[120px] xl:w-[157px] 2xl:w-[180px] 3xl:w-[220px] aspect-[156/46] border border-white rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] block p-[5px] xl:p-[10px] 2xl:p-[12px] 3xl:p-[16px] hover:bg-[#000b70]"
+                >
+                  <Image
+                    src={item?.image?.url}
+                    alt={item?.image?.alt}
+                    width={140}
+                    height={35}
+                    className="w-full h-full transition-all object-contain group-hover:scale-[0.75]"
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="w-full sm:w-[50%] lg:w-[65%]">
+            <h6 className={cn(footerHeading, "max-sm:hidden")}>&nbsp;</h6>
+            <div className="flex flex-wrap items-center sm:gap-4 gap-3">
+              <h6 className={cn(footerHeading, "!mb-0")}>Follow Us:</h6>
+              <div className="flex flex-wrap">
+                {socialIcons.map(({ key, svg }) => {
+                  const link = social_media_section?.social_media_icons?.[key];
+                  if (!link?.url || link.url.trim() === "") return null;
+                  return (
+                    <a
+                      key={key}
+                      href={link?.url}
+                      target={link?.target || "_self"}
+                      rel="noopener noreferrer"
+                      className="w-[35px] xl:w-[40px] 2xl:w-[50px] 3xl:w-[60px] aspect-square rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#000b70] cursor-pointer"
+                    >
+                      <span className="w-[14px] xl:w-[16px] 2xl:w-[18px] 3xl:w-[20px] aspect-square [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-white">
+                        {svg}
+                      </span>
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
         </div>
 
-        {/* copyrights */}
-
-        <div
-          className="xs:w-[calc(100%-30px)] lg:w-[calc(100%-60px)] relative z-0 flex flex-wrap items-center justify-between xl:mt-[50px] md:mt-[30px] mt-[15px] after:absolute after:content-['']
-after:left-0 after:right-0 after:h-[1px] after:w-full after:bg-[#051EFF] after:m-auto after:z-[-1] max-sm:after:hidden max-xs:text-center max-xs:px-[20px] max-xs:justify-center"
-        >
-          <div className="bg-[#00095B] p-[5px]">
-            <div className="text-[11px] xl:text-[12.4px] 2xl:text-[15px] 3xl:text-[18px] leading-normal font-normal text-white">
+        <div className="flex flex-wrap items-center justify-between gap-[10px]">
+          <div className="flex-1 w-full flex flex-wrap items-center justify-between gap-[10px]">
+            <div className="text-[10px] sm:text-[11px] xl:text-[12.4px] 2xl:text-[15px] 3xl:text-[18px] leading-normal font-normal text-white">
               © {new Date().getFullYear()} Ford Oman. All rights reserved.
             </div>
-          </div>
-          <div className="flex items-center gap-2 bg-[#00095B] p-[5px]">
-            <div className="2xl:text-[14px] xl:text-[13px] lg:text-[12px] text-[11px] text-white">
-              Designed By:
+            <div className="flex-1 h-px bg-[#051EFF]" />
+            <div className="text-[10px] sm:text-[11px] xl:text-[12.4px] 2xl:text-[15px] 3xl:text-[18px] leading-normal font-normal text-white flex items-center gap-2">
+              <span>Designed By:</span>
+              <a
+                href="https://www.intersmartsolution.com/"
+                target="_blank"
+                className="d-block w-12px h-[12px]"
+              >
+                <Image
+                  src="/images/intersmart.svg"
+                  alt="App Store"
+                  width={12}
+                  height={12}
+                  className="w-full h-full object-contain block"
+                />
+              </a>
             </div>
-            <a
-              href="https://www.intersmartsolution.com/"
-              target="_blank"
-              className="d-block w-12px h-[12px]"
-            >
-              <Image
-                src="/images/intersmart.svg"
-                alt="App Store"
-                width={12}
-                height={12}
-                className="w-full h-full max-w-[12px] mx-[3px]"
-              />
-            </a>
           </div>
+          <ScrollToTopButton />
         </div>
       </div>
-    </section>
+    </footer>
   );
 }

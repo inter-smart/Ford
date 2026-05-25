@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { cn } from "@/lib/utils";
 
 export default function ServiceSection({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -18,7 +19,7 @@ export default function ServiceSection({ data }) {
           slidesPerView={1}
           spaceBetween={10}
           breakpoints={{
-            478: { slidesPerView: 2, pagination: true, spaceBetween: 15 },
+            478: { slidesPerView: 2, pagination: false, spaceBetween: 15 },
             678: {
               slidesPerView: 3,
               spaceBetween: 20,
@@ -33,7 +34,8 @@ export default function ServiceSection({ data }) {
               spaceBetween: 40,
             },
           }}
-          pagination={{ clickable: true }}
+          pagination={false}
+          // pagination={{ clickable: true }}
           modules={[Pagination]}
           className="h-auto"
         >
@@ -106,7 +108,7 @@ export default function ServiceSection({ data }) {
                     >
                       {item?.description_service}
                     </Text>
-                    <Link
+                    {/* <Link
                       href={item?.button_service?.button_link_service?.url}
                       target={item?.button_service?.button_link_service?.target}
                       className={`2xl:text-[14px] xl:text-[12px] text-[10px] font-normal text-white max-w-[135px] 2xl:h-[40px] h-[35px] flex items-center justify-center border border-white px-2 rounded-full transition cursor-pointer max-sm:m-auto ${
@@ -116,6 +118,23 @@ export default function ServiceSection({ data }) {
                       }`}
                     >
                       {item?.button_service?.button_text_service}
+                    </Link> */}
+                    <Link
+                      href={item?.button_service?.button_link_service?.url}
+                      target={item?.button_service?.button_link_service?.target}
+                      className={cn(
+                        "text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center sm:justify-start gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider",
+                        isActive ? "opacity-100" : "opacity-0",
+                      )}
+                    >
+                      {item?.button_service?.button_text_service}
+                      <Image
+                        src="/images/footer-btn-icon.svg"
+                        alt="fleet-icon"
+                        width={8}
+                        height={14}
+                        className="w-[4.5px] 2xl:w-[6px] 3xl:w-[7px] block"
+                      />
                     </Link>
                   </div>
                 </div>

@@ -63,14 +63,34 @@ async function getDealersData(locale) {
   }
 }
 
+
+async function getCarOptions(locale) {
+  try {
+    const endpoint = locale === "ar"
+      ? `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/ar/product`
+      : `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/product`;
+    const res  = await fetch(endpoint, { next: { revalidate: 3600 } });
+    const json = await res.json();
+    return (json?.product ?? []).map((car) => ({
+      modelName:     car.modelName ?? "",
+      modelCategory: (car.modelCategory ?? []).map((c) => c.name ?? c),
+    })).filter((car) => car.modelName)
+.filter((car, idx, arr) => arr.findIndex((c) => c.modelName === car.modelName) === idx);
+  } catch {
+    return [];
+  }
+}
+
+
 export default async function RootLayout({ children, params }) {
   const { locale } = await params;
   const lang = locale === "ar" ? "ar" : "en";
 
-  const [headerData, footerData, dealers] = await Promise.all([
+  const [headerData, footerData, dealers, carOptions] = await Promise.all([
     getHeaderData(locale),
     getFooterData(locale),
     getDealersData(locale),
+    getCarOptions(locale),
   ]);
 
   return (
@@ -81,7 +101,7 @@ export default async function RootLayout({ children, params }) {
           {children}
           <ToasterWrapper />
         </main>
-        <Footer data={footerData} dealers={dealers} lang={lang} />
+        <Footer data={footerData} dealers={dealers} carOptions={carOptions} lang={lang} />
         <Script
           src="https://www.google.com/recaptcha/api.js?render=6LcnDSUsAAAAAPzuIuNcagH8xs8f_HIbB7_GYaBD"
           strategy="afterInteractive"

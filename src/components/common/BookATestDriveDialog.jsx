@@ -24,7 +24,8 @@ export default function BookATestDriveDialog({
   dealers = [],
   pageTitle = "",
   prefillModel = "",
-  prefillMake = "",
+  prefillType = "",
+  carOptions = [],
   lang = "en",
 }) {
   const [open, setOpen] = useState(false);
@@ -54,13 +55,14 @@ export default function BookATestDriveDialog({
           <div className="typography [&_p]:last:mb-0 [--text-color:#000] mb-[10px] xl:mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px]">
             <p>{dt.description}</p>
           </div>
-          <BookATestDriveForm
-            dealers={dealers}
-            pageTitle={pageTitle}
-            prefillModel={prefillModel}
-            prefillMake={prefillMake}
-            lang={lang}
-          />
+         <BookATestDriveForm
+  dealers={dealers}
+  pageTitle={pageTitle}
+  prefillModel={prefillModel}
+  prefillType={prefillType}
+  carOptions={carOptions}
+  lang={lang}
+/>
         </div>
       </DialogContent>
     </Dialog>

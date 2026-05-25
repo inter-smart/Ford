@@ -8,13 +8,13 @@ import { motion } from "framer-motion";
 export default function Welcome({ data }) {
   return (
     <section className="w-full relative bg-[#F0F0F0] 2xl:py-[125px_100px] xl:py-[80px] py-[50px] z-0 overflow-hidden">
-      <div className="absolute ltr:right-0 rtl:left-0 lg:top-0 max-md:bottom-0 xl:max-w-[550px] max-w-[350px] h-auto w-full z-[-1]">
+      <div className="absolute ltr:right-0 rtl:left-0 lg:top-0 max-md:bottom-0 xl:max-w-[550px] max-w-[350px] h-auto w-full aspect-55/50 z-[-1]">
         <Image
           src="/images/mountains.png"
           width="650"
           height="450"
           alt="logo"
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover"
         />
       </div>
 
@@ -61,15 +61,25 @@ export default function Welcome({ data }) {
                   className="text-[#434343] mb-[15px]"
                 >
                 </Text>
-                <Link
-                  href={data?.button_about_ford?.button_link_about_ford?.url}
-                  target={
-                    data?.button_about_ford?.button_link_about_ford?.target
-                  }
-                  className="2xl:text-[14px] xl:text-[12px] text-[10px] font-normal text-white max-w-[130px] 2xl:h-[40px] h-[35px] flex items-center justify-center bg-[#1A73E8] px-6 rounded-full hover:bg-[#fff] hover:text-black transition cursor-pointer"
-                >
-                  {data?.button_about_ford?.button_text_about_ford}
-                </Link>
+                <div className="mt-[15px] xl:mt-[25px] 2xl:mt-[35px] 3xl:mt-[40px]">
+                  <Link
+                    href={data?.button_about_ford?.button_link_about_ford?.url}
+                    target={
+                      data?.button_about_ford?.button_link_about_ford?.target
+                    }
+                    className="text-[12.44px] 2xl:text-[15px] 3xl:text-[18px] leading-none font-bold text-[#1577F0] gap-[5px] flex items-center justify-start group/arrow"
+                  >{data?.button_about_ford?.button_text_about_ford}
+                    <span className="w-[12px] 2xl:w-[13px] 3xl:w-[14px] h-auto aspect-[8/5] flex items-center justify-center group-hover/arrow:translate-x-[3px] transition duration-500 ease-in-out">
+                      <Image
+                        src="/images/product_learmore_arrow.svg"
+                        alt="arrow-right"
+                        width={10}
+                        height={10}
+                        className="w-full h-full object-contain"
+                      />
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
           </motion.div>

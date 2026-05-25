@@ -105,7 +105,7 @@ export default function LegendarySection({ data = {} }) {
     return normalizedCars.filter(
       (car) =>
         car.categories.includes(selectedCategory) &&
-        car.brandName === selectedBrand
+        car.brandName === selectedBrand,
     );
   }, [normalizedCars, selectedCategory, selectedBrand]);
 
@@ -159,7 +159,11 @@ export default function LegendarySection({ data = {} }) {
   return (
     <section className="min-h-[670px] relative z-0 2xl:py-[120px_80px] xl:py-[60px_60px] py-[40px_40px]">
       <div className="container">
-        <Heading size="heading3" as="h2" className="text-black mb-[20px] lg:mb-[45px]">
+        <Heading
+          size="heading3"
+          as="h2"
+          className="text-black mb-[20px] lg:mb-[45px]"
+        >
           Discover Ford's Legendary Line up
         </Heading>
 
@@ -168,7 +172,7 @@ export default function LegendarySection({ data = {} }) {
           <div className="w-full 2xl:w-[200px] lg:w-[160px] flex flex-wrap lg:flex-col m-[-3px] lg:my-[-7px]">
             {categories.map((item, index) => (
               <div
-                key={index}
+                key={"categories" + index}
                 className="lg:w-full p-[3px] lg:py-[7px]"
               >
                 <button
@@ -186,7 +190,7 @@ export default function LegendarySection({ data = {} }) {
                       alt={item.name}
                       width={20}
                       height={20}
-                      className={`sm:w-[40px] w-[30px] h-[40px] transition duration-300 ${
+                      className={`w-[30px] sm:w-[35px] transition duration-300 ${
                         selectedCategory === item.name
                           ? "invert group-hover:brightness-100"
                           : "brightness-[0.3] group-hover:brightness-100 group-hover:invert"
@@ -239,7 +243,7 @@ export default function LegendarySection({ data = {} }) {
                 </TabsList>
 
                 <TabsContent value={selectedBrand} className="mt-0 relative">
-                  {currentCar && (
+                  {currentCar && ( 
                     <>
                       {/* <div className="flex flex-col ltr:sm:flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full"> */}
                       <div className="flex flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
@@ -254,7 +258,7 @@ export default function LegendarySection({ data = {} }) {
                           {currentCar.brochure && (
                             <Link
                               href={currentCar.brochure}
-                              className="2xl:text-[14px] text-[12px] text-[#1577F0] font-medium inline-block border rtl:ml-auto border-[#1577F0] 2xl:px-6 px-5 2xl:py-3 py-2
+                              className="text-[10px] xl:text-[12px] 2xl:text-[13px] 3xl:text-[14px] text-[#1577F0] font-medium inline-block border rtl:ml-auto border-[#1577F0] px-2 2xl:px-6 xl:px-4 2xl:py-3 py-2
                                 rounded-full hover:bg-[#0052FF] hover:text-white transition sm:mb-10"
                             >
                               Download Brochure
@@ -262,7 +266,7 @@ export default function LegendarySection({ data = {} }) {
                           )}
                         </div>
 
-                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-[-120px] right-0 min-w-[200px]">
+                        <div className="flex flex-col gap-4 md:relative ltr:sm:absolute rtl:sm:relative top-[-120px] right-0 min-w-[100px] sm:min-w-[200px]">
                           <div className="flex flex-col xl:flex-row items-center max-lg:items-end gap-1 xl:gap-2 3xl:gap-4">
                             <span className="text-[11px] 2xl:text-[14px] 3xl:text-[16px] text-black font-semibold uppercase">
                               {currentCar.name} Models:
@@ -318,7 +322,7 @@ export default function LegendarySection({ data = {} }) {
                         </div>
                       </div>
                       {/* Big car image */}
-                      <div className="relative mt-15 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[80px]">
+                      <div className="relative mt-5 sm:mt-10 xl:mt-15 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[80px]">
                         <Image
                           src={
                             selectedColorImage ||
@@ -331,7 +335,7 @@ export default function LegendarySection({ data = {} }) {
                           className="w-full max-w-5xl mx-auto object-contain z-1"
                         />
                         {currentCar.modelLogo && (
-                          <div className="absolute z-[-1] top-[-10%] xl:top-[-15%] 2xl:top-[-20%] left-0 right-0 m-auto w-full max-w-[150px] xl:max-w-[300px] 2xl:max-w-[350px]">
+                          <div className="absolute z-[-1] top-[-5%] xl:top-[-10%] 2xl:top-[-15%] left-0 right-0 m-auto w-full max-w-[150px] xl:max-w-[300px] 2xl:max-w-[350px]">
                             <Image
                               src={currentCar.modelLogo}
                               alt={currentCar.modelLogoAlt}
