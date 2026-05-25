@@ -39,7 +39,7 @@ export default async function AccessoriesPage({ params }) {
       )}
 
       {whyRaw?.enable__disable_why_choose_accessories && (
-        <AccessoriesGenuineSection data={whyRaw} />
+        <AccessoriesGenuineSection data={whyRaw} locale={locale} />
       )}
     </>
   );

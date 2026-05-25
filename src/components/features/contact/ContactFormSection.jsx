@@ -131,7 +131,7 @@ export default function ContactFormSection({ data, lang }) {
                   />
                 </div>
               </div>
-              <div className="w-full xs:w-[50%] p-[8px] xs:pl-[30px] xl:pl-[50px]">
+              <div className="w-full xs:w-[50%] p-[8px] ltr:xs:pl-[30px] ltr:xl:pl-[50px] rtl:xs:pr-[30px] rtl:xl:pr-[50px]">
                 <ContactForm data={data} lang={lang} />
               </div>
             </div>

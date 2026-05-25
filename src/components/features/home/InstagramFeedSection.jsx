@@ -85,6 +85,7 @@ const instagram_feed_section = {
 
 export default function InstagramFeedSection({
   data = instagram_feed_section,
+  locale = "en",
 }) {
   const [emblaRef] = useEmblaCarousel(
     {
@@ -92,6 +93,7 @@ export default function InstagramFeedSection({
       align: "start",
       slidesToScroll: 1,
       containScroll: "trimSnaps",
+      direction: locale === "ar" ? "rtl" : "ltr",
     },
     [Autoplay({ delay: 5000, stopOnInteraction: true, pauseOnHover: true })],
   );
@@ -123,7 +125,7 @@ export default function InstagramFeedSection({
                   alt="arrow-right"
                   width={10}
                   height={10}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain rtl:-scale-x-100"
                 />
               </span>
             </Link>

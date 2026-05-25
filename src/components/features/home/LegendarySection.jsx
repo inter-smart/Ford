@@ -222,12 +222,11 @@ export default function LegendarySection({ data = {} }) {
                       key={brand.name}
                       value={brand.name}
                       className="group flex flex-col items-center gap-1 border-b-2 border-transparent shadow-none h-auto ring-0 cursor-pointer relative
-                      after:absolute after:content-[''] after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:m-auto after:bg-transparent
-                      data-[state=active]:after:bg-[#0052FF] data-[state=active]:after:w-full
                       data-[state=active]:text-black rounded-none
                       data-[state=active]:shadow-none
-                      text-gray-500 px-0 pt-0"
+                      text-gray-500 px-0 pt-0 data-[state=active]:[&>div]:bg-[#0052FF] data-[state=active]:[&>div]:w-full"
                     >
+                      <div className="absolute z-0 bottom-0 left-0 w-fit max-w-[90%] h-[2px] xl:h-[3px] m-auto bg-transparent " />
                       <Image
                         src={brand.logo || "/images/placeholder.png"}
                         alt={brand.name}
@@ -243,7 +242,7 @@ export default function LegendarySection({ data = {} }) {
                 </TabsList>
 
                 <TabsContent value={selectedBrand} className="mt-0 relative">
-                  {currentCar && ( 
+                  {currentCar && (
                     <>
                       {/* <div className="flex flex-col ltr:sm:flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full"> */}
                       <div className="flex flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
@@ -251,13 +250,14 @@ export default function LegendarySection({ data = {} }) {
                           <Heading
                             size="heading1"
                             as="h2"
-                            className="text-black font-medium lg:mb-[35px] sm:mb-[25px] mb-[15px] max-w-[360px] rtl:ml-auto font-antenna"
+                            className="text-black font-medium mb-[15px] sm:mb-[20px] xl:mb-[25px] 3xl:mb-[30px] max-w-[360px] rtl:ml-auto font-antenna"
                           >
                             {currentCar.name}
                           </Heading>
                           {currentCar.brochure && (
                             <Link
                               href={currentCar.brochure}
+                              target="_blank"
                               className="text-[10px] xl:text-[12px] 2xl:text-[13px] 3xl:text-[14px] text-[#1577F0] font-medium inline-block border rtl:ml-auto border-[#1577F0] px-2 2xl:px-6 xl:px-4 2xl:py-3 py-2
                                 rounded-full hover:bg-[#0052FF] hover:text-white transition sm:mb-10"
                             >
@@ -322,7 +322,7 @@ export default function LegendarySection({ data = {} }) {
                         </div>
                       </div>
                       {/* Big car image */}
-                      <div className="relative mt-5 sm:mt-10 xl:mt-15 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[80px]">
+                      <div className="relative mt-5 sm:mt-10 xl:mt-15 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[40px] 2xl:pt-[60px] 3xl:pt-[80px]">
                         <Image
                           src={
                             selectedColorImage ||

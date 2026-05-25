@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Heading } from "@/components/layout/Heading";
 import useEmblaCarousel from "embla-carousel-react";
 
-export default function GallerySection({ data }) {
+export default function GallerySection({ data, locale = "en" }) {
   const [activeTab, setActiveTab] = useState("interior");
 
   const galleryImages =
@@ -17,6 +17,7 @@ export default function GallerySection({ data }) {
     dragFree: true,
     loop: true,
     containScroll: "trimSnaps",
+    direction: locale === "ar" ? "rtl" : "ltr",
   });
 
   useEffect(() => {

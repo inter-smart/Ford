@@ -31,7 +31,7 @@ export default async function NewsDetailPage({ params }) {
   return (
     <>
       {banner?.enable__disable_banner_section && <InnerHero data={banner} />}
-      <NewsDetailSection data={newsData} relatedNews={relatedNews} />
+      <NewsDetailSection data={newsData} relatedNews={relatedNews} locale={locale} />
     </>
   );
 }

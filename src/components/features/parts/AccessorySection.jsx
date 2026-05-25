@@ -24,10 +24,18 @@ export default function AccessorySection({ data }) {
               </div>
               <Link
                 href={data?.button?.link || "#"}
-                className="text-[11px] xl:text-[12px] 2xl:text-[15px] 3xl:text-[18px] text-[#1577F0] font-semibold inline-flex items-center gap-[10px] capitalize group"
+                className="text-[12.44px] 2xl:text-[15px] 3xl:text-[18px] leading-none font-bold text-[#1577F0] gap-[5px] flex items-center justify-start group/arrow"
               >
                 {data?.button_text}
-                <span className="w-[8px] h-[8px] border-r-2 border-b-2 border-[#1577F0] rotate-[-45deg] transition-transform duration-300 group-hover:translate-x-[4px]" />
+                <span className="w-[12px] 2xl:w-[13px] 3xl:w-[14px] h-auto aspect-[8/5] flex items-center justify-center group-hover/arrow:translate-x-[3px] transition duration-500 ease-in-out">
+                  <Image
+                    src="/images/product_learmore_arrow.svg"
+                    alt="arrow-right"
+                    width={10}
+                    height={10}
+                    className="w-full h-full object-contain rtl:-scale-x-100"
+                  />
+                </span>
               </Link>
             </div>
           </div>

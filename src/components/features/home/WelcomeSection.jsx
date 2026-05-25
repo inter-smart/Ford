@@ -59,8 +59,7 @@ export default function Welcome({ data }) {
                     __html: data?.description_about_ford || "",
                   }}
                   className="text-[#434343] mb-[15px]"
-                >
-                </Text>
+                ></Text>
                 <div className="mt-[15px] xl:mt-[25px] 2xl:mt-[35px] 3xl:mt-[40px]">
                   <Link
                     href={data?.button_about_ford?.button_link_about_ford?.url}
@@ -68,14 +67,15 @@ export default function Welcome({ data }) {
                       data?.button_about_ford?.button_link_about_ford?.target
                     }
                     className="text-[12.44px] 2xl:text-[15px] 3xl:text-[18px] leading-none font-bold text-[#1577F0] gap-[5px] flex items-center justify-start group/arrow"
-                  >{data?.button_about_ford?.button_text_about_ford}
+                  >
+                    {data?.button_about_ford?.button_text_about_ford}
                     <span className="w-[12px] 2xl:w-[13px] 3xl:w-[14px] h-auto aspect-[8/5] flex items-center justify-center group-hover/arrow:translate-x-[3px] transition duration-500 ease-in-out">
                       <Image
                         src="/images/product_learmore_arrow.svg"
                         alt="arrow-right"
                         width={10}
                         height={10}
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-contain rtl:-scale-x-100"
                       />
                     </span>
                   </Link>

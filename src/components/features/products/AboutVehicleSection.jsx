@@ -8,7 +8,7 @@ export default function AboutVehicleSection({ data, badge, dealers = [], pageTit
     <section className="w-full h-auto block py-[30px] 3xl:py-[40px]">
       <div className="container">
         <div className="w-full h-auto flex items-center flex-wrap">
-          <div className="w-full md:w-1/2 md:pr-[20px]">
+          <div className="w-full md:w-1/2 ltr:md:pr-[20px] rtl:md:pl-[20px] mb-5 md:mb-0">
             <div className="w-full">
               {badge && (
                 <div className="text-[10px] sm:text-[12px] leading-[1] font-normal text-white w-fit h-auto p-[5px_10px] bg-[#1577F0] rounded-[5px] mb-[10px]">

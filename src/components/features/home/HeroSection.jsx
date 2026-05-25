@@ -92,7 +92,7 @@ export default function HeroSection({ data }) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="container w-auto h-auto absolute z-4 left-auto bottom-10 sm:bottom-15 lg:bottom-15 2xl:bottom-25 right-0 flex items-center gap-[7px] lg:gap-[10px] 2xl:gap-[15px]">
+      <div className="container w-auto h-auto absolute z-4 ltr:right-0 ltr:left-auto rtl:left-0 rtl:right-auto bottom-10 sm:bottom-15 lg:bottom-15 2xl:bottom-25 flex items-center gap-[7px] lg:gap-[10px] 2xl:gap-[15px]">
         {data?.banners?.map((item, index) => {
           const isActive = index === activeIndex;
           if (item?.image__video === "video") {

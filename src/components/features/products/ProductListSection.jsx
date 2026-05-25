@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 import React, { useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
-export default function ProductListSection({ data }) {
+export default function ProductListSection({ data, locale = "en" }) {
   const productRaw = data?.product ?? [];
 
   const categories = [
@@ -21,7 +21,7 @@ export default function ProductListSection({ data }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(18);
 
-  const [tabsEmblaRef] = useEmblaCarousel({ dragFree: true });
+  const [tabsEmblaRef] = useEmblaCarousel({ dragFree: true, direction: locale === "ar" ? "rtl" : "ltr" });
 
   const productList = productRaw.filter((item) => {
     const searchLower = searchQuery.toLowerCase().trim();
@@ -72,7 +72,7 @@ export default function ProductListSection({ data }) {
         <div className="flex flex-wrap items-center flex-col-reverse sm:flex-row gap-5 mb-[20px] xl:mb-[30px] 2xl:mb-[45px] 3xl:mb-[50px]">
           <div className="w-full sm:flex-1 overflow-hidden relative">
             <div className="embla__viewport" ref={tabsEmblaRef}>
-              <div className="embla__container flex pr-5">
+              <div className="embla__container flex ltr:pr-5 rtl:pl-5">
                 {categories.map((item, index) => (
                   <div
                     className="embla__slide w-auto"
@@ -96,7 +96,7 @@ export default function ProductListSection({ data }) {
                 ))}
               </div>
             </div>
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-[60px] bg-gradient-to-l from-white to-transparent z-10" />
+            <div className="pointer-events-none absolute ltr:right-0 rtl:left-0 top-0 h-full w-[60px] ltr:bg-gradient-to-l rtl:bg-gradient-to-r from-white to-transparent z-10" />
           </div>
           <div className="w-full sm:w-[268px] xl:w-[327px] 2xl:w-[392px] 3xl:w-[490px]">
             <div className="w-full h-auto relative z-0">
@@ -109,13 +109,13 @@ export default function ProductListSection({ data }) {
                   setVisibleCount(18);
                 }}
                 className="
-                    text-[14px] lg:text-[16px] w-full h-[40px] 2xl:h-[45px] pl-4 pr-12
+                    text-[14px] lg:text-[16px] w-full h-[40px] 2xl:h-[45px] ltr:pl-4 ltr:pr-12 rtl:pl-12 rtl:pr-4
                     border-[#D8D8D8] border-1 rounded-[5px]
                     text-base outline-none
                     focus:border-black transition-all
                   "
               />
-              <button className="w-[10px] lg:w-[15px] 2xl:w-[20px] h-auto aspect-[20/20] p-[0_35px_0_20px] lg:p-[0_35px_0_20px] absolute z-1 right-0 top-1/2 -translate-y-1/2 cursor-pointer">
+              <button className="w-[10px] lg:w-[15px] 2xl:w-[20px] h-auto aspect-[20/20] ltr:p-[0_35px_0_20px] ltr:lg:p-[0_35px_0_20px] rtl:p-[0_20px_0_35px] rtl:lg:p-[0_20px_0_35px] absolute z-1 ltr:right-0 rtl:left-0 top-1/2 -translate-y-1/2 cursor-pointer">
                 <Search className="text-black" size={20} />
               </button>
             </div>

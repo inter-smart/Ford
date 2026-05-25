@@ -96,7 +96,7 @@ export default function Footer({ data, dealers = [], carOptions = [], lang = "en
                     alt="footer-btn-icon"
                     width={8}
                     height={14}
-                    className="w-[5.5px] xl:w-[6px] 3xl:w-[8px] block object-contain transition-transform duration-300 ease-in-out group-hover:translate-x-2"
+                    className="w-[5.5px] xl:w-[6px] 3xl:w-[8px] block object-contain transition-transform duration-300 ease-in-out group-hover:translate-x-2 rtl:-scale-x-100"
                   />
                 </button>
               </BookATestDriveDialog>

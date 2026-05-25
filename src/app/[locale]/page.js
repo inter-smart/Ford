@@ -69,7 +69,7 @@ export default async function Home({ params }) {
 
       {/* <InsightSection /> */}
       {home_data?.instagram?.enable__disable_instagram && (
-        <InstagramFeedSection data={home_data?.instagram?.instagram} />
+        <InstagramFeedSection data={home_data?.instagram?.instagram} locale={locale} />
       )}
     </>
   );

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function ColorSwitchSection({ data }) {
   const firstColorOption = data?.[0];
   const [activeVariation, setActiveVariation] = useState(
-    firstColorOption?.variations?.[0] || null
+    firstColorOption?.variations?.[0] || null,
   );
   const isActive = (variation) => activeVariation === variation;
   return (
@@ -33,28 +33,26 @@ export default function ColorSwitchSection({ data }) {
           </motion.div>
           <div className="w-full h-auto gap-[7px] sm:gap-[15px] 2xl:gap-[20px] 3xl:gap-[25px] flex items-center justify-center">
             {firstColorOption?.variations?.map((item, index) => (
-              <div key={index} className="w-auto h-auto block relative z-0">
+              <div key={index} className="relative z-0">
                 <button
                   onClick={() => setActiveVariation(item)}
-                  className="w-[20px] sm:w-[25px] 2xl:w-[30px] h-[20px] sm:h-[25px] 2xl:h-[30px] rounded-full relative z-0 flex items-center justify-center transition-all duration-300"
+                  className="w-[20px] sm:w-[25px] 2xl:w-[30px] aspect-square rounded-full relative z-0 border transition-all duration-300"
                   style={{
-                    border: isActive(item)
-                      ? "1px solid #000"
-                      : "1px solid transparent",
+                    borderColor: isActive(item) ? "#000" : "#b8b8b8",
                     backgroundColor: isActive(item) ? "#fff" : item?.color,
                   }}
                 >
-                  {isActive(item) && (
-                    <span
-                      className="w-[12px] sm:w-[15px] 2xl:w-[18px] h-[12px] sm:h-[15px] 2xl:h-[18px] rounded-full block"
-                      style={{
-                        backgroundColor: item?.color,
-                      }}
-                    />
-                  )}
+                  {/* {isActive(item) && ( */}
+                  <span
+                    className="w-full h-full rounded-full block"
+                    style={{
+                      backgroundColor: item?.color,
+                    }}
+                  />
+                  {/* )} */}
                 </button>
                 {isActive(item) && (
-                  <div className="text-[13px] 2xl:text-[14px] leading-[1] font-normal text-black whitespace-nowrap mx-auto absolute z-1 left-0 right-0 bottom-[-25px] sm:bottom-[-30px] flex justify-center">
+                  <div className="text-[12px] xl:text-[14px] 2xl:text-[17px] 3xl:text-[20px] leading-normal font-normal tracking-tight text-black whitespace-nowrap mx-auto absolute z-1 left-0 right-0 bottom-[-25px] sm:bottom-[-30px] flex justify-center">
                     {item?.title}
                   </div>
                 )}

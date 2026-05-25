@@ -113,14 +113,14 @@ export default async function Page({ params }) {
 
       {spec?.enabled && <SpecificationSection data={spec} />}
 
-      {kf?.enabled && <VehicleDetailSection data={kf} />}
+      {kf?.enabled && <VehicleDetailSection data={kf} locale={locale} />}
 
       {firstItem(data.color_options)?.enabled && (
         <ColorSwitchSection data={data.color_options} />
       )}
 
       {firstItem(data.gallery)?.enabled && (
-        <GallerySection data={firstItem(data.gallery)} />
+        <GallerySection data={firstItem(data.gallery)} locale={locale} />
       )}
 
       {service?.enabled && <AfterSaleSection data={service} />}

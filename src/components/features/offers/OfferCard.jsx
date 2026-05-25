@@ -34,7 +34,7 @@ export default function OfferCard({ data }) {
           </div>
         )}
         <div className="w-auto flex justify-center">
-          <button className="text-[10px] xl:text-[12px] 2xl:text-[15px] 3xl:text-[17px] leading-[1] font-bold text-white mr-auto px-6 py-3 rounded-[20] bg-[#066FEF] cursor-pointer transition-all">
+          <button className="text-[10px] xl:text-[12px] 2xl:text-[15px] 3xl:text-[17px] leading-[1] font-bold text-white ltr:mr-auto rtl:ml-auto px-6 py-3 rounded-[20] bg-[#066FEF] cursor-pointer transition-all">
             Know More
           </button>
         </div>

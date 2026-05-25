@@ -27,7 +27,7 @@ export default function PartsSection({ data }) {
             </div>
           </div>
           <div className="w-full md:w-1/2 flex items-center">
-            <div className="w-full md:pl-[30px] xl:pl-[60px] max-w-[810px]">
+            <div className="w-full ltr:md:pl-[30px] ltr:xl:pl-[60px] rtl:md:pr-[30px] rtl:xl:pr-[60px] max-w-[810px]">
               <Heading
                 size="heading1"
                 as="h2"

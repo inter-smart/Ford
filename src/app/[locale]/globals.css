@@ -113,11 +113,19 @@ body {
       @apply mb-[10px] lg:mb-[24px] 2xl:mb-[30px] 3xl:mb-[35px];
     }
 
-    p, &, li, td {
+    p,
+    &,
+    li,
+    td {
       @apply text-[12px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-(--text-color);
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       @apply leading-normal font-semibold text-(--text-color);
     }
 
@@ -140,21 +148,26 @@ body {
     h6 {
       @apply text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px];
     }
-    
+
     ul > li,
     ol > li {
       @apply mb-[10px] lg:mb-[20px] 2xl:mb-[26px] 3xl:mb-[30px];
     }
 
     ul > li {
-      @apply ml-4.5 sm:pl-2 list-image-[url('/images/list-icon.svg')];
+      @apply list-image-[url('/images/list-icon.svg')];
+    }
+    ul > li {
+      @apply ltr:ml-4.5 ltr:sm:pl-2 rtl:mr-4.5 rtl:sm:pr-2;
     }
 
-    &[dir="rtl"] ul > li {
+    /* [dir="ltr"] ul > li {
+      @apply ml-4.5 sm:pl-2;
+    }
+
+    [dir="rtl"] ul > li {
       @apply mr-4.5 sm:pr-2;
-    }
-
-
+    } */
   }
 }
 
@@ -209,5 +222,6 @@ body {
 
 /* Ford Antenna has broader Unicode coverage — better Arabic glyph rendering */
 :root[lang="ar"] body {
-  font-family: var(--font-antenna), "Segoe UI", "Tahoma", "Arial Unicode MS", sans-serif;
+  font-family:
+    var(--font-antenna), "Segoe UI", "Tahoma", "Arial Unicode MS", sans-serif;
 }

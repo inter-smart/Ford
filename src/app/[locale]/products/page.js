@@ -22,7 +22,7 @@ export default async function Page({ params }) {
   return (
     <>
       {banner.enable__disable_banner && <InnerHero data={banner} />}
-      <ProductListSection data={data} />
+      <ProductListSection data={data} locale={locale} />
     </>
   );
 }

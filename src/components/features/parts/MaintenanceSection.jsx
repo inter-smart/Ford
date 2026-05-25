@@ -28,7 +28,7 @@ export default function MaintenanceSection({ data }) {
                         </div>
                     </div>
 
-                    <div className="w-full lg:w-[calc(100%-315px)] xl:w-[calc(100%-395px)] 2xl:w-[calc(100%-475px)]  3xl:w-[calc(100%-590px)] lg:pl-[35px] xl:pl-[45px] 2xl:pl-[55px] 3xl:pl-[65px]">
+                    <div className="w-full lg:w-[calc(100%-315px)] xl:w-[calc(100%-395px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-590px)] ltr:lg:pl-[35px] ltr:xl:pl-[45px] ltr:2xl:pl-[55px] ltr:3xl:pl-[65px] rtl:lg:pr-[35px] rtl:xl:pr-[45px] rtl:2xl:pr-[55px] rtl:3xl:pr-[65px]">
                         <div className="relative w-full h-full bg-[#F7F7F7] p-[20px] lg:p-[25px_35px] xl:p-[30px_45px] 2xl:p-[40px_55px] 3xl:p-[45px_65px] rounded-[13px] overflow-hidden">
                             <div className="flex flex-wrap max-xs:gap-[15px]">
                                 <div className="w-full xs:w-1/2">
@@ -41,7 +41,7 @@ export default function MaintenanceSection({ data }) {
                                                 key={index}
                                                 className="text-[12px] xl:text-[14px] 2xl:text-[17px] 3xl:text-[21px] text-black flex items-start mb-[12px] xl:mb-[15px] 2xl:mb-[20px] 3xl:mb-[25px] last-of-type:mb-0"
                                             >
-                                                <span className="mr-[12px] xl:mr-[15px] 3xl:mr-[20px] mt-[7px] w-[4px] xl:w-[6px] 2xl:w-[8px] 3xl:w-[10px] h-[4px] xl:h-[6px] 2xl:h-[8px] 3xl:h-[10px] rounded-full bg-[#00095B] shrink-0" />
+                                                <span className="ltr:mr-[12px] ltr:xl:mr-[15px] ltr:3xl:mr-[20px] rtl:ml-[12px] rtl:xl:ml-[15px] rtl:3xl:ml-[20px] mt-[7px] w-[4px] xl:w-[6px] 2xl:w-[8px] 3xl:w-[10px] h-[4px] xl:h-[6px] 2xl:h-[8px] 3xl:h-[10px] rounded-full bg-[#00095B] shrink-0" />
 
                                                 {item}
                                             </li>
@@ -59,7 +59,7 @@ export default function MaintenanceSection({ data }) {
                                                 key={index}
                                                 className="text-[12px] xl:text-[14px] 2xl:text-[17px] 3xl:text-[21px] text-black flex items-start mb-[12px] xl:mb-[15px] 2xl:mb-[20px] 3xl:mb-[25px] last-of-type:mb-0"
                                             >
-                                                <span className="mr-[12px] xl:mr-[15px] 3xl:mr-[20px] mt-[7px] w-[4px] xl:w-[6px] 2xl:w-[8px] 3xl:w-[10px] h-[4px] xl:h-[6px] 2xl:h-[8px] 3xl:h-[10px] rounded-full bg-[#00095B] shrink-0" />
+                                                <span className="ltr:mr-[12px] ltr:xl:mr-[15px] ltr:3xl:mr-[20px] rtl:ml-[12px] rtl:xl:ml-[15px] rtl:3xl:ml-[20px] mt-[7px] w-[4px] xl:w-[6px] 2xl:w-[8px] 3xl:w-[10px] h-[4px] xl:h-[6px] 2xl:h-[8px] 3xl:h-[10px] rounded-full bg-[#00095B] shrink-0" />
 
                                                 {item}
                                             </li>

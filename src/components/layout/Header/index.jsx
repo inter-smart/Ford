@@ -46,7 +46,11 @@ export default function Header({ locale, data: header_acf }) {
         return p.replace(/^\/(en|ar)/, "").replace(/\/$/, "") || "/";
       }
     };
-    return normalize(url) === normalize(pathname);
+    const normalizedUrl = normalize(url);
+    const normalizedPath = normalize(pathname);
+    if (normalizedUrl === normalizedPath) return true;
+    if (normalizedUrl !== "/" && normalizedPath.startsWith(normalizedUrl + "/")) return true;
+    return false;
   };
 
   React.useEffect(() => {

@@ -62,11 +62,11 @@ export default async function FleetPage({ params }) {
       )}
 
       {carsRaw?.enable__disable_cars_fleet && (
-        <FleetCarlineSection data={carsRaw} />
+        <FleetCarlineSection data={carsRaw} locale={locale} />
       )}
 
       {contactRaw?.enable__disable_contact_section && (
-        <FleetContactSection data={contactRaw} />
+        <FleetContactSection data={contactRaw} locale={locale} />
       )}
     </>
   );

@@ -133,7 +133,7 @@ export default function ServiceSection({ data }) {
                         alt="fleet-icon"
                         width={8}
                         height={14}
-                        className="w-[4.5px] 2xl:w-[6px] 3xl:w-[7px] block"
+                        className="w-[4.5px] 2xl:w-[6px] 3xl:w-[7px] block rtl:-scale-x-100"
                       />
                     </Link>
                   </div>

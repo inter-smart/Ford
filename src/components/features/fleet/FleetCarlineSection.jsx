@@ -10,7 +10,7 @@ import { Text } from "@/components/layout/Text";
 
 const toSlug = (name) => name?.toLowerCase().replace(/\s+/g, "-") ?? "";
 
-export default function FleetCarlineSection({ data }) {
+export default function FleetCarlineSection({ data, locale = "en" }) {
   const categories = data?.car_types?.map((ct) => ({
     id: ct.term_id,
     name: ct.term_name,
@@ -37,6 +37,7 @@ export default function FleetCarlineSection({ data }) {
       align: "start",
       slidesToScroll: 1,
       containScroll: "trimSnaps",
+      direction: locale === "ar" ? "rtl" : "ltr",
     },
     [Autoplay({ delay: 5000, stopOnInteraction: true, pauseOnHover: true })],
   );

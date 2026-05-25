@@ -8,7 +8,7 @@ import { Text } from "@/components/layout/Text";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-export default function AccessoriesGenuineSection({ data }) {
+export default function AccessoriesGenuineSection({ data, locale = "en" }) {
   const items = data?.items?.map((item) => ({
     iconPath: item.icon?.url,
     iconAlt:  item.icon?.alt || item.title || "",
@@ -21,6 +21,7 @@ export default function AccessoriesGenuineSection({ data }) {
       align: "start",
       slidesToScroll: 1,
       containScroll: "trimSnaps",
+      direction: locale === "ar" ? "rtl" : "ltr",
     },
     [Autoplay({ delay: 5000, stopOnInteraction: true, pauseOnHover: true })],
   );

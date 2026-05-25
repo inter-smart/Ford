@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { Heading } from "@/components/layout/Heading";
 import { Text } from "@/components/layout/Text";
 
-export default function FleetContactSection({ data }) {
+export default function FleetContactSection({ data, locale = "en" }) {
   const cards = data?.items?.map((item) => ({
     icon: item.icon?.url,
     iconAlt: item.icon?.alt || "",
@@ -25,6 +25,7 @@ export default function FleetContactSection({ data }) {
       align: "start",
       slidesToScroll: 1,
       containScroll: "trimSnaps",
+      direction: locale === "ar" ? "rtl" : "ltr",
     },
     [Autoplay({ delay: 5000, stopOnInteraction: true, pauseOnHover: true })],
   );

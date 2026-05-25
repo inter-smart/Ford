@@ -35,7 +35,7 @@ export default function ProductCard({ item }) {
               alt="arrow-right"
               width={10}
               height={10}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain rtl:-scale-x-100"
             />
           </span>
         </Link>
