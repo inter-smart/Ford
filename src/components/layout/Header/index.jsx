@@ -118,7 +118,7 @@ export default function Header({ locale, data: header_acf }) {
     <header>
       <div
         className={cn(
-          "w-full h-(--header-y) lg:h-(--header-y-lg) 2xl:h-(--header-y-2xl) 3xl:h-(--header-y-3xl) absolute z-10 top-0 left-0 right-0 [--logo-x:60px] min-[376px]:[--logo-x:70px] sm:[--logo-x:75px] xl:[--logo-x:85px] 2xl:[--logo-x:100px] 3xl:[--logo-x:105px] border border-yellow-500 flex items-center ",
+          "w-full h-(--header-y) lg:h-(--header-y-lg) 2xl:h-(--header-y-2xl) 3xl:h-(--header-y-3xl) absolute z-10 top-0 left-0 right-0 [--logo-x:60px] min-[376px]:[--logo-x:70px] sm:[--logo-x:75px] xl:[--logo-x:85px] 2xl:[--logo-x:100px] 3xl:[--logo-x:105px] flex items-center ",
           isDarkBgPage ? "bg-[#0A0A0A]" : "bg-transparent",
         )}
       >
