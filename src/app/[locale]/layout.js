@@ -5,8 +5,8 @@ import ToasterWrapper from "@/components/common/ToasterWrapper";
 import localFont from "next/font/local";
 import Script from "next/script";
 
-import { apiFetch, CACHE }           from "@/lib/api/client";
-import { getLocalizedEndpoint }      from "@/lib/api/endpoints";
+import { apiFetch, CACHE } from "@/lib/api/client";
+import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { FALLBACK_HEADER, FALLBACK_FOOTER } from "@/lib/api/fallbacks";
 
 export const metadata = {
@@ -16,9 +16,21 @@ export const metadata = {
 
 export const fordf1 = localFont({
   src: [
-    { path: "../../../public/fonts/FordF-1-Regular.woff2",  weight: "400", style: "normal" },
-    { path: "../../../public/fonts/FordF-1-Semibold.woff2", weight: "500", style: "normal" },
-    { path: "../../../public/fonts/FordF-1-Bold.woff2",     weight: "800", style: "normal" },
+    {
+      path: "../../../public/fonts/FordF-1-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/FordF-1-Semibold.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/FordF-1-Bold.woff2",
+      weight: "800",
+      style: "normal",
+    },
   ],
   variable: "--font-fordf1",
   preload: true,
@@ -27,9 +39,21 @@ export const fordf1 = localFont({
 
 export const fordAntenna = localFont({
   src: [
-    { path: "../../../public/fonts/FordAntenna-Light.woff2",   weight: "300", style: "light"  },
-    { path: "../../../public/fonts/FordAntenna-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../../../public/fonts/FordAntenna-Medium.woff2",  weight: "500", style: "medium" },
+    {
+      path: "../../../public/fonts/FordAntenna-Light.woff2",
+      weight: "300",
+      style: "light",
+    },
+    {
+      path: "../../../public/fonts/FordAntenna-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/FordAntenna-Medium.woff2",
+      weight: "500",
+      style: "medium",
+    },
   ],
   variable: "--font-antenna",
   preload: true,
@@ -38,7 +62,9 @@ export const fordAntenna = localFont({
 
 async function getHeaderData(locale) {
   try {
-    const data = await apiFetch(getLocalizedEndpoint("header", locale), { cache: CACHE.NO_STORE });
+    const data = await apiFetch(getLocalizedEndpoint("header", locale), {
+      cache: CACHE.NO_STORE,
+    });
     return data?.header_acf ?? FALLBACK_HEADER;
   } catch {
     return FALLBACK_HEADER;
@@ -47,7 +73,9 @@ async function getHeaderData(locale) {
 
 async function getFooterData(locale) {
   try {
-    const data = await apiFetch(getLocalizedEndpoint("footer", locale), { cache: CACHE.NO_STORE });
+    const data = await apiFetch(getLocalizedEndpoint("footer", locale), {
+      cache: CACHE.NO_STORE,
+    });
     return data?.footer_acf ?? FALLBACK_FOOTER;
   } catch {
     return FALLBACK_FOOTER;
@@ -56,31 +84,38 @@ async function getFooterData(locale) {
 
 async function getDealersData(locale) {
   try {
-    const res = await apiFetch(getLocalizedEndpoint("test-drive-form", locale), { cache: CACHE.NO_STORE });
+    const res = await apiFetch(
+      getLocalizedEndpoint("test-drive-form", locale),
+      { cache: CACHE.NO_STORE },
+    );
     return res?.data?.dealers || [];
   } catch {
     return [];
   }
 }
 
-
 async function getCarOptions(locale) {
   try {
-    const endpoint = locale === "ar"
-      ? `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/ar/product`
-      : `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/product`;
-    const res  = await fetch(endpoint, { next: { revalidate: 3600 } });
+    const endpoint =
+      locale === "ar"
+        ? `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/ar/product`
+        : `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/product`;
+    const res = await fetch(endpoint, { next: { revalidate: 3600 } });
     const json = await res.json();
-    return (json?.product ?? []).map((car) => ({
-      modelName:     car.modelName ?? "",
-      modelCategory: (car.modelCategory ?? []).map((c) => c.name ?? c),
-    })).filter((car) => car.modelName)
-.filter((car, idx, arr) => arr.findIndex((c) => c.modelName === car.modelName) === idx);
+    return (json?.product ?? [])
+      .map((car) => ({
+        modelName: car.modelName ?? "",
+        modelCategory: (car.modelCategory ?? []).map((c) => c.name ?? c),
+      }))
+      .filter((car) => car.modelName)
+      .filter(
+        (car, idx, arr) =>
+          arr.findIndex((c) => c.modelName === car.modelName) === idx,
+      );
   } catch {
     return [];
   }
 }
-
 
 export default async function RootLayout({ children, params }) {
   const { locale } = await params;
@@ -96,12 +131,23 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={`${fordf1.variable} ${fordAntenna.variable}`}>
-        <Header data={headerData} locale={locale} />
+        <Header
+          data={headerData}
+          locale={locale}
+          dealers={dealers}
+          carOptions={carOptions}
+          lang={lang}
+        />
         <main className="flex-grow">
           {children}
           <ToasterWrapper />
         </main>
-        <Footer data={footerData} dealers={dealers} carOptions={carOptions} lang={lang} />
+        <Footer
+          data={footerData}
+          dealers={dealers}
+          carOptions={carOptions}
+          lang={lang}
+        />
         <Script
           src="https://www.google.com/recaptcha/api.js?render=6LcnDSUsAAAAAPzuIuNcagH8xs8f_HIbB7_GYaBD"
           strategy="afterInteractive"

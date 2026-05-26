@@ -13,7 +13,7 @@ export default function AfterSaleSection({ data }) {
           </div>
           <div className="w-full xl:w-[45%] flex flex-wrap gap-[10px] xl:justify-end">
             <Link
-              href={data?.button?.link || "/contact"}
+              href={data?.button?.link || "/service"}
               target={data?.button?.isExternal ? "_blank" : "_self"}
               className="text-[12px] xl:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1] font-bold text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] max-xs:w-full px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-[#1A73E8] transition duration-300 cursor-pointer"
             >

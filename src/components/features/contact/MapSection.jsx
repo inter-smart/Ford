@@ -31,7 +31,7 @@ export default function ContactMapSection({ data }) {
   return (
       <section className="w-full block py-[20px_40px] xl:py-[30px_70px] 2xl:py-[40px_85px] 3xl:py-[50px_106px]">
       <div className="container">
-        <div className="w-full h-[300px] md:h-[350px] xl:h-[400px] 2xl:h-[450px] 3xl:h-[500px] rounded-xl overflow-hidden relative">
+        <div className="w-full h-[300px] md:h-[350px] xl:h-[400px] 2xl:h-[450px] 3xl:h-[500px] rounded-xl overflow-hidden relative z-0">
           <MapContainer
             center={center}
             zoom={6}

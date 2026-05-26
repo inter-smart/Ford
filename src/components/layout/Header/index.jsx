@@ -22,11 +22,18 @@ import { usePathname } from "next/navigation";
 import { Search, X } from "lucide-react";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 import { cn } from "@/lib/utils";
+import BookATestDriveDialog from "@/components/common/BookATestDriveDialog";
 
 const menuLinkClass =
   "text-[14px] lg:text-[12px] xl:text-[14.22px] 2xl:text-[17.1px] 3xl:text-[21.33px] leading-normal font-normal tracking-tight text-white hover:text-[#036EEE] transition-colors duration-200";
 
-export default function Header({ locale, data: header_acf }) {
+export default function Header({
+  locale,
+  data: header_acf,
+  dealers = [],
+  carOptions = [],
+  lang = "en",
+}) {
   const pathname = usePathname();
 
   const [searchOpen, setSearchOpen] = React.useState(false);
@@ -49,7 +56,8 @@ export default function Header({ locale, data: header_acf }) {
     const normalizedUrl = normalize(url);
     const normalizedPath = normalize(pathname);
     if (normalizedUrl === normalizedPath) return true;
-    if (normalizedUrl !== "/" && normalizedPath.startsWith(normalizedUrl + "/")) return true;
+    if (normalizedUrl !== "/" && normalizedPath.startsWith(normalizedUrl + "/"))
+      return true;
     return false;
   };
 
@@ -231,8 +239,10 @@ export default function Header({ locale, data: header_acf }) {
                     <div
                       ref={searchPanelRef}
                       className={cn(
-                        "absolute z-1 right-0 top-full w-60 xl:w-80 bg-white rounded-md sm:rounded-lg overflow-hidden max-sm:translate-x-1/2",
-                        searchOpen ? "max-h-[376px] p-1 sm:p-2 xl:p-4" : "max-h-0 p-0",
+                        "absolute z-1 ltr:right-0 rtl:left-0 top-full w-60 xl:w-80 bg-white rounded-md sm:rounded-lg overflow-hidden ltr:max-sm:translate-x-1/2 rtl:max-sm:-translate-x-1/2",
+                        searchOpen
+                          ? "max-h-[376px] p-1 sm:p-2 xl:p-4"
+                          : "max-h-0 p-0",
                       )}
                     >
                       <input
@@ -280,12 +290,16 @@ export default function Header({ locale, data: header_acf }) {
 
                   {/* CTA Button */}
                   <div>
-                    <Link
-                      href="/contact"
-                      className="text-[8px] sm:text-[10px] xl:text-[12.4px] 2xl:text-[14.5px] 3xl:text-[18.6px] leading-[1] font-bold text-white w-max max-w-full h-[30px] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[10px] xl:px-[15px] 2xl:px-[20px] 3xl:px-[28px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center hover:bg-[#005fd3]"
+                    <BookATestDriveDialog
+                      dealers={dealers}
+                      pageTitle="Header"
+                      carOptions={carOptions}
+                      lang={lang}
                     >
-                      Book a Test Drive
-                    </Link>
+                      <button className="text-[8px] sm:text-[10px] xl:text-[12.4px] 2xl:text-[14.5px] 3xl:text-[18.6px] leading-[1] font-bold text-white w-max max-w-full h-[30px] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[10px] xl:px-[15px] 2xl:px-[20px] 3xl:px-[28px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center hover:bg-[#005fd3]">
+                        Book a Test Drive
+                      </button>
+                    </BookATestDriveDialog>
                   </div>
 
                   {/* Mobile Hamburger & Sheet Menu */}

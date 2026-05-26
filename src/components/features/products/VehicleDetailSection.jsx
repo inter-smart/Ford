@@ -12,13 +12,19 @@ function toSlides(images) {
   return [];
 }
 
-function ImageSlider({ slides, delay = 3000, aspectClass = "aspect-[300/250]" }) {
+function ImageSlider({
+  slides,
+  delay = 3000,
+  aspectClass = "aspect-[300/250]",
+}) {
   if (!slides.length) return null;
   return (
     <Swiper
       modules={[Pagination, Autoplay]}
       loop={slides.length > 1}
-      autoplay={slides.length > 1 ? { delay, disableOnInteraction: false } : false}
+      autoplay={
+        slides.length > 1 ? { delay, disableOnInteraction: false } : false
+      }
       pagination={{ clickable: true }}
       speed={600}
       className="w-full h-full"
@@ -42,13 +48,15 @@ function ImageSlider({ slides, delay = 3000, aspectClass = "aspect-[300/250]" })
 
 export default function VehicleDetailSection({ data, locale = "en" }) {
   const isAr = locale === "ar";
-  const otherItems = data?.other_features?.enabled ? (data?.other_features?.items || []) : [];
+  const otherItems = data?.other_features?.enabled
+    ? data?.other_features?.items || []
+    : [];
 
   const interiorSlides = toSlides(data?.interior?.images);
   const exteriorSlides = toSlides(data?.exterior?.images);
 
   const containerPad = (usePr) => {
-    const dir = isAr ? (usePr ? "pl" : "pr") : (usePr ? "pr" : "pl");
+    const dir = isAr ? (usePr ? "pl" : "pr") : usePr ? "pr" : "pl";
     return `container container-sm !p-0 xl:max-w-full xl:!${dir}-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-sm-gap-xl))] 2xl:!${dir}-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-sm-gap-2xl))] 3xl:!${dir}-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-sm-gap-3xl))]`;
   };
 
@@ -99,7 +107,9 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
               <div className="w-full sm:w-1/2 h-auto overflow-hidden block">
                 <ImageSlider slides={interiorSlides} delay={3000} />
               </div>
-              <div className={`w-full sm:w-1/2 h-auto ${interiorPad} flex flex-col justify-center`}>
+              <div
+                className={`w-full sm:w-1/2 h-auto ${interiorPad} flex flex-col justify-center`}
+              >
                 <div className="w-full h-auto mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">
                   <div className="text-[18px] sm:text-[20px] lg:text-[22px] 2xl:text-[25px] 3xl:text-[28px] leading-[1] font-semibold text-black mb-[10px] lg:mb-[15px]">
                     {data.interior.title}
@@ -110,10 +120,27 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                 </div>
                 <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
                   {data.interior.highlights?.map((item, index) => (
-                    <div key={index} className="flex items-center">
-                      <div className={`text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] ${bulletClass} relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:top-[6px] before:sm:top-[8px]`}>
+                    <div
+                      key={"interior highlights" + index}
+                      className="flex flex-wrap items-center gap-[15px] xl:gap-[20px] 2xl:gap-[24px] 3xl:gap-[28px]"
+                    >
+                      <div className="w-[35px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
+                        <Image
+                          src={item?.icon?.url ||"/images/pro-detail-dot.svg"}
+                          alt={item?.alt || item?.text}
+                          width={60}
+                          height={60}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-normal font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%]">
                         {item?.text}
                       </div>
+                      {/* <div
+                        className={`text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] ${bulletClass} relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:top-[6px] before:sm:top-[8px]`}
+                      >
+                        {item?.text}
+                      </div> */}
                     </div>
                   ))}
                 </div>
@@ -126,7 +153,9 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
         {data?.exterior?.enabled && (
           <div className={containerPad(true)}>
             <div className="w-full h-auto flex flex-wrap max-sm:flex-col-reverse">
-              <div className={`w-full sm:w-1/2 h-auto ${exteriorPad} flex flex-col justify-center`}>
+              <div
+                className={`w-full sm:w-1/2 h-auto ${exteriorPad} flex flex-col justify-center`}
+              >
                 <div className="w-full h-auto mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">
                   <div className="text-[18px] sm:text-[20px] lg:text-[22px] 2xl:text-[25px] 3xl:text-[28px] leading-[1] font-semibold text-black mb-[10px] lg:mb-[15px]">
                     {data.exterior.title}
@@ -137,8 +166,27 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                 </div>
                 <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
                   {data.exterior.highlights?.map((item, index) => (
-                    <div key={index} className="flex items-center">
-                      <div className={`text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] ${bulletClass} relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:top-[6px] before:sm:top-[8px]`}>
+                    // <div key={index} className="flex items-center">
+                    //   <div
+                    //     className={`text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] ${bulletClass} relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:top-[6px] before:sm:top-[8px]`}
+                    //   >
+                    //     {item?.text}
+                    //   </div>
+                    // </div>
+                    <div
+                      key={"exterior highlights" + index}
+                      className="flex flex-wrap items-center gap-[15px] xl:gap-[20px] 2xl:gap-[24px] 3xl:gap-[28px]"
+                    >
+                      <div className="w-[35px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
+                        <Image
+                          src={item?.icon?.url || "/images/pro-detail-dot.svg"}
+                          alt={item?.alt || item?.text}
+                          width={60}
+                          height={60}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-normal font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%]">
                         {item?.text}
                       </div>
                     </div>
@@ -156,7 +204,9 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
         {otherItems.map((item, index) => {
           const isOdd = index % 2 === 0;
           const slides = toSlides(item.images);
-          const containerClass = isOdd ? containerPad(true) : containerPad(false);
+          const containerClass = isOdd
+            ? containerPad(true)
+            : containerPad(false);
 
           const imageEl = (
             <div className="w-full sm:w-1/2 h-auto overflow-hidden block">
@@ -165,7 +215,9 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
           );
 
           const textEl = (
-            <div className={`w-full sm:w-1/2 h-auto ${isOdd ? oddTextPad : evenTextPad} flex flex-col justify-center`}>
+            <div
+              className={`w-full sm:w-1/2 h-auto ${isOdd ? oddTextPad : evenTextPad} flex flex-col justify-center`}
+            >
               <div className="w-full h-auto mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">
                 <div className="text-[18px] sm:text-[20px] lg:text-[22px] 2xl:text-[25px] 3xl:text-[28px] leading-[1] font-semibold text-black mb-[10px] lg:mb-[15px]">
                   {item.title}
@@ -176,8 +228,27 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
               </div>
               <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
                 {item.highlights?.map((h, i) => (
-                  <div key={i} className="flex items-center">
-                    <div className={`text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] ${bulletClass} relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:top-[6px] before:sm:top-[8px]`}>
+                  // <div key={i} className="flex items-center">
+                  //   <div
+                  //     className={`text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] ${bulletClass} relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:top-[6px] before:sm:top-[8px]`}
+                  //   >
+                  //     {h?.text}
+                  //   </div>
+                  // </div>
+                  <div
+                    key={"highlights" + i + index}
+                    className="flex flex-wrap items-center gap-[15px] xl:gap-[20px] 2xl:gap-[24px] 3xl:gap-[28px]"
+                  >
+                    <div className="w-[35px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
+                      <Image
+                        src={item?.icon?.url || "/images/pro-detail-dot.svg"}
+                        alt={item?.alt || h?.text}
+                        width={60}
+                        height={60}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-normal font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%]">
                       {h?.text}
                     </div>
                   </div>
@@ -188,8 +259,20 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
 
           return (
             <div key={index} className={containerClass}>
-              <div className={`w-full h-auto flex flex-wrap${!isOdd ? " max-sm:flex-col-reverse" : ""}`}>
-                {isOdd ? <>{imageEl}{textEl}</> : <>{textEl}{imageEl}</>}
+              <div
+                className={`w-full h-auto flex flex-wrap${!isOdd ? " max-sm:flex-col-reverse" : ""}`}
+              >
+                {isOdd ? (
+                  <>
+                    {imageEl}
+                    {textEl}
+                  </>
+                ) : (
+                  <>
+                    {textEl}
+                    {imageEl}
+                  </>
+                )}
               </div>
             </div>
           );
