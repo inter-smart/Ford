@@ -1,3 +1,4 @@
 <svg width="59" height="59" viewBox="0 0 59 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="29" cy="30" r="10" fill="#066FEF"/>
+<circle cx="29" cy="30" r="6" fill="#066FEF"/>
+<circle cx="29" cy="30" r="11.5" stroke="#066FEF"/>
 </svg>

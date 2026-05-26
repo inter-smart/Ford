@@ -69,12 +69,12 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
     : "p-[20px_20px_30px_20px] sm:p-[40px_30px_40px_15px] lg:p-[50px_50px_50px_0px] xl:p-[60px_70px_60px_70px] 2xl:p-[70px_80px_70px_80px] 3xl:p-[80px_90px_80px_90px]";
 
   const oddTextPad = isAr
-    ? "p-[30px_0px_20px_25px] sm:p-[40px_30px_40px_0px] lg:p-[50px_50px_50px_0px] xl:p-[60px_70px_60px_70px] 2xl:p-[70px_80px_70px_80px] 3xl:p-[80px_90px_80px_90px]"
-    : "p-[30px_25px_20px_0px] sm:p-[40px_0px_40px_30px] lg:p-[50px_0px_50px_50px] xl:p-[60px_0px_60px_70px] 2xl:p-[70px_0px_70px_80px] 3xl:p-[80px_0px_80px_90px]";
+    ? "p-[30px_20px_20px_20px] sm:p-[40px_30px_40px_15px] lg:p-[50px_50px_50px_0px] xl:p-[60px_70px_60px_70px] 2xl:p-[70px_80px_70px_80px] 3xl:p-[80px_90px_80px_90px]"
+    : "p-[30px_20px_20px_20px] sm:p-[40px_15px_40px_30px] lg:p-[50px_0px_50px_50px] xl:p-[60px_0px_60px_70px] 2xl:p-[70px_0px_70px_80px] 3xl:p-[80px_0px_80px_90px]";
 
   const evenTextPad = isAr
-    ? "p-[20px_0px_30px_25px] sm:p-[40px_0px_40px_30px] lg:p-[50px_0px_50px_50px] xl:p-[60px_70px_60px_70px] 2xl:p-[70px_80px_70px_80px] 3xl:p-[80px_90px_80px_90px] bg-white"
-    : "p-[20px_25px_30px_0px] sm:p-[40px_30px_40px_0px] lg:p-[50px_50px_50px_0px] xl:p-[60px_70px_60px_70px] 2xl:p-[70px_80px_70px_80px] 3xl:p-[80px_90px_80px_90px] bg-white";
+    ? "p-[20px_20px_30px_20px] sm:p-[40px_15px_40px_30px] lg:p-[50px_0px_50px_50px] xl:p-[60px_70px_60px_70px] 2xl:p-[70px_80px_70px_80px] 3xl:p-[80px_90px_80px_90px] bg-white"
+    : "p-[20px_20px_30px_20px] sm:p-[40px_30px_40px_15px] lg:p-[50px_50px_50px_0px] xl:p-[60px_70px_60px_70px] 2xl:p-[70px_80px_70px_80px] 3xl:p-[80px_90px_80px_90px] bg-white";
 
   const bulletClass = isAr
     ? "pr-[15px] lg:pr-[20px] before:right-0"
@@ -118,7 +118,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                     {data.interior.description}
                   </div>
                 </div>
-                <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
+                <div className="w-full h-auto gap-[10px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
                   {data.interior.highlights?.map((item, index) => (
                     <div
                       key={"interior highlights" + index}
@@ -133,7 +133,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                           className="w-full h-full object-contain"
                         />
                       </div>
-                      <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-normal font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%]">
+                      <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-normal font-normal text-black flex-1 lg:max-w-[50%] 2xl:max-w-[40%]">
                         {item?.text}
                       </div>
                       {/* <div
@@ -164,7 +164,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                     {data.exterior.description}
                   </div>
                 </div>
-                <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
+                <div className="w-full h-auto gap-[10px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
                   {data.exterior.highlights?.map((item, index) => (
                     // <div key={index} className="flex items-center">
                     //   <div
@@ -186,7 +186,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                           className="w-full h-full object-contain"
                         />
                       </div>
-                      <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-normal font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%]">
+                      <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-normal font-normal text-black flex-1 lg:max-w-[50%] 2xl:max-w-[40%]">
                         {item?.text}
                       </div>
                     </div>
@@ -226,7 +226,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                   {item.description}
                 </div>
               </div>
-              <div className="w-full h-auto gap-[15px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
+              <div className="w-full h-auto gap-[10px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
                 {item.highlights?.map((h, i) => (
                   // <div key={i} className="flex items-center">
                   //   <div
@@ -237,7 +237,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                   // </div>
                   <div
                     key={"highlights" + i + index}
-                    className="flex flex-wrap items-center gap-[15px] xl:gap-[20px] 2xl:gap-[24px] 3xl:gap-[28px]"
+                    className="flex flex-wrap flex-nowrap items-center gap-[15px] xl:gap-[20px] 2xl:gap-[24px] 3xl:gap-[28px]"
                   >
                     <div className="w-[35px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
                       <Image
@@ -248,7 +248,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                         className="w-full h-full object-contain"
                       />
                     </div>
-                    <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-normal font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%]">
+                    <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-normal font-normal text-black flex-1 lg:max-w-[50%] 2xl:max-w-[40%]">
                       {h?.text}
                     </div>
                   </div>

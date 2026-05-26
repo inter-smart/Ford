@@ -10,8 +10,8 @@ import Link from "next/link";
 export default function NewsDetailSection({ data, relatedNews, locale = "en" }) {
   const [emblaRef] = useEmblaCarousel({ axis: "x", skipSnaps: false, direction: locale === "ar" ? "rtl" : "ltr" });
 
-  const imageUrl = data?.acf?.main_image?.url || data?.featured_image?.url || data?.media?.url;
-  const imageAlt = data?.acf?.main_image?.alt || data?.featured_image?.alt || data?.media?.alt || data?.title || "News";
+  const imageUrl = data?.featured_image?.url || data?.media?.url;
+  const imageAlt = data?.featured_image?.alt || data?.media?.alt || data?.title || "News";
   const content = data?.content || data?.description;
 
   return (

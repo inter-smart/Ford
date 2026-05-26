@@ -160,6 +160,9 @@ body {
     ul > li {
       @apply ltr:ml-4.5 ltr:sm:pl-2 rtl:mr-4.5 rtl:sm:pr-2;
     }
+    ol > li {
+      @apply list-decimal ltr:ml-4.5 ltr:sm:pl-2 rtl:mr-4.5 rtl:sm:pr-2;
+    }
 
     /* [dir="ltr"] ul > li {
       @apply ml-4.5 sm:pl-2;

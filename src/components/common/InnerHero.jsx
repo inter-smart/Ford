@@ -58,11 +58,6 @@ export default function InnerHero({ data, buttonSlot }) {
           )}
           {buttonSlot ??
             (data?.button_text && (
-              // <Link
-              //   href={data?.button?.link || "/"}
-              //   target={data?.button?.isExternal ? "_blank" : "_self"}
-              //   className="text-[12px] xl:text-[15px] 3xl:text-[16px] leading-[1] font-medium font-antenna text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer"
-              // >
               <Link
                 href={data?.button?.link || "/"}
                 target={data?.button?.isExternal ? "_blank" : "_self"}

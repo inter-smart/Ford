@@ -26,7 +26,7 @@ export default function AboutVehicleSection({ data, badge, dealers = [], pageTit
               </div>
               <BookATestDriveDialog dealers={dealers} pageTitle={pageTitle} prefillModel={modelName} prefillType={prefillType} lang={lang}>
                 <button className="text-[12px] xl:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1] font-bold text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] px-6 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition cursor-pointer">
-                  {data?.button_text}
+                  {data?.button_text || "Book a Test Drive"}
                 </button>
               </BookATestDriveDialog>
             </div>
