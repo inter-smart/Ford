@@ -284,23 +284,27 @@ export default function Header({
                       )}
                     </div>
                   </div>
-                  <div>
-                    <LanguageSwitcher locale={locale} />
-                  </div>
+                  {header_acf?.enable__disable_language_switcher && (
+                    <div>
+                      <LanguageSwitcher locale={locale} />
+                    </div>
+                  )}
 
                   {/* CTA Button */}
-                  <div>
-                    <BookATestDriveDialog
-                      dealers={dealers}
-                      pageTitle="Header"
-                      carOptions={carOptions}
-                      lang={lang}
-                    >
-                      <button className="text-[8px] sm:text-[10px] xl:text-[12.4px] 2xl:text-[14.5px] 3xl:text-[18.6px] leading-[1] font-bold text-white w-max max-w-full h-[30px] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[10px] xl:px-[15px] 2xl:px-[20px] 3xl:px-[28px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center hover:bg-[#005fd3]">
-                        Book a Test Drive
-                      </button>
-                    </BookATestDriveDialog>
-                  </div>
+                  {header_acf?.enable__disable_test_drive_button && (
+                    <div>
+                      <BookATestDriveDialog
+                        dealers={dealers}
+                        pageTitle="Header"
+                        carOptions={carOptions}
+                        lang={lang}
+                      >
+                        <button className="text-[8px] sm:text-[10px] xl:text-[12.4px] 2xl:text-[14.5px] 3xl:text-[18.6px] leading-[1] font-bold text-white w-max max-w-full h-[30px] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[10px] xl:px-[15px] 2xl:px-[20px] 3xl:px-[28px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center hover:bg-[#005fd3]">
+                          {header_acf?.test_drive_button_title}
+                        </button>
+                      </BookATestDriveDialog>
+                    </div>
+                  )}
 
                   {/* Mobile Hamburger & Sheet Menu */}
                   <div className="lg:hidden">

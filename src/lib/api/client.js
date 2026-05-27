@@ -13,8 +13,11 @@ export const CACHE = {
 };
 
 export async function apiFetch(endpoint, { cache = CACHE.ISR(), ...rest } = {}) {
-  const base = process.env.NEXT_PUBLIC_API_URL;
+  const base = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "")
   const url = `${base}/wp-json/${endpoint}`;
+
+
+  console.log("[apiFetch]", url);
 
   const res = await fetch(url, { ...cache, ...rest });
 

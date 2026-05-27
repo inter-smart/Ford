@@ -65,7 +65,9 @@ export default async function Home({ params }) {
         <ServiceSection data={home_data?.services} />
       )}
       {/* <LocationSection /> */}
-      <LocationSection data={home_data?.services} />
+      {home_data?.location?.enable__disable_location && (
+        <LocationSection data={home_data?.location} locale={locale} />
+      )}
 
       {/* <InsightSection /> */}
       {home_data?.instagram?.enable__disable_instagram && (

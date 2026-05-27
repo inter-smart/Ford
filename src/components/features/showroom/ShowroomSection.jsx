@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Heading } from "@/components/layout/Heading";
 import { cn } from "@/lib/utils";
@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import Image from "next/image";
 import { apiFetch, CACHE } from "@/lib/api/client";
 import { ENDPOINTS } from "@/lib/api/endpoints";
+import { useSearchParams } from "next/navigation";
 
 const normalizeLocation = (loc, idx) => ({
   id: idx,
@@ -23,13 +24,14 @@ export default function ShowroomSection({
   initialLocations = [],
   initialTotalPages = 1,
 }) {
+  const searchParams = useSearchParams(); // ✅ inside component
   const [activeTabIndex, setActiveTabIndex] = useState(initialTabIndex);
   const [rawLocations,   setRawLocations]   = useState(initialLocations);
   const [loading,        setLoading]        = useState(false);
   const [loadingMore,    setLoadingMore]    = useState(false);
   const [searchQuery,    setSearchQuery]    = useState("");
-  const [page,           setPage]          = useState(1);
-  const [totalPages,     setTotalPages]    = useState(initialTotalPages);
+  const [page,           setPage]           = useState(1);
+  const [totalPages,     setTotalPages]     = useState(initialTotalPages);
   const debounceRef = useRef(null);
 
   const fetchLocations = async ({ tabIndex, page, search, replace }) => {
@@ -43,7 +45,7 @@ export default function ShowroomSection({
         { cache: CACHE.NO_STORE }
       );
       const newLocations  = json?.data?.location_details ?? [];
-      const newTotalPages = json?.data?.total_pages       ?? 1;
+      const newTotalPages = json?.meta?.totalPages        ?? 1; // ✅ fixed key
 
       setRawLocations(prev => replace ? newLocations : [...prev, ...newLocations]);
       setTotalPages(newTotalPages);
@@ -54,6 +56,16 @@ export default function ShowroomSection({
       replace ? setLoading(false) : setLoadingMore(false);
     }
   };
+
+  useEffect(() => { // ✅ inside component
+    const tabParam    = searchParams.get("tab");
+    const searchParam = searchParams.get("search");
+    const tabIdx      = tabParam !== null ? parseInt(tabParam) : initialTabIndex;
+
+    setActiveTabIndex(tabIdx);
+    setSearchQuery(searchParam || "");
+    fetchLocations({ tabIndex: tabIdx, page: 1, search: searchParam || "", replace: true });
+  }, []);
 
   const handleTabChange = (tabIndex) => {
     if (tabIndex === activeTabIndex) return;
@@ -84,8 +96,6 @@ export default function ShowroomSection({
       <div className="container">
 
         <div className="flex flex-wrap items-center justify-between w-full mb-[25px] xl:mb-[30px] 2xl:mb-[40px] 3xl:mb-[60px] max-md:gap-[20px]">
-
-          {/* Title */}
           <div className="w-full md:w-1/4">
             <Heading size="heading1" as="h2" className="text-black">
               {activeTab?.main_title}
@@ -94,7 +104,6 @@ export default function ShowroomSection({
 
           <div className="w-full md:w-3/4">
             <div className="flex flex-wrap gap-[20px] md:gap-[30px] xl:gap-[40px] 2xl:gap-[50px] 3xl:gap-[60px] w-full justify-between md:justify-end">
-
               {/* Search */}
               <div className="relative w-full sm:max-w-[300px] md:max-w-[260px] xl:max-w-[330px] 2xl:max-w-[390px] 3xl:max-w-[490px] h-[45px] md:h-[40px] 2xl:h-[44px] 3xl:h-[56px] bg-[#F8F9FD] rounded-[4px] overflow-hidden">
                 <input
@@ -136,7 +145,6 @@ export default function ShowroomSection({
                   </button>
                 ))}
               </div>
-
             </div>
           </div>
         </div>
@@ -167,40 +175,24 @@ export default function ShowroomSection({
                 </div>
                 {item.phone && (
                   <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] xl:my-[6px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
-                    <Image
-                      src="/images/icon-telephone-call.svg"
-                      alt="icon-telephone-call"
-                      width={18}
-                      height={18}
-                      className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain"
-                    />
+                    <Image src="/images/icon-telephone-call.svg" alt="icon-telephone-call" width={18} height={18} className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain" />
                     {parse(item.phone)}
                   </div>
                 )}
                 {item.timing && (
                   <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] xl:my-[6px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
-                    <Image
-                      src="/images/icon-clock.svg"
-                      alt="icon-clock"
-                      width={18}
-                      height={18}
-                      className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain"
-                    />
+                    <Image src="/images/icon-clock.svg" alt="icon-clock" width={18} height={18} className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain" />
                     {parse(item.timing)}
                   </div>
                 )}
-                {item.directionUrl && (
+                {item.directionUrl && item.directionUrl !== "#" && (
                   <Link
                     href={item.directionUrl}
-                    className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-none font-bold text-white w-max max-w-full h-[28.5] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[12px] xl:px-[16px] 2xl:px-[18px] 3xl:px-[23.3px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center gap-1 xl:gap-2 2xl:gap-3 hover:bg-[#005fd3] mt-5 2xl:mt-6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-none font-bold text-white w-max max-w-full py-2 px-[12px] xl:px-[16px] 2xl:px-[18px] 3xl:px-[23.3px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center gap-1 xl:gap-2 2xl:gap-3 hover:bg-[#005fd3] mt-5 2xl:mt-6"
                   >
-                    <Image
-                      src="/images/btn-loc.svg"
-                      alt="btn-loc"
-                      width={18}
-                      height={18}
-                      className="w-[14px] xl:w-[18px] 2xl:w-[22px] 3xl:w-[28px] object-contain"
-                    />
+                    <Image src="/images/btn-loc.svg" alt="btn-loc" width={18} height={18} className="w-[14px] xl:w-[18px] 2xl:w-[22px] 3xl:w-[28px] object-contain" />
                     Let's Go
                   </Link>
                 )}
