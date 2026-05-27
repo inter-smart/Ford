@@ -8,17 +8,6 @@ import {
 import { Heading } from "../layout/Heading";
 import { BookATestDriveForm } from "../form/BookATestDriveForm";
 
-const dialogT = {
-  en: {
-    title:       "Book a Test Drive",
-    description: "To book your Test Drive, complete all of the fields below and select your preferred booking date and time slot.",
-  },
-  ar: {
-    title:       "احجز تجربة قيادة",
-    description: "لحجز تجربة القيادة، يرجى تعبئة جميع الحقول أدناه واختيار التاريخ والوقت المفضلين.",
-  },
-};
-
 export default function BookATestDriveDialog({
   children,
   dealers = [],
@@ -27,10 +16,17 @@ export default function BookATestDriveDialog({
   prefillType = "",
   carOptions = [],
   lang = "en",
+  title = "",
+  description = "",
 }) {
   const [open, setOpen] = useState(false);
-  const dt    = dialogT[lang] ?? dialogT.en;
   const isRtl = lang === "ar";
+
+  const displayTitle = title || (lang === "ar" ? "احجز تجربة قيادة" : "Book a Test Drive");
+  const displayDescription = description || (lang === "ar"
+    ? "لحجز تجربة القيادة، يرجى تعبئة جميع الحقول أدناه واختيار التاريخ والوقت المفضلين."
+    : "To book your Test Drive, complete all of the fields below and select your preferred booking date and time slot."
+  );
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -41,8 +37,8 @@ export default function BookATestDriveDialog({
         dir={isRtl ? "rtl" : "ltr"}
       >
         <DialogHeader className="sr-only">
-          <DialogTitle>{dt.title}</DialogTitle>
-          <DialogDescription>{dt.description}</DialogDescription>
+          <DialogTitle>{displayTitle}</DialogTitle>
+          <DialogDescription>{displayDescription}</DialogDescription>
         </DialogHeader>
         <div className="w-full">
           <Heading
@@ -50,19 +46,19 @@ export default function BookATestDriveDialog({
             size="none"
             className="text-[20px] lg:text-[27px] xl:text-[33px] 2xl:text-[40px] 3xl:text-[50px] leading-tight font-semibold text-black mb-[5px] xl:mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px]"
           >
-            {dt.title}
+            {displayTitle}
           </Heading>
           <div className="typography [&_p]:last:mb-0 [--text-color:#000] mb-[10px] xl:mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px]">
-            <p>{dt.description}</p>
+            <p>{displayDescription}</p>
           </div>
-         <BookATestDriveForm
-  dealers={dealers}
-  pageTitle={pageTitle}
-  prefillModel={prefillModel}
-  prefillType={prefillType}
-  carOptions={carOptions}
-  lang={lang}
-/>
+          <BookATestDriveForm
+            dealers={dealers}
+            pageTitle={pageTitle}
+            prefillModel={prefillModel}
+            prefillType={prefillType}
+            carOptions={carOptions}
+            lang={lang}
+          />
         </div>
       </DialogContent>
     </Dialog>

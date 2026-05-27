@@ -11,10 +11,12 @@ async function getOfferDetail(slug, locale) {
 
 async function getFormOptions(locale) {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/offers-form?locale=${locale}`,
-      { next: { revalidate: 3600 } }
-    );
+    const isAr = locale === "ar";
+    const endpoint = isAr
+      ? `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/ar/offers-form`
+      : `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/offers-form`;
+
+    const res = await fetch(endpoint, { next: { revalidate: 3600 } });
     const json = await res.json();
     return json?.data || null;
   } catch (error) {

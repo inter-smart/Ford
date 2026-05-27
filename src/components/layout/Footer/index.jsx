@@ -55,7 +55,7 @@ const footerLink =
 const footerHeading =
   "text-[10px] xl:text-[11px] 2xl:text-[12px] 3xl:text-[14.6px] leading-normal font-medium tracking-tight uppercase text-[#666b9d] mb-[10px] xl:mb-[15px] 2xl:mb-[20px] 3xl:mb-[25px]";
 
-export default function Footer({ data, dealers = [], carOptions = [], lang = "en" }) {
+export default function Footer({ data, dealers = [], carOptions = [], lang = "en", testDriveFormData = null }) {
   if (!data) return null;
 
   const {
@@ -88,7 +88,14 @@ export default function Footer({ data, dealers = [], carOptions = [], lang = "en
             </div>
 
             <div className="w-[268px] xl:w-[300px] 2xl:w-[360px] 3xl:w-[400px]">
-              <BookATestDriveDialog dealers={dealers} pageTitle="Footer" carOptions={carOptions} lang={lang}>
+              <BookATestDriveDialog
+                dealers={dealers}
+                pageTitle="Footer"
+                carOptions={carOptions}
+                lang={lang}
+                title={testDriveFormData?.title || ""}
+                description={testDriveFormData?.short_description || ""}
+              >
                 <button className="text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
                   {test_drive_section.button_title}
                   <Image

@@ -11,10 +11,13 @@ async function getPageData(locale) {
 }
 
 
-async function getRaqFormData() {
+async function getRaqFormData(locale) {
   try {
+    const endpoint = locale === "ar"
+      ? `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/ar/request-a-quote-form`
+      : `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form`;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form`,
+      endpoint,
       { next: { revalidate: 3600 } }
     );
     const json = await res.json();
@@ -35,7 +38,7 @@ export default async function FleetPage({ params }) {
   const { locale } = await params;
   const [data, raqFormData] = await Promise.all([
     getPageData(locale),
-    getRaqFormData(),
+    getRaqFormData(locale),
   ]);
 
   const heroRaw    = data?.heroData?.[0];

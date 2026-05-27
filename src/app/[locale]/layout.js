@@ -88,9 +88,13 @@ async function getDealersData(locale) {
       getLocalizedEndpoint("test-drive-form", locale),
       { cache: CACHE.NO_STORE },
     );
-    return res?.data?.dealers || [];
+    return {
+      dealers: res?.data?.dealers || [],
+      title: res?.data?.title || "",
+      short_description: res?.data?.short_description || "",
+    };
   } catch {
-    return [];
+    return { dealers: [], title: "", short_description: "" };
   }
 }
 
@@ -121,12 +125,14 @@ export default async function RootLayout({ children, params }) {
   const { locale } = await params;
   const lang = locale === "ar" ? "ar" : "en";
 
-  const [headerData, footerData, dealers, carOptions] = await Promise.all([
+  const [headerData, footerData, testDriveFormData, carOptions] = await Promise.all([
     getHeaderData(locale),
     getFooterData(locale),
     getDealersData(locale),
     getCarOptions(locale),
   ]);
+
+  const dealers = testDriveFormData.dealers
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
@@ -137,6 +143,7 @@ export default async function RootLayout({ children, params }) {
           dealers={dealers}
           carOptions={carOptions}
           lang={lang}
+          testDriveFormData={testDriveFormData}
         />
         <main className="flex-grow">
           {children}
@@ -147,7 +154,9 @@ export default async function RootLayout({ children, params }) {
           dealers={dealers}
           carOptions={carOptions}
           lang={lang}
+          testDriveFormData={testDriveFormData}
         />
+
         <Script
           src="https://www.google.com/recaptcha/api.js?render=6LcnDSUsAAAAAPzuIuNcagH8xs8f_HIbB7_GYaBD"
           strategy="afterInteractive"

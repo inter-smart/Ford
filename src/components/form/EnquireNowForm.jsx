@@ -234,8 +234,12 @@ const inputClasses =
 const errorClass =
   "text-[10px] md:text-[10px] xl:text-[11px] 3xl:text-[12px] leading-normal font-normal text-red-500 mt-1";
 
-export function EnquireNowForm({ dealers = [], pageTitle = "", submitEndpoint = "" }) {
+export function EnquireNowForm({ dealers = [], pageTitle = "", submitEndpoint = "", lang = "en" }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const tr = t[lang] ?? t.en;
+  const isRtl = lang === "ar";
+  const formSchema = buildSchema(tr);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -325,12 +329,12 @@ async function onSubmit(data) {
   return (
     <>
     <RecaptchaScript />
-    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full" noValidate>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full" noValidate dir={isRtl ? "rtl" : "ltr"}>
       {/* Full Name */}
       <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           <FormBlock
-            item={{ name: "fullName", placeholder: "Name*" }}
+            item={{ name: "fullName", placeholder: tr.fullName }}
             form={form}
             isSubmitting={isSubmitting}
             onBlurTrim={handleBlurTrim}
@@ -342,13 +346,13 @@ async function onSubmit(data) {
       <div className="mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-5 2xl:gap-6 3xl:gap-8">
           <FormBlock
-            item={{ name: "email", placeholder: "Email*", type: "email" }}
+            item={{ name: "email", placeholder: tr.email, type: "email" }}
             form={form}
             isSubmitting={isSubmitting}
             onBlurTrim={handleBlurTrim}
           />
           <FormBlock
-            item={{ name: "phone", placeholder: "Phone*" }}
+            item={{ name: "phone", placeholder: tr.phone }}
             form={form}
             isSubmitting={isSubmitting}
             onBlurTrim={handleBlurTrim}
@@ -362,7 +366,7 @@ async function onSubmit(data) {
           <FormBlock
             item={{
               name: "selectDealer",
-              placeholder: "Select Dealer*",
+              placeholder: tr.selectDealer,
               type: "select",
               options: dealers.map((d) => d.dealer),
             }}
@@ -383,7 +387,7 @@ async function onSubmit(data) {
                 <FieldLabel className="sr-only">Message</FieldLabel>
                 <Textarea
                   {...field}
-                  placeholder="Message"
+                  placeholder={tr.message}
                   className={cn(
                     inputClasses,
                     "min-h-[50px] xl:min-h-[68px] 2xl:min-h-[70px] 3xl:min-h-[90px]"
@@ -467,8 +471,7 @@ async function onSubmit(data) {
                   htmlFor="agreeToTerms"
                   className={cn(labelClasses, "cursor-pointer leading-normal")}
                 >
-                  I agree to the terms and conditions and privacy policy of this
-                  website.
+                  {tr.agreeLabel}
                 </Label>
               </div>
               {fieldState.invalid && (
@@ -489,7 +492,7 @@ async function onSubmit(data) {
           disabled={isSubmitting}
           className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-[1] font-bold text-white w-full max-w-[130px] xl:max-w-[143px] 2xl:max-w-[172px] 3xl:max-w-[214px] h-[30.5px] xl:h-[35.5px] 2xl:h-[42.6px] 3xl:h-[53.4px] p-2 rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center"
         >
-          {isSubmitting ? "Submitting..." : "Submit Request"}
+          {isSubmitting ? tr.submitting : tr.submit}
         </button>
       </div>
     </form>

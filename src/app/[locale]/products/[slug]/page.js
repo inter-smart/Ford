@@ -39,16 +39,23 @@ async function getPageData(slug, locale) {
 async function getDealersData(locale) {
   try {
     const res = await apiFetch(getLocalizedEndpoint("test-drive-form", locale), { cache: CACHE.ISR(3600) });
-    return res?.data?.dealers ?? [];
+    return {
+      dealers: res?.data?.dealers ?? [],
+      title: res?.data?.title || "",
+      short_description: res?.data?.short_description || "",
+    };
   } catch {
-    return [];
+    return { dealers: [], title: "", short_description: "" };
   }
 }
 
-async function getRaqFormData() {
+async function getRaqFormData(locale) {
   try {
+    const endpoint = locale === "ar"
+      ? `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/ar/request-a-quote-form`
+      : `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form`;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/request-a-quote-form`,
+      endpoint,
       { next: { revalidate: 3600 } }
     );
     const json = await res.json();
@@ -66,7 +73,8 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { slug, locale } = await params;
-  const [res, dealers, raqFormData] = await Promise.all([getPageData(slug, locale), getDealersData(locale), getRaqFormData()]);
+  const [res, testDriveFormData, raqFormData] = await Promise.all([getPageData(slug, locale), getDealersData(locale), getRaqFormData(locale)]);
+  const dealers = testDriveFormData.dealers;
   const data = res?.data;
 
   if (!data) return <div className="text-center py-20">Car not found.</div>;
@@ -108,7 +116,7 @@ export default async function Page({ params }) {
       )}
 
       {about?.enabled && (
-        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} pageTitle={data.modelName} modelName={data.modelName} modelCategory={data.modelCategory} lang={lang} />
+        <AboutVehicleSection data={about} badge={data.badge} dealers={dealers} pageTitle={data.modelName} modelName={data.modelName} modelCategory={data.modelCategory} lang={lang} testDriveFormData={testDriveFormData} />
       )}
 
       {spec?.enabled && <SpecificationSection data={spec} />}
