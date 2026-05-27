@@ -18,6 +18,21 @@ const normalizeLocation = (loc, idx) => ({
   directionUrl: loc.map_url || "#",
 });
 
+function InfoItem({ type = "default", icon, alt, text }) {
+  return (
+    <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] sm:my-[6px] xl:my-[8px] 2xl:my-[10px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
+      <Image
+        src={icon}
+        alt={alt}
+        width={18}
+        height={18}
+        className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain"
+      />
+      {type === "tel" ? <a href={`tel:${text}`}>{text}</a> : parse(text)}
+    </div>
+  );
+}
+
 export default function ShowroomSection({
   tabs = [],
   initialTabIndex = 0,
@@ -26,12 +41,12 @@ export default function ShowroomSection({
 }) {
   const searchParams = useSearchParams(); // ✅ inside component
   const [activeTabIndex, setActiveTabIndex] = useState(initialTabIndex);
-  const [rawLocations,   setRawLocations]   = useState(initialLocations);
-  const [loading,        setLoading]        = useState(false);
-  const [loadingMore,    setLoadingMore]    = useState(false);
-  const [searchQuery,    setSearchQuery]    = useState("");
-  const [page,           setPage]           = useState(1);
-  const [totalPages,     setTotalPages]     = useState(initialTotalPages);
+  const [rawLocations, setRawLocations] = useState(initialLocations);
+  const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(initialTotalPages);
   const debounceRef = useRef(null);
 
   const fetchLocations = async ({ tabIndex, page, search, replace }) => {
@@ -40,14 +55,17 @@ export default function ShowroomSection({
       const params = new URLSearchParams({ page, pageSize: 12 });
       if (search) params.set("search", search);
 
-      const json = await apiFetch(
-        `${ENDPOINTS.showroomTab}/${tabIndex}?${params}`,
-        { cache: CACHE.NO_STORE }
-      );
-      const newLocations  = json?.data?.location_details ?? [];
-      const newTotalPages = json?.meta?.totalPages        ?? 1; // ✅ fixed key
+    const json = await apiFetch(
+      `${ENDPOINTS.showroomTab}/${tabIndex}?${params}`,
+      { cache: CACHE.NO_STORE },
+    );
 
-      setRawLocations(prev => replace ? newLocations : [...prev, ...newLocations]);
+    const newLocations = json?.data?.location_details ?? [];
+    const newTotalPages = json?.meta?.totalPages ?? 1;
+
+      setRawLocations((prev) =>
+        replace ? newLocations : [...prev, ...newLocations],
+      );
       setTotalPages(newTotalPages);
       setPage(page);
     } catch (_) {
@@ -80,12 +98,22 @@ export default function ShowroomSection({
     setSearchQuery(value);
     clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
-      fetchLocations({ tabIndex: activeTabIndex, page: 1, search: value, replace: true });
+      fetchLocations({
+        tabIndex: activeTabIndex,
+        page: 1,
+        search: value,
+        replace: true,
+      });
     }, 400);
   };
 
   const loadMore = () => {
-    fetchLocations({ tabIndex: activeTabIndex, page: page + 1, search: searchQuery, replace: false });
+    fetchLocations({
+      tabIndex: activeTabIndex,
+      page: page + 1,
+      search: searchQuery,
+      replace: false,
+    });
   };
 
   const activeTab = tabs.find((t) => t.tab_index === activeTabIndex);
@@ -94,14 +122,12 @@ export default function ShowroomSection({
   return (
     <section className="relative py-[40px] md:py-[55px_70px] xl:py-[70px_80px] 2xl:py-[85px] 3xl:py-[110px_120px]">
       <div className="container">
-
         <div className="flex flex-wrap items-center justify-between w-full mb-[25px] xl:mb-[30px] 2xl:mb-[40px] 3xl:mb-[60px] max-md:gap-[20px]">
           <div className="w-full md:w-1/4">
             <Heading size="heading1" as="h2" className="text-black">
               {activeTab?.main_title}
             </Heading>
           </div>
-
           <div className="w-full md:w-3/4">
             <div className="flex flex-wrap gap-[20px] md:gap-[30px] xl:gap-[40px] 2xl:gap-[50px] 3xl:gap-[60px] w-full justify-between md:justify-end">
               {/* Search */}
@@ -135,10 +161,10 @@ export default function ShowroomSection({
                     type="button"
                     onClick={() => handleTabChange(tab.tab_index)}
                     className={cn(
-                      "text-[12px] sm:text-[14px] xl:text-[16px] 2xl:text-[19px] 3xl:text-[24px] leading-none rounded-full whitespace-nowrap h-[30px] xl:h-[35px] 2xl:h-[42px] 3xl:h-[53px] px-[15px] xl:px-[22px] 2xl:px-[26px] 3xl:px-[32px] border flex items-center justify-center transition-all duration-300 cursor-pointer",
+                      "text-[12px] sm:text-[14px] xl:text-[16px] 2xl:text-[19.2px] 3xl:text-[24px] leading-none font-normal capitalize rounded-full h-[30px] xl:h-[35.5px] 2xl:h-[42.5px] 3xl:h-[53.3px] p-[5px_15px] xl:p-[7px_24px] 2xl:p-[7px_26px] 3xl:p-[8px_32px] bg-white border flex items-center justify-center transition-all duration-300",
                       activeTabIndex === tab.tab_index
-                        ? "font-semibold text-black border-[#008dd2] bg-white"
-                        : "font-normal border-transparent text-black hover:text-[#008dd2]"
+                        ? "font-semibold text-black border-[#008dd2]"
+                        : "border-white text-black hover:text-[#008dd2]",
                     )}
                   >
                     {tab.tab_title}
@@ -150,55 +176,75 @@ export default function ShowroomSection({
         </div>
 
         {/* Location Cards */}
-        <div className={cn(
-          "relative flex flex-wrap rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden border-t-[1px] border-l-[1px] border-[#c4c4c4] transition-opacity duration-200",
-          loading && "opacity-50"
-        )}>
+        <div
+          className={cn(
+            "relative transition-opacity duration-200",
+            loading && "opacity-50",
+          )}
+        >
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center z-10">
               <div className="w-8 h-8 border-[3px] border-[#008dd2] border-t-transparent rounded-full animate-spin" />
             </div>
           )}
           {!loading && locations.length === 0 && (
-            <div className="w-full border-r-[1px] border-b-[1px] border-[#c4c4c4] py-[40px] text-center text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#888]">
+            <div className="w-full py-[40px] text-center text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#888]">
               No results found
             </div>
           )}
-          {locations.map((item, idx) => (
-            <div key={"branch" + idx} className="w-full sm:w-1/2 lg:w-1/4">
-              <div className="w-full h-full border-r-[1px] border-b-[1px] border-[#c4c4c4] p-[18px_15px] sm:p-[20px_18px] xl:p-[25px_30px] 2xl:p-[30px_35px] 3xl:p-[38px_44px]">
-                <div className="text-[14px] xl:text-[17.7px] 2xl:text-[21.3px] 3xl:text-[26.6px] leading-normal font-normal text-[#434343] mb-[4px] xl:mb-[6px] 2xl:mb-[8px]">
-                  {item.title}
-                </div>
-                <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343]">
-                  {parse(item.description)}
-                </div>
-                {item.phone && (
-                  <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] xl:my-[6px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
-                    <Image src="/images/icon-telephone-call.svg" alt="icon-telephone-call" width={18} height={18} className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain" />
-                    {parse(item.phone)}
+
+          <div className="flex flex-wrap rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px]">
+            {locations?.map((item, idx) => {
+              return (
+                <div key={"branch" + idx} className="w-full sm:w-1/2 lg:w-1/4">
+                  <div className="w-full h-full border-[1px] border-[#c4c4c4] p-[18px_15px] sm:p-[20px_18px] xl:p-[25px_30px] 2xl:p-[30px_35px] 3xl:p-[38px_44px]">
+                    <div className="text-[14px] xl:text-[17.7px] 2xl:text-[21.3px] 3xl:text-[26.6px] leading-normal font-normal text-[#434343] mb-[4px] xl:mb-[6px] 2xl:mb-[8px]">
+                      {item?.title}
+                    </div>
+
+                    <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343]">
+                      {parse(item?.description)}
+                    </div>
+
+                    {item?.phone && (
+                      <InfoItem
+                        type="tel"
+                        icon="/images/icon-telephone-call.svg"
+                        alt="icon-telephone-call"
+                        text={item.phone}
+                      />
+                    )}
+
+                    {item?.timing && (
+                      <InfoItem
+                        icon="/images/icon-clock.svg"
+                        alt="icon-clock"
+                        text={item.timing}
+                      />
+                    )}
+
+                    {item?.directionUrl && item?.directionUrl !== "#" && (
+                      <Link
+                        href={item?.directionUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-none font-bold text-white w-max max-w-full h-[28.5] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[12px] xl:px-[16px] 2xl:px-[18px] 3xl:px-[23.3px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center gap-1 xl:gap-2 2xl:gap-3 hover:bg-[#005fd3] mt-5 2xl:mt-6"
+                      >
+                        <Image
+                          src="/images/btn-loc.svg"
+                          alt="btn-loc"
+                          width={18}
+                          height={18}
+                          className="w-[14px] xl:w-[18px] 2xl:w-[22px] 3xl:w-[28px] object-contain"
+                        />
+                        Let&apos;s Go
+                      </Link>
+                    )}
                   </div>
-                )}
-                {item.timing && (
-                  <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] xl:my-[6px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
-                    <Image src="/images/icon-clock.svg" alt="icon-clock" width={18} height={18} className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain" />
-                    {parse(item.timing)}
-                  </div>
-                )}
-                {item.directionUrl && item.directionUrl !== "#" && (
-                  <Link
-                    href={item.directionUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-none font-bold text-white w-max max-w-full py-2 px-[12px] xl:px-[16px] 2xl:px-[18px] 3xl:px-[23.3px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center gap-1 xl:gap-2 2xl:gap-3 hover:bg-[#005fd3] mt-5 2xl:mt-6"
-                  >
-                    <Image src="/images/btn-loc.svg" alt="btn-loc" width={18} height={18} className="w-[14px] xl:w-[18px] 2xl:w-[22px] 3xl:w-[28px] object-contain" />
-                    Let's Go
-                  </Link>
-                )}
-              </div>
-            </div>
-          ))}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Load More */}
@@ -213,7 +259,6 @@ export default function ShowroomSection({
             </button>
           </div>
         )}
-
       </div>
     </section>
   );

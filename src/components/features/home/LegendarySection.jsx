@@ -167,17 +167,17 @@ export default function LegendarySection({ data = {} }) {
           Discover Ford's Legendary Line up
         </Heading>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
+        <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10">
           {/* Sidebar */}
-          <div className="w-full 2xl:w-[200px] lg:w-[160px] flex flex-wrap lg:flex-col m-[-3px] lg:my-[-7px]">
+          <div className="w-full 2xl:w-[200px] lg:w-[160px] flex flex-wrap lg:flex-col m-[-2px] sm:m-[-3px] lg:my-[-7px]">
             {categories.map((item, index) => (
               <div
                 key={"categories" + index}
-                className="lg:w-full p-[3px] lg:py-[7px]"
+                className="lg:w-full p-[2px] sm:p-[3px] lg:py-[7px]"
               >
                 <button
                   onClick={() => setSelectedCategory(item.name)}
-                  className={`group 2xl:text-[14px] xl:text-[12px] 3xs:text-[11px] text-[10px] leading-none text-black h-[35px] lg:h-[40px] w-full flex items-center gap-2 px-4 py-2 rounded-full
+                  className={`group 2xl:text-[14px] xl:text-[12px] 3xs:text-[11px] text-[10px] leading-none text-black h-[30px] lg:h-[40px] w-full flex items-center gap-2 px-4 py-2 rounded-full
                     border border-[#E8E8E8] transition-all cursor-pointer ${
                       selectedCategory === item.name
                         ? "bg-[#1577F0] text-white font-semibold"
@@ -232,9 +232,9 @@ export default function LegendarySection({ data = {} }) {
                         alt={brand.name}
                         width={80}
                         height={50}
-                        className="max-w-[90px] mb-[10px] object-contain"
+                        className="max-w-[70px] lg:max-w-[90px] mb-[5px] lg:mb-[10px] object-contain"
                       />
-                      <span className="text-[14px] 2xl:text-[16px] font-normal group-data-[state=active]:font-semibold text-[#00142E] w-full text-start">
+                      <span className="text-[12px] lg:text-[14px] 2xl:text-[16px] font-normal group-data-[state=active]:font-semibold text-[#00142E] w-full text-start">
                         {brand.name}
                       </span>
                     </TabsTrigger>
@@ -245,7 +245,7 @@ export default function LegendarySection({ data = {} }) {
                   {currentCar && (
                     <>
                       {/* <div className="flex flex-col ltr:sm:flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full"> */}
-                      <div className="flex flex-row rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
+                      <div className="flex flex-col rtl:sm:flex-row-reverse justify-between gap-2 xl:gap-4 2xl:gap-6 sm:absolute top-0 left-0 rtl:text-right w-full">
                         <div className="sm:w-1/3">
                           <Heading
                             size="heading1"
@@ -289,7 +289,7 @@ export default function LegendarySection({ data = {} }) {
                           </div>
                           {/* Mini video/image preview */}
                           {isVisible && currentCar.video && (
-                            <div className="absolute 2xl:top-[130px] top-[40%] sm:top-[100px] ltr:right-0 rtl:left-0 ltr:sm:right-[100px] rtl:xs:left-[50px] rtl:sm:left-[100px] w-full 2xl:max-w-[230px] lg:max-w-[200px] max-w-[150px] shadow-md">
+                            <div className="absolute z-1 sm:-z-1 top-[25%] sm:top-[100px] 2xl:top-[130px] ltr:left-0 ltr:sm:right-[100px] rtl:left-0 rtl:sm:left-[100px] w-full max-w-[120px] sm:max-w-[140px] lg:max-w-[200px] 2xl:max-w-[230px] shadow-md">
                               <div className="relative">
                                 <div className="rounded-md w-full h-full overflow-hidden relative">
                                   <video
@@ -307,11 +307,11 @@ export default function LegendarySection({ data = {} }) {
                                 </div>
                                 <button
                                   onClick={() => setIsVisible(false)}
-                                  className="w-[20px] h-[20px] rounded-full bg-[#D9D9D9] p-[6px] flex items-center justify-center absolute top-[-18px] right-[-18px] hover:bg-[#00095b] group hover:text-white cursor-pointer"
+                                  className="w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] rounded-full bg-[#D9D9D9] p-[4px] lg:p-[6px] flex items-center justify-center absolute top-[-10px] lg:top-[-10px] right-[-15px] lg:right-[-18px] hover:bg-[#00095b] group hover:text-white cursor-pointer"
                                 >
                                   <svg
                                     viewBox="0 0 329.26933 329"
-                                    className="group-hover:fill-white w-4 h-4"
+                                    className="group-hover:fill-white w-full h-full"
                                   >
                                     <path d="M194.8 164.77l128.21-128.21c8.34-8.34 8.34-21.82 0-30.16s-21.82-8.34-30.16 0L164.64 134.61 36.43 6.4C28.09-1.94 14.6-1.94 6.26 6.4s-8.34 21.82 0 30.16l128.21 128.21L6.26 293.19c-8.34 8.34-8.34 21.82 0 30.16a21.3 21.3 0 0 0 30.16 0l128.21-128.21 128.21 128.21a21.3 21.3 0 0 0 30.16 0c8.34-8.34 8.34-21.82 0-30.16L194.8 164.77z" />
                                   </svg>
@@ -322,7 +322,7 @@ export default function LegendarySection({ data = {} }) {
                         </div>
                       </div>
                       {/* Big car image */}
-                      <div className="relative mt-5 sm:mt-10 xl:mt-15 pointer-events-none 3xl:max-w-[850px] xl:max-w-[650px] lg:max-w-[600px] max-w-[550px] m-auto sm:pt-[40px] 2xl:pt-[60px] 3xl:pt-[80px]">
+                      <div className="relative mt-6 sm:mt-10 xl:mt-15 pointer-events-none max-w-[550px] lg:max-w-[600px] xl:max-w-[650px] 3xl:max-w-[850px] aspect-[850/444] m-auto sm:pt-[40px] 2xl:pt-[60px] 3xl:pt-[80px]">
                         <Image
                           src={
                             selectedColorImage ||
@@ -335,7 +335,7 @@ export default function LegendarySection({ data = {} }) {
                           className="w-full max-w-5xl mx-auto object-contain z-1"
                         />
                         {currentCar.modelLogo && (
-                          <div className="absolute z-[-1] top-[-5%] xl:top-[-10%] 2xl:top-[-15%] left-0 right-0 m-auto w-full max-w-[150px] xl:max-w-[300px] 2xl:max-w-[350px]">
+                          <div className="absolute z-[-1] top-[-5%] xl:top-[-10%] 2xl:top-[-15%] left-0 right-0 m-auto w-full max-w-[100px] lg:max-w-[140px] xl:max-w-[300px] 2xl:max-w-[350px]">
                             <Image
                               src={currentCar.modelLogo}
                               alt={currentCar.modelLogoAlt}
@@ -349,7 +349,7 @@ export default function LegendarySection({ data = {} }) {
                       </div>
 
                       {/* Colors */}
-                      <div className="2xl:mt-[50px] sm:mt-[30px] mt-[30px]">
+                      <div className="mt-[20px] sm:mt-[30px] 2xl:mt-[50px]">
                         <div className="w-fit flex ltr:items-end rtl:items-start gap-2 flex-wrap mx-auto">
                           {currentCar.colors.length > 0 ? (
                             currentCar.colors.map((color, i) => {

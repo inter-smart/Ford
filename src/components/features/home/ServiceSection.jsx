@@ -16,7 +16,7 @@ export default function ServiceSection({ data }) {
     <section className="w-full relative bg-[#00095B] z-0 overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:bg-white before:xl:h-[30%] before:h-[25%] before:z-[-1]">
       <div className="container">
         <Swiper
-          slidesPerView={1}
+          slidesPerView={1.2}
           spaceBetween={10}
           breakpoints={{
             478: { slidesPerView: 2, pagination: false, spaceBetween: 15 },
@@ -52,28 +52,41 @@ export default function ServiceSection({ data }) {
                       : "max-sm:bg-[#0A1572] hover:bg-[#0A1572]"
                   }`}
                 >
-                  <div className="w-full rounded-[10px] 2xl:pt-[150px] sm:pt-[110px] pt-[130px] overflow-hidden mb-[15px] relative">
-                    <div className="w-full aspect-ratio-[280/170]">
-                      <video
-                        autoPlay
-                        preload="auto"
-                        width={250}
-                        height={150}
-                        muted
-                        loop
-                        playsInline
-                        className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-300 z-10 ${
-                          isActive
-                            ? "sm:opacity-100"
-                            : "sm:opacity-0 group-hover:opacity-100 "
-                        }`}
-                      >
-                        <source
-                          src={item?.video_service?.url}
-                          type="video/mp4"
+                  <div className="w-full rounded-[10px] 2xl:pt-[150px] sm:pt-[110px] pt-[130px] overflow-hidden mb-[15px] relative z-0">
+                    <div
+                      className={cn(
+                        "w-full aspect-ratio-[280/170] absolute z-0 inset-0 transition-opacity duration-300",
+                        isActive
+                          ? "sm:opacity-100"
+                          : "sm:opacity-0 group-hover:opacity-100 ",
+                      )}
+                    >
+                      {item?.video_service?.url ? (
+                        <video
+                          autoPlay
+                          preload="auto"
+                          width={250}
+                          height={150}
+                          muted
+                          loop
+                          playsInline
+                          className="w-full h-full object-cover"
+                        >
+                          <source
+                            src={item?.video_service?.url}
+                            type="video/mp4"
+                          />
+                          Your browser does not support the video tag.
+                        </video>
+                      ) : (
+                        <Image
+                          src="/images/placeholder.png"
+                          alt="placeholder"
+                          width={250}
+                          height={150}
+                          className="w-full h-full object-cover"
                         />
-                        Your browser does not support the video tag.
-                      </video>
+                      )}
                     </div>
 
                     <div className="2xl:w-[50px] w-[40px] 2xl:h-[50px] h-[40px] max-sm:hidden flex items-center relative">
@@ -108,34 +121,27 @@ export default function ServiceSection({ data }) {
                     >
                       {item?.description_service}
                     </Text>
-                    {/* <Link
-                      href={item?.button_service?.button_link_service?.url}
-                      target={item?.button_service?.button_link_service?.target}
-                      className={`2xl:text-[14px] xl:text-[12px] text-[10px] font-normal text-white max-w-[135px] 2xl:h-[40px] h-[35px] flex items-center justify-center border border-white px-2 rounded-full transition cursor-pointer max-sm:m-auto ${
-                        isActive
-                          ? "opacity-100 text-[#1A73E8]"
-                          : "sm:opacity-0 group-hover:opacity-100"
-                      }`}
-                    >
-                      {item?.button_service?.button_text_service}
-                    </Link> */}
-                    <Link
-                      href={item?.button_service?.button_link_service?.url}
-                      target={item?.button_service?.button_link_service?.target}
-                      className={cn(
-                        "text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center sm:justify-start gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider",
-                        isActive ? "opacity-100" : "opacity-0",
-                      )}
-                    >
-                      {item?.button_service?.button_text_service}
-                      <Image
-                        src="/images/footer-btn-icon.svg"
-                        alt="fleet-icon"
-                        width={8}
-                        height={14}
-                        className="w-[4.5px] 2xl:w-[6px] 3xl:w-[7px] block rtl:-scale-x-100"
-                      />
-                    </Link>
+                    {item?.button_service?.button_link_service?.url && (
+                      <Link
+                        href={item?.button_service?.button_link_service?.url}
+                        target={
+                          item?.button_service?.button_link_service?.target
+                        }
+                        className={cn(
+                          "text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center sm:justify-start gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider",
+                          isActive ? "opacity-100" : "opacity-0",
+                        )}
+                      >
+                        {item?.button_service?.button_text_service}
+                        <Image
+                          src="/images/footer-btn-icon.svg"
+                          alt="fleet-icon"
+                          width={8}
+                          height={14}
+                          className="w-[4.5px] 2xl:w-[6px] 3xl:w-[7px] block rtl:-scale-x-100"
+                        />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </SwiperSlide>

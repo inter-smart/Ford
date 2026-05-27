@@ -42,7 +42,7 @@ export default async function Page({ params }) {
   const galleryRaw = data?.gallery?.[0];
   const motorcraftRaw = data?.motorcraft?.[0];
   const whyMotoRaw = data?.whymotorcraft?.[0];
-  const branchRaw = data?.branch;
+  const branchRaw = data?.branch?.[0];
 
   return (
     <>
@@ -164,7 +164,25 @@ export default async function Page({ params }) {
         />
       )}
 
-      {branchRaw && <ServiceBranchDirectory data={branchRaw} />}
+      {branchRaw?.enable__disable_branch_parts && (
+        <ServiceBranchDirectory
+          // data={{
+          //   title: branchRaw.title,
+          //   cards: branchRaw.branches,
+          // }}
+          data={{
+            title: branchRaw.title,
+            cards: branchRaw.branches?.map((b, idx) => ({
+              id: idx + 1,
+              title: b.name,
+              description: `<p>${b.address}</p>`,
+              phone: b.phone,
+              timing: b.time,
+              directionUrl: b.direction?.url || "#",
+            })) ?? [],
+          }}
+        />
+      )}
     </>
   );
 }

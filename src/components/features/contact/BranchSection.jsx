@@ -2,7 +2,7 @@ import Link from "next/link";
 import parse from "html-react-parser";
 import Image from "next/image";
 
-function InfoItem({ icon, alt, text }) {
+function InfoItem({ type = "default", icon, alt, text }) {
   return (
     <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343] hover:text-black my-[4px] sm:my-[6px] xl:my-[8px] 2xl:my-[10px] flex items-center gap-2 2xl:gap-3 3xl:gap-4">
       <Image
@@ -12,7 +12,7 @@ function InfoItem({ icon, alt, text }) {
         height={18}
         className="w-[12px] xl:w-[14px] 2xl:w-[18px] 3xl:w-[20px] object-contain"
       />
-      {parse(text)}
+      {type === "tel" ? <a href={`tel:${text}`}>{text}</a> : parse(text)}
     </div>
   );
 }
@@ -37,6 +37,7 @@ export default function BranchSection({ data }) {
                   </div>
                   {item?.phone_number && (
                     <InfoItem
+                      type="tel"
                       icon="/images/icon-telephone-call.svg"
                       alt="icon-telephone-call"
                       text={item.phone_number}
@@ -52,6 +53,7 @@ export default function BranchSection({ data }) {
                   {item?.map_url && (
                     <Link
                       href={item?.map_url}
+                      target="_blank"
                       className="text-[10px] xl:text-[12px] 2xl:text-[14.5px] 3xl:text-[18px] leading-none font-bold text-white w-max max-w-full h-[28.5] xl:h-[35.5] 2xl:h-[42.6] 3xl:h-[53.4] py-2 px-[12px] xl:px-[16px]  2xl:px-[18px] 3xl:px-[23.3px] rounded-full bg-[#066FEF] cursor-pointer transition-all flex items-center justify-center gap-1 xl:gap-2 2xl:gap-3 hover:bg-[#005fd3] mt-5 2xl:mt-6"
                     >
                       <Image

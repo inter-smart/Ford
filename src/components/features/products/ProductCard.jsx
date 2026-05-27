@@ -4,7 +4,10 @@ import Image from "next/image";
 export default function ProductCard({ item }) {
   return (
     <div className="w-full h-full block group">
-      <div className="w-full h-auto aspect-[420/260] mb-[10px] sm:mb-[15px] 2xl:mb-[20px] rounded-[5px] lg:rounded-[8px] 2xl:rounded-[10px] overflow-hidden block relative z-0">
+      <Link
+        href={`/products/${item?.slug}`}
+        className="w-full h-auto aspect-[420/260] mb-[10px] sm:mb-[15px] 2xl:mb-[20px] rounded-[5px] lg:rounded-[8px] 2xl:rounded-[10px] overflow-hidden block relative z-0"
+      >
         <Image
           src={item?.car_image?.path || "/images/placeholder.png"}
           alt={item?.car_image?.alt || "Car"}
@@ -19,7 +22,7 @@ export default function ProductCard({ item }) {
             </div>
           </div>
         )}
-      </div>
+      </Link>
       <div className="w-full h-auto flex items-center [&>*]:w-[50%]">
         <div className="text-[12px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-semibold text-black">
           {item?.modelName}

@@ -17,6 +17,12 @@ export default function GallerySection({ data }) {
 
     return groups;
   });
+
+  // TEMP: duplicate to get >8 slides for pagination testing — remove after fix
+  // const displaySlides =
+  //   groupedSlides && groupedSlides.length <= 8
+  //     ? Array.from({ length: 3 }, () => groupedSlides).flat()
+  //     : groupedSlides;
   return (
     <section className="relative w-full h-auto block py-[20px] xl:py-[30px] 2xl:py-[40px] 3xl:py-[50px] ">
       <div className="container">
@@ -34,49 +40,39 @@ export default function GallerySection({ data }) {
             navigation
             modules={[Navigation]}
             className="gallery-slider !h-full
-                        [&_.swiper-button-prev]:!w-[38px]
-                        [&_.swiper-button-prev]:!h-[38px]
                         [&_.swiper-button-prev]:rounded-full
                         [&_.swiper-button-prev]:bg-white
                         [&_.swiper-button-prev]:text-black
                         [&_.swiper-button-prev]:shadow-lg
-                        [&_.swiper-button-prev]:!left-[-15px]
+                        [&_.swiper-button-prev]:!left-[10px]
                         [&_.swiper-button-prev]:!top-[49%]
                         [&_.swiper-button-prev]:transition-all
-                        [&_.swiper-button-prev:hover]:bg-[#1A73E8]
-                        [&_.swiper-button-prev:hover]:text-white
                          [&_.swiper-button-prev_svg]:max-w-[20%]
                         [&_.swiper-button-next_svg]:max-w-[20%]
 
-                        [&_.swiper-button-next]:!w-[38px]
-                        [&_.swiper-button-next]:!h-[38px]
                         [&_.swiper-button-next]:rounded-full
                         [&_.swiper-button-next]:bg-white
                         [&_.swiper-button-next]:text-black
                         [&_.swiper-button-next]:shadow-lg
-                        [&_.swiper-button-next]:!right-[-15px]
+                        [&_.swiper-button-next]:!right-[10px]
                          [&_.swiper-button-next]:!top-[49%]
                         [&_.swiper-button-next]:transition-all
-                        [&_.swiper-button-next:hover]:bg-[#1A73E8]
-                        [&_.swiper-button-next:hover]:text-white
 
                         [&_.swiper-button-prev:after]:text-[14px]
                         [&_.swiper-button-next:after]:text-[14px]
 
-                        xl:[&_.swiper-button-prev]:w-[55px]
-                        xl:[&_.swiper-button-prev]:h-[55px]
-                        xl:[&_.swiper-button-next]:w-[55px]
-                        xl:[&_.swiper-button-next]:h-[55px]
+                        [--swiper-navigation-size:35px]
+                        xl:[--swiper-navigation-size:50px]
 
                         xl:[&_.swiper-button-prev:after]:text-[18px]
                         xl:[&_.swiper-button-next:after]:text-[18px]"
           >
             {groupedSlides?.map((images, slideIndex) => (
               <SwiperSlide key={slideIndex}>
-                <div className="relative  h-full flex flex-wrap -my-[4px] sm:-my-[7px] lg:-my-[10px] 2xl:-my-[15px] 3xl:-my-[20px] -mx-[4px] sm:-mx-[7px] lg:-mx-[10px] 2xl:-mx-[15px] 3xl:-mx-[20px] [&>*]:p-[4px]  [&>*]:sm:p-[7px] [&>*]:lg:p-[10px] [&>*]:2xl:p-[15px] [&>*]:3xl:p-[20px]">
+                <div className="relative  h-full flex flex-wrap -my-[4px] sm:-my-[7px] lg:-my-[10px] 2xl:-my-[15px] 3xl:-my-[20px] -mx-[4px] sm:-mx-[6px] lg:-mx-[8px] 2xl:-mx-[14px] 3xl:-mx-[18px] [&>*]:p-[4px] [&>*]:sm:p-[6px] [&>*]:lg:p-[8px] [&>*]:2xl:p-[14px] [&>*]:3xl:p-[18px]">
                   {/* Large Top Image */}
                   <div className="w-full h-1/2">
-                    <div className="w-full h-full rounded-[12px] overflow-hidden aspect-[1745/645]">
+                    <div className="w-full h-full rounded-[8.8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden aspect-[1745/620]">
                       <Image
                         src={images?.[0]?.url}
                         alt={images?.[0]?.alt}
@@ -93,7 +89,7 @@ export default function GallerySection({ data }) {
                       key={"gallery" + index}
                       className="w-1/3  grow-1 h-1/2"
                     >
-                      <div className="w-full h-full rounded-[12px] overflow-hidden aspect-[555/645]">
+                      <div className="w-full h-full rounded-[8.8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] overflow-hidden aspect-[420/520]">
                         <Image
                           src={image?.url}
                           alt={image?.alt}

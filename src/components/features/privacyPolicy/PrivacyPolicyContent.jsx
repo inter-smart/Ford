@@ -13,7 +13,7 @@ export default function PrivacyPolicyContent({ data }) {
         >
           {parse(data?.title || "")}
         </Heading>
-        <div className="typography [--text-color:#000] [&_p]:text-[#434343] [&_:is(h1,h2,h3,h4,h5,h6)]:my-[15px] sm:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[18px] xl:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[22px] 2xl:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[28px] 3xl:[&_:is(h1,h2,h3,h4,h5,h6)]:my-[35px] [&_li]:list-image-none [&_li]:list-disc">
+        <div className="typography [--text-color:#000] [&_p]:text-[#434343] [&_:is(h1,h2,h3,h4,h5,h6,p)]:mb-[15px] sm:[&_:is(h1,h2,h3,h4,h5,h6,p)]:mb-[18px] xl:[&_:is(h1,h2,h3,h4,h5,h6,p)]:mb-[22px] 2xl:[&_:is(h1,h2,h3,h4,h5,h6,p)]:mb-[28px] 3xl:[&_:is(h1,h2,h3,h4,h5,h6,p)]:mb-[35px]">
           <ParsedContent html={data?.description} />
         </div>
       </div>
