@@ -36,14 +36,11 @@ const t = {
     emailTooLong: "Email is too long",
     emailInvalid: "Invalid email address",
     phoneRequired: "Phone number is required",
-    phoneLength: "Phone number must be between 10 and 20 characters",
-    phoneFormat: "Phone number format is invalid",
-    phonePlus: "Phone number can contain only one '+' symbol",
-    phoneAllZeros: "Phone number cannot be all zeros",
-    phoneMaxDigits: "Phone number cannot exceed 15 digits",
-    phoneInvalidChars: "Phone number contains invalid characters",
-    messageInvalid: "Please enter a valid message",
-    // toasts
+    phoneTooLong: "Phone number is too long",
+    phoneShort:   "Phone number must be at least 10 digits",
+    phoneInvalid: "Invalid phone number, max 15 digits allowed",
+    messageTooShort: "Message is too short",
+    messageInvalid: "Please enter a valid message",    // toasts
     toastSuccess: "Enquiry submitted successfully!",
     toastError: "Something went wrong. Please try again.",
     toastException: "An error occurred while submitting the form.",
@@ -64,12 +61,10 @@ const t = {
     emailTooLong: "البريد الإلكتروني طويل جداً",
     emailInvalid: "عنوان البريد الإلكتروني غير صالح",
     phoneRequired: "رقم الهاتف مطلوب",
-    phoneLength: "يجب أن يتراوح رقم الهاتف بين 10 و20 رقماً",
-    phoneFormat: "تنسيق رقم الهاتف غير صالح",
-    phonePlus: "لا يمكن أن يحتوي رقم الهاتف على أكثر من إشارة '+'",
-    phoneAllZeros: "لا يمكن أن يكون رقم الهاتف أصفاراً فقط",
-    phoneMaxDigits: "لا يمكن أن يتجاوز رقم الهاتف 15 رقماً",
-    phoneInvalidChars: "رقم الهاتف يحتوي على أحرف غير صالحة",
+    phoneTooLong: "رقم الهاتف طويل جداً",
+    phoneShort:   "يجب أن يحتوي رقم الهاتف على 10 أرقام على الأقل",
+    phoneInvalid: "رقم هاتف غير صالح، الحد الأقصى 15 رقماً",
+    messageTooShort: "الرسالة قصيرة جداً",
     messageInvalid: "يرجى إدخال رسالة صحيحة",
     // toasts
     toastSuccess: "تم إرسال الاستفسار بنجاح!",
@@ -98,11 +93,11 @@ function buildSchema(tr) {
       .string()
       .trim()
       .min(1, tr.nameRequired)
-      .min(2, tr.nameMin2)
       .max(50, tr.nameMax50)
       .refine((value) => {
         const trimmed = value.trim();
         if (!trimmed) return false;
+        // Check invalid characters / injection first — most specific error
         if (/[\t\n]/.test(trimmed)) return false;
         if (/\d/.test(trimmed)) return false;
         if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
@@ -114,16 +109,17 @@ function buildSchema(tr) {
         if (!/^[^\d!@#$%^&*()_+=\[\]{};:"\\|,.<>\/?`~]+$/u.test(trimmed))
           return false;
         return true;
-      }, tr.nameInvalid),
+      }, tr.nameInvalid)
+      // min(2) AFTER refine — so digits/symbols get "Invalid name" not "too short"
+      .refine((value) => value.trim().length >= 2, tr.nameMin2),
 
     email: z
       .string()
-      .min(5, tr.emailRequired)
+      .min(1, tr.emailRequired)
       .max(254, tr.emailTooLong)
       .refine((value) => {
         const trimmed = value.trim();
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
-        if (!trimmed) return false;
         if (!emailRegex.test(trimmed)) return false;
         if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
         if (/["'`;]|--/.test(trimmed)) return false;
@@ -133,51 +129,27 @@ function buildSchema(tr) {
 
     phone: z
       .string()
-      .trim()
       .min(1, { message: tr.phoneRequired })
-      .superRefine((value, ctx) => {
-        if (value.length < 10 || value.length > 20) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: tr.phoneLength,
-          });
-          return;
-        }
+      .max(20, { message: tr.phoneTooLong })
+      // Format/character check FIRST — letters in phone = "Invalid", not "too short"
+      .refine((value) => {
+        const trimmed = value.trim();
+        if (/<|>|script|javascript:/i.test(trimmed)) return false;
+        if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(trimmed)) return false;
         const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
-        if (!validPattern.test(value)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: tr.phoneFormat,
-          });
-          return;
-        }
-        if ((value.match(/\+/g) || []).length > 1) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phonePlus });
-          return;
-        }
-        const digitsOnly = value.replace(/\D/g, "");
-        if (/^0+$/.test(digitsOnly)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: tr.phoneAllZeros,
-          });
-          return;
-        }
-        if (digitsOnly.length > 15) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: tr.phoneMaxDigits,
-          });
-          return;
-        }
-        if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(value)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: tr.phoneInvalidChars,
-          });
-          return;
-        }
-      }),
+        if (!validPattern.test(trimmed)) return false;
+        if ((trimmed.match(/\+/g) || []).length > 1) return false;
+        const digitsOnly = trimmed.replace(/\D/g, "");
+        if (/^0+$/.test(digitsOnly)) return false;
+        if (/^(\d)\1+$/.test(digitsOnly)) return false;
+        if (digitsOnly.length > 15) return false;
+        return true;
+      }, { message: tr.phoneInvalid })
+      // Digit count check AFTER — only reaches here if format is valid
+      .refine((value) => {
+        const digitsOnly = value.trim().replace(/\D/g, "");
+        return digitsOnly.length >= 10;
+      }, { message: tr.phoneShort }),
 
     message: z
       .string()
@@ -185,7 +157,13 @@ function buildSchema(tr) {
       .refine((value) => {
         if (!value) return true;
         const trimmed = value.replace(/\s+/g, " ").trim();
-        if (trimmed.length < 2) return false;
+        if (trimmed.length > 0 && trimmed.length < 2) return false;
+        return true;
+      }, tr.messageTooShort)
+      .refine((value) => {
+        if (!value) return true;
+        const trimmed = value.replace(/\s+/g, " ").trim();
+        if (trimmed.length === 0) return true;
         const forbiddenPatterns = [
           /<script[\s\S]*?>[\s\S]*?<\/script>/i,
           /<img[\s\S]*?>/i,
@@ -198,7 +176,7 @@ function buildSchema(tr) {
         for (const pattern of forbiddenPatterns) {
           if (pattern.test(trimmed)) return false;
         }
-        if (!/[a-zA-Z0-9\u0600-\u06FF]/.test(trimmed)) return false; // support Arabic chars
+        if (!/[a-zA-Z0-9\u0600-\u06FF]/.test(trimmed)) return false;
         if (trimmed.length > 2000) return false;
         return true;
       }, tr.messageInvalid),

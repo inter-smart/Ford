@@ -53,17 +53,14 @@ const t = {
     emailRequired:      "Email is required",
     emailTooLong:       "Email is too long",
     emailInvalid:       "Invalid email address",
-    phoneRequired:      "Phone number is required",
-    phoneLength:        "Phone number must be between 10 and 20 characters",
-    phoneFormat:        "Phone number format is invalid",
-    phonePlus:          "Phone number can contain only one '+' symbol",
-    phoneAllZeros:      "Phone number cannot be all zeros",
-    phoneMaxDigits:     "Phone number cannot exceed 15 digits",
-    phoneInvalidChars:  "Phone number contains invalid characters",
+    phoneRequired:   "Phone number is required",
+    phoneTooLong:    "Phone number is too long",
+    phoneShort:      "Phone number must be at least 10 digits",
+    phoneInvalid:    "Invalid phone number, max 15 digits allowed",
     dealerRequired:     "Please select a location",
-dealerInvalid:      "Invalid location selection",
-typeRequired:       "Vehicle type is required",
-typeTooLong:        "Vehicle type is too long",
+    dealerInvalid:      "Invalid location selection",
+    typeRequired:       "Vehicle type is required",
+    typeTooLong:        "Vehicle type is too long",
     modelRequired:      "Vehicle model is required",
     modelTooLong:       "Vehicle model is too long",
     
@@ -106,17 +103,14 @@ typeTooLong:        "Vehicle type is too long",
     emailRequired:      "البريد الإلكتروني مطلوب",
     emailTooLong:       "البريد الإلكتروني طويل جداً",
     emailInvalid:       "عنوان البريد الإلكتروني غير صالح",
-    phoneRequired:      "رقم الهاتف مطلوب",
-    phoneLength:        "يجب أن يتراوح رقم الهاتف بين 10 و20 رقماً",
-    phoneFormat:        "تنسيق رقم الهاتف غير صالح",
-    phonePlus:          "لا يمكن أن يحتوي رقم الهاتف على أكثر من إشارة '+'",
-    phoneAllZeros:      "لا يمكن أن يكون رقم الهاتف أصفاراً فقط",
-    phoneMaxDigits:     "لا يمكن أن يتجاوز رقم الهاتف 15 رقماً",
-    phoneInvalidChars:  "رقم الهاتف يحتوي على أحرف غير صالحة",
+    phoneRequired:   "رقم الهاتف مطلوب",
+    phoneTooLong:    "رقم الهاتف طويل جداً",
+    phoneShort:      "يجب أن يحتوي رقم الهاتف على 10 أرقام على الأقل",
+    phoneInvalid:    "رقم هاتف غير صالح، الحد الأقصى 15 رقماً",
     dealerRequired:     "يرجى اختيار موقع",
-dealerInvalid:      "اختيار موقع غير صالح",
-typeRequired:       "نوع السيارة مطلوب",
-typeTooLong:        "نوع السيارة طويل جداً",
+    dealerInvalid:      "اختيار موقع غير صالح",
+    typeRequired:       "نوع السيارة مطلوب",
+    typeTooLong:        "نوع السيارة طويل جداً",
     modelRequired:      "موديل السيارة مطلوب",
     modelTooLong:       "موديل السيارة طويل جداً",
     
@@ -133,29 +127,31 @@ typeTooLong:        "نوع السيارة طويل جداً",
 // ─── Schema factory ───────────────────────────────────────────────────────────
 function buildSchema(tr) {
   return z.object({
-    fullName: z
-      .string().trim()
-      .min(1, { message: tr.nameRequired })
-      .min(2, { message: tr.nameMin2 })
-      .max(50, { message: tr.nameMax50 })
-      .refine((value) => {
-        const v = value.trim();
-        if (!v) return false;
-        if (/[\t\n]/.test(v)) return false;
-        if (/\d/.test(v)) return false;
-        if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(v)) return false;
-        if (/<img[\s\S]*?>/i.test(v)) return false;
-        if (/javascript:/i.test(v)) return false;
-        if (/\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|EXEC|UNION)\b/i.test(v)) return false;
-        if (!/^[^\d!@#$%^&*()_+=\[\]{};:"\\|,.<>\/?`~]+$/u.test(v)) return false;
-        if (/<iframe[\s\S]*?>/i.test(v)) return false;   
-        if (/\bon\w+\s*=/i.test(v)) return false;         
-        return true;
-      }, tr.nameInvalid),
+fullName: z
+  .string()
+  .trim()
+  .min(1, { message: tr.nameRequired })
+  .max(50, { message: tr.nameMax50 })
+  .refine((value) => {
+    const v = value.trim();
+    if (!v) return false;
+    if (/[\t\n]/.test(v)) return false;
+    if (/\d/.test(v)) return false;
+    if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(v)) return false;
+    if (/<img[\s\S]*?>/i.test(v)) return false;
+    if (/<iframe[\s\S]*?>/i.test(v)) return false;
+    if (/javascript:/i.test(v)) return false;
+    if (/\bon\w+\s*=/i.test(v)) return false;
+    const sqlPattern = /\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|EXEC|UNION)\b/i;
+    if (sqlPattern.test(v)) return false;
+    if (!/^[^\d!@#$%^&*()_+=\[\]{};:"\\|,.<>\/?`~]+$/u.test(v)) return false;
+    return true;
+  }, { message: tr.nameInvalid })
+  .refine((value) => value.trim().length >= 2, { message: tr.nameMin2 }),
 
     email: z
       .string()
-      .min(5, { message: tr.emailRequired })
+      .min(1, { message: tr.emailRequired })
       .max(254, { message: tr.emailTooLong })
       .refine((value) => {
         const v = value.trim();
@@ -169,35 +165,26 @@ function buildSchema(tr) {
       }, tr.emailInvalid),
 
     phone: z
-      .string().trim()
+      .string()
       .min(1, { message: tr.phoneRequired })
-      .superRefine((value, ctx) => {
-        if (/<|>|script|javascript:/i.test(value)) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneInvalidChars }); return;
-        }
-        if (value.length < 10 || value.length > 20) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneLength }); return;
-        }
-        if (!/^\+?\d[\d\s()-]{7,19}$/.test(value)) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneFormat }); return;
-        }
-        if ((value.match(/\+/g) || []).length > 1) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phonePlus }); return;
-        }
-        const digits = value.replace(/\D/g, "");
-        if (/^0+$/.test(digits)) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneAllZeros }); return;
-        }
-        if (/^(\d)\1+$/.test(digits)) {                                              
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneInvalidChars }); return;  
-        }                                                                            
-        if (digits.length > 15) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneMaxDigits }); return;
-        }
-        if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(value)) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: tr.phoneInvalidChars }); return;
-        }
-      }),
+      .max(20, { message: tr.phoneTooLong })
+      .refine((value) => {
+        const v = value.trim();
+        if (/<|>|script|javascript:/i.test(v)) return false;
+        if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(v)) return false;
+        const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
+        if (!validPattern.test(v)) return false;
+        if ((v.match(/\+/g) || []).length > 1) return false;
+        const digitsOnly = v.replace(/\D/g, "");
+        if (/^0+$/.test(digitsOnly)) return false;
+        if (/^(\d)\1+$/.test(digitsOnly)) return false;
+        if (digitsOnly.length > 15) return false;
+        return true;
+      }, { message: tr.phoneInvalid })
+      .refine((value) => {
+        const digitsOnly = value.trim().replace(/\D/g, "");
+        return digitsOnly.length >= 10;
+      }, { message: tr.phoneShort }),
 
     selectDealer: z
       .string()
@@ -215,43 +202,53 @@ function buildSchema(tr) {
       .max(100, { message: tr.modelTooLong }),
 
     vehicleType: z
-  .string()
-  .min(1, { message: tr.typeRequired })
-  .max(100, { message: tr.typeTooLong }),
-
-preferredDate: z
-  .string()
-  .min(1, { message: tr.dateRequired })
-  .refine((value) => {
-    if (!value) return false;
-    // Compare as plain date strings (yyyy-mm-dd) — no timezone issues
-    const today = new Date().toISOString().split("T")[0];
-    return value >= today;
-  }, tr.datePast),
-
-    preferredTime: z
       .string()
-      .min(1, { message: tr.timeRequired }),
+      .min(1, { message: tr.typeRequired })
+      .max(100, { message: tr.typeTooLong }),
+
+    preferredDate: z
+      .string()
+      .min(1, { message: tr.dateRequired })
+      .refine((value) => {
+        if (!value) return false;
+        // Compare as plain date strings (yyyy-mm-dd) — no timezone issues
+        const today = new Date().toISOString().split("T")[0];
+        return value >= today;
+      }, tr.datePast),
+
+        preferredTime: z
+          .string()
+          .min(1, { message: tr.timeRequired }),
 
     message: z
-      .string().optional()
+      .string()
+      .optional()
+      // length check first
       .refine((value) => {
         if (!value) return true;
         const v = value.replace(/\s+/g, " ").trim();
-        if (v.length < 2) return false;
+        if (v.length > 0 && v.length < 2) return false;
+        return true;
+      }, { message: tr.messageInvalid })
+      // content/injection check after
+      .refine((value) => {
+        if (!value) return true;
+        const v = value.replace(/\s+/g, " ").trim();
+        if (v.length === 0) return true;
         const forbidden = [
           /<script[\s\S]*?>[\s\S]*?<\/script>/i,
-          /<img[\s\S]*?>/i, /<iframe[\s\S]*?>/i,
+          /<img[\s\S]*?>/i,
+          /<iframe[\s\S]*?>/i,
           /{{.*?constructor.*?}}/i,
           /['";]?\s*DROP\s+TABLE/i,
           /javascript:/i,
-          /\bon\w+\s*=/i,   
-          ];
+          /\bon\w+\s*=/i,
+        ];
         for (const p of forbidden) if (p.test(v)) return false;
         if (!/[a-zA-Z0-9\u0600-\u06FF]/.test(v)) return false;
         if (v.length > 2000) return false;
         return true;
-      }, tr.messageInvalid),
+      }, { message: tr.messageInvalid }),
 
     installationSupport: z
       .string()

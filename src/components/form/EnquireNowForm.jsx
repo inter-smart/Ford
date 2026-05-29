@@ -114,12 +114,13 @@ const t = {
 // ─── Schema factory ───────────────────────────────────────────────────────────
 function buildSchema(tr) {
   return z.object({
+
     fullName: z
       .string()
       .trim()
       .min(1, { message: tr.nameRequired })
-      .min(2, { message: tr.nameMin2 })
       .max(50, { message: tr.nameMax50 })
+      // character/injection check FIRST — digits/symbols → "Invalid name", not "too short"
       .refine((value) => {
         const trimmed = value.trim();
         if (!trimmed) return false;
@@ -127,18 +128,20 @@ function buildSchema(tr) {
         if (/\d/.test(trimmed)) return false;
         if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(trimmed)) return false;
         if (/<img[\s\S]*?>/i.test(trimmed)) return false;
+        if (/<iframe[\s\S]*?>/i.test(trimmed)) return false;
         if (/javascript:/i.test(trimmed)) return false;
+        if (/\bon\w+\s*=/i.test(trimmed)) return false;
         const sqlPattern = /\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|EXEC|UNION)\b/i;
         if (sqlPattern.test(trimmed)) return false;
         if (!/^[^\d!@#$%^&*()_+=\[\]{};:"\\|,.<>\/?`~]+$/u.test(trimmed)) return false;
-        if (/<iframe[\s\S]*?>/i.test(trimmed)) return false;
-        if (/\bon\w+\s*=/i.test(trimmed)) return false;
         return true;
-      }, tr.nameInvalid),
+      }, { message: tr.nameInvalid })
+      // min-length AFTER — only reaches here if chars are valid
+      .refine((value) => value.trim().length >= 2, { message: tr.nameMin2 }),
 
     email: z
       .string()
-      .min(5, { message: tr.emailRequired })
+      .min(1, { message: tr.emailRequired })   // ← was min(5); empty showed wrong msg
       .max(254, { message: tr.emailTooLong })
       .refine((value) => {
         const trimmed = value.trim();
@@ -150,48 +153,57 @@ function buildSchema(tr) {
         if (/<|>|javascript:/i.test(trimmed)) return false;
         if ((trimmed.match(/@/g) || []).length !== 1) return false;
         return true;
-      }, tr.emailInvalid),
+      }, { message: tr.emailInvalid }),
 
-  phone: z
-    .string()
-    .min(1, { message: tr.phoneRequired })
-    .max(20, { message: tr.phoneTooLong })
-    .refine((value) => {
-      // catches too-short numbers separately
-      const digitsOnly = value.trim().replace(/\D/g, "");
-      return digitsOnly.length >= 10;
-    }, { message: tr.phoneShort })          // ← "must be at least 10 digits"
-    .refine((value) => {
-      const trimmed = value.trim();
-      if (/<|>|script|javascript:/i.test(trimmed)) return false;
-      const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
-      if (!validPattern.test(trimmed)) return false;
-      if ((trimmed.match(/\+/g) || []).length > 1) return false;
-      const digitsOnly = trimmed.replace(/\D/g, "");
-      if (/^0+$/.test(digitsOnly)) return false;
-      if (/^(\d)\1+$/.test(digitsOnly)) return false;
-      if (digitsOnly.length > 15) return false;
-      if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(trimmed)) return false;
-      return true;
-    }, { message: tr.phoneInvalid }),
+    phone: z
+      .string()
+      .min(1, { message: tr.phoneRequired })
+      .max(20, { message: tr.phoneTooLong })
+      // format/character check FIRST — letters in phone → "Invalid", not "too short"
+      .refine((value) => {
+        const trimmed = value.trim();
+        if (/<|>|script|javascript:/i.test(trimmed)) return false;
+        if (/[a-zA-Z<>"'`;]|--|\)\s*;/.test(trimmed)) return false;
+        const validPattern = /^\+?\d[\d\s()-]{7,19}$/;
+        if (!validPattern.test(trimmed)) return false;
+        if ((trimmed.match(/\+/g) || []).length > 1) return false;
+        const digitsOnly = trimmed.replace(/\D/g, "");
+        if (/^0+$/.test(digitsOnly)) return false;
+        if (/^(\d)\1+$/.test(digitsOnly)) return false;
+        if (digitsOnly.length > 15) return false;
+        return true;
+      }, { message: tr.phoneInvalid })
+      // digit-count AFTER — only reaches here if format passed
+      .refine((value) => {
+        const digitsOnly = value.trim().replace(/\D/g, "");
+        return digitsOnly.length >= 10;
+      }, { message: tr.phoneShort }),
 
-  selectDealer: z
-    .string()
-    .min(1, { message: "Please select a dealer" })
-    .refine((value) => {
-      if (!value || !value.trim()) return false;
-      if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(value)) return false;
-      if (/javascript:/i.test(value)) return false;
-      return true;
-    }, "Invalid dealer selection"),
+    selectDealer: z
+      .string()
+      .min(1, { message: tr.dealerRequired })
+      .refine((value) => {
+        if (!value || !value.trim()) return false;
+        if (/<script[\s\S]*?>[\s\S]*?<\/script>/i.test(value)) return false;
+        if (/javascript:/i.test(value)) return false;
+        return true;
+      }, { message: tr.dealerInvalid }),
 
     message: z
       .string()
       .optional()
+      // length check first
       .refine((value) => {
         if (!value) return true;
         const trimmed = value.replace(/\s+/g, " ").trim();
-        if (trimmed.length < 2) return false;
+        if (trimmed.length > 0 && trimmed.length < 2) return false;
+        return true;
+      }, { message: tr.messageInvalid })
+      // content/injection check after
+      .refine((value) => {
+        if (!value) return true;
+        const trimmed = value.replace(/\s+/g, " ").trim();
+        if (trimmed.length === 0) return true;
         const forbiddenPatterns = [
           /<script[\s\S]*?>[\s\S]*?<\/script>/i,
           /<img[\s\S]*?>/i,
@@ -207,21 +219,21 @@ function buildSchema(tr) {
         if (!/[a-zA-Z0-9\u0600-\u06FF]/.test(trimmed)) return false;
         if (trimmed.length > 2000) return false;
         return true;
-      }, tr.messageInvalid),
+      }, { message: tr.messageInvalid }),
 
-  installationSupport: z
-    .string()
-    .min(1, { message: "Please select an option" })
-    .refine(
-      (value) => ["Yes", "No"].includes(value),
-      "Invalid option selected"
-    ),
+    installationSupport: z
+      .string()
+      .min(1, { message: tr.radioRequired })
+      .refine(
+        (value) => ["Yes", "No"].includes(value),
+        { message: tr.radioInvalid }
+      ),
 
     agreeToTerms: z
       .boolean()
       .refine((val) => val === true, {
         message: tr.termsRequired,
-    }),
+      }),
   });
 }
 

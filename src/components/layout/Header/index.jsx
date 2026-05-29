@@ -66,7 +66,7 @@ export default function Header({
     async function fetchCars() {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/wp-json/custom/v1/product`,
+          `${process.env.NEXT_PUBLIC_API_URL}/wp-json/ford/v1/product`,
         );
         const data = await res.json();
         setAllCars(data?.product || []);

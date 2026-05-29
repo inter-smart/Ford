@@ -41,11 +41,22 @@ function LocateBx({ title, description, tabIndex, locale }) {
 
   const target = `/${locale}/showroom-service-center?tab=${tabIndex}`;
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (!search.trim()) return;
-    router.push(`${target}&search=${encodeURIComponent(search.trim())}`);
-  };
+const handleSearch = (e) => {
+  e.preventDefault();
+
+  const value = search.trim();
+
+  if (!value) return;
+
+  // Block HTML/script tags
+  if (value.includes("<") || value.includes(">")) {
+    setError("Invalid search term.");
+    return;
+  }
+
+  setError("");
+  router.push(`${target}&search=${encodeURIComponent(value)}`);
+};
 
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) {
