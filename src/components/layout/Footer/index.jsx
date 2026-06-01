@@ -95,20 +95,6 @@ export default function Footer({
             </div>
 
             <div className="w-[268px] xl:w-[300px] 2xl:w-[360px] 3xl:w-[400px]">
-            {/* <BookATestDriveDialog
-                
-              >
-                <button type="button" className="text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
-                  {data?.test_drive_section?.button_title}
-                  <Image
-                    src="/images/footer-btn-icon.svg"
-                    alt="footer-btn-icon"
-                    width={8}
-                    height={14}
-                    className="w-[5.5px] xl:w-[6px] 3xl:w-[8px] block object-contain transition-transform duration-300 ease-in-out group-hover:translate-x-2 rtl:-scale-x-100"
-                  />
-                </button>
-              </BookATestDriveDialog> */}
               <BookATestDriveDialog
                 dealers={dealers}
                 pageTitle="Footer"
