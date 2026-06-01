@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import InnerHero from "@/components/common/InnerHero";
 import OfferDetailSection from "@/components/features/offers/OfferDetailSection";
 
@@ -27,18 +28,28 @@ async function getFormOptions(locale) {
 
 export async function generateMetadata({ params }) {
   const { slug, locale } = await params;
-  const data = await getOfferDetail(slug, locale);
-  return buildMetadata(data?.seo);
+  try {
+    const data = await getOfferDetail(slug, locale);
+    return buildMetadata(data?.seo);
+  } catch {
+    return {};
+  }
 }
 
 export default async function OfferDetailPage({ params }) {
   const { slug, locale } = await params;
   const lang = locale === "ar" ? "ar" : "en";
 
-  const [data, formData] = await Promise.all([
-    getOfferDetail(slug, locale),
-    getFormOptions(locale),
-  ]);
+  let data;
+  try {
+    data = await getOfferDetail(slug, locale);
+  } catch {
+    notFound();
+  }
+
+  if (!data) notFound();
+
+  const [formData] = await Promise.all([getFormOptions(locale)]);
 
   const banner = data?.detail_page?.Banner?.[0];
 

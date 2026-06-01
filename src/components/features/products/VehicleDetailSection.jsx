@@ -124,7 +124,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                       key={"interior highlights" + index}
                       className="flex flex-wrap items-center gap-[15px] xl:gap-[20px] 2xl:gap-[24px] 3xl:gap-[28px]"
                     >
-                      <div className="w-[35px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
+                      <div className="w-[20px] sm:w-[30px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
                         <Image
                           src={item?.icon?.url ||"/images/pro-detail-dot.svg"}
                           alt={item?.alt || item?.text}
@@ -177,7 +177,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                       key={"exterior highlights" + index}
                       className="flex flex-wrap items-center gap-[15px] xl:gap-[20px] 2xl:gap-[24px] 3xl:gap-[28px]"
                     >
-                      <div className="w-[35px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
+                      <div className="w-[20px] sm:w-[30px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
                         <Image
                           src={item?.icon?.url || "/images/pro-detail-dot.svg"}
                           alt={item?.alt || item?.text}
@@ -239,7 +239,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                     key={"highlights" + i + index}
                     className="flex flex-wrap flex-nowrap items-center gap-[15px] xl:gap-[20px] 2xl:gap-[24px] 3xl:gap-[28px]"
                   >
-                    <div className="w-[35px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
+                    <div className="w-[20px] sm:w-[30px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
                       <Image
                         src={item?.icon?.url || "/images/pro-detail-dot.svg"}
                         alt={item?.alt || h?.text}

@@ -177,7 +177,7 @@ export default function LegendarySection({ data = {} }) {
               >
                 <button
                   onClick={() => setSelectedCategory(item.name)}
-                  className={`group 2xl:text-[14px] xl:text-[12px] 3xs:text-[11px] text-[10px] leading-none text-black h-[30px] lg:h-[40px] w-full flex items-center gap-2 px-4 py-2 rounded-full
+                  className={`group 2xl:text-[14px] xl:text-[12px] 3xs:text-[11px] text-[10px] leading-none text-start text-black h-[30px] lg:h-[40px] w-full flex items-center gap-2 px-4 py-2 rounded-full
                     border border-[#E8E8E8] transition-all cursor-pointer ${
                       selectedCategory === item.name
                         ? "bg-[#1577F0] text-white font-semibold"
@@ -188,9 +188,9 @@ export default function LegendarySection({ data = {} }) {
                     <Image
                       src={item.image || "/images/icon-placeholder.png"}
                       alt={item.name}
-                      width={20}
-                      height={20}
-                      className={`w-[30px] sm:w-[35px] transition duration-300 ${
+                      width={30}
+                      height={30}
+                      className={`w-[25px] sm:w-[30px] transition duration-300 ${
                         selectedCategory === item.name
                           ? "invert group-hover:brightness-100"
                           : "brightness-[0.3] group-hover:brightness-100 group-hover:invert"
@@ -232,7 +232,7 @@ export default function LegendarySection({ data = {} }) {
                         alt={brand.name}
                         width={80}
                         height={50}
-                        className="max-w-[70px] lg:max-w-[90px] mb-[5px] lg:mb-[10px] object-contain"
+                        className="w-[70px] lg:w-[90px] aspect-4/2 mb-[5px] lg:mb-[10px] object-contain"
                       />
                       <span className="text-[12px] lg:text-[14px] 2xl:text-[16px] font-normal group-data-[state=active]:font-semibold text-[#00142E] w-full text-start">
                         {brand.name}
@@ -289,25 +289,23 @@ export default function LegendarySection({ data = {} }) {
                           </div>
                           {/* Mini video/image preview */}
                           {isVisible && currentCar.video && (
-                            <div className="absolute z-1 sm:-z-1 top-[25%] sm:top-[100px] 2xl:top-[130px] ltr:left-0 ltr:sm:right-[100px] rtl:left-0 rtl:sm:left-[100px] w-full max-w-[120px] sm:max-w-[140px] lg:max-w-[200px] 2xl:max-w-[230px] shadow-md">
-                              <div className="relative">
-                                <div className="rounded-md w-full h-full overflow-hidden relative">
-                                  <video
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                    className="w-full h-full object-cover"
-                                  >
-                                    <source
-                                      src={currentCar.video}
-                                      type="video/mp4"
-                                    />
-                                  </video>
-                                </div>
+                            <div className="absolute z-1 top-[25%] sm:top-[100px] 2xl:top-[130px] ltr:left-0 ltr:sm:right-[100px] rtl:left-0 rtl:sm:left-[100px] w-[120px] sm:w-[140px] lg:w-[200px] 2xl:w-[230px]">
+                              <div className="w-[120px] sm:w-[140px] lg:w-[200px] 2xl:w-[230px] aspect-video relative z-0">
+                                <video
+                                  autoPlay
+                                  muted
+                                  loop
+                                  playsInline
+                                  className="w-full h-full rounded-md shadow-md object-cover"
+                                >
+                                  <source
+                                    src={currentCar.video}
+                                    type="video/mp4"
+                                  />
+                                </video>
                                 <button
                                   onClick={() => setIsVisible(false)}
-                                  className="w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] rounded-full bg-[#D9D9D9] p-[4px] lg:p-[6px] flex items-center justify-center absolute top-[-10px] lg:top-[-10px] right-[-15px] lg:right-[-18px] hover:bg-[#00095b] group hover:text-white cursor-pointer"
+                                  className="w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] rounded-full bg-[#D9D9D9] p-[4px] lg:p-[6px] flex items-center justify-center absolute z-1 top-0 right-0 ltr:translate-x-1/2 ltr:-translate-y-1/2 rtl:-translate-x-1/2 rtl:translate-y-1/2 hover:bg-[#00095b] group hover:text-white cursor-pointer"
                                 >
                                   <svg
                                     viewBox="0 0 329.26933 329"

@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 import { apiFetch, CACHE } from "@/lib/api/client";
 import { getLocalizedEndpoint } from "@/lib/api/endpoints";
 import { buildMetadata }    from "@/lib/api/seo";
@@ -67,17 +68,27 @@ async function getRaqFormData(locale) {
 
 export async function generateMetadata({ params }) {
   const { slug, locale } = await params;
-  const res = await getPageData(slug, locale);
-  return buildMetadata(res?.meta?.seo);
+  try {
+    const res = await getPageData(slug, locale);
+    return buildMetadata(res?.meta?.seo);
+  } catch {
+    return {};
+  }
 }
 
 export default async function Page({ params }) {
   const { slug, locale } = await params;
-  const [res, testDriveFormData, raqFormData] = await Promise.all([getPageData(slug, locale), getDealersData(locale), getRaqFormData(locale)]);
+  let res;
+  try {
+    res = await getPageData(slug, locale);
+  } catch {
+    notFound();
+  }
+  const [testDriveFormData, raqFormData] = await Promise.all([getDealersData(locale), getRaqFormData(locale)]);
   const dealers = testDriveFormData.dealers;
   const data = res?.data;
 
-  if (!data) return <div className="text-center py-20">Car not found.</div>;
+  if (!data) notFound();
 
   const firstItem = (arr) =>
     Array.isArray(arr) && arr.length > 0 ? arr[0] : null;

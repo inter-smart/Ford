@@ -162,7 +162,7 @@ export default function Header({
         <div className="container">
           <div className="flex flex-wrap items-center">
             {/* Main menu */}
-            <div className="w-[calc((100%-var(--logo-x))/2)] ltr:lg:pr-6 ltr:2xl:pr-8 ltr:3xl:pr-10 max-lg:hidden">
+            <div className="w-[calc((100%-var(--logo-x))/2)] ltr:lg:pr-[50px] ltr:2xl:pr-[60px] ltr:3xl:pr-[80px] max-lg:hidden">
               <NavigationMenu>
                 <NavigationMenuList className="flex items-center rtl:flex-row-reverse gap-[5px] xl:gap-[20px] 2xl:gap-[30px] 3xl:gap-[50px]">
                   {header_acf?.left_menu_items?.map((item, index) => (
@@ -203,7 +203,7 @@ export default function Header({
             </div>
 
             {/* Right Menu */}
-            <div className="w-[calc(100%-var(--logo-x))] lg:w-[calc((100%-var(--logo-x))/2)] ltr:lg:pl-6 ltr:2xl:pl-8 ltr:3xl:pl-10">
+            <div className="w-[calc(100%-var(--logo-x))] lg:w-[calc((100%-var(--logo-x))/2)] ltr:lg:pl-[50px] ltr:2xl:pl-[60px] ltr:3xl:pl-[80px]">
               <div className="flex justify-between">
                 <NavigationMenu className="justify-end">
                   <NavigationMenuList className="flex items-center rtl:flex-row-reverse gap-[5px] xl:gap-[20px] 2xl:gap-[30px] 3xl:gap-[50px]">
@@ -240,19 +240,29 @@ export default function Header({
                     <div
                       ref={searchPanelRef}
                       className={cn(
-                        "absolute z-1 ltr:right-0 rtl:left-0 top-full w-60 xl:w-80 bg-white rounded-md sm:rounded-lg overflow-hidden ltr:max-sm:translate-x-1/2 rtl:max-sm:-translate-x-1/2",
+                        "absolute z-1 ltr:right-0 rtl:left-0 top-[130%] w-60 xl:w-80 bg-white rounded-md sm:rounded-lg overflow-hidden ltr:max-sm:translate-x-1/2 rtl:max-sm:-translate-x-1/2",
                         searchOpen
                           ? "max-h-[376px] p-1 sm:p-2 xl:p-4"
                           : "max-h-0 p-0",
                       )}
                     >
-                      <input
-                        type="text"
-                        className="text-[12px] xl:text-[14px] leading-normal font-normal tracking-tight text-black w-full border px-2 sm:px-3 py-1.5 sm:py-2 rounded-sm sm:rounded-md focus:outline-none"
-                        placeholder="Search cars..."
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          className="text-[12px] xl:text-[14px] leading-normal font-normal tracking-tight text-black w-full border px-2 sm:px-3 py-1.5 sm:py-2 rounded-sm sm:rounded-md focus:outline-none pr-8"
+                          placeholder="Search cars..."
+                          value={query}
+                          onChange={(e) => setQuery(e.target.value)}
+                        />
+                        {query.length > 0 && (
+                          <button
+                            onClick={() => setQuery("")}
+                            className="absolute ltr:right-2 rtl:left-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"
+                          >
+                            <X size={16} />
+                          </button>
+                        )}
+                      </div>
 
                       {filtered.length > 0 && (
                         <ul className="mt-3 max-h-64 overflow-y-auto">
@@ -266,10 +276,10 @@ export default function Header({
                                   setQuery("");
                                 }}
                               >
-                                <div className="text-[14px] sm:text-[15px] 3xl:text-[18px] font-semibold">
+                                <div className="text-[10px] sm:text-[12px] 3xl:text-[14px] font-semibold">
                                   {item.modelBrand} {item.modelName}
                                 </div>
-                                <div className="text-[12px] 3xl:text-[14px]  text-gray-500">
+                                <div className="text-[10px] sm:text-[12px] 3xl:text-[14px] text-gray-500">
                                   {item.modelCategory}
                                 </div>
                               </Link>
@@ -279,7 +289,7 @@ export default function Header({
                       )}
 
                       {query.length > 1 && filtered.length === 0 && (
-                        <div className="text-sm text-gray-500 mt-3">
+                        <div className="text-[10px] sm:text-[12px] 3xl:text-[14px] text-gray-500 mt-3">
                           No results found
                         </div>
                       )}

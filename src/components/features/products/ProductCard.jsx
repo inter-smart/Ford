@@ -25,7 +25,7 @@ export default function ProductCard({ item }) {
       </Link>
       <div className="w-full h-auto flex items-center [&>*]:w-[50%]">
         <div className="text-[12px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-semibold text-black">
-          {item?.modelName}
+          {item?.modelName || "Model Name Not Available"}
         </div>
         <Link
           href={`/products/${item?.slug}`}

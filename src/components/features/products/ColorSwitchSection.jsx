@@ -36,7 +36,7 @@ export default function ColorSwitchSection({ data }) {
               <div key={index} className="relative z-0">
                 <button
                   onClick={() => setActiveVariation(item)}
-                  className="w-[20px] sm:w-[25px] 2xl:w-[30px] aspect-square rounded-full relative z-0 border transition-all duration-300"
+                  className="w-[20px] sm:w-[25px] 2xl:w-[30px] aspect-square border border-[#e9e9e9] rounded-full relative z-0 border transition-all duration-300"
                   style={{
                     borderColor: isActive(item) ? "#000" : "#b8b8b8",
                     backgroundColor: isActive(item) ? "#fff" : item?.color,

@@ -1,8 +1,9 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import BookATestDriveDialog from "@/components/common/BookATestDriveDialog";
 import { cn } from "@/lib/utils";
 import ScrollToTopButton from "@/components/common/scrollTop";
+import BookATestDriveDialog from "@/components/common/BookATestDriveDialog";
 
 const socialIcons = [
   {
@@ -55,7 +56,13 @@ const footerLink =
 const footerHeading =
   "text-[10px] xl:text-[11px] 2xl:text-[12px] 3xl:text-[14.6px] leading-normal font-medium tracking-tight uppercase text-[#666b9d] mb-[10px] xl:mb-[15px] 2xl:mb-[20px] 3xl:mb-[25px]";
 
-export default function Footer({ data, dealers = [], carOptions = [], lang = "en", testDriveFormData = null }) {
+export default function Footer({
+  data,
+  dealers = [],
+  carOptions = [],
+  lang = "en",
+  testDriveFormData = null,
+}) {
   if (!data) return null;
 
   const {
@@ -88,16 +95,30 @@ export default function Footer({ data, dealers = [], carOptions = [], lang = "en
             </div>
 
             <div className="w-[268px] xl:w-[300px] 2xl:w-[360px] 3xl:w-[400px]">
+            {/* <BookATestDriveDialog
+                
+              >
+                <button type="button" className="text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
+                  {data?.test_drive_section?.button_title}
+                  <Image
+                    src="/images/footer-btn-icon.svg"
+                    alt="footer-btn-icon"
+                    width={8}
+                    height={14}
+                    className="w-[5.5px] xl:w-[6px] 3xl:w-[8px] block object-contain transition-transform duration-300 ease-in-out group-hover:translate-x-2 rtl:-scale-x-100"
+                  />
+                </button>
+              </BookATestDriveDialog> */}
               <BookATestDriveDialog
                 dealers={dealers}
                 pageTitle="Footer"
                 carOptions={carOptions}
                 lang={lang}
-                title={testDriveFormData?.title || ""}
-                description={testDriveFormData?.short_description || ""}
+                // title={testDriveFormData?.title || ""}
+                // description={testDriveFormData?.description || ""}
               >
-                <button className="text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
-                  {test_drive_section.button_title}
+                <button type="button" className="text-[12px] xl:text-[12.44px] 2xl:text-[14.9px] 3xl:text-[18.6px] leading-normal font-bold text-white w-full flex items-center justify-center gap-1.5 2xl:gap-2 transition-all duration-300 ease-in-out hover:tracking-wider">
+                  {data?.test_drive_section?.button_title}
                   <Image
                     src="/images/footer-btn-icon.svg"
                     alt="footer-btn-icon"
@@ -110,7 +131,6 @@ export default function Footer({ data, dealers = [], carOptions = [], lang = "en
             </div>
           </div>
         )}
-        {/* <div className="w-full grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-5 lg:gap-8 3xl:mb-[70px] 2xl:mb-[45px] lg:mb-[30px] mb-[15px]"> */}
         <div className="flex flex-wrap flex-row-reverse lg:flex-row -mx-[15px] lg:-mx-[20px] [&>*]:p-[15px] lg:[&>*]:p-[20px] sm:mb-[15px] 2xl:mb-[20px] 3xl:mb-[40px]">
           {[
             {
@@ -133,7 +153,10 @@ export default function Footer({ data, dealers = [], carOptions = [], lang = "en
             ({ section, enabled }) =>
               enabled &&
               section?.menu_items?.length > 0 && (
-                <div key={section?.title} className="w-1/2 sm:w-[25%] lg:w-[17.5%]">
+                <div
+                  key={section?.title}
+                  className="w-1/2 sm:w-[25%] lg:w-[17.5%]"
+                >
                   <h6 className={footerHeading}>{section?.title}</h6>
                   <ul className="space-y-[3px] 2xl:space-y-[4px] 3xl:space-y-[6px]">
                     {section?.menu_items?.map((item, index) => (

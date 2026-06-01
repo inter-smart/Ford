@@ -55,13 +55,13 @@ export default function ShowroomSection({
       const params = new URLSearchParams({ page, pageSize: 12 });
       if (search) params.set("search", search);
 
-    const json = await apiFetch(
-      `${ENDPOINTS.showroomTab}/${tabIndex}?${params}`,
-      { cache: CACHE.NO_STORE },
-    );
+      const json = await apiFetch(
+        `${ENDPOINTS.showroomTab}/${tabIndex}?${params}`,
+        { cache: CACHE.NO_STORE },
+      );
 
-    const newLocations = json?.data?.location_details ?? [];
-    const newTotalPages = json?.meta?.totalPages ?? 1;
+      const newLocations = json?.data?.location_details ?? [];
+      const newTotalPages = json?.meta?.totalPages ?? 1;
 
       setRawLocations((prev) =>
         replace ? newLocations : [...prev, ...newLocations],
@@ -75,14 +75,20 @@ export default function ShowroomSection({
     }
   };
 
-  useEffect(() => { // ✅ inside component
-    const tabParam    = searchParams.get("tab");
+  useEffect(() => {
+    // ✅ inside component
+    const tabParam = searchParams.get("tab");
     const searchParam = searchParams.get("search");
-    const tabIdx      = tabParam !== null ? parseInt(tabParam) : initialTabIndex;
+    const tabIdx = tabParam !== null ? parseInt(tabParam) : initialTabIndex;
 
     setActiveTabIndex(tabIdx);
     setSearchQuery(searchParam || "");
-    fetchLocations({ tabIndex: tabIdx, page: 1, search: searchParam || "", replace: true });
+    fetchLocations({
+      tabIndex: tabIdx,
+      page: 1,
+      search: searchParam || "",
+      replace: true,
+    });
   }, []);
 
   const handleTabChange = (tabIndex) => {
@@ -199,11 +205,14 @@ export default function ShowroomSection({
                 <div key={"branch" + idx} className="w-full sm:w-1/2 lg:w-1/4">
                   <div className="w-full h-full border-[1px] border-[#c4c4c4] p-[18px_15px] sm:p-[20px_18px] xl:p-[25px_30px] 2xl:p-[30px_35px] 3xl:p-[38px_44px]">
                     <div className="text-[14px] xl:text-[17.7px] 2xl:text-[21.3px] 3xl:text-[26.6px] leading-normal font-normal text-[#434343] mb-[4px] xl:mb-[6px] 2xl:mb-[8px]">
-                      {item?.title}
+                      {item?.title || "Location Title"}
                     </div>
 
                     <div className="text-[11.3px] xl:text-[14.2px] 2xl:text-[17px] 3xl:text-[21.3px] leading-normal font-normal text-[#434343]">
-                      {parse(item?.description)}
+                      {parse(
+                        item?.description ||
+                          "<p>Location description not available now.</p>",
+                      )}
                     </div>
 
                     {item?.phone && (

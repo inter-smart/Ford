@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import InnerHero from "@/components/common/InnerHero";
 import NewsDetailSection from "@/components/features/news/NewsDetailSection";
 
@@ -11,13 +12,23 @@ async function getNewsDetail(slug, locale) {
 
 export async function generateMetadata({ params }) {
   const { slug, locale } = await params;
-  const data = await getNewsDetail(slug, locale);
-  return buildMetadata(data?.data?.seo);
+  try {
+    const data = await getNewsDetail(slug, locale);
+    return buildMetadata(data?.data?.seo);
+  } catch {
+    return {};
+  }
 }
 
 export default async function NewsDetailPage({ params }) {
   const { slug, locale } = await params;
-  const data = await getNewsDetail(slug, locale);
+  let data;
+  try {
+    data = await getNewsDetail(slug, locale);
+  } catch {
+    notFound();
+  }
+  if (!data) notFound();
 
   const newsData = data?.data;
   const banner = newsData?.acf?.banner;

@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 export default function SpecificationSection({ data }) {
+  if (!data?.specs?.length) return null;
+
   return (
     <section className="w-full h-auto block">
       <div className="w-full h-auto block bg-black relative z-0">
@@ -25,7 +27,7 @@ export default function SpecificationSection({ data }) {
             />
           )}
         </div>
-        <div className="container [&>*]:w-1/2 sm:[&>*]:w-1/4 md:max-w-[850px] 2xl:max-w-[1000px] 3xl:max-w-[1200px] md:px-0 py-[100px_30px] sm:py-[220px_40px] lg:py-[320px_60px] xl:py-[368px_70px] 2xl:py-[420px_84px] 3xl:py-[520px_105px] [&>*]:p-[5px] flex flex-wrap justify-between">
+        <div className="container [&>*]:w-1/2 sm:[&>*]:w-1/4 md:max-w-[850px] 2xl:max-w-[1000px] 3xl:max-w-[1200px] md:px-0 py-[100px_30px] sm:py-[220px_40px] lg:py-[320px_60px] xl:py-[368px_70px] 2xl:py-[420px_84px] 3xl:py-[520px_105px] [&>*]:p-[5px] flex flex-wrap justify-center lg:justify-between">
           {data?.specs?.map((item, index) => (
             <div
               key={index}

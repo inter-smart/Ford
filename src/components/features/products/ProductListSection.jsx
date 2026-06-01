@@ -1,5 +1,5 @@
 "use client";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import ProductCard from "./ProductCard";
 import React, { useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -109,12 +109,23 @@ export default function ProductListSection({ data, locale = "en" }) {
                   setVisibleCount(18);
                 }}
                 className="
-                    text-[14px] lg:text-[16px] w-full h-[40px] 2xl:h-[45px] ltr:pl-4 ltr:pr-12 rtl:pl-12 rtl:pr-4
+                    text-[14px] lg:text-[16px] w-full h-[40px] 2xl:h-[45px] ltr:pl-4 ltr:pr-16 rtl:pl-16 rtl:pr-4
                     border-[#D8D8D8] border-1 rounded-[5px]
                     text-base outline-none
                     focus:border-black transition-all
                   "
               />
+              {searchQuery.length > 0 && (
+                <button
+                  onClick={() => {
+                    setSearchQuery("");
+                    setVisibleCount(18);
+                  }}
+                  className="absolute z-1 ltr:right-[35px] rtl:left-[35px] top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"
+                >
+                  <X size={16} />
+                </button>
+              )}
               <button className="w-[10px] lg:w-[15px] 2xl:w-[20px] h-auto aspect-[20/20] ltr:p-[0_35px_0_20px] ltr:lg:p-[0_35px_0_20px] rtl:p-[0_20px_0_35px] rtl:lg:p-[0_20px_0_35px] absolute z-1 ltr:right-0 rtl:left-0 top-1/2 -translate-y-1/2 cursor-pointer">
                 <Search className="text-black" size={20} />
               </button>

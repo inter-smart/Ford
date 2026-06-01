@@ -47,7 +47,7 @@ export default function Welcome({ data }) {
               <div className="w-full">
                 <Heading
                   size="heading1"
-                  as="h2"
+                  as="h1"
                   className="text-black mb-[15px]"
                 >
                   {data?.title_about_ford}

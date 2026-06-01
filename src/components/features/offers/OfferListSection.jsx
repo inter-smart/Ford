@@ -28,7 +28,7 @@ export default function OfferListSection({ initialOffers, totalPages }) {
   return (
     <section className="w-full h-auto block my-[30px_20px] sm:my-[50px_40px] xl:my-[90px_75px] 2xl:my-[100px_90px] 3xl:my-[130px_100px] ">
       <div className="container">
-        <div className="flex flex-wrap h-auto -mx-[10px] sm:-mx-[8px] xl:-mx-[10px] 2xl:-mx-[-13px] 3xl:-mx-[16px]">
+        <div className="flex flex-wrap -mx-[10px] sm:-mx-[8px] xl:-mx-[10px] 2xl:-mx-[13px] 3xl:-mx-[16px]">
           {offers?.map((item, index) => (
             <div
               key={"offers-card-" + index}

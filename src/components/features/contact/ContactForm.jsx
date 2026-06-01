@@ -236,7 +236,7 @@ export default function ContactForm({ data, lang = "en" }) {
     "text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] leading-normal font-normal text-black peer w-full pb-[15px] 3xl:pb-[20px] pt-[30px] 3xl:pt-[35px] border-transparent border-b-[1px] border-b-[#d9d6ce] rounded-none px-0 focus-visible:ring-0 focus-visible:border-b-black shadow-none";
 
   const labelCls =
-    "text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] leading-normal font-normal text-black gap-0 absolute top-[20px] transition-all duration-200 peer-focus:top-0 peer-focus:text-[12px] peer-focus:text-black peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-[12px] peer-[:not(:placeholder-shown)]:text-black pointer-events-none";
+    "text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] leading-normal font-normal text-black gap-0 absolute top-[20px] transition-all duration-200 peer-focus:top-0 peer-focus:text-[12px] peer-focus:text-black peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-[12px] peer-[:not(:placeholder-shown)]:text-black peer-[:autofill]:top-0 peer-[:autofill]:text-[12px] peer-[:autofill]:text-black peer-[:-webkit-autofill]:top-0 peer-[:-webkit-autofill]:text-[12px] peer-[:-webkit-autofill]:text-black pointer-events-none";
 
   return (
     <div className="w-full" dir={isRtl ? "rtl" : "ltr"}>
