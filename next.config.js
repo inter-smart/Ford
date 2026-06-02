@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "dev18.intersmarthosting.in",
+        hostname: "admin.fordoman.com",
         pathname: "/**",
       },
       {

@@ -197,27 +197,29 @@ export default function Footer({
           </div>
         </div>
         <div className="flex flex-wrap -mx-[15px] lg:-mx-[20px] [&>*]:p-[15px] lg:[&>*]:p-[20px] mb-[10px] sm:mb-[15px] 2xl:mb-[30px] 3xl:mb-[40px]">
-          <div className="w-full sm:w-[50%] lg:w-[35%]">
-            <h6 className={footerHeading}>Download the App</h6>
-            <div className="flex flex-wrap gap-[10px] 2xl:gap-[15px] 3xl:gap-[20px]">
-              {app_link_section?.app_links?.map((item, index) => (
-                <Link
-                  key={"app_links" + index}
-                  href={item?.download_link?.url}
-                  target={item?.menu_url?.target || "_self"}
-                  className="group w-[100px] sm:w-[120px] xl:w-[157px] 2xl:w-[180px] 3xl:w-[220px] aspect-[156/46] border border-white rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] block p-[5px] xl:p-[10px] 2xl:p-[12px] 3xl:p-[16px] hover:bg-[#000b70]"
-                >
-                  <Image
-                    src={item?.image?.url}
-                    alt={item?.image?.alt}
-                    width={140}
-                    height={35}
-                    className="w-full h-full transition-all object-contain group-hover:scale-[0.75]"
-                  />
-                </Link>
-              ))}
+          {app_link_section?.enable__disable_app_link_section && (
+            <div className="w-full sm:w-[50%] lg:w-[35%]">
+              <h6 className={footerHeading}>Download the App</h6>
+              <div className="flex flex-wrap gap-[10px] 2xl:gap-[15px] 3xl:gap-[20px]">
+                {app_link_section?.app_links?.map((item, index) => (
+                  <Link
+                    key={"app_links" + index}
+                    href={item?.download_link?.url}
+                    target={item?.menu_url?.target || "_self"}
+                    className="group w-[100px] sm:w-[120px] xl:w-[157px] 2xl:w-[180px] 3xl:w-[220px] aspect-[156/46] border border-white rounded-[8px] 2xl:rounded-[10.6px] 3xl:rounded-[13.3px] block p-[5px] xl:p-[10px] 2xl:p-[12px] 3xl:p-[16px] hover:bg-[#000b70]"
+                  >
+                    <Image
+                      src={item?.image?.url}
+                      alt={item?.image?.alt}
+                      width={140}
+                      height={35}
+                      className="w-full h-full transition-all object-contain group-hover:scale-[0.75]"
+                    />
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           <div className="w-full sm:w-[50%] lg:w-[65%]">
             <h6 className={cn(footerHeading, "max-sm:hidden")}>&nbsp;</h6>
             <div className="flex flex-wrap items-center sm:gap-4 gap-3">
