@@ -1,34 +1,8 @@
 import { NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
 
-const legacyRedirects = {
-  "/product": "products",
-  "/page/25/fleet-ford-oman": "fleet",
-  "/news/1/news-and-events-at-ford-oman": "news",
-  "/page/36/parts-and-accessories-at-ford-oman": "parts",
-  "/page/4/service-at-ford-oman": "service",
-  "/branchlocator/branch-locator-for-ford-oman": "contact",
-  "/page/41/privacy-policy-at-ford-oman": "privacy-policy",
-  "/page/40/terms-and-conditions-for-ford-oman": "terms-conditions",
-};
-
 export default async function middleware(request) {
   const { pathname, search } = request.nextUrl;
-
-  const hostname = request.headers.get("host") || "";
-
-  if (legacyRedirects[pathname]) {
-    const locale = hostname.startsWith("ar.") ? "ar" : "en";
-
-    return NextResponse.redirect(
-      new URL(
-        `/${locale}/${legacyRedirects[pathname]}${search}`,
-        request.url
-      ),
-      301
-    );
-  }
-
   console.log(`[${new Date().toISOString()}] Middleware triggered for: ${pathname}${search}`);
 
   // Redirect / to /en

@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "admin.fordoman.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "admin.fordoman.com",
+        pathname: "/**",
+      },
     ],
     qualities: [75, 100],
   },
