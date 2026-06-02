@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "dev18.intersmarthosting.in",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "admin.fordoman.com",
+        pathname: "/**",
+      },
     ],
     qualities: [75, 100],
   },
