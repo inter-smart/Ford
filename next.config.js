@@ -10,6 +10,20 @@ const nextConfig = {
     ],
     qualities: [75, 100],
   },
+  async redirects() {
+    return [
+      {
+        source: "/old-about",
+        destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/old-contact",
+        destination: "/contact",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 
