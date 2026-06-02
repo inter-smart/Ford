@@ -20,24 +20,16 @@ export default function AfterSaleSection({ data }) {
               data?.description ? "xl:w-[45%]" : "xl:w-full",
             )}
           >
-            {data?.button_text && (
+            
+            {data?.brochure && (
               <Link
-                href={data?.button?.link || "/service"}
-                target={data?.button?.isExternal ? "_blank" : "_self"}
-                className="text-[12px] xl:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1] font-semibold text-white w-fit h-[35px] 2xl:h-[40px] bg-[#1A73E8] max-xs:w-full px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-[#1A73E8] transition duration-300 cursor-pointer"
-              >
-                {data?.button_text}
-              </Link>
-            )}
-            {data?.pdf_url && (
-              <Link
-                href={data?.pdf_url || "/files/brochure.pdf"}
+                href={data?.brochure?.url}
                 download
                 target="_blank"
                 className="text-[12px] xl:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1] font-bold text-white w-fit h-[35px] 2xl:h-[40px] border-1 max-xs:w-full border-white px-6 rounded-full flex items-center justify-center hover:bg-white hover:text-[#00095B] transition duration-300 cursor-pointer gap-2"
               >
                 <Download size={18} />
-                Download PDF
+                {data?.button_text}
               </Link>
             )}
           </div>
