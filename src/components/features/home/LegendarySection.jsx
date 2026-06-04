@@ -46,7 +46,6 @@ export default function LegendarySection({ data = {} }) {
           car?.detail_page?.Banner?.[0]?.desktop_image?.url ||
           "/images/placeholder.png",
         video:
-          car?.detail_page?.specifications?.[0]?.video_specifications?.url ||
           car?.detail_page?.home_page_video?.url ||
           null,
         brochure: car?.detail_page?.brochure?.url || null,

@@ -1,4 +1,4 @@
-const SITE_KEY = "6LcnDSUsAAAAAPzuIuNcagH8xs8f_HIbB7_GYaBD";
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 export async function getRecaptchaToken(action = "submit") {
   return new Promise((resolve, reject) => {
