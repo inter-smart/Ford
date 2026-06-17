@@ -227,7 +227,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                 </div>
               </div>
               <div className="w-full h-auto gap-[10px] sm:gap-[20px] lg:gap-[30px] 2xl:gap-[40px] flex flex-col">
-                {item.highlights?.map((h, i) => (
+                {item?.highlights?.map((h, i) => (
                   // <div key={i} className="flex items-center">
                   //   <div
                   //     className={`text-[14px] sm:text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[22px] leading-[1.5] font-normal text-black lg:max-w-[50%] 2xl:max-w-[40%] ${bulletClass} relative z-0 before:content-[''] before:w-[5px] before:h-[5px] before:lg:w-[7px] before:lg:h-[7px] 2xl:before:w-[10px] 2xl:before:h-[10px] before:bg-[#1577F0] before:rounded-full before:absolute before-z-1 before:top-[6px] before:sm:top-[8px]`}
@@ -241,7 +241,7 @@ export default function VehicleDetailSection({ data, locale = "en" }) {
                   >
                     <div className="w-[20px] sm:w-[30px] xl:w-[42px] 2xl:w-[50px] 3xl:w-[60px]">
                       <Image
-                        src={item?.icon?.url || "/images/pro-detail-dot.svg"}
+                        src={h?.icon?.url || "/images/pro-detail-dot.svg"}
                         alt={item?.alt || h?.text}
                         width={60}
                         height={60}
